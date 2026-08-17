@@ -1,6 +1,6 @@
 # PL-300 Practice Test
 
-PL-300 | 12 Practice Tests | 600+ Q's
+PL-300 | 12 Practice Tests | 600 Q's
 
 A free, public PL-300 (Microsoft Power BI Data Analyst) practice test — no account or
 password required, just a name + email to save your progress. Built as a static web app so it

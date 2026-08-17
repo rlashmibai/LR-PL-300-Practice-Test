@@ -298,6 +298,13 @@ h3 { margin: 18px 0 8px; font-size: 1rem; }
 .stat-pct { font-weight: 800; font-size: 1.35rem; color: #000; }
 .stat-label { font-size: 0.85rem; color: var(--text-muted); line-height: 1.35; }
 
+/* Big-number stat call-out (used instead of the ring above when the figure is
+   a learner count like "65+" rather than a percentage — a ring implies a
+   fraction of some whole, which a count doesn't have). */
+.stat-count-item { text-align: center; }
+.stat-count { font-weight: 800; font-size: 2.1rem; color: var(--accent-dark); line-height: 1; }
+.stat-count-label { font-size: 0.85rem; color: var(--text-muted); line-height: 1.35; margin-top: 6px; }
+
 label {
   display: block;
   font-weight: 600;
