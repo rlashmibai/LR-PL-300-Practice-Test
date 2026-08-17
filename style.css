@@ -567,6 +567,19 @@ th { color: var(--text-muted); font-weight: 600; }
   padding: 12px 14px; margin-bottom: 8px; cursor: pointer;
 }
 .option:hover { border-color: var(--accent); }
+
+/* Multi-line DAX formula blocks — as an answer option's own text, or quoted
+   inside an explanation. white-space:pre preserves the source's exact line
+   breaks/indentation; overflow-x lets a long formula scroll instead of
+   forcing the whole card wider than the viewport on mobile. */
+.dax-code {
+  display: block; white-space: pre; overflow-x: auto;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.85rem; line-height: 1.5;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; margin: 4px 0;
+}
+.option .dax-code { margin: 0; flex: 1 1 auto; min-width: 0; }
 .option.selected { border-color: var(--accent); background: var(--accent-light); }
 .option input { pointer-events: none; }
 .option.locked { cursor: default; }

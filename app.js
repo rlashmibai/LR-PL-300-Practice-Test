@@ -694,6 +694,17 @@ function formatExplanation(raw) {
     return `\x00IMG${imgTags.length - 1}\x00`;
   });
 
+  // Same idea for <pre class="dax-code">...</pre> blocks (multi-line DAX
+  // formulas quoted in an explanation) — without this, the paragraph
+  // splitter below wraps the whole block in a <p>, which is invalid HTML
+  // nesting for a block-level <pre>, and the sentence-splitting heuristics
+  // would otherwise break mid-formula on any "." inside the code.
+  const preTags = [];
+  text = text.replace(/<pre class="dax-code">[\s\S]*?<\/pre>/g, (m) => {
+    preTags.push(m);
+    return `\x00PRE${preTags.length - 1}\x00`;
+  });
+
   // Break known section headers onto their OWN isolated paragraph (blank line on both
   // sides) so they render as sub-headings rather than getting merged into body text.
   const headerNames = new Set(EXPL_HEADERS.map((h) => h.replace(/:$/, "")));
@@ -730,11 +741,17 @@ function formatExplanation(raw) {
       if (headerNames.has(p)) return `<h4 class="expl-heading">${p}</h4>`;
       const dynamicHeading = p.match(/^\x02(.+)\x02$/);
       if (dynamicHeading) return `<h4 class="expl-heading">${dynamicHeading[1]}</h4>`;
+      // A paragraph that's ENTIRELY one <pre> placeholder (own blank-line-
+      // separated block, not mixed with other prose) must come out bare —
+      // wrapping it in <p> here would nest a block-level <pre> inside a <p>
+      // once the placeholder is restored below, which is invalid HTML.
+      if (/^\x00PRE\d+\x00$/.test(p)) return p;
       return formatBlock(p);
     })
     .join("");
 
   html = html.replace(/\x00IMG(\d+)\x00/g, (_, i) => imgTags[Number(i)]);
+  html = html.replace(/\x00PRE(\d+)\x00/g, (_, i) => preTags[Number(i)]);
 
   // Consecutive reference links separated by only a space (common in
   // "References"/"Recommended Video" sections with several links in a row)
