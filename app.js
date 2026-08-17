@@ -71,6 +71,11 @@ function show(viewId) {
   document.querySelectorAll(".view").forEach((v) => v.classList.remove("active"));
   document.getElementById(viewId).classList.add("active");
   document.querySelector(".container").classList.toggle("wide", viewId === "view-test");
+  // Switching views doesn't reset scroll position on its own — without this,
+  // starting a test (or any other view switch) from partway down a long page
+  // (e.g. the Choose Test grid) leaves the new view rendering mid-page instead
+  // of at the top.
+  window.scrollTo(0, 0);
 }
 
 // In-app replacement for the native window.confirm() dialog, which renders
@@ -602,14 +607,15 @@ function formatMatchingTable(text) {
 // "Match each X to Y" question stems arrive as one dense run-on paragraph
 // ("Apps: Power Apps, Power Automate. Scenarios: A. ... B. ... C. ...").
 // Tries the real two-column table first; if the text doesn't cleanly split
-// into two equal-length lists, falls back to one line per label/item instead
-// — still far more readable than the original run-on, just not a table.
-// Only ever called for question text starting with "Match each"/"Match the
-// following", and always falls back to the untouched original if neither
-// approach finds real list structure, so it can never make an ordinary
-// question worse.
+// into two equal-length lists, falls back to one line per label/item instead,
+// still far more readable than the original run-on, just not a table.
+// Only ever called for question text containing "match the"/"match each"
+// anywhere (not just at the very start, since some stems lead with a short
+// scenario sentence first), and always falls back to the untouched original
+// if neither approach finds real list structure, so it can never make an
+// ordinary question worse.
 function formatMatchingQuestionText(text) {
-  if (!/^match (each|the following)/i.test(text.trim())) return text;
+  if (!/\bmatch (the|each)\b/i.test(text)) return text;
 
   const table = formatMatchingTable(text);
   if (table) return table;
@@ -619,10 +625,29 @@ function formatMatchingQuestionText(text) {
   working = working.replace(/\s([A-H])\.\s(?=[A-Z])/g, "\n$1. ");
   working = working.replace(/\s(\d{1,2})\.\s(?=[A-Z])/g, "\n$1. ");
   working = working.replace(/;\s*/g, "\n");
-  const lines = working
+  // Some stems are a run of standalone "Which X does Y?" clauses with no
+  // label/marker at all (the answer choices live entirely in the options,
+  // each a full candidate sequence) — break after each "? " so every
+  // question reads on its own line instead of running into the next.
+  working = working.replace(/\?\s+(?=[A-Z])/g, "?\n");
+  let lines = working
     .split("\n")
     .map((s) => s.trim())
     .filter(Boolean);
+  // Same idea, but the run-on clauses are plain statements ending in "."
+  // rather than "?" (no marker/label at all). Only apply this looser split
+  // as a last resort — when nothing else found real list structure yet, and
+  // there are several roughly sentence-length segments — since blindly
+  // splitting on every period is too aggressive for ordinary prose.
+  if (lines.length < 3) {
+    const bySentence = text
+      .split(/\.\s+(?=[A-Z])/)
+      .map((s) => s.trim().replace(/\.$/, "") + ".")
+      .filter((s) => s.length > 3);
+    if (bySentence.length >= 4 && bySentence.every((s) => s.length < 200)) {
+      lines = bySentence;
+    }
+  }
   if (lines.length < 3) return text;
   // Bold just the label — a bare "Tasks:"/"Places:" line in full, or the
   // "1."/"A." marker at the start of an item line — not the whole line
@@ -633,7 +658,7 @@ function formatMatchingQuestionText(text) {
       const bareLabel = l.match(/^([A-Za-z][A-Za-z ]*:)$/);
       // Extra top margin (via match-section) so the left-column list and the
       // right-column list read as two visually distinct groups, not one
-      // continuous run of lines — matters most on longer 5-6 item matches.
+      // continuous run of lines: matters most on longer 5-6 item matches.
       if (bareLabel) return `<div class="match-line match-section"><strong>${bareLabel[1]}</strong></div>`;
       const marker = l.match(/^((?:[A-H]|\d{1,2})\.)\s(.*)$/);
       if (marker) return `<div class="match-line"><strong>${marker[1]}</strong> ${marker[2]}</div>`;
@@ -660,7 +685,8 @@ function formatYesNoQuestionText(text) {
 }
 
 function formatQuestionText(text) {
-  if (/^match (each|the following)/i.test(text.trim())) return formatMatchingQuestionText(text);
+  text = text.replace(/→|➔|➡/g, "-");
+  if (/\bmatch (the|each)\b/i.test(text)) return formatMatchingQuestionText(text);
   return formatYesNoQuestionText(text) || text;
 }
 
@@ -669,7 +695,7 @@ function formatExplanation(raw) {
 
   // Arrow characters (from source docx bullets like "Manager -> Approves") render
   // inconsistently across fonts/platforms; a plain ASCII arrow is more reliable.
-  raw = raw.replace(/→|➔|➡/g, "->");
+  raw = raw.replace(/→|➔|➡/g, "-");
 
   // A handful of explanations start with a stray literal "Explanation" word
   // before the actual content (e.g. "Explanation Everyone must approve: ...")
@@ -938,7 +964,7 @@ async function boot() {
   } else if (ALL_QUESTIONS.length === 0) {
     const banner = document.createElement("div");
     banner.className = "card load-error-banner";
-    banner.innerHTML = `📝 Questions are coming soon — the site is live, content is on its way.`;
+    banner.innerHTML = `📝 Questions are coming soon. The site is live, content is on its way.`;
     document.querySelector(".container").prepend(banner);
   }
 
@@ -1010,7 +1036,7 @@ async function onContactSubmit(e) {
         name,
         email,
         message,
-        _subject: `LR PL300 Practice Test — feedback from ${name}`,
+        _subject: `LR PL300 Practice Test: feedback from ${name}`,
       }),
     });
     if (!res.ok) throw new Error("Request failed");

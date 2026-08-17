@@ -1,73 +1,80 @@
-# PL-300 Practice Test
+# PL-300 Microsoft Power BI Data Analyst Practice Test
 
-PL-300 | 12 Practice Tests | 600 Q's
+A free online PL-300 practice test created by Lashmi Bai Ravindrapandian to help learners prepare for the Microsoft Power BI Data Analyst (PL-300) certification exam.
 
-A free, public PL-300 (Microsoft Power BI Data Analyst) practice test — no account or
-password required, just a name + email to save your progress. Built as a static web app so it
-can be hosted for free and reached by anyone.
+**Practice Online:** [PL-300 Practice Test](https://rlashmibai.github.io/LR-PL-300-Practice-Test/)
 
-## Live features
+The practice application is designed to help you test your Power BI knowledge, identify areas that need more attention, and build confidence before taking the actual exam.
 
-- Guest login (name + email, no password) — saves score history on this device
-- Full timed practice exam, or practice one topic at a time
-- Question formats: single-choice, multi-select, true/false, ordering, matching, fill-in-the-blank
-- Instant explanation shown after each attempt, plus a full review screen
-- Score breakdown by PL-300 course module
-- Works on mobile and desktop (responsive, installable as a home-screen app)
+## What This Practice Test Covers
 
-## Project structure
+The practice questions are designed around the key areas of the PL-300 certification, including:
 
-```
-index.html      Page structure / all views (welcome, dashboard, test, results)
-style.css       Styling (mobile-first, responsive)
-app.js          App logic: guest login, quiz engine, scoring, results rendering
-questions.json  The question bank (see format below) — currently empty, content pending
-manifest.json   PWA manifest (enables "Add to Home Screen")
-```
+- Prepare and transform data
+- Model data
+- Visualize and analyze data
+- Manage and secure Power BI
+- Power Query and data preparation
+- DAX and calculations
+- Semantic models and relationships
+- Power BI reports and dashboards
+- Data analysis and interpretation
 
-## Question format
+The questions are intended to reinforce your understanding rather than simply encourage memorization.
 
-Each question in `questions.json` looks like this:
+## Why I Created This
 
-```json
-{
-  "id": "q1",
-  "type": "single",
-  "testSet": 1,
-  "module": 1,
-  "section": "Get started with Microsoft data analytics",
-  "text": "Question text goes here?",
-  "options": [
-    { "id": "a", "text": "Option A" },
-    { "id": "b", "text": "Option B" }
-  ],
-  "correct": ["b"],
-  "explanation": "Why b is correct, shown after the visitor answers."
-}
-```
+As I worked toward the PL-300 Microsoft Power BI Data Analyst certification, I wanted to understand Power BI's data preparation, modeling, visualization, and analysis capabilities more deeply.
 
-- `type`: `single` (one correct answer), `multi` (select all that apply), `truefalse`,
-  `fillblank`, or `ordering` (put items in the correct sequence — `correct` is the array of
-  option ids in order).
-- `module`: `1`–`6`, the content-source module a question was drawn from (see `MODULE_NAMES` in
-  `app.js`) — known directly from which source doc the question came from, no classification.
-- `section`: always set equal to the question's own module name (`MODULE_NAMES[module]`) — used
-  for topic-wise practice and the results breakdown. There is **no mapping to the official
-  PL-300 exam's domain structure anywhere in this app**, by design.
-- `testSet`: `1`–`12`, assigned by a deterministic round-robin over all 6 content-source modules
-  (see `testSetLabel`/`renderTestGrid` in `app.js`) so every test mixes questions from all 6
-  modules rather than one module per test.
+While studying, I realized that learning the material was only one part of the preparation. The real challenge was applying that knowledge to questions and recognizing where there were still gaps.
 
-## Running locally
+That is why I created this practice test.
 
-Any static file server works, e.g.:
+I wanted a simple, practical place where learners could test themselves, revisit topics they found difficult, and build confidence before sitting for the actual exam.
 
-```
-python -m http.server 8080
-```
+## How I Built It
 
-Then open `http://localhost:8080`.
+I wanted to turn the idea into a working application of my own.
 
-## Deployment
+I created the practice questions, explanations, test structure, and overall learning experience. I then used GitHub and Claude Code to build and develop the application.
 
-Currently a client-only static app (data is saved to the browser's `localStorage`, per device).
+Claude Code helped with the development and implementation, while I shaped the requirements, content, functionality, and user experience.
+
+For me, this project became both a PL-300 preparation tool and an opportunity to explore how AI-assisted development can help turn an idea into a practical learning application.
+
+## About the Creator
+
+Lashmi Bai Ravindrapandian is a Strategic PMO and Digital Transformation Leader with 14+ years of experience helping organizations deliver large transformation programs.
+
+Over the years, I have partnered closely with business and technology leaders to drive delivery excellence, strengthen governance, lead product management initiatives, and simplify operations.
+
+I am passionate about developing future-ready organizations where People, Process, Technology and AI work together to accelerate innovation and transformation.
+
+I also created [LR Virtual Classroom](https://lrvirtualclassroom.co.in/), where I share practical learning resources and tools for professionals building new skills and preparing for certifications.
+
+## Disclaimer
+
+This is an independent practice resource created for PL-300 exam preparation.
+
+The questions are original practice questions and are not real Microsoft exam questions.
+
+This project is not affiliated with, sponsored by, or endorsed by Microsoft.
+
+For the most current exam objectives and certification information, always refer to the official Microsoft resources.
+
+## Useful Links
+
+- [PL-300 Practice Test](https://rlashmibai.github.io/LR-PL-300-Practice-Test/)
+- [LR Virtual Classroom](https://lrvirtualclassroom.co.in/)
+- [Lashmi Bai Ravindrapandian on GitHub](https://github.com/rlashmibai)
+- [Connect with me on LinkedIn](https://www.linkedin.com/in/lashmibairavindrapandian)
+
+## Free Learning Resource
+
+This practice test is provided as a free learning resource for anyone preparing for the PL-300 Microsoft Power BI Data Analyst certification.
+
+No subscription is required to use the practice resource.
+
+Learn → Practice → Review → Improve
+
+Good luck with your PL-300 preparation!
