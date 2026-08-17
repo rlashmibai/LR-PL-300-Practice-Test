@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>LR PL300 Practice Test</title>
+  <meta name="description" content="Free PL-300 (Microsoft Power BI Data Analyst) practice test with instant explanations and score history." />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0F5FA3" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="LR PL300" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="app-brand" id="appHomeLink" role="button" tabindex="0">🏠 LR PL300 Practice Test</div>
+    <div class="app-header-title">Microsoft Power BI PL-300 Data Analyst Practice Test</div>
+    <div class="app-header-right">
+      <button class="header-nav-btn" id="headerAboutBtn" type="button">About Me</button>
+      <button class="header-nav-btn" id="headerContactBtn" type="button">Contact</button>
+      <div class="user-chip" id="userChip"></div>
+    </div>
+  </header>
+
+  <button id="backToTopBtn" class="back-to-top" type="button" aria-label="Back to top" title="Back to top">▲</button>
+
+  <div class="container">
+
+    <!-- Home / landing page -->
+    <section id="view-home" class="view active">
+
+      <div class="card hero-card">
+        <h2>Welcome to LR PL300 Practice Test</h2>
+        <p class="hero-sub">Master the PL-300 Microsoft Power BI Data Analyst Exam with Confidence — Guaranteed Pass on Your First Attempt!</p>
+        <div class="hero-badges">
+          <span class="hero-badge">🆓 100% Free</span>
+          <span class="hero-badge">📚 600+ Practice Questions</span>
+        </div>
+        <div class="hero-grid">
+          <img class="hero-image" src="get-certified-banner.webp" alt="Get Certified PL-300 at First Attempt" />
+          <div class="hero-text">
+            <h3 class="hero-text-title">Free PL-300 Practice Test</h3>
+            <p class="hero-text-subtitle">600+ Practice Questions for Microsoft Power BI Data Analyst</p>
+            <p>100% coverage of the PL-300 Microsoft Learning path. This practice test is updated as per the latest study guide as on January 15, 2026.</p>
+            <p>Whether you're preparing for the PL-300 exam or looking for Free PL-300 Practice Test Questions and Answers, this site gives you a practical way to test your Power BI knowledge, identify gaps in your preparation, and build confidence before exam day.</p>
+            <p>100% free. No subscription. No paid course required. No account required to start.</p>
+          </div>
+        </div>
+
+        <div class="hero-grid hero-grid-second">
+          <img class="hero-image hero-badge-image" src="PL300-Data-Analyst-badge.webp" alt="Microsoft Certified: Power BI Data Analyst Associate badge" />
+          <div class="hero-text">
+            <p class="hero-text-list-heading">What You Get</p>
+            <ul class="hero-text-list">
+              <li>600+ original PL-300 practice questions across 6 full practice tests</li>
+              <li>A dedicated DAX practice test covering beginner to advanced-level DAX concepts</li>
+              <li>100 questions per main practice test, aligned closely with the real exam pattern</li>
+              <li>Timed mock exams and practice mode with instant explanations</li>
+              <li>Study links to PL-300 Learning Path modules and recommended YouTube videos</li>
+              <li>Detailed explanations for every question</li>
+              <li>Practice by major PL-300 exam topics</li>
+              <li>Domain-wise score breakdown</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hero-closing">
+          <p>Start practicing and see where you stand before taking the official Microsoft PL-300 exam.</p>
+          <p>This practice test is aligned to the official Microsoft <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300" target="_blank" rel="noopener">PL-300 study guide</a>, updated as per the latest study guide as on January 15, 2026.</p>
+          <div class="btn-row">
+            <button id="homeReadyBtn" class="btn brand-a">Ready to start? (Instant Free Access) →</button>
+            <button id="homeGoToLoginBtn" class="btn brand-b">Sign in to save your progress instead →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-card pair-a">
+        <div class="split-head"><span class="split-icon">🏆</span> Why Learners Trust This Practice Test</div>
+        <div class="split-body">
+          <p style="color:var(--text-muted); text-align:center;">This is a brand-new practice test, so there's no learner data to show yet. Real results will appear here once test-takers start sharing their outcomes.</p>
+        </div>
+      </div>
+
+      <div class="split-card pair-b">
+        <div class="split-head"><span class="split-icon">⭐</span> Key Features</div>
+        <div class="split-body">
+          <div class="feature-grid">
+            <div class="feature-card-item">
+              <div class="fci-icon">🎯</div>
+              <div class="fci-title">600+ Real Exam-Style Questions</div>
+              <div class="fci-desc">Covering all 4 official PL-300 domains, so nothing catches you off guard.</div>
+            </div>
+            <div class="feature-card-item">
+              <div class="fci-icon">🗂️</div>
+              <div class="fci-title">6 Ready-Made Practice Sets</div>
+              <div class="fci-desc">100 questions each, built to mirror the weight of the real exam.</div>
+            </div>
+            <div class="feature-card-item">
+              <div class="fci-icon">🧮</div>
+              <div class="fci-title">Dedicated DAX Practice Test</div>
+              <div class="fci-desc">Beginner-to-advanced DAX functions and scenarios, practiced separately.</div>
+            </div>
+            <div class="feature-card-item">
+              <div class="fci-icon">⏱️</div>
+              <div class="fci-title">Timed &amp; Practice Modes</div>
+              <div class="fci-desc">Simulate exam pressure, or learn at your own pace with instant feedback.</div>
+            </div>
+            <div class="feature-card-item">
+              <div class="fci-icon">📝</div>
+              <div class="fci-title">Full Explanations, Every Question</div>
+              <div class="fci-desc">Not just the right answer, the reasoning behind it.</div>
+            </div>
+            <div class="feature-card-item">
+              <div class="fci-icon">🧩</div>
+              <div class="fci-title">Every Format the Exam Uses</div>
+              <div class="fci-desc">Knowledge-check, multiple-choice, multi-select, scenario-based, and matching questions.</div>
+            </div>
+            <div class="feature-card-item">
+              <div class="fci-icon">📊</div>
+              <div class="fci-title">Domain-Wise Score Breakdown</div>
+              <div class="fci-desc">See exactly where you stand against each exam skill area.</div>
+            </div>
+            <div class="feature-card-item">
+              <div class="fci-icon">🆓</div>
+              <div class="fci-title">100% Free, No Account Needed</div>
+              <div class="fci-desc">Start practicing instantly, no sign-up wall, ever. If you do sign in to save your history, your email is never stored on a server, it just stays in your own browser.</div>
+            </div>
+            <div class="feature-card-item">
+              <div class="fci-icon">📱</div>
+              <div class="fci-title">Works Anywhere, Installs Like an App</div>
+              <div class="fci-desc">Mobile or desktop, online or offline once installed.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-card pair-a">
+        <div class="split-head"><span class="split-icon">💡</span> Why This Practice Test Is Worth Your Time</div>
+        <div class="split-body">
+          <p>This practice test was built from my personal PL-300 exam journey and learning experience. Passing PL-300 requires strong understanding of Power BI fundamentals, including data preparation, modeling, visualization, analysis, and deployment.</p>
+          <p>My goal is simple: help you clear the PL-300 exam on your first attempt. Approach these tests with a learning mindset, not just an assessment mindset.</p>
+          <p>Sound familiar? These are the exact gaps this practice test is built to close:</p>
+          <ol>
+            <li>I wasn't sure what the question was really testing - data modeling, visualization, or DAX.</li>
+            <li>I didn't know when to use Dataverse, SQL Server, or Excel as a data source in Power BI.</li>
+            <li>I didn't fully understand connectors in Power BI Desktop or how standard vs premium connectors impact licensing.</li>
+            <li>I wasn't clear on query folding in Power Query and why it matters for performance optimization.</li>
+            <li>I struggled to differentiate between Import mode, DirectQuery, and Live Connection, and when to use each.</li>
+            <li>I didn't understand how relationships work in Power BI models, or how cardinality and cross-filter direction affect reporting.</li>
+            <li>I found DAX functions like CALCULATE, FILTER, and SUMX difficult to apply in practical scenarios.</li>
+            <li>I didn't know how to troubleshoot dataset refresh failures or interpret refresh history.</li>
+            <li>I wasn't confident about AI visuals like Key Influencers and Decomposition Tree.</li>
+            <li>I didn't understand the difference between built-in AI visuals and machine learning models integrated through Azure ML.</li>
+            <li>I wasn't sure when to use Q&amp;A, Smart Narrative, or Anomaly Detection.</li>
+            <li>I found parameters, what-if analysis, and field parameters confusing.</li>
+            <li>I struggled to understand how workspaces, datasets, permissions, and roles work together for governance and security.</li>
+            <li>I wasn't clear about licensing differences between Power BI Pro, Premium Per User, and Premium Capacity.</li>
+          </ol>
+          <p>By the end of these practice tests, you will strengthen your understanding of both core and advanced Power BI features. You will sharpen your problem-solving ability and enter the exam with clarity, confidence, and complete preparation.</p>
+          <p>Key to pass PL300 exam is to be thorough in fingertips in the features, functionality of Power BI. If you truly know the concept, you don't need to manage time - you'll spot the answer and move on, no stress. I'm confident in my answer - no wasted time here.</p>
+          <p>The actual exam gives 40-60 questions. I got 55. Colleagues got 45 and 50. These practice tests are 160 minutes long so you can cover 100 questions calmly and thoroughly. This course will prepare you to walk in confidently, knowing you've seen 600+ solid questions understanding all the topics and nothing will surprise you.</p>
+          <p><strong>The goal is simple: to have you thinking, "I'm confident in this answer, no time wasted second-guessing myself."</strong></p>
+        </div>
+      </div>
+
+      <div class="split-card pair-b">
+        <div class="split-head"><span class="split-icon">🎯</span> Who Is This Practice Test For?</div>
+        <div class="split-body">
+          <p class="who-tagline">Ready to Validate Your PL-300 Preparation?<br />Have you completed the PL-300 Microsoft Learning Path and want to self-assess?<br />Are you aiming to pass the PL-300 exam on your first try?<br />Want to check your readiness and topic coverage for PL-300?<br />Looking for simplified explanations of complex Power BI concepts?</p>
+          <p><strong>Aspiring Power BI Data Analysts:</strong> Individuals who are new to Power BI and want to gain a foundational understanding of data preparation, modeling, visualization, and analysis via practice test.</p>
+          <p>Those who have completed the Microsoft <a href="https://learn.microsoft.com/en-us/training/courses/pl-300t00" target="_blank" rel="noopener">Learning Path</a> and wish to self-assess before the official exam can utilize this practice test.</p>
+        </div>
+      </div>
+
+      <div class="split-card pair-a">
+        <div class="split-head"><span class="split-icon">⚖️</span> With Sign-In vs Without Sign-In</div>
+        <div class="split-body">
+          <div class="compare-grid">
+            <div class="compare-col">
+              <div class="compare-col-title">Without Sign-In</div>
+              <ul class="compare-list">
+                <li>Take any Timed or Practice test right away</li>
+                <li>See your score and full answer review after every test</li>
+                <li>No name, email, or account needed</li>
+                <li>Nothing is saved once you close the tab</li>
+              </ul>
+            </div>
+            <div class="compare-col">
+              <div class="compare-col-title">With Sign-In</div>
+              <ul class="compare-list">
+                <li>Everything available without sign-in, plus:</li>
+                <li>Score history saved across visits</li>
+                <li>Options to practice by major exam topics</li>
+                <li>Just a name + email, no password, stored only in your own browser</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-card pair-b">
+        <div class="split-head"><span class="split-icon">📚</span> Complete Topic Coverage</div>
+        <div class="split-body">
+          <p>This practice test maps to the full PL-300 study guide, spanning:</p>
+          <ul>
+            <li>Prepare the data (25-30%)</li>
+            <li>Model the data (25-30%)</li>
+            <li>Visualize and analyze the data (25-30%)</li>
+            <li>Manage and secure Power BI (15-20%)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="split-card pair-a">
+        <div class="split-head"><span class="split-icon">🧩</span> A Mix of Question Formats</div>
+        <div class="split-body">
+          <p>To mirror how the real PL-300 exam is structured, this practice test uses a variety of question formats:</p>
+          <ul>
+            <li>Definition and knowledge-check questions</li>
+            <li>Multiple-choice and multi-select questions</li>
+            <li>Scenario-based and matching questions</li>
+          </ul>
+          <p>Working across this mix reinforces your understanding and gets you ready for whatever question style shows up on exam day.</p>
+        </div>
+      </div>
+
+      <div class="split-card pair-b">
+        <div class="split-head"><span class="split-icon">🎁</span> Bonus Resources Included</div>
+        <div class="split-body">
+          <ul>
+            <li>Study links to PL-300 Learning Path modules</li>
+            <li>Recommended YouTube videos for visual learning and explanations</li>
+            <li>Visual aids such as charts, diagrams, and screenshots wherever applicable</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="split-card pair-a">
+        <div class="split-head"><span class="split-icon">💬</span> How People Have Benefitted from PL-300 Exam</div>
+        <div class="split-body">
+          <p style="color:var(--text-muted); text-align:center;">No testimonials yet — real feedback from learners will be added here as it comes in.</p>
+        </div>
+      </div>
+
+      <div class="split-card pair-a">
+        <div class="split-head"><span class="split-icon">🔄</span> Study Guide Update</div>
+        <div class="split-body">
+          <p style="color:var(--text-muted);">This practice test is built against the official PL-300 study guide as of January 15, 2026. A dated change-log will be posted here whenever Microsoft revises the study guide.</p>
+        </div>
+      </div>
+
+      <div class="btn-row home-bottom-cta">
+        <button id="homeReadyBtnBottom" class="btn brand-a">Ready to start? (Instant Free Access) →</button>
+        <button id="homeGoToLoginBtnBottom" class="btn brand-b">Sign in to save your progress instead →</button>
+      </div>
+
+      <p class="copyright-note">All questions on this site are original, independently written and reviewed, not copied wholesale from any single source.<br />&copy; 2026 LR Virtual Classroom. All rights reserved.</p>
+
+    </section>
+
+    <!-- Choose Test: hero + 7 test-set buttons, no sign-in required -->
+    <section id="view-choose-test" class="view">
+      <div class="card hero-card">
+        <div class="eyebrow">Microsoft Power BI PL-300 Exam</div>
+        <h2>Master the PL-300 Microsoft Power BI Data Analyst Exam with Confidence</h2>
+        <p class="hero-sub">Prepare smarter, not harder.</p>
+        <p>Pick any test below to jump straight in, no sign-in required. Six sets cover the core PL-300 domains with 100 questions each, plus a dedicated DAX practice test for beginner-to-advanced DAX concepts.</p>
+      </div>
+
+      <div class="card tint-blue">
+        <h2>⏱️ Timed Tests</h2>
+        <p>Simulates real exam conditions: 160 minutes for the main sets, answers and explanations shown only after you submit.</p>
+        <div class="test-grid" id="chooseTimedGrid"></div>
+      </div>
+
+      <div class="card tint-gold">
+        <h2>📖 Practice Tests</h2>
+        <p>Same 7 question sets, but see the correct answer and full explanation right after each question, at your own pace. If you truly know the concept, you don't need to manage time — you'll spot the answer and move on.</p>
+        <div class="test-grid" id="choosePracticeGrid"></div>
+      </div>
+
+      <div class="btn-row">
+        <button id="chooseTestGoHomeBtn" class="btn ghost">← Back to home</button>
+        <button id="chooseTestLoginBtn" class="btn ghost">Sign in to save your progress →</button>
+      </div>
+    </section>
+
+    <!-- Welcome / guest login -->
+    <section id="view-welcome" class="view">
+      <div class="card">
+        <h2>Start practicing for PL-300</h2>
+        <p>No account or password needed, just enter your name and email so we can save your scores and let you pick up where you left off.</p>
+        <form id="welcomeForm">
+          <label for="nameInput">Name</label>
+          <input type="text" id="nameInput" placeholder="Your name" required />
+          <label for="emailInput">Email</label>
+          <input type="email" id="emailInput" placeholder="you@example.com" required />
+          <div class="btn-row">
+            <button type="submit" class="btn">Continue</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section id="view-dashboard" class="view">
+      <div class="card">
+        <h2 id="dashGreeting">Welcome!</h2>
+        <div class="btn-row">
+          <button id="logoutBtn" class="btn ghost">Sign out</button>
+        </div>
+      </div>
+
+      <div class="card tint-blue">
+        <h2>⏱️ Timed Tests</h2>
+        <p>100 questions, 160 minutes for the main sets, answers shown at the end.</p>
+        <div class="test-grid" id="dashTimedGrid"></div>
+      </div>
+
+      <div class="card tint-gold">
+        <h2>📖 Practice Tests</h2>
+        <p>Same 7 sets, instant answer and explanation after each question.</p>
+        <div class="test-grid" id="dashPracticeGrid"></div>
+      </div>
+
+      <div class="card">
+        <h2>Practice by topic</h2>
+        <div id="sectionList" class="section-list"></div>
+      </div>
+
+      <div class="card">
+        <h2>Your past attempts</h2>
+        <p id="historyEmpty" style="color:var(--text-muted)">No attempts yet — take a test to see your history here.</p>
+        <table id="historyTable" style="display:none">
+          <thead><tr><th>Date</th><th>Test</th><th>Score</th><th>Result</th><th>Time</th></tr></thead>
+          <tbody id="historyBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Test taking: sidebar question list + main question panel -->
+    <section id="view-test" class="view">
+      <div class="test-topbar">
+        <div class="test-topbar-left">
+          <span class="mode-badge timed" id="modeBadge">Timed exam mode</span>
+          <span class="test-name-label" id="testNameLabel"></span>
+        </div>
+        <div class="test-topbar-right">
+          <button id="testCancelBtn" class="btn ghost small">✕ Cancel</button>
+        </div>
+      </div>
+
+      <div class="progress-row">
+        <div class="progress-count" id="progressCount">1/–</div>
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="progressBarFill"></div></div>
+        <div class="timer" id="timerDisplay">00:00</div>
+        <button id="submitTestBtn" class="btn submit-btn small">✓ Submit Test</button>
+      </div>
+
+      <div class="test-layout">
+        <aside class="test-sidebar">
+          <div class="test-sidebar-header">Questions</div>
+          <div class="test-sidebar-list" id="questionSidebarList"></div>
+        </aside>
+
+        <div class="test-main">
+          <div class="card no-pad">
+            <div class="q-topic-bar" id="qTopicBar"></div>
+            <div class="q-number-bar">
+              <span id="qNumberLabel"></span>
+            </div>
+            <div class="q-body-pad">
+              <div class="question-text" id="questionText"></div>
+              <div id="questionBody"></div>
+              <div id="checkAnswerArea"></div>
+              <div class="btn-row" style="justify-content:space-between; align-items:center;">
+                <span class="flag-toggle" id="flagToggle">🚩 Flag for review</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button id="prevQBtn" class="btn secondary">← Previous</button>
+            <button id="nextQBtn" class="btn">Skip / Next →</button>
+          </div>
+        </div>
+
+        <aside class="test-status-grid">
+          <div class="test-sidebar-header">Overview</div>
+          <div class="nav-grid-legend">
+            <span><i class="legend-dot complete"></i> Complete</span>
+            <span><i class="legend-dot skipped"></i> Skipped</span>
+            <span><i class="legend-dot flagged"></i> Flagged</span>
+          </div>
+          <div class="nav-grid" id="navGrid"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="view-results" class="view">
+      <div class="card score-hero">
+        <div class="pct" id="scorePct">0%</div>
+        <div id="scoreDetail" style="color:var(--text-muted); margin:6px 0;"></div>
+        <span class="badge" id="passBadge"></span>
+      </div>
+
+      <div class="card">
+        <h2>Score by topic</h2>
+        <table>
+          <thead><tr><th>Topic</th><th>Score</th></tr></thead>
+          <tbody id="sectionBreakdownBody"></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Review answers</h2>
+        <div id="reviewList"></div>
+      </div>
+
+      <div class="btn-row">
+        <button id="backToDashBtn" class="btn">Back to dashboard</button>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="view-about" class="view">
+      <div class="card hero-card" style="text-align:center;">
+        <h2>About Me - Lashmi Bai Ravindrapandian</h2>
+      </div>
+
+      <div class="card">
+        <p>I'm Lashmi Bai Ravindrapandian, creator of <a href="https://lrvirtualclassroom.co.in/" target="_blank" rel="noopener">LR Virtual Classroom</a>, a Strategic PMO and Digital Transformation Leader with 14+ years of experience leading Oracle ERP programs, business transformation initiatives, operational improvements, and AI-enabled delivery across consulting, technology, aerospace, engineering, and construction.</p>
+        <p>As I worked toward the PL-300 Microsoft Power BI Data Analyst certification, I wanted to understand Power BI's data preparation, modeling, visualization, and analysis capabilities more deeply. While studying, I realized that learning the material was only one part of the preparation. The real challenge was applying that knowledge to questions and recognizing where there were still gaps.</p>
+        <p>That is why I created this practice test.</p>
+        <p>I wanted a simple, practical place where learners could test themselves, revisit topics they found difficult, and build confidence before sitting for the actual exam.</p>
+      </div>
+
+      <div class="split-card pair-a">
+        <div class="split-head"><span class="split-icon">🎯</span> Who This Is For</div>
+        <div class="split-body">
+          <p>If you're preparing for the PL-300 Microsoft Power BI Data Analyst exam, whether you're completely new to Power BI or you've already worked through the Microsoft Learning Path, this practice test is for you.</p>
+          <p>Use it to reinforce what you've learned, identify areas that need more attention, and get comfortable with exam-style questions before the real thing.</p>
+          <p>No prior certification required.<br />No paid course.<br />No login is required to start practicing.</p>
+        </div>
+      </div>
+
+      <div class="split-card pair-b">
+        <div class="split-head"><span class="split-icon">💙</span> Why This Is Free</div>
+        <div class="split-body">
+          <p>I believe good learning resources should be accessible to anyone who is willing to put in the effort to learn.</p>
+          <p>There are many excellent courses and resources available, but I wanted to create something that could sit alongside them as a simple, practical practice tool without another subscription or paywall.</p>
+          <p>So this practice test is completely free, with no ads and no hidden costs. Sign-in is optional and only exists for those who want to save their scores and practice history across visits.</p>
+          <p>I built this as a learning resource, and I hope it becomes a useful part of your preparation. Use it to practice, find your gaps, and walk into your PL-300 exam feeling prepared and confident.</p>
+          <p>Good luck with your certification journey.</p>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button id="aboutGoHomeBtn" class="btn ghost">← Back to home</button>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="view-contact" class="view">
+      <div class="card hero-card">
+        <div class="eyebrow">Get In Touch</div>
+        <h2>Contact &amp; Feedback</h2>
+        <p>Spotted a wrong answer, a broken link, or just want to say hello? Send a message below and it goes straight to my inbox.</p>
+        <div class="btn-row">
+          <a href="https://www.linkedin.com/in/lashmibairavindrapandian" target="_blank" rel="noopener" class="btn linkedin-btn">🔗 Connect on LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <form id="contactForm">
+          <label for="contactName">Name</label>
+          <input type="text" id="contactName" name="name" placeholder="Your name" required />
+          <label for="contactEmail">Your email</label>
+          <input type="email" id="contactEmail" name="email" placeholder="you@example.com" required />
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" name="message" rows="5" placeholder="Let me know what's on your mind..." required></textarea>
+          <div class="btn-row">
+            <button type="submit" class="btn" id="contactSubmitBtn">Send feedback</button>
+          </div>
+          <p class="contact-status" id="contactStatus"></p>
+        </form>
+      </div>
+
+      <div class="btn-row">
+        <button id="contactGoHomeBtn" class="btn ghost">← Back to home</button>
+      </div>
+    </section>
+
+    <!-- Disclaimer -->
+    <section id="view-disclaimer" class="view">
+      <div class="card hero-card">
+        <div class="eyebrow">Legal</div>
+        <h2>Disclaimer</h2>
+      </div>
+      <div class="card">
+        <p>LR PL300 Practice Test is an independent, unofficial study resource created by LR Virtual Classroom. It is not affiliated with, endorsed by, sponsored by, or in any way officially connected with Microsoft Corporation.</p>
+        <p>Microsoft, Power BI, Power BI Desktop, Power Query, DAX, Microsoft Fabric, PL-300, and any other Microsoft product or certification names referenced on this site are trademarks of Microsoft Corporation. They are used here for identification and educational purposes only.</p>
+        <p>All questions on this site are original: independently written and reviewed, not copied wholesale from any single source, and mapped to the publicly available PL-300 exam skills outline. They are intended as a study and self-assessment aid. Working through this practice test does not guarantee a passing score on the official Microsoft PL-300 exam, which is administered solely by Microsoft and its certified testing partners.</p>
+        <p>Every effort is made to keep the content accurate and current with the official exam skills outline, but Microsoft's exams and study guides can change at any time. Always cross-check against Microsoft's own official resources before sitting the real exam.</p>
+      </div>
+      <div class="btn-row">
+        <button id="disclaimerGoHomeBtn" class="btn ghost">← Back to home</button>
+      </div>
+    </section>
+
+    <!-- Privacy Policy -->
+    <section id="view-privacy" class="view">
+      <div class="card hero-card">
+        <div class="eyebrow">Legal</div>
+        <h2>Privacy Policy</h2>
+      </div>
+      <div class="card">
+        <h3>What this site collects</h3>
+        <p>You can take every practice test on this site with no sign-in at all. If you choose to sign in to save your score history, all that's asked for is a name and email address, no password. That name/email and your score history are stored only in your own browser's local storage (localStorage). They are never transmitted to, or stored on, any server or database run by this site, because this site doesn't have one, it's a static page.</p>
+        <p>That also means your data lives only on the device and browser you signed in with. Clearing your browser data, or switching devices/browsers, will clear it too, and there's no way for LR Virtual Classroom to recover it for you.</p>
+        <h3>Contact form</h3>
+        <p>If you use the Contact page, the name, email, and message you submit are sent via FormSubmit.co, a third-party form-delivery service, to reach the site owner's inbox. That information is used only to respond to you, never for marketing, and never sold or shared with anyone else.</p>
+        <h3>No ads, no tracking</h3>
+        <p>This site runs no advertising and no third-party analytics or tracking scripts. The only external resource loaded is Google Fonts (for the site's typeface), which involves a request to Google's font CDN when the page loads.</p>
+        <h3>Changes to this policy</h3>
+        <p>If this policy ever changes, the update will be posted on this page.</p>
+      </div>
+      <div class="btn-row">
+        <button id="privacyGoHomeBtn" class="btn ghost">← Back to home</button>
+      </div>
+    </section>
+
+    <!-- Cookie Policy -->
+    <section id="view-cookies" class="view">
+      <div class="card hero-card">
+        <div class="eyebrow">Legal</div>
+        <h2>Cookie Policy</h2>
+      </div>
+      <div class="card">
+        <p>This site does not use cookies for tracking, advertising, or analytics.</p>
+        <p>To remember an optional sign-in (name and email) and your score history between visits, the site uses your browser's local storage (localStorage) rather than cookies. That data stays on your device and is never sent to a server.</p>
+        <p>The site's font is loaded from Google Fonts. Loading a font from Google's CDN can involve a minimal technical request to Google's servers; Google's own privacy policy covers how that request is handled on their end.</p>
+        <p>Because no tracking or advertising cookies are used, this site doesn't need a cookie-consent banner, but this page exists so you always know exactly what is and isn't happening with your data.</p>
+      </div>
+      <div class="btn-row">
+        <button id="cookiesGoHomeBtn" class="btn ghost">← Back to home</button>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="app-footer">
+    <div class="app-footer-left">Designed with Love by Lashmi Bai Ravindrapandian</div>
+    <div class="app-footer-center">All Rights Reserved to LR Virtual Classroom</div>
+    <div class="app-footer-right">
+      <button id="footerDisclaimerBtn" class="footer-link-btn" type="button">Disclaimer</button>
+      <button id="footerPrivacyBtn" class="footer-link-btn" type="button">Privacy Policy</button>
+      <button id="footerCookieBtn" class="footer-link-btn" type="button">Cookie Policy</button>
+    </div>
+  </footer>
+
+  <!-- Custom confirm dialog — replaces the native browser confirm() for
+       leave/cancel/submit-test prompts, which felt jarring and inconsistent
+       with the rest of the app (especially on mobile). -->
+  <div id="confirmModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <p class="modal-message" id="confirmModalMessage"></p>
+      <div class="btn-row modal-actions">
+        <button id="confirmModalCancelBtn" class="btn secondary">Cancel</button>
+        <button id="confirmModalOkBtn" class="btn">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch((err) => console.warn("SW registration failed:", err));
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+.DS_Store
+Thumbs.db
+node_modules/
+*.log
+firebase-config.local.js
+
+# Raw source material (Word docs, etc.) — never publish these, only the
+# converted questions.json should be committed
+Question*.docx
+*ERRORS.docx
+~$*.docx
