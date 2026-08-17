@@ -7,10 +7,11 @@ const PASS_PERCENT = 70;
 // 12 flat practice tests, each a deterministic mix of all 6 content-source
 // modules (50 questions/test once the full 600-question bank is loaded).
 const TEST_SET_COUNT = 12;
-// ~1.6 min/question (matching the real PL-300 exam's pacing philosophy described
-// on the home page). Applied per-set from each set's actual question count so a
-// partially-loaded set isn't over-timed.
-const TEST_SET_MINUTES_PER_QUESTION = 1.6;
+// 2 min/question (100 minutes for a 50-question test, per the home page's
+// pacing description). Applied per-set from each set's actual question count
+// so a partially-loaded set isn't over-timed. Only matters for Timed Tests —
+// Practice mode uses a count-up timer with no enforced limit.
+const TEST_SET_MINUTES_PER_QUESTION = 2;
 
 function testSetMinutes(count) {
   return Math.max(10, Math.round(count * TEST_SET_MINUTES_PER_QUESTION));
