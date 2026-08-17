@@ -134,6 +134,11 @@ function stripHtml(html) {
 // the colon makes them distinct substrings that can't collide.
 const EXPL_HEADERS = [
   "Overall explanation", "References:", "Reference:",
+  // Must come before the bare "Explanation:" entry below — array order
+  // matters here (each pass consumes its exact substring), so "Detailed
+  // Explanation:" is extracted whole before the shorter "Explanation:"
+  // gets a chance to tear it into a stray "Detailed" paragraph + heading.
+  "Detailed Explanation:",
   "Explanation:",
   "Exam Tips:", "Exam Tip:",
   "Keep in Mind:", "Keep in Mind", "Study Links:", "Study links:", "Study Links", "Study links",
@@ -169,14 +174,17 @@ const EXPL_HEADER_PATTERNS = [
   // Youtube Video" + a stray "s" paragraph). One atomic pattern covering
   // both cases (colon optional, singular/plural, Youtube/YouTube) avoids it.
   /Recommended [Yy]ou[Tt]ube (?:[Vv]ideos?|[Ll]inks?)\b/g,
-  // Bare "References" (no colon) — but ONLY right after a sentence/clause
+  // Bare "References" (no colon): but ONLY right after a real sentence/clause
   // boundary (". "/": "/string start), never mid-phrase. Without this
   // restriction it also matches inside compound terms like "Connection
-  // References", tearing that phrase in half every time it appears.
+  // References", tearing that phrase in half every time it appears. The
+  // (?<!\d) guard additionally excludes a numbered-list marker's own period
+  // (e.g. "2. References to Model Objects" is one list item's title, not a
+  // heading — "2." would otherwise satisfy the "[.:] " lookbehind on its own).
   // The "\n\n" alternative catches "References" landing right after a
   // heading EXPL_HEADERS already isolated above (e.g. "Exam Tips:" leaves
   // "\n\nExam Tips\n\n   References ..." — the colon itself is gone by now).
-  /(?:^|(?<=[.:]\s+)|(?<=\n\n\s*))References\b/g,
+  /(?:^|(?<=(?<!\d)[.:]\s+)|(?<=\n\n\s*))References\b/g,
   /Why (?:the )?Other[s]?(?: Answers?| Options?)?\s*(?:Are|Is)\s*(?:Correct|Incorrect|Wrong|Right)\b/gi,
   // Same idea, but naming specific option letters instead of saying "other"
   // ("Why D and E are incorrect", "Why C is correct") — common when this
