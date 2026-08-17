@@ -4,13 +4,12 @@
 
 const SECTION_TEST_MINUTES = 15;
 const PASS_PERCENT = 70;
-// 6 main practice sets (100 questions each) plus one dedicated DAX practice set.
-const MAIN_TEST_SET_COUNT = 6;
-const DAX_TEST_SET_ID = 7;
-const TEST_SET_COUNT = DAX_TEST_SET_ID; // total test-set tiles to render (1..7)
-// ~1.6 min/question (160 minutes for a 100-question set), matching the real PL-300
-// exam's pacing philosophy described on the home page. Applied per-set from each
-// set's actual question count so a smaller set (e.g. the DAX test) isn't over-timed.
+// 12 flat practice tests, each a deterministic mix of all 6 content-source
+// modules (50 questions/test once the full 600-question bank is loaded).
+const TEST_SET_COUNT = 12;
+// ~1.6 min/question (matching the real PL-300 exam's pacing philosophy described
+// on the home page). Applied per-set from each set's actual question count so a
+// partially-loaded set isn't over-timed.
 const TEST_SET_MINUTES_PER_QUESTION = 1.6;
 
 function testSetMinutes(count) {
@@ -18,7 +17,7 @@ function testSetMinutes(count) {
 }
 
 function testSetLabel(n) {
-  return n === DAX_TEST_SET_ID ? "PL300 DAX Practice Test" : `PL300 Practice Test ${n}`;
+  return `PL300 Practice Test ${n}`;
 }
 
 // Official PL-300 exam skill weights, shown next to each topic on the dashboard.
@@ -28,6 +27,19 @@ const EXAM_WEIGHTS = {
   "Model the data": "25–30%",
   "Visualize and analyze the data": "25–30%",
   "Manage and secure Power BI": "15–20%",
+};
+
+// The 6 content-source modules questions are drawn from (distinct from the 4
+// EXAM_WEIGHTS exam domains above) — used only for the topic labels shown while
+// taking a test and on the results-review page. Keyed by each question's
+// "module" field (1-6), populated at content-conversion time.
+const MODULE_NAMES = {
+  1: "Get started with Microsoft data analytics",
+  2: "Prepare data for analysis with Power BI",
+  3: "Model data with Power BI",
+  4: "Design effective reports in Power BI",
+  5: "Manage and secure Power BI",
+  6: "Complete DAX Mastery",
 };
 
 // ---------- Data layer (localStorage today, Firestore later) ----------
@@ -1007,8 +1019,8 @@ function getSections() {
   return [...new Set(ALL_QUESTIONS.map((q) => q.section))];
 }
 
-// Renders the 7 test-set buttons (6 main sets + 1 DAX set; shared by the no-login
-// Choose Test page and the signed-in Dashboard) into the given container element id.
+// Renders the 12 test-set buttons (shared by the no-login Choose Test page and the
+// signed-in Dashboard) into the given container element id.
 function renderTestGrid(containerId, feedbackMode) {
   const grid = document.getElementById(containerId);
   if (!grid) return;
@@ -1290,7 +1302,7 @@ function gotoQuestion(i) {
 function renderQuestion() {
   const q = session.questions[session.index];
   session.visited.add(q.id);
-  document.getElementById("qTopicBar").textContent = q.section;
+  document.getElementById("qTopicBar").textContent = MODULE_NAMES[q.module] || q.section;
   document.getElementById("qNumberLabel").textContent = `Question #${session.index + 1}`;
   // innerHTML (not textContent) so a question can include an <img> if needed
   document.getElementById("questionText").innerHTML = formatQuestionText(q.text);
@@ -1571,7 +1583,7 @@ function renderResults(reviewItems, attempt) {
       Array.isArray(q.options) &&
       q.options.some((o) => o.explanation);
     div.innerHTML = `
-      <div class="question-meta">Question ${i + 1} · ${q.section}</div>
+      <div class="question-meta">Question ${i + 1} · ${MODULE_NAMES[q.module] || q.section}</div>
       <div class="question-text" style="font-size:0.98rem;">${formatQuestionText(q.text)}</div>
       <div class="verdict-banner ${r.isCorrect ? "correct" : "incorrect"}">
         <div class="verdict-title">${r.isCorrect ? "✓ Correct" : "✗ Incorrect"}</div>

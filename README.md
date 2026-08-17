@@ -1,6 +1,6 @@
 # PL-300 Practice Test
 
-PL-300 | 6 Practice Tests + 1 Dedicated DAX Test | 600+ Q's
+PL-300 | 12 Practice Tests | 600+ Q's
 
 A free, public PL-300 (Microsoft Power BI Data Analyst) practice test — no account or
 password required, just a name + email to save your progress. Built as a static web app so it
@@ -34,6 +34,7 @@ Each question in `questions.json` looks like this:
   "id": "q1",
   "type": "single",
   "testSet": 1,
+  "module": 1,
   "section": "Prepare the data",
   "text": "Question text goes here?",
   "options": [
@@ -52,8 +53,12 @@ Each question in `questions.json` looks like this:
   of the four official PL-300 domains (see `EXAM_WEIGHTS` in `app.js`):
   `Prepare the data`, `Model the data`, `Visualize and analyze the data`, `Manage and secure
   Power BI`.
-- `testSet`: `1`–`6` for the six main 100-question practice sets, `7` for the dedicated DAX
-  practice set (see `DAX_TEST_SET_ID` in `app.js`).
+- `module`: `1`–`6`, the content-source module a question was drawn from (see `MODULE_NAMES` in
+  `app.js`) — a separate taxonomy from `section`, shown as the topic label while taking a test and
+  on the results-review page.
+- `testSet`: `1`–`12`, assigned by a deterministic round-robin over all 6 content-source modules
+  (see `testSetLabel`/`renderTestGrid` in `app.js`) so every test mixes questions from all 6
+  modules rather than one module per test.
 
 ## Running locally
 
