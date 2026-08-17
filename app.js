@@ -20,19 +20,12 @@ function testSetLabel(n) {
   return `PL300 Practice Test ${n}`;
 }
 
-// Official PL-300 exam skill weights, shown next to each topic on the dashboard.
-// These must match each question's "section" field exactly once real content is loaded.
-const EXAM_WEIGHTS = {
-  "Prepare the data": "25–30%",
-  "Model the data": "25–30%",
-  "Visualize and analyze the data": "25–30%",
-  "Manage and secure Power BI": "15–20%",
-};
-
-// The 6 content-source modules questions are drawn from (distinct from the 4
-// EXAM_WEIGHTS exam domains above) — used only for the topic labels shown while
-// taking a test and on the results-review page. Keyed by each question's
-// "module" field (1-6), populated at content-conversion time.
+// The 6 content-source modules questions are drawn from. Every question's
+// "section" field is set to its own module's name directly (see
+// pl300_assemble.py) — no mapping to the official PL-300 exam's domain
+// structure is done anywhere in this app, by explicit instruction. Also used
+// for the topic labels shown while taking a test and on the results-review
+// page. Keyed by each question's "module" field (1-6).
 const MODULE_NAMES = {
   1: "Get started with Microsoft data analytics",
   2: "Prepare data for analysis with Power BI",
@@ -1075,10 +1068,9 @@ function renderDashboard() {
     const count = ALL_QUESTIONS.filter((q) => q.section === sec).length;
     const row = document.createElement("div");
     row.className = "section-item";
-    const weight = EXAM_WEIGHTS[sec] ? ` (${EXAM_WEIGHTS[sec]})` : "";
     row.innerHTML = `
       <div>
-        <div>${sec}${weight}</div>
+        <div>${sec}</div>
         <div class="count">${count} question${count === 1 ? "" : "s"}</div>
       </div>
       <button class="btn secondary" data-section="${sec}">Practice this topic</button>
@@ -1574,9 +1566,8 @@ function renderResults(reviewItems, attempt) {
   const secBody = document.getElementById("sectionBreakdownBody");
   secBody.innerHTML = "";
   Object.entries(bySection).forEach(([sec, s]) => {
-    const weight = EXAM_WEIGHTS[sec] ? ` (${EXAM_WEIGHTS[sec]})` : "";
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${sec}${weight}</td><td>${s.correct}/${s.total}</td>`;
+    tr.innerHTML = `<td>${sec}</td><td>${s.correct}/${s.total}</td>`;
     secBody.appendChild(tr);
   });
 

@@ -12,7 +12,7 @@ can be hosted for free and reached by anyone.
 - Full timed practice exam, or practice one topic at a time
 - Question formats: single-choice, multi-select, true/false, ordering, matching, fill-in-the-blank
 - Instant explanation shown after each attempt, plus a full review screen
-- Score breakdown by PL-300 exam domain
+- Score breakdown by PL-300 course module
 - Works on mobile and desktop (responsive, installable as a home-screen app)
 
 ## Project structure
@@ -35,7 +35,7 @@ Each question in `questions.json` looks like this:
   "type": "single",
   "testSet": 1,
   "module": 1,
-  "section": "Prepare the data",
+  "section": "Get started with Microsoft data analytics",
   "text": "Question text goes here?",
   "options": [
     { "id": "a", "text": "Option A" },
@@ -49,13 +49,11 @@ Each question in `questions.json` looks like this:
 - `type`: `single` (one correct answer), `multi` (select all that apply), `truefalse`,
   `fillblank`, or `ordering` (put items in the correct sequence — `correct` is the array of
   option ids in order).
-- `section`: groups questions into topic-wise practice and the results breakdown. Must be one
-  of the four official PL-300 domains (see `EXAM_WEIGHTS` in `app.js`):
-  `Prepare the data`, `Model the data`, `Visualize and analyze the data`, `Manage and secure
-  Power BI`.
 - `module`: `1`–`6`, the content-source module a question was drawn from (see `MODULE_NAMES` in
-  `app.js`) — a separate taxonomy from `section`, shown as the topic label while taking a test and
-  on the results-review page.
+  `app.js`) — known directly from which source doc the question came from, no classification.
+- `section`: always set equal to the question's own module name (`MODULE_NAMES[module]`) — used
+  for topic-wise practice and the results breakdown. There is **no mapping to the official
+  PL-300 exam's domain structure anywhere in this app**, by design.
 - `testSet`: `1`–`12`, assigned by a deterministic round-robin over all 6 content-source modules
   (see `testSetLabel`/`renderTestGrid` in `app.js`) so every test mixes questions from all 6
   modules rather than one module per test.
