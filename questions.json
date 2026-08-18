@@ -788,21 +788,21 @@
     "testSet": 1,
     "module": 1,
     "section": "Get started with Microsoft data analytics",
-    "text": "Match the Power BI features or functions on the left with their specific use cases or benefits on the right. Options on the Left: Cross-Filtering Aggregations Dataflows DirectQuery Options on the Right: A. Allows you to create pre-aggregated tables for faster query performance. B. Enables you to connect to large datasets without importing them into Power BI. C. Helps you transform and shape data from multiple sources for reuse across reports. D. Allows you to filter visuals in one direction, preserving context in other visuals. Match the options from the left with the appropriate specific use cases or benefits on the right (e.g., 1-D, 2-A, 3-C, 4-B).",
+    "text": "Match the Power BI features or functions on the left with their specific use cases or benefits on the right. Features: Cross-Filtering; Aggregations; Dataflows; DirectQuery. Benefits: A. Allows you to create pre-aggregated tables for faster query performance. B. Enables you to connect to large datasets without importing them into Power BI. C. Helps you transform and shape data from multiple sources for reuse across reports. D. Allows you to filter visuals in one direction, preserving context in other visuals. Match the options from the left with the appropriate specific use cases or benefits on the right (e.g., 1-D, 2-A, 3-C, 4-B).",
     "options": [
       {
         "id": "a",
-        "text": "Cross-Filtering - A. Allows you to create pre-aggregated tables for faster query performance. Aggregations - D. Allows you to filter visuals in one direction, preserving context in other visuals. Dataflows - C. Helps you transform and shape data from multiple sources for reuse across reports. DirectQuery - B. Enables you to connect to large datasets without importing them into Power BI.",
+        "text": "Cross-Filtering - A. Allows you to create pre-aggregated tables for faster query performance. <br><br>Aggregations - D. Allows you to filter visuals in one direction, preserving context in other visuals. <br><br>Dataflows - C. Helps you transform and shape data from multiple sources for reuse across reports. <br><br>DirectQuery - B. Enables you to connect to large datasets without importing them into Power BI.",
         "explanation": "This option is incorrect."
       },
       {
         "id": "b",
-        "text": "Cross-Filtering - D. Allows you to filter visuals in one direction, preserving context in other visuals. Aggregations - A. Allows you to create pre-aggregated tables for faster query performance. Dataflows - B. Enables you to connect to large datasets without importing them into Power BI. DirectQuery - C. Helps you transform and shape data from multiple sources for reuse across reports.",
+        "text": "Cross-Filtering - D. Allows you to filter visuals in one direction, preserving context in other visuals. <br><br>Aggregations - A. Allows you to create pre-aggregated tables for faster query performance. <br><br>Dataflows - B. Enables you to connect to large datasets without importing them into Power BI. <br><br>DirectQuery - C. Helps you transform and shape data from multiple sources for reuse across reports.",
         "explanation": "This option is incorrect."
       },
       {
         "id": "c",
-        "text": "Cross-Filtering - D. Allows you to filter visuals in one direction, preserving context in other visuals. Aggregations - A. Allows you to create pre-aggregated tables for faster query performance. Dataflows - C. Helps you transform and shape data from multiple sources for reuse across reports. DirectQuery - B. Enables you to connect to large datasets without importing them into Power BI.",
+        "text": "Cross-Filtering - D. Allows you to filter visuals in one direction, preserving context in other visuals. <br><br>Aggregations - A. Allows you to create pre-aggregated tables for faster query performance. <br><br>Dataflows - C. Helps you transform and shape data from multiple sources for reuse across reports. <br><br>DirectQuery - B. Enables you to connect to large datasets without importing them into Power BI.",
         "explanation": "This option is correct option."
       }
     ],
@@ -2060,7 +2060,7 @@
     "correct": [
       "d"
     ],
-    "explanation": "The correct answer is Apply the Month No category sort option\n\nThe Month No category sort option is available in the Modeling tab of the Power BI Desktop. When you select this option, Power BI will sort the months in chronological order, starting with January and ending with December.\n\nSteps to Sort Months by Month Order:\n\nOpen Power BI Desktop.\n\nClick the Data tab.\n\nSelect the column containing month names.\n\nGo to the Modeling tab.\n\nClick \"Sort by Column\".\n\nChoose the \"Month No\" column (where Jan = 1, Feb = 2, etc.).\n\nClick OK - The months will now appear in chronological order.\n\nThe months will now be sorted in chronological order.\n\nThe other options are incorrect because:\n\nClicking the Edit Queries button will open the Query Editor, but it will not sort the months.\n\nAdding a slicer to your visual will allow you to filter the months, but it will not sort them.\n\nChanging the visualization type will change the way the months are displayed, but it will not change the order of the months.\n\nExam Tips: For the PL-300 exam, focus on: Using \"Sort by Column\" for correct month order. How Power BI handles default alphabetical sorting. Best practices for preparing and structuring data for visualizations."
+    "explanation": "The correct answer is Apply the Month No category sort option\n\nThe Month No category sort option is available in the Modeling tab of the Power BI Desktop. When you select this option, Power BI will sort the months in chronological order, starting with January and ending with December.\n\nSteps to Sort Months by Month Order:\n\n1. Open Power BI Desktop. 2. Click the Data tab. 3. Select the column containing month names. 4. Go to the Modeling tab. 5. Click \"Sort by Column\". 6. Choose the \"Month No\" column (where Jan = 1, Feb = 2, etc.). 7. Click OK - The months will now appear in chronological order.\n\nThe months will now be sorted in chronological order.\n\nThe other options are incorrect because:\n\nClicking the Edit Queries button will open the Query Editor, but it will not sort the months.\n\nAdding a slicer to your visual will allow you to filter the months, but it will not sort them.\n\nChanging the visualization type will change the way the months are displayed, but it will not change the order of the months.\n\nExam Tips: For the PL-300 exam, focus on: Using \"Sort by Column\" for correct month order. How Power BI handles default alphabetical sorting. Best practices for preparing and structuring data for visualizations."
   },
   {
     "id": "q62",
@@ -2800,17 +2800,17 @@
     "options": [
       {
         "id": "a",
-        "text": "Drill-Through - A. Allows users to see more detailed data by clicking a visual element. Filters - B. Enables the selection of specific data points to refine visualizations. Drill-Down - C. Navigates from summarized data to more detailed information. Cross-Filtering - D. Filters visuals based on interactions with other visuals.",
+        "text": "Drill-Through - A. Allows users to see more detailed data by clicking a visual element. <br><br>Filters - B. Enables the selection of specific data points to refine visualizations. <br><br>Drill-Down - C. Navigates from summarized data to more detailed information. <br><br>Cross-Filtering - D. Filters visuals based on interactions with other visuals.",
         "explanation": "Drill-Through functionality allows users to see more detailed data by clicking on a visual element, providing a deeper level of insight into the data being displayed. This feature is essential for exploring specific data points in greater detail within a report or dashboard."
       },
       {
         "id": "b",
-        "text": "Drill-Through - D. Filters visuals based on interactions with other visuals. Filters - C. Navigates from summarized data to more detailed information. Drill-Down - A. Allows users to see more detailed data by clicking a visual element. Cross-Filtering - B. Enables the selection of specific data points to refine visualizations.",
+        "text": "Drill-Through - D. Filters visuals based on interactions with other visuals. <br><br>Filters - C. Navigates from summarized data to more detailed information. <br><br>Drill-Down - A. Allows users to see more detailed data by clicking a visual element. <br><br>Cross-Filtering - B. Enables the selection of specific data points to refine visualizations.",
         "explanation": "This choice is incorrect."
       },
       {
         "id": "c",
-        "text": "Drill-Through - B. Enables the selection of specific data points to refine visualizations. Filters - A. Allows users to see more detailed data by clicking a visual element. Drill-Down - D. Filters visuals based on interactions with other visuals. Cross-Filtering - C. Navigates from summarized data to more detailed information.",
+        "text": "Drill-Through - B. Enables the selection of specific data points to refine visualizations. <br><br>Filters - A. Allows users to see more detailed data by clicking a visual element. <br><br>Drill-Down - D. Filters visuals based on interactions with other visuals. <br><br>Cross-Filtering - C. Navigates from summarized data to more detailed information.",
         "explanation": "This choice is incorrect."
       }
     ],
@@ -3215,21 +3215,21 @@
     "testSet": 1,
     "module": 1,
     "section": "Get started with Microsoft data analytics",
-    "text": "Match the Power BI components or terms on the left with their more detailed descriptions or functions on the right. Options on the Left: DAX (Data Analysis Expressions) Power Query Star Schema Drill-Through Options on the Right: A. This language is used for creating custom calculations and aggregations in Power BI. B. It's a data transformation and cleaning tool that allows you to shape and transform data from various sources. C. A database modelling technique where fact tables are connected to dimension tables in a star-like structure. D. A feature that allows users to explore detailed data by navigating from a summarized report to a more detailed one.",
+    "text": "Match the Power BI components or terms on the left with their more detailed descriptions or functions on the right. Terms: DAX (Data Analysis Expressions); Power Query; Star Schema; Drill-Through. Descriptions: A. This language is used for creating custom calculations and aggregations in Power BI. B. It's a data transformation and cleaning tool that allows you to shape and transform data from various sources. C. A database modelling technique where fact tables are connected to dimension tables in a star-like structure. D. A feature that allows users to explore detailed data by navigating from a summarized report to a more detailed one.",
     "options": [
       {
         "id": "a",
-        "text": "DAX  - A. This language is used for creating custom calculations and aggregations in Power BI. Power Query - B. It's a data transformation and cleaning tool that allows you to shape and transform data from various sources. Star Schema - C. A database modeling technique where fact tables are connected to dimension tables in a star-like structure. Drill-Through - D. A feature that allows users to explore detailed data by navigating from a summarized report to a more detailed one.",
+        "text": "DAX  - A. This language is used for creating custom calculations and aggregations in Power BI. <br><br>Power Query - B. It's a data transformation and cleaning tool that allows you to shape and transform data from various sources. <br><br>Star Schema - C. A database modeling technique where fact tables are connected to dimension tables in a star-like structure. <br><br>Drill-Through - D. A feature that allows users to explore detailed data by navigating from a summarized report to a more detailed one.",
         "explanation": "DAX (Data Analysis Expressions) is a language specifically designed for creating custom calculations and aggregations within Power BI. It allows users to perform complex calculations and manipulate data to generate meaningful insights in their reports and visualizations."
       },
       {
         "id": "b",
-        "text": "DAX  - B. It's a data transformation and cleaning tool that allows you to shape and transform data from various sources. Power Query - D. A feature that allows users to explore detailed data by navigating from a summarized report to a more detailed one. Star Schema - A. This language is used for creating custom calculations and aggregations in Power BI. Drill-Through - C. A database modeling technique where fact tables are connected to dimension tables in a star-like structure.",
+        "text": "DAX  - B. It's a data transformation and cleaning tool that allows you to shape and transform data from various sources. <br><br>Power Query - D. A feature that allows users to explore detailed data by navigating from a summarized report to a more detailed one. <br><br>Star Schema - A. This language is used for creating custom calculations and aggregations in Power BI. <br><br>Drill-Through - C. A database modeling technique where fact tables are connected to dimension tables in a star-like structure.",
         "explanation": "This option is incorrect."
       },
       {
         "id": "c",
-        "text": "DAX - D. A feature that allows users to explore detailed data by navigating from a summarized report to a more detailed one. Power Query - C. A database modeling technique where fact tables are connected to dimension tables in a star-like structure. Star Schema - A. This language is used for creating custom calculations and aggregations in Power BI. Drill-Through - B. It's a data transformation and cleaning tool that allows you to shape and transform data from various sources.",
+        "text": "DAX - D. A feature that allows users to explore detailed data by navigating from a summarized report to a more detailed one. <br><br>Power Query - C. A database modeling technique where fact tables are connected to dimension tables in a star-like structure. <br><br>Star Schema - A. This language is used for creating custom calculations and aggregations in Power BI. <br><br>Drill-Through - B. It's a data transformation and cleaning tool that allows you to shape and transform data from various sources.",
         "explanation": "This option is incorrect."
       }
     ],
@@ -4465,7 +4465,7 @@
     "testSet": 1,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the following DAX concepts with their correct descriptions: Column A (Concepts) DAX Operators References to Model Objects Table References Column References Column B (Descriptions) A. Used to perform arithmetic, comparisons, string operations, and logical tests B. Must be enclosed in square brackets and can optionally be preceded by the table name C. Can only refer to tables, columns, or measures not hierarchies or hierarchy levels D. Enclosed in single quotation marks if the name contains spaces or is a reserved word",
+    "text": "Match the following DAX concepts with their correct descriptions. Concepts: DAX Operators; References to Model Objects; Table References; Column References. Descriptions: A. Used to perform arithmetic, comparisons, string operations, and logical tests B. Must be enclosed in square brackets and can optionally be preceded by the table name C. Can only refer to tables, columns, or measures not hierarchies or hierarchy levels D. Enclosed in single quotation marks if the name contains spaces or is a reserved word",
     "options": [
       {
         "id": "a",
@@ -4558,7 +4558,7 @@
     "testSet": 4,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the following formatting elements with their correct descriptions: Column A (Concepts) Whitespace Spaces Tabs Carriage returns Shift+Enter Formatting recommendation DAX Formatter tool Column B (Descriptions) A. Used to separate function arguments, especially when they’re too long for one line B. Refers to characters like spaces, tabs, and carriage returns that improve readability without affecting logic C. Used to indent nested function calls for clarity D. Recommended between operators to make formulas easier to read E. Key combination used to insert a line break in the formula bar F. Helps format DAX code by pasting, styling, and copying it back into Power BI G. Advises using more whitespace rather than less and applying a consistent style",
+    "text": "Match the following formatting elements with their correct descriptions: Concepts: Whitespace; Spaces; Tabs; Carriage returns; Shift+Enter; Formatting recommendation; DAX Formatter tool. Descriptions: A. Used to separate function arguments, especially when they’re too long for one line B. Refers to characters like spaces, tabs, and carriage returns that improve readability without affecting logic C. Used to indent nested function calls for clarity D. Recommended between operators to make formulas easier to read E. Key combination used to insert a line break in the formula bar F. Helps format DAX code by pasting, styling, and copying it back into Power BI G. Advises using more whitespace rather than less and applying a consistent style",
     "options": [
       {
         "id": "a",
@@ -4616,7 +4616,7 @@
     "testSet": 6,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the model data type with its corresponding DAX data type and description: Column A (Model Data Type) Whole number Decimal number Boolean Text Date Currency N/A Column B (DAX Data Type and Description) A. Currency – Supports values from -9.22 x 10¹⁴ to 9.22 x 10¹⁴ with four decimal digits of fixed precision B. Boolean – Represents TRUE or FALSE C. String – Unicode character string D. Date/time – Valid dates after January 1, 1900 E. BLANK – Equivalent to SQL NULL in some cases F. 64-bit integer – Range from -2⁶³ to 2⁶³ - 1 G. 64-bit real – Supports negative and positive values with up to 17 decimal digits",
+    "text": "Match the model data type with its corresponding DAX data type and description: Model Data Types: Whole number; Decimal number; Boolean; Text; Date; Currency; N/A. Descriptions: A. Currency – Supports values from -9.22 x 10¹⁴ to 9.22 x 10¹⁴ with four decimal digits of fixed precision; B. Boolean – Represents TRUE or FALSE; C. String – Unicode character string; D. Date/time – Valid dates after January 1, 1900; E. BLANK – Equivalent to SQL NULL in some cases; F. 64-bit integer – Range from -2⁶³ to 2⁶³ - 1; G. 64-bit real – Supports negative and positive values with up to 17 decimal digits",
     "options": [
       {
         "id": "a",
@@ -4685,7 +4685,7 @@
     "testSet": 8,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the concept with its corresponding description: Column A (Concept) ISBLANK function BLANK function NULL Zero Column B (Description) A. A DAX function used to test whether an expression evaluates to BLANK. B. A DAX function that returns a BLANK value. C. A database term for missing or undefined values, similar to BLANK in DAX. D. A numeric value representing nothing, but not the same as BLANK.",
+    "text": "Match the concept with its corresponding description: Concepts: ISBLANK function; BLANK function; NULL; Zero. Descriptions: A. A DAX function used to test whether an expression evaluates to BLANK. B. A DAX function that returns a BLANK value. C. A database term for missing or undefined values, similar to BLANK in DAX. D. A numeric value representing nothing, but not the same as BLANK.",
     "options": [
       {
         "id": "a",
@@ -5502,12 +5502,12 @@
     "options": [
       {
         "id": "a",
-        "text": "1 -> d 2 -> c 3 -> b 4 -> a",
+        "text": "1 - d 2 - c 3 - b 4 - a",
         "explanation": "Choice A is correct because DATESYTD / DATESMTD / DATESQTD functions return dates for the YTD, MTD, or QTD in the current filter context as a table, making them useful as filters in CALCULATE. TOTALYTD / TOTALMTD / TOTALQTD functions evaluate an expression for a year-to-date, month-to-date, or quarter-to-date range in the current filter context. DATESBETWEEN returns a single-column table of dates from a start date to an end date. Lastly, DATESINPERIOD returns a date column starting from a given date for a set number of intervals."
       },
       {
         "id": "b",
-        "text": "1 -> a 2 -> b 3 -> c 4 -> d",
+        "text": "1 - a 2 - b 3 - c 4 - d",
         "explanation": "This is incorrect option. <a href=\"https://learn.microsoft.com/en-us/dax/date-and-time-functions-dax\" target=\"_blank\" rel=\"noopener\">Date and time functions (DAX) - DAX | Microsoft Learn</a>"
       }
     ],
@@ -5627,7 +5627,7 @@
     "testSet": 1,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the feature with its description related to visual calculations. Column A A. Location of formula B. Data scope C. Performance D. Flexibility Column B Works on aggregated data, often improving speed Defined directly on the visual, not stored in the model Can refer to columns, measures, or other visual calculations Limited to data present in the visual",
+    "text": "Match the feature with its description related to visual calculations. Features: A. Location of formula B. Data scope C. Performance D. Flexibility Descriptions: 1. Works on aggregated data, often improving speed; 2. Defined directly on the visual, not stored in the model; 3. Can refer to columns, measures, or other visual calculations; 4. Limited to data present in the visual",
     "options": [
       {
         "id": "a",
@@ -6024,7 +6024,7 @@
     "testSet": 1,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each feature with its correct description. Left (Feature) Use the Analyze feature in Power BI Use grouping, binning, and clustering Use AI visuals Use reference lines, error bars, and forecasting Detect outliers and anomalies Use decomposition tree Right (Description) A. Automatically identifies key drivers and patterns using built-in machine learning B. Adds statistical overlays to visuals to highlight trends and uncertainty C. Segments data into categories or clusters for better comparison D. Highlights unusual data points based on statistical thresholds E. Breaks down a measure across multiple dimensions interactively F. Provides automated insights by analyzing selected visuals",
+    "text": "Match each feature with its correct description. Features: Use the Analyze feature in Power BI; Use grouping, binning, and clustering; Use AI visuals; Use reference lines, error bars, and forecasting; Detect outliers and anomalies; Use decomposition tree. Descriptions: A. Automatically identifies key drivers and patterns using built-in machine learning B. Adds statistical overlays to visuals to highlight trends and uncertainty C. Segments data into categories or clusters for better comparison D. Highlights unusual data points based on statistical thresholds E. Breaks down a measure across multiple dimensions interactively F. Provides automated insights by analyzing selected visuals",
     "options": [
       {
         "id": "a",
@@ -6389,16 +6389,16 @@
     "testSet": 1,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each calculation feature with its correct description. Left (Feature) Create model calculations by using DAX Create single aggregation measures Use the CALCULATE function Implement time intelligence measures Use basic statistical functions Create semi-additive measures Create a measure by using quick measures Create calculated tables or columns Create calculation groups Right (Description) A. Defines reusable logic across multiple measures, such as time periods or formatting B. Adds new columns or tables based on expressions evaluated at model load time C. Uses built-in templates to generate common DAX expressions without manual coding D. Applies filters and modifies context to produce dynamic calculations E. Uses functions like AVERAGE, MEDIAN, MIN, and MAX to summarize data F. Calculates values that aggregate over some dimensions but not others (e.g., inventory balances) G. Creates measures using functions like SUM, COUNT, or AVERAGE for a single field H. Enables dynamic calculations using expressions written in DAX I. Uses functions like DATESYTD, SAMEPERIODLASTYEAR, and TOTALMTD to compare time-based data",
+    "text": "Match each calculation feature with its correct description. Features: Create model calculations by using DAX; Create single aggregation measures; Use the CALCULATE function; Implement time intelligence measures; Use basic statistical functions; Create semi-additive measures; Create a measure by using quick measures; Create calculated tables or columns; Create calculation groups. Descriptions: Defines reusable logic across multiple measures, such as time periods or formatting; Adds new columns or tables based on expressions evaluated at model load time; Uses built-in templates to generate common DAX expressions without manual coding; Applies filters and modifies context to produce dynamic calculations; Uses functions like AVERAGE, MEDIAN, MIN, and MAX to summarize data; Calculates values that aggregate over some dimensions but not others (e.g., inventory balances); Creates measures using functions like SUM, COUNT, or AVERAGE for a single field; Enables dynamic calculations using expressions written in DAX; Uses functions like DATESYTD, SAMEPERIODLASTYEAR, and TOTALMTD to compare time-based data",
     "options": [
       {
         "id": "a",
-        "text": "1 – H 2 – G 3 – D 4 – I 5 – E 6 – F 7 – C 8 – B 9 – A",
+        "text": "A - 8 B - 7 C - 4 D - 9 E - 5 F - 6 G - 3 H - 2 I - 1",
         "explanation": "This is correct match. Keep in Mind: Such big match the following will not be expected in the exam. In order to provide more value to ensure variety of questions and topics are covered, multiple items are combined. Do not worry about getting this question wrong, worry if you have not able to understand the concept which will help in PL300 exam (Learning mindset)."
       },
       {
         "id": "b",
-        "text": "1 – G 2 – H 3 – I 4 – D 5 – E 6 – F 7 – C 8 – B 9 – A",
+        "text": "A - 7 B - 8 C - 9 D - 4 E - 5 F - 6 G - 3 H - 2 I - 1",
         "explanation": "This is incorrect match."
       }
     ],
@@ -6501,12 +6501,12 @@
     "options": [
       {
         "id": "a",
-        "text": "1 - A. Import 2 - B. Hybrid table (Import + DirectQuery) 3 - C. Direct Lake 4 - D. DirectQuery (composite model) 5 - E. Live connection to semantic model or Analysis Services 6 - F. DirectQuery with dynamic M parameters",
+        "text": "1 - A. Import <br><br>2 - B. Hybrid table (Import + DirectQuery) <br><br>3 - C. Direct Lake <br><br>4 - D. DirectQuery (composite model) <br><br>5 - E. Live connection to semantic model or Analysis Services <br><br>6 - F. DirectQuery with dynamic M parameters",
         "explanation": "This is incorrect match."
       },
       {
         "id": "b",
-        "text": "1 - A. Import 2 - B. Hybrid table (Import + DirectQuery) 3 - C. Direct Lake 4 - D. DirectQuery (composite model) 5 - E. Direct Lake 6 - F. DirectQuery with dynamic M parameters",
+        "text": "1 - A. Import <br><br>2 - B. Hybrid table (Import + DirectQuery) <br><br>3 - C. Direct Lake <br><br>4 - D. DirectQuery (composite model) <br><br>5 - E. Direct Lake <br><br>6 - F. DirectQuery with dynamic M parameters",
         "explanation": "This is incorrect match.1 - A. Import 2 - B. Hybrid table (Import + DirectQuery) 3 - C. Direct Lake 4 - D. DirectQuery (composite model) 5 - E. Direct Lake 6 - F. DirectQuery with dynamic M parameters"
       }
     ],
@@ -8267,12 +8267,12 @@
     "options": [
       {
         "id": "a",
-        "text": "1 - D. Basic 2 - C. Relative date and Relative time 3 - A. Top N 4 - B. Advanced",
+        "text": "1 - D. Basic <br><br>2 - C. Relative date and Relative time <br><br>3 - A. Top N <br><br>4 - B. Advanced",
         "explanation": "This is the correct match. Check explanation for more details. <a href=\"https://learn.microsoft.com/en-us/power-bi/create-reports/power-bi-report-filter-types\" target=\"_blank\" rel=\"noopener\">Types of filters in Power BI reports - Power BI | Microsoft Learn</a>"
       },
       {
         "id": "b",
-        "text": "1 - B. Advanced 2 - A. Top N 3 - C. Relative date and Relative time 4 -  D. Basic",
+        "text": "1 - B. Advanced <br><br>2 - A. Top N <br><br>3 - C. Relative date and Relative time <br><br>4 -  D. Basic",
         "explanation": "This match is incorrect."
       }
     ],
@@ -8291,12 +8291,12 @@
     "options": [
       {
         "id": "a",
-        "text": "1 - C. Clicking a bar in a chart filters other visuals automatically 2 - E. Set by the report designer in the Filters pane to show only FY2025 data 3 - D. Right-click a data point and choose \"Exclude\" to remove it from the visual 4 - A. Clicking on a year in a column chart drills down to quarters 5 - F. Not supported directly as a filter type; handled through interactions 6 - B. Right-click a product name and drill through to a detailed product page",
+        "text": "1 - C. Clicking a bar in a chart filters other visuals automatically <br><br>2 - E. Set by the report designer in the Filters pane to show only FY2025 data <br><br>3 - D. Right-click a data point and choose \"Exclude\" to remove it from the visual <br><br>4 - A. Clicking on a year in a column chart drills down to quarters <br><br>5 - F. Not supported directly as a filter type; handled through interactions <br><br>6 - B. Right-click a product name and drill through to a detailed product page",
         "explanation": "This is correct match."
       },
       {
         "id": "b",
-        "text": "1 - B. Right-click a product name and drill through to a detailed product page 2 - E. Set by the report designer in the Filters pane to show only FY2025 data 3 - D. Right-click a data point and choose \"Exclude\" to remove it from the visual 4 - A. Clicking on a year in a column chart drills down to quarters 5 - F. Not supported directly as a filter type; handled through interactions 6 - C. Clicking a bar in a chart filters other visuals automatically",
+        "text": "1 - B. Right-click a product name and drill through to a detailed product page <br><br>2 - E. Set by the report designer in the Filters pane to show only FY2025 data <br><br>3 - D. Right-click a data point and choose \"Exclude\" to remove it from the visual <br><br>4 - A. Clicking on a year in a column chart drills down to quarters <br><br>5 - F. Not supported directly as a filter type; handled through interactions <br><br>6 - C. Clicking a bar in a chart filters other visuals automatically",
         "explanation": "Choice B is incorrect because right-clicking a product name and drilling through to a detailed product page is an example of drillthrough filters, not manual filters."
       }
     ],
@@ -8494,7 +8494,7 @@
     "testSet": 1,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "Match each Power BI feature with its correct mobile behavior. Left Responsive Visuals Responsive Slicer Vertical Slicer Mobile Layout View Right A. Collapses into filter icon when resized B. Repositions legend and removes padding C. Cannot be made responsive D. Allows rearranging existing visuals only",
+    "text": "Match each Power BI feature with its correct mobile behavior. Features: Responsive Visuals; Responsive Slicer; Vertical Slicer; Mobile Layout View. Behaviors: A. Collapses into filter icon when resized B. Repositions legend and removes padding C. Cannot be made responsive D. Allows rearranging existing visuals only",
     "options": [
       {
         "id": "a",
@@ -9819,7 +9819,7 @@
       "b",
       "c"
     ],
-    "explanation": "Power BI includes several specialized visuals that provide considerable interactive experiences for report consumers. Often, these specialized visuals are called AI visuals because Power BI uses machine learning to discover insights from data. These visuals provide a simple way to deliver rich and interactive experiences to your report consumers.\n\nThe three main AI visuals are:\n\nKey influencers\n\nDecomposition tree\n\nQ&A\n\nUse of Power BI in Copilot:\n\nGet Data help = Ask Copilot to explain which data source to pick (Excel, SQL, SharePoint, etc.).\n\nTransform guidance = Get stepbystep tips for cleaning data in Power Query.\n\nDAX formulas = Generate or explain DAX measures and calculated columns.\n\nModeling advice = Learn how to set relationships between tables correctly.\n\nVisualization suggestions = Ask which chart best fits your data (bar, line, map, KPI).\n\nFormatting tips = Get quick help on formatting visuals, labels, and axes.\n\nBookmark setup = Learn how to create and use bookmarks for navigation or resetting slicers.\n\nPerformance Analyzer = Ask Copilot to explain how to record and interpret performance logs.\n\nTooltips usage = Get guidance on enabling tooltips or adding custom explanations.\n\nGroups and bins = Learn how to group categories or create numeric bins for analysis.\n\nFilters vs slicers = Understand when to use filters and when slicers are better.\n\nDrillthrough setup = Get instructions on creating drillthrough pages for detailed analysis.\n\nRowlevel security = Learn how to set up roles and restrict data access.\n\nThemes and design = Ask Copilot for tips on applying themes and making reports look professional.\n\nButtons and navigation = Get help adding buttons for page navigation or actions.\n\nExplain increase/decrease = Understand when the Analyze feature works and why it may be disabled.\n\nExport options = Learn how to export data or visuals properly.\n\nPublishing guidance = Get steps for publishing reports to Power BI Service.\n\nExam prep tips = Use Copilot to quiz yourself on interface questions (e.g., “Where is Performance Analyzer?”).\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/perform-analytics-power-bi/9-use-specialized-visuals\" target=\"_blank\" rel=\"noopener\">Use specialized visuals - Training | Microsoft Learn</a>"
+    "explanation": "Power BI includes several specialized visuals that provide considerable interactive experiences for report consumers. Often, these specialized visuals are called AI visuals because Power BI uses machine learning to discover insights from data. These visuals provide a simple way to deliver rich and interactive experiences to your report consumers.\n\nThe three main AI visuals are:\n\nKey influencers\n\nDecomposition tree\n\nQ&A\n\nUse of Copilot in Power BI:\n\nCopilot can help with: * Get Data help = Ask Copilot to explain which data source to pick (Excel, SQL, SharePoint, etc.). * Transform guidance = Get stepbystep tips for cleaning data in Power Query. * DAX formulas = Generate or explain DAX measures and calculated columns. * Modeling advice = Learn how to set relationships between tables correctly. * Visualization suggestions = Ask which chart best fits your data (bar, line, map, KPI). * Formatting tips = Get quick help on formatting visuals, labels, and axes. * Bookmark setup = Learn how to create and use bookmarks for navigation or resetting slicers. * Performance Analyzer = Ask Copilot to explain how to record and interpret performance logs. * Tooltips usage = Get guidance on enabling tooltips or adding custom explanations. * Groups and bins = Learn how to group categories or create numeric bins for analysis. * Filters vs slicers = Understand when to use filters and when slicers are better. * Drillthrough setup = Get instructions on creating drillthrough pages for detailed analysis. * Rowlevel security = Learn how to set up roles and restrict data access. * Themes and design = Ask Copilot for tips on applying themes and making reports look professional. * Buttons and navigation = Get help adding buttons for page navigation or actions. * Explain increase/decrease = Understand when the Analyze feature works and why it may be disabled. * Export options = Learn how to export data or visuals properly. * Publishing guidance = Get steps for publishing reports to Power BI Service. * Exam prep tips = Use Copilot to quiz yourself on interface questions (e.g., “Where is Performance Analyzer?”).\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/perform-analytics-power-bi/9-use-specialized-visuals\" target=\"_blank\" rel=\"noopener\">Use specialized visuals - Training | Microsoft Learn</a>"
   },
   {
     "id": "q290",
@@ -13089,12 +13089,12 @@
     "options": [
       {
         "id": "a",
-        "text": "Pinning a live report page reflects realtime changes - T. When you pin an entire report page, all slicers and filters continue to work as they do in the report. - T. Individual visuals cannot be reformatted on dashboard - F. Report changes show on dashboard when refreshed - T. Use ellipsis (…) > Pin to dashboard > Pin live - T. Dashboards are meant as collections from multiple sources, not just single report pages - T.",
+        "text": "Pinning a live report page reflects realtime changes - T. When you pin an entire report page, all slicers and filters continue to work as they do in the report. - T.<br><br>Individual visuals cannot be reformatted on dashboard - F.<br><br>Report changes show on dashboard when refreshed - T.<br><br>Use ellipsis (…) > Pin to dashboard > Pin live - T.<br><br>Dashboards are meant as collections from multiple sources, not just single report pages - T.",
         "explanation": "This is correct."
       },
       {
         "id": "b",
-        "text": "Pinning a live report page reflects realtime changes - T. When you pin an entire report page, all slicers and filters continue to work as they do in the report. - T. Individual visuals cannot be reformatted on dashboard - F. Report changes show on dashboard when refreshed - F. Use ellipsis (…) > Pin to dashboard > Pin live - F. Dashboards are meant as collections from multiple sources, not just single report pages - F.",
+        "text": "Pinning a live report page reflects realtime changes - T. When you pin an entire report page, all slicers and filters continue to work as they do in the report. - T.<br><br>Individual visuals cannot be reformatted on dashboard - F.<br><br>Report changes show on dashboard when refreshed - F.<br><br>Use ellipsis (…) > Pin to dashboard > Pin live - F.<br><br>Dashboards are meant as collections from multiple sources, not just single report pages - F.",
         "explanation": "This is incorrect."
       }
     ],
@@ -13504,7 +13504,7 @@
     "correct": [
       "a"
     ],
-    "explanation": "Why Slicers Must Use the Same Field\n\nConsistency of filtering logic\n\nWhen slicers are synced, Power BI applies the same filter across multiple report pages or visuals.\n\nIf slicers are based on different fields, the filter context would not align, and synchronization would fail.\n\nShared filter context\n\nFor example, if you have a slicer on “Region”, syncing works only if all slicers are tied to the Region field in the model.\n\nIf one slicer uses “Country” and another uses “Region”, they cannot sync because they represent different fields.\n\nFor example,\n\nYou create a slicer for Year on Page 1.\n\nYou create another slicer for Year on Page 2.\n\nBy syncing slicers, when you select 2022 on Page 1, Page 2 automatically filters to 2022 as well.\n\nIf instead Page 2 had a slicer for Quarter, syncing would not be possible because the fields differ.\n\nKeep in Mind:\n\nHow to Sync Slicers\n\nAdd slicers based on the same field across report pages.\n\nGo to the View tab - Sync Slicers pane.\n\nSelect which pages the slicer should sync with.\n\nChoose whether the slicer should be visible or hidden on each page."
+    "explanation": "Why Slicers Must Use the Same Field\n\nConsistency of filtering logic\n\nWhen slicers are synced, Power BI applies the same filter across multiple report pages or visuals.\n\nIf slicers are based on different fields, the filter context would not align, and synchronization would fail.\n\nShared filter context\n\nFor example, if you have a slicer on “Region”, syncing works only if all slicers are tied to the Region field in the model.\n\nIf one slicer uses “Country” and another uses “Region”, they cannot sync because they represent different fields.\n\nFor example,\n\nYou create a slicer for Year on Page 1.\n\nYou create another slicer for Year on Page 2.\n\nBy syncing slicers, when you select 2022 on Page 1, Page 2 automatically filters to 2022 as well.\n\nIf instead Page 2 had a slicer for Quarter, syncing would not be possible because the fields differ.\n\nKeep in Mind:\n\nHow to Sync Slicers:\n\n* Add slicers based on the same field across report pages. * Go to the View tab - Sync Slicers pane. * Select which pages the slicer should sync with. * Choose whether the slicer should be visible or hidden on each page."
   },
   {
     "id": "q398",
@@ -14748,7 +14748,7 @@
     "correct": [
       "b"
     ],
-    "explanation": "Power BI Apps are designed for organization-wide distribution of finalized reports and dashboards.\n\nThey provide:\n\nA clean, read-only experience for end users\n\nCentralized access to multiple reports\n\nControlled and secure content sharing\n\nSeparation between developers (workspace) and consumers (app users)\n\nHow to Create a Power BI App\n\nCreating an app is a straightforward process completed in the <a href=\"https://app.powerbi.com/\" target=\"_blank\" rel=\"noopener\">Power BI Service</a>.\n\nNavigate to your Workspace: Open the workspace containing the published reports and dashboards you want to share.\n\nCreate the App: Click the Create app button located in the top right corner.\n\nSetup: Add an App name, description, logo, and customize the theme color.\n\nSelect Content: Choose the specific reports, dashboards, and Excel workbooks you want to include.\n\nDefine Audiences: Create different audience groups and assign permissions to control exactly which pieces of content each group can access.\n\nPublish: Review your setup and publish the app to generate a direct sharing link for your organization."
+    "explanation": "Power BI Apps are designed for organization-wide distribution of finalized reports and dashboards.\n\nThey provide:\n\nA clean, read-only experience for end users\n\nCentralized access to multiple reports\n\nControlled and secure content sharing\n\nSeparation between developers (workspace) and consumers (app users)\n\nHow to Create a Power BI App\n\nCreating an app is a straightforward process completed in the <a href=\"https://app.powerbi.com/\" target=\"_blank\" rel=\"noopener\">Power BI Service</a>.\n\nNavigate to your Workspace: Open the workspace containing the published reports and dashboards you want to share. Create the App: Click the Create app button located in the top right corner. Setup: Add an App name, description, logo, and customize the theme color. Select Content: Choose the specific reports, dashboards, and Excel workbooks you want to include. Define Audiences: Create different audience groups and assign permissions to control exactly which pieces of content each group can access. Publish: Review your setup and publish the app to generate a direct sharing link for your organization."
   },
   {
     "id": "q434",
@@ -15083,7 +15083,7 @@
     "testSet": 1,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Select the right definition: Terms Grouping Binning Slicer Measure Descriptions a. Automatically creates ranges for numeric data b. Combines categories like 'East' and 'West' c. Allows users to filter report visuals interactively d. A calculated field using DAX expressions",
+    "text": "Select the right definition. Terms: Grouping; Binning; Slicer; Measure. Descriptions: a. Automatically creates ranges for numeric data; b. Combines categories like 'East' and 'West'; c. Allows users to filter report visuals interactively; d. A calculated field using DAX expressions",
     "options": [
       {
         "id": "a",
@@ -16659,22 +16659,22 @@
     "options": [
       {
         "id": "a",
-        "text": "Select all columns -> Pivot columns",
+        "text": "Select all columns - Pivot columns",
         "explanation": "Selecting all columns and pivoting them would not result in the desired transformation of the data into three columns as required in the exhibit. Pivoting all columns would not separate the data into TransactionID, Attribute, and Value columns."
       },
       {
         "id": "b",
-        "text": "Select TransactionID -> Select Pivot columns",
+        "text": "Select TransactionID - Select Pivot columns",
         "explanation": "Selecting TransactionID and pivoting columns would not achieve the desired transformation into three separate columns. Pivoting only the TransactionID column would not separate the data into the required format of TransactionID, Attribute, and Value columns."
       },
       {
         "id": "c",
-        "text": "Select all columns -> Select Unpivot columns",
+        "text": "Select all columns - Select Unpivot columns",
         "explanation": "Selecting all columns and unpivoting them would not result in the desired transformation of the data into three columns as needed in the exhibit. Unpivoting all columns would not separate the data into TransactionID, Attribute, and Value columns."
       },
       {
         "id": "d",
-        "text": "Select TransactionID -> Select Unpivot other columns",
+        "text": "Select TransactionID - Select Unpivot other columns",
         "explanation": "Selecting TransactionID and unpivoting other columns is the correct choice to transform the data into the required format of TransactionID, Attribute, and Value columns. This selection will help in achieving the desired data structure for the market basket analysis dataset."
       }
     ],
@@ -17101,7 +17101,7 @@
     "testSet": 1,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Left Options (Functions) A. ALL B. ALLEXCEPT C. ALLSELECTED D. ALLCROSSFILTERED Right Options (Situations) Removes all filters from a table or column, returning the entire set of rows. Removes all filters except those explicitly preserved on specified columns. Removes filters but keeps the ones applied by the user’s selection in visuals (like slicers). Removes filters from both sides of a relationship, ignoring crossfiltering between tables.",
+    "text": "Functions: A. ALL B. ALLEXCEPT C. ALLSELECTED D. ALLCROSSFILTERED Situations: 1. Removes all filters from a table or column, returning the entire set of rows. 2. Removes all filters except those explicitly preserved on specified columns. 3. Removes filters but keeps the ones applied by the user’s selection in visuals (like slicers). 4. Removes filters from both sides of a relationship, ignoring crossfiltering between tables.",
     "options": [
       {
         "id": "a",
@@ -17227,7 +17227,7 @@
     "testSet": 5,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Left Options (Functions): A. AVERAGE B. AVERAGEX C. AVERAGEA Right Options (Situations): You want the arithmetic mean of all numeric values in a single column, such as Sales[Amount]. You need to calculate the average of a custom expression evaluated row by row, for example Sales[Amount] / Sales[Quantity]. You want to average a column that contains mixed data types, treating TRUE as 1, FALSE as 0, and text as 0.",
+    "text": "Functions: A. AVERAGE B. AVERAGEX C. AVERAGEA Situations: 1. You want the arithmetic mean of all numeric values in a single column, such as Sales[Amount]. 2. You need to calculate the average of a custom expression evaluated row by row, for example Sales[Amount] / Sales[Quantity]. 3. You want to average a column that contains mixed data types, treating TRUE as 1, FALSE as 0, and text as 0.",
     "options": [
       {
         "id": "a",
@@ -17426,7 +17426,7 @@
     "testSet": 11,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Left Options (Functions) A. LOOKUP B. LOOKUPWITHTOTALS C. LOOKUPVALUE Right Options (Situations) In visual calculation mode only, looks up the value when filters are applied. In visual calculation mode only, looks up the value when filters are applied, but filters not specified will not be inferred. Returns the value for the row that meets all criteria specified by search conditions. Can apply one or more conditions.",
+    "text": "Functions: A. LOOKUP B. LOOKUPWITHTOTALS C. LOOKUPVALUE Situations: 1. In visual calculation mode only, looks up the value when filters are applied. 2. In visual calculation mode only, looks up the value when filters are applied, but filters not specified will not be inferred. 3. Returns the value for the row that meets all criteria specified by search conditions. Can apply one or more conditions.",
     "options": [
       {
         "id": "a",
@@ -17479,7 +17479,7 @@
     "testSet": 1,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Left Options (Functions): A. SUM B. SUMX Right Options (Situations): You want the total of all values in a single numeric column, such as Sales[Amount]. You want to calculate the total of an expression row by row, for example Sales[Quantity] * Sales[UnitPrice].",
+    "text": "Functions: A. SUM B. SUMX Situations: 1. You want the total of all values in a single numeric column, such as Sales[Amount]. 2. You want to calculate the total of an expression row by row, for example Sales[Quantity] * Sales[UnitPrice].",
     "options": [
       {
         "id": "a",
@@ -17634,7 +17634,7 @@
     "testSet": 6,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Left Options (Functions): A. COUNT(Orders[DiscountCode]) B. COUNTA(Orders[DiscountCode]) C. COUNTAX(Orders, Orders[DiscountCode]) Right Options (Situations): Counts only numeric values in the column Orders[DiscountCode], ignoring text and blanks. Counts all nonblank values in Orders[DiscountCode], including text and logical values. Iterates row by row over the Orders table, evaluates the expression Orders[DiscountCode], and counts how many results are not blank.",
+    "text": "Functions: A. COUNT(Orders[DiscountCode]) B. COUNTA(Orders[DiscountCode]) C. COUNTAX(Orders, Orders[DiscountCode]) Situations: 1. Counts only numeric values in the column Orders[DiscountCode], ignoring text and blanks. 2. Counts all nonblank values in Orders[DiscountCode], including text and logical values. 3. Iterates row by row over the Orders table, evaluates the expression Orders[DiscountCode], and counts how many results are not blank.",
     "options": [
       {
         "id": "a",
@@ -19393,7 +19393,7 @@
     "testSet": 1,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Fill in the blanks to correctly calculate Revenue by multiplying Quantity × Price for each row in the Sales table. Revenue = …………… (     Sales,     Sales[Quantity] * Sales[Price] )",
+    "text": "Fill in the blanks to correctly calculate Revenue by multiplying Quantity × Price for each row in the Sales table.<br><br>Revenue = …………… (     Sales,     Sales[Quantity] * Sales[Price] )",
     "options": [
       {
         "id": "a",

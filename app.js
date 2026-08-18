@@ -162,7 +162,7 @@ const EXPL_HEADERS = [
   "Reference Links:", "Recommended Videos:", "What Environment Maker Can Do:",
   "Environments Overview:", "Roles and Security:",
   "Features of Gallery Control.", "Use Cases of Gallery Control.",
-  "PL300 Tips:",
+  "PL300 Tips:", "Common Pitfalls to Avoid",
 ];
 
 // Recurring section-header phrases that have variable trailing content (so they
@@ -438,8 +438,13 @@ function formatSentences(text) {
   // vs. Custom Tables" must stay one phrase), and a single capital letter
   // followed by a period used as an inline answer reference ("...B.
   // Microsoft 365 admin centre" must stay one phrase, not split after "B.").
+  // A third shape: a bare numbered-list marker ("1.", "2." ... up to 2 digits)
+  // that starts a paragraph on its own, with the item's actual title/content
+  // sitting right after it on the same logical line — e.g. "1. DAX Operators
+  // - A. Used to perform..." must stay one phrase, not split right after "1."
+  // and orphan the marker onto its own paragraph.
   const sentences = safe
-    .split(/(?<!\bvs\.)(?<!\b[A-Z]\.)(?<=[a-zA-Z0-9\)"']\.)\s+(?=[A-Z])/g)
+    .split(/(?<!\bvs\.)(?<!\b[A-Z]\.)(?<!\b\d{1,2}\.)(?<=[a-zA-Z0-9\)"']\.)\s+(?=[A-Z])/g)
     .map((s) => s.trim())
     .filter(Boolean);
   if (sentences.length < 2) return `<p>${linkify(text)}</p>`;
@@ -709,6 +714,14 @@ function formatYesNoQuestionText(text) {
 
 function formatQuestionText(text) {
   text = text.replace(/→|➔|➡/g, "-");
+  // A handful of true/false stems bury "true or false" mid-sentence after a
+  // narrative setup instead of leading with it — hard to scan since the
+  // actual claim being judged blends into the setup. Only fires when
+  // something real comes before it (never at the very start, where "True or
+  // false:" already reads fine as the first thing in the stem) and always
+  // renders the same way: capitalized, on its own line, with the claim
+  // starting fresh on the next.
+  text = text.replace(/(\S)\s+true or false\s*[:,]\s*/i, "$1<br><br>True or False:<br><br>");
   if (/\bmatch (the|each)\b/i.test(text)) return formatMatchingQuestionText(text);
   return formatYesNoQuestionText(text) || text;
 }
@@ -811,13 +824,16 @@ function formatExplanation(raw) {
 // re-matched back to their source doc; anything else (or a question with no
 // recovered per-option text) just falls back to the Overall Explanation alone.
 function renderExplanationBreakdown(q, given) {
-  const hasOptionExpl =
-    (q.type === "single" || q.type === "multi" || q.type === "truefalse") &&
-    Array.isArray(q.options) &&
-    q.options.some((o) => o.explanation);
+  // Per-option breakdown is supported for these 3 types regardless of whether
+  // any option actually has recovered per-option text — a question where NONE
+  // of its options have one still gets the breakdown UI, just with a generic
+  // "This is not the right option" fallback on each wrong answer instead of a
+  // blank card, so every question looks consistent rather than some silently
+  // having no breakdown at all.
+  const supportsOptionExpl = (q.type === "single" || q.type === "multi" || q.type === "truefalse") && Array.isArray(q.options);
 
   let optionsHtml = "";
-  if (hasOptionExpl) {
+  if (supportsOptionExpl) {
     optionsHtml =
       `<div class="option-breakdown">` +
       q.options
@@ -829,12 +845,17 @@ function renderExplanationBreakdown(q, given) {
           else if (wasGiven) cls += " incorrect";
           const tag = isCorrect ? "Correct answer" : wasGiven ? "Your answer" : "";
           const mark = isCorrect ? "✓" : wasGiven ? "✗" : "";
+          const explBody = opt.explanation
+            ? formatExplanation(opt.explanation)
+            : isCorrect
+            ? ""
+            : "<p>This is not the right option.</p>";
           return `
             <div class="${cls}">
               <div class="option-expl-label">${mark ? `<span class="option-expl-mark">${mark}</span> ` : ""}${opt.text}${
                 tag ? `<span class="option-expl-tag">${tag}</span>` : ""
               }</div>
-              ${opt.explanation ? `<div class="option-expl-text">${formatExplanation(opt.explanation)}</div>` : ""}
+              ${explBody ? `<div class="option-expl-text">${explBody}</div>` : ""}
             </div>`;
         })
         .join("") +
@@ -844,7 +865,7 @@ function renderExplanationBreakdown(q, given) {
   return `
     ${optionsHtml}
     <div class="explanation-card">
-      <div class="explanation-title">${hasOptionExpl ? "Overall Explanation" : "Explanation"}</div>
+      <div class="explanation-title">${supportsOptionExpl ? "Overall Explanation" : "Explanation"}</div>
       <div class="explanation-body">${formatExplanation(q.explanation)}</div>
     </div>
   `;
@@ -1604,7 +1625,7 @@ function renderResults(reviewItems, attempt) {
 
   document.getElementById("backToDashBtn").textContent = DB.getUser()
     ? "Back to dashboard"
-    : "Done (sign in above to save results like this)";
+    : "Done - Move to Next Test";
 
   // Section breakdown
   const bySection = {};
