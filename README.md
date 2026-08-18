@@ -83,6 +83,6 @@ This practice test is provided as a free learning resource for anyone preparing 
 
 No subscription is required to use the practice resource.
 
-Learn → Practice → Review → Improve
+Learn -> Practice -> Review -> Improve
 
 Good luck with your PL-300 preparation!
