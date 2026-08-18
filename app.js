@@ -13,6 +13,21 @@ const TEST_SET_COUNT = 12;
 // Practice mode uses a count-up timer with no enforced limit.
 const TEST_SET_MINUTES_PER_QUESTION = 2;
 
+// Anonymous "test started" click counter (no login required, no personal data sent).
+// Fires a single fire-and-forget beacon to a Google Apps Script Web App that appends
+// one row (timestamp, site, mode, test/section) to a private Sheet only the site owner
+// can view. Never blocks or delays starting a test if the request fails or is offline.
+const TEST_START_LOG_URL = "https://script.google.com/macros/s/AKfycbw9mgiX8xqx6j_1HCg4YuWZGMMkG3cNkkVG9Jlz0D4TZeQzyowrP2XyjayYm50Dxrod/exec";
+function logTestStart(mode, param) {
+  if (!TEST_START_LOG_URL || TEST_START_LOG_URL.startsWith("PASTE_")) return;
+  try {
+    const payload = JSON.stringify({ site: "PL300", mode, param: String(param) });
+    navigator.sendBeacon(TEST_START_LOG_URL, new Blob([payload], { type: "text/plain;charset=UTF-8" }));
+  } catch (err) {
+    // Logging is best-effort only — never let it block a test from starting.
+  }
+}
+
 function testSetMinutes(count) {
   return Math.max(10, Math.round(count * TEST_SET_MINUTES_PER_QUESTION));
 }
@@ -1165,6 +1180,7 @@ function isAnswerCorrect(q, given) {
 // feedbackMode: "deferred" (Timed Test — answers/explanations shown only at the end)
 //            or "immediate" (Practice Test — check each answer as you go)
 function startTest(mode, param, feedbackMode) {
+  logTestStart(mode, param);
   let questions;
   let minutes;
   let modeLabel;
