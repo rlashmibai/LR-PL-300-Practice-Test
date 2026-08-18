@@ -62,6 +62,14 @@ This project is not affiliated with, sponsored by, or endorsed by Microsoft.
 
 For the most current exam objectives and certification information, always refer to the official Microsoft resources.
 
+## License & Usage
+
+This repository doesn't include an open-source license. You're welcome to browse the code and reference the general structure (how the site is built, the formatting approach, the PWA setup) for your own learning.
+
+However, the 600 practice questions, their explanations, and the question bank as a whole are original content that I've written and curated myself. Please don't copy, redistribute, or republish the question content elsewhere, whether as-is or reworded, without my permission.
+
+If this project inspires you to build something similar, that's great, just write your own questions.
+
 ## Useful Links
 
 - [PL-300 Practice Test](https://rlashmibai.github.io/LR-PL-300-Practice-Test/)
