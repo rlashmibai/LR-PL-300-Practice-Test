@@ -136,8 +136,8 @@ h3 { margin: 18px 0 8px; font-size: 1rem; }
 .hero-image { width: 100%; height: auto; object-fit: contain; border-radius: 10px; border: 1px solid var(--border); display: block; background: #fff; }
 .hero-badge-image { max-width: 260px; margin: 0 auto; padding: 14px; }
 .hero-text { display: flex; flex-direction: column; justify-content: center; }
-.hero-text-title { margin: 0 0 2px; font-size: 1.3rem; font-weight: 800; color: var(--text); }
-.hero-text-subtitle { margin: 0 0 10px; font-weight: 600; color: var(--text-muted); }
+.hero-text-title { margin: 0 0 2px; font-size: 1.3rem; font-weight: 800; color: var(--text); text-align: center; }
+.hero-text-subtitle { margin: 0 0 10px; font-weight: 600; color: var(--text-muted); text-align: center; }
 .hero-text-list-heading { margin: 0 0 4px; font-weight: 800; color: var(--text); }
 .hero-text-list { margin: 0; padding-left: 22px; }
 .hero-text-list li { margin-bottom: 4px; }
