@@ -163,6 +163,24 @@ const EXPL_HEADERS = [
   "Environments Overview:", "Roles and Security:",
   "Features of Gallery Control.", "Use Cases of Gallery Control.",
   "PL300 Tips:", "Common Pitfalls to Avoid",
+  // Added from a corpus-wide audit for genuine recurring section headings
+  // (each verified to repeat 3+ times within a single explanation, matching
+  // this file's own bar for "real heading, not incidental prose" — and each
+  // spot-checked against its actual source context) that the general-purpose
+  // detectors (formatTermList's 3+ threshold, splitEmbeddedTitle/splitGluedTitle)
+  // were still missing for one structural reason or another.
+  // Compound forms must come before their shorter counterpart below (same
+  // "longer phrase consumed first" rule as Detailed Explanation:/Explanation:
+  // above) — each confirmed present in the corpus via direct search.
+  "Substitute DAX:", "VALUES DAX:", "DAX:",
+  "Quick Tip:", "Tip to Remember:", "Tip:",
+  "Load Behavior:", "Export Behavior:", "Behavior:",
+  "Example Use Case:", "Use Case:",
+  "Admin Role:", "Role:",
+  "Purpose:", "Recommended Component:", "Reasoning:", "Mistake:",
+  "Storage:", "Ask:", "Limitation:",
+  "Situation:", "Memory Hook:", "Result:", "Consequence:",
+  "Definition:", "Effect:", "Function:",
 ];
 
 // Recurring section-header phrases that have variable trailing content (so they
