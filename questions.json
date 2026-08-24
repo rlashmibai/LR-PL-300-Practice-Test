@@ -3910,7 +3910,6 @@
     ],
     "correct": [
       "a",
-      "b",
       "c"
     ],
     "explanation": "A. Setting the Data category property helps Power BI geocode spatial data more accurately. – Correct Explanation: Categorizing columns with spatial values (like latitude or longitude) enables Power BI to recognize and visualize them properly in map visuals.\n\nB. You must rename the column to “Latitude” or “Longitude” for Power BI to geocode it. –  Incorrect Explanation: Renaming a column does not affect geocoding. You must explicitly set the Data category property to “Latitude” or “Longitude” for proper spatial recognition.\n\nC. Categorizing a column as Web URL allows Power BI to display clickable link icons in visuals. –  Correct Explanation: When a column is categorized as Web URL, Power BI can render it as a compact link icon in visuals like tables or matrices.\n\nD. Image URLs can only be displayed in map visuals. –  Incorrect Explanation: Image URLs can be displayed in various visuals including tables, matrices, slicers, and multi-row cards, not just maps.\n\nCategorize data\n\nYou can set the Data category property to describe the content of a column.\n\nSetting this property is especially useful when a column stores a spatial value, either in text or as a decimal latitude or longitude value. Columns that are categorized with a spatial value appear in the Data pane with a spatial icon, and Power BI can more accurately geocode and visualize the data when used in map visuals.\n\n<img src=\"images/questions/m2-image10.png\" alt=\"\" />\n\nYou can also categorize columns that contain a URL.\n\nWhen the URL contains a general web link, set the Data category property to Web URL. When used in a table or matrix visual, the report author can configure the format options to condense the URL into a compact and easily recognizable link icon.\n\nWhen the URL contains a link to an image, set the property to Image URL. When used in a table, matrix, slicer, or multi-row card visual, the report author can configure the format options to display the images.\n\nKeep in Mind:\n\nSetting the Data category helps Power BI display location data correctly on map visuals.\n\nFor spatial data like latitude, longitude, or addresses, you should set the appropriate category so Power BI knows it's location-related.\n\nRenaming a column to \"Latitude\" or \"Longitude\" does not help Power BI recognize it as spatial data - you must set the category manually.\n\nIf a column contains website links, setting its category to Web URL allows Power BI to show clickable link icons in visuals.\n\nIf a column contains image links, setting its category to Image URL lets Power BI display the actual images in visuals.\n\nImage URLs can be used in tables, matrices, slicers, and multi-row cards, not just map visuals.\n\nWhen you categorize a column as spatial data, it gets a special icon in the Data pane to indicate its type.\n\nUsing Data categories makes reports cleaner and easier to understand by formatting links and images properly.\n\nCategorizing columns helps Power BI understand the type of data, which improves how it handles and visualizes it.\n\nYou can set the Data category by selecting the column, going to the Modeling tab, and choosing the correct category from the dropdown menu.\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/4-columns\" target=\"_blank\" rel=\"noopener\">Configure columns - Training | Microsoft Learn</a>"
@@ -3988,7 +3987,7 @@
       "a",
       "c"
     ],
-    "explanation": "A - Correct Hierarchies provide a structured path (like Year - Quarter - Month) that makes it easier to navigate and analyze data.\n\nB - Incorrect Hierarchies are created in the data model, not just visuals. They help simplify report building and improve usability.\n\nC - Incorrect All hierarchy levels must come from the same table. You cannot mix columns from different tables in a single hierarchy.\n\nD - Incorrect Report authors can still use multiple columns manually, but it requires more effort and understanding of the data structure.\n\n<img src=\"images/questions/m2-image14.png\" alt=\"\" />\n\nKeep in Mind:\n\nHierarchies are optional but useful for organizing related columns in a logical order.\n\nCreating a hierarchy helps report authors understand how columns relate to each other, like Year - Quarter - Month.\n\nHierarchies are built using columns from the same table; you cannot mix columns from different tables.\n\nYou can create multiple hierarchies in a single table to support different analysis paths.\n\nHierarchies make it easier to drill down in visuals like matrix tables, charts, and slicers.\n\nWithout a hierarchy, users can still add multiple columns to a visual, but it takes more effort and knowledge.\n\nYou can name a hierarchy and reorder its levels to match your desired navigation path.\n\nHierarchies can have metadata properties like description, synonym, display folder, and hidden status.\n\nUsing hierarchies improves report usability and makes navigation more intuitive for end users.\n\nHierarchies are especially helpful in time-based data models, such as organizing dates by year, quarter, and month.\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies\" target=\"_blank\" rel=\"noopener\">Configure hierarchies - Training | Microsoft Learn</a>"
+    "explanation": "A - Correct Hierarchies provide a structured path (like Year - Quarter - Month) that makes it easier to navigate and analyze data.\n\nB - Incorrect Hierarchies are created in the data model, not just visuals. They help simplify report building and improve usability.\n\nD - Incorrect Report authors can still use multiple columns manually, but it requires more effort and understanding of the data structure.\n\n<img src=\"images/questions/m2-image14.png\" alt=\"\" />\n\nKeep in Mind:\n\nHierarchies are optional but useful for organizing related columns in a logical order.\n\nCreating a hierarchy helps report authors understand how columns relate to each other, like Year - Quarter - Month.\n\nHierarchies are built using columns from the same table; you cannot mix columns from different tables.\n\nYou can create multiple hierarchies in a single table to support different analysis paths.\n\nHierarchies make it easier to drill down in visuals like matrix tables, charts, and slicers.\n\nWithout a hierarchy, users can still add multiple columns to a visual, but it takes more effort and knowledge.\n\nYou can name a hierarchy and reorder its levels to match your desired navigation path.\n\nHierarchies can have metadata properties like description, synonym, display folder, and hidden status.\n\nUsing hierarchies improves report usability and makes navigation more intuitive for end users.\n\nHierarchies are especially helpful in time-based data models, such as organizing dates by year, quarter, and month.\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/5-hierarchies\" target=\"_blank\" rel=\"noopener\">Configure hierarchies - Training | Microsoft Learn</a>"
   },
   {
     "id": "q119",
@@ -6618,28 +6617,28 @@
       {
         "id": "a",
         "text": "A. One-to-one relationship with bi-directional filtering",
-        "explanation": "A one-to-one relationship with bi-directional filtering is not the best choice for supporting filtering across related tables and maintaining referential integrity. This type of relationship is more suitable for scenarios where each record in one table is related to only one record in another table."
+        "explanation": "This option is incorrect. A one-to-one relationship doesn't fit this scenario at all — it's used when each record in one table relates to exactly one record in another, not for filtering across related tables."
       },
       {
         "id": "b",
         "text": "B. One-to-many relationship with single-direction filtering",
-        "explanation": "A one-to-many relationship with single-direction filtering may not be the most effective choice for supporting filtering across related tables and maintaining referential integrity. This type of relationship allows each record in one table to be related to multiple records in another table, but the single-direction filtering may limit the flexibility of filtering options."
+        "explanation": "This is the correct option. A one-to-many relationship with single-direction filtering is the standard, recommended setup for a star-schema model: it lets filters flow from the \"one\" (dimension) table to the \"many\" (fact) table, supports filtering across related tables, and preserves referential integrity without the ambiguity risk that bi-directional filtering can introduce."
       },
       {
         "id": "c",
         "text": "C. Many-to-many relationship with bi-directional filtering",
-        "explanation": "A many-to-many relationship with bi-directional filtering is not the ideal choice for ensuring referential integrity and supporting filtering across related tables. This type of relationship allows multiple records in one table to be related to multiple records in another table, but it may introduce complexity and potential issues in maintaining data consistency."
+        "explanation": "This option is incorrect. Many-to-many relationships are only needed for specific bridging scenarios and add unnecessary complexity here, where each employee/customer maps to many transactions in a standard one-to-many pattern."
       },
       {
         "id": "d",
         "text": "D. One-to-many relationship with bi-directional filtering",
-        "explanation": "A one-to-many relationship with bi-directional filtering is the correct choice for supporting filtering across related tables and maintaining referential integrity in a Power BI model. This type of relationship allows each record in one table to be related to multiple records in another table, while the bi-directional filtering enables seamless filtering and data consistency across the tables."
+        "explanation": "This option is incorrect. Bi-directional filtering isn't needed to support filtering across related tables or to maintain referential integrity — single-direction filtering already provides both. Microsoft's own guidance recommends using bi-directional filtering only when necessary (e.g., many-to-many bridge tables), since it can introduce ambiguity and hurt performance."
       }
     ],
     "correct": [
-      "d"
+      "b"
     ],
-    "explanation": "A one-to-many relationship with bi-directional filtering allows filters to flow both ways across related tables, supporting slicers and visuals that depend on cross-table filtering. This setup is common in star schema models used in Power BI.\n\nYou have two tables:\n\nCustomers table\n\nCustomerID\n\nCustomerName\n\nRegion\n\nSales table\n\nSaleID\n\nCustomerID\n\nAmount\n\nDate\n\nRelationship\n\nOnetomany:\n\nOne customer can have many sales.\n\nSo you create a relationship: Customers[CustomerID] - Sales[CustomerID].\n\nBidirectional filtering:\n\nNormally, filters flow from Customers - Sales (e.g., selecting a region filters sales).\n\nWith bidirectional filtering, filters also flow Sales - Customers.\n\nThis means if you filter Sales (say, only sales above $10,000), the Customers table also gets filtered to show only those customers who meet that condition.\n\n<img src=\"images/questions/m2-image53.png\" alt=\"\" />\n\n<a href=\"https://www.i2tutorials.com/what-is-the-difference-between-one-to-one-one-to-many-many-to-one-many-to-many-in-neural-network/\" target=\"_blank\" rel=\"noopener\">What is the difference between one to one, one to many, many to one, many to many in Neural Network? | i2tutorials</a>\n\nKeep in Mind:\n\nQ1: What is the difference between single-direction and bi-directional filtering?\n\nA: Single-direction filtering allows filters to flow from one table to another (typically from dimension to fact). Bi-directional filtering allows filters to flow both ways, which is useful for slicers and cross-filtering visuals.\n\nQ2: Why is a one-to-many relationship commonly used in Power BI models?\n\nA: It reflects the typical star schema design, where a dimension table (one side) connects to a fact table (many side). This structure supports efficient filtering and aggregation.\n\nQ3: When should I use bi-directional filtering?\n\nA: Use it when you need visuals or slicers to affect both related tables. However, be cautious-it can introduce ambiguity and performance issues if overused.\n\nQ4: Can I use many-to-many relationships in Power BI?\n\nA: Yes, Power BI supports many-to-many relationships, but they should be used carefully. They can complicate filter propagation and may require composite models or bridge tables.\n\nQ5: What happens if I create multiple relationships between two tables?\n\nA: Power BI allows only one active relationship at a time. You can use inactive relationships in DAX measures with functions like USERELATIONSHIP or simulate filtering with TREATAS."
+    "explanation": "A one-to-many relationship with single-direction filtering is the correct, standard choice for supporting filtering across related tables while maintaining referential integrity.\n\nYou have two tables:\n\nCustomers table\n\nCustomerID\n\nCustomerName\n\nRegion\n\nSales table\n\nSaleID\n\nCustomerID\n\nAmount\n\nDate\n\nRelationship\n\nOne-to-many:\n\nOne customer can have many sales.\n\nSo you create a relationship: Customers[CustomerID] -> Sales[CustomerID].\n\nSingle-direction filtering:\n\nBy default, filters flow from the \"one\" side (Customers) to the \"many\" side (Sales) — e.g., selecting a region filters the related sales. This single direction is what Power BI creates by default and is the recommended setup for standard star-schema models; it already gives you filtering across related tables and referential integrity without any extra configuration.\n\nBi-directional filtering is a separate, optional feature that lets filters also flow the other way (Sales -> Customers). It isn't required for referential integrity, and Microsoft's own guidance recommends using it only when necessary — such as many-to-many bridge-table scenarios — because it can introduce ambiguous filter paths and hurt query performance if overused.\n\n<img src=\"images/questions/m2-image53.png\" alt=\"\" />\n\nKeep in Mind:\n\nQ1: What is the difference between single-direction and bi-directional filtering?\n\nA: Single-direction filtering allows filters to flow from one table to another (typically from dimension to fact) and is the default. Bi-directional filtering allows filters to flow both ways, which is useful for specific slicer/cross-filtering scenarios but should be used sparingly.\n\nQ2: Why is a one-to-many relationship commonly used in Power BI models?\n\nA: It reflects the typical star schema design, where a dimension table (one side) connects to a fact table (many side). This structure supports efficient filtering and aggregation.\n\nQ3: When should I use bi-directional filtering?\n\nA: Only when you specifically need visuals or slicers to affect both related tables, such as many-to-many bridge tables. Microsoft cautions that it can introduce ambiguity and performance issues if overused.\n\nQ4: Can I use many-to-many relationships in Power BI?\n\nA: Yes, Power BI supports many-to-many relationships, but they should be used carefully. They can complicate filter propagation and may require composite models or bridge tables.\n\nQ5: What happens if I create multiple relationships between two tables?\n\nA: Power BI allows only one active relationship at a time. You can use inactive relationships in DAX measures with functions like USERELATIONSHIP or simulate filtering with TREATAS.\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/power-bi/guidance/relationships-bidirectional-filtering\" target=\"_blank\" rel=\"noopener\">Bi-directional relationship guidance - Power BI | Microsoft Learn</a>, <a href=\"https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-relationships-understand\" target=\"_blank\" rel=\"noopener\">Model relationships in Power BI Desktop - Power BI | Microsoft Learn</a>"
   },
   {
     "id": "q201",
@@ -9661,7 +9660,7 @@
       {
         "id": "b",
         "text": "B. The Analyze feature only works with numerical measures like Expense Amount, not categorical fields.",
-        "explanation": "This is incorrect option. The Analyze feature in Power BI is primarily intended to work with numerical measures, like Expense Amount, to provide insights and explanations. When the dataset is filtered by categorical fields, such as department or category, the Analyze feature may not be available as it requires numerical data to analyze."
+        "explanation": "This option is incorrect, though it sounds similar to the right answer. Per Microsoft's own documentation, the Analyze feature is disabled specifically when non-numeric filters (or measure filters) are applied to the visual — it isn't a blanket statement that the feature \"only works with numerical measures\" in general. Option A describes the actual documented restriction; this option overstates it as a general limitation of the feature rather than the specific filter-related trigger that disables it."
       },
       {
         "id": "c",
@@ -9677,7 +9676,7 @@
     "correct": [
       "a"
     ],
-    "explanation": "Power BI’s Analyze - Explain the increase/decrease feature relies on Power BI automatically running statistical analysis and machine learning models on the underlying data to identify possible explanations for a change in a numerical measure.\n\nHowever, there are specific conditions under which this feature is disabled, and one of the most common is when non-numeric filters (such as text or categorical slicers) are applied directly to the visual. This restriction exists because Power BI’s analysis models can’t accurately compute correlations or causal insights when the dataset is constrained by categorical filters that may alter the statistical relationships.\n\nIn this question, the Analyze feature in Power BI is disabled if nonnumeric filters or measure filters are applied to a visual. In this case, filtering by the \"Sales\" department (a nonnumeric field) prevents Power BI from generating automated insights.\n\nExam Tips: Q1. What does the “Explain the increase/decrease” feature do? It automatically runs statistical analysis and machine learning models on your data to suggest possible reasons why a numerical measure (like sales or revenue) went up or down. Q2. When is this feature most useful? When you want quick, automated insights into changes in metrics without manually digging into the data. Q3. Why might the feature be disabled? It gets disabled if you apply nonnumeric filters (like text or categorical slicers) directly to the visual. It also won’t work if measure filters are applied. Q4. Why does Power BI restrict nonnumeric filters? Because categorical filters can distort statistical relationships, making it hard for Power BI’s models to compute accurate correlations or causal insights. Q5. Can you give an example of when it won’t work? If you filter a visual by “Sales Department” (a text field), Power BI cannot generate automated explanations for increases or decreases. Q6. How can I make sure the feature works? Use numeric measures (like sales amount, revenue, profit) in your visuals. Avoid applying nonnumeric filters directly to the visual when you want to use the Analyze feature. Q7. Does this mean I can’t filter at all? You can still filter, but stick to numeric fields or use filters that don’t break the statistical model.\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/perform-analytics-power-bi/7-analyze-feature\" target=\"_blank\" rel=\"noopener\">Use the Analyze feature - Training | Microsoft Learn</a>"
+    "explanation": "Power BI’s Analyze - Explain the increase/decrease feature relies on Power BI automatically running statistical analysis and machine learning models on the underlying data to identify possible explanations for a change in a numerical measure.\n\nHowever, there are specific conditions under which this feature is disabled, and one of the most common is when non-numeric filters (such as text or categorical slicers) are applied directly to the visual. This restriction exists because Power BI’s analysis models can’t accurately compute correlations or causal insights when the dataset is constrained by categorical filters that may alter the statistical relationships.\n\nIn this question, the Analyze feature in Power BI is disabled if nonnumeric filters or measure filters are applied to a visual. In this case, filtering by the \"Sales\" department (a nonnumeric field) prevents Power BI from generating automated insights.\n\nPer Microsoft Learn: \"This feature doesn't work if you have non-numeric filters applied to your visual and/or you have measure filters applied.\"\n\nExam Tips: Q1. What does the “Explain the increase/decrease” feature do? It automatically runs statistical analysis and machine learning models on your data to suggest possible reasons why a numerical measure (like sales or revenue) went up or down. Q2. When is this feature most useful? When you want quick, automated insights into changes in metrics without manually digging into the data. Q3. Why might the feature be disabled? It gets disabled if you apply nonnumeric filters (like text or categorical slicers) directly to the visual. It also won’t work if measure filters are applied. Q4. Why does Power BI restrict nonnumeric filters? Because categorical filters can distort statistical relationships, making it hard for Power BI’s models to compute accurate correlations or causal insights. Q5. Can you give an example of when it won’t work? If you filter a visual by “Sales Department” (a text field), Power BI cannot generate automated explanations for increases or decreases. Q6. How can I make sure the feature works? Use numeric measures (like sales amount, revenue, profit) in your visuals. Avoid applying nonnumeric filters directly to the visual when you want to use the Analyze feature. Q7. Does this mean I can’t filter at all? You can still filter, but stick to numeric fields or use filters that don’t break the statistical model.\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/perform-analytics-power-bi/7-analyze-feature\" target=\"_blank\" rel=\"noopener\">Use the Analyze feature - Training | Microsoft Learn</a>"
   },
   {
     "id": "q286",
@@ -10204,7 +10203,7 @@
     "testSet": 12,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "You are preparing a Power BI report for the Sales & Supply Chain team. They want to: Show the proportion of sales contributed by each product category Display hierarchical breakdown of regions - countries - cities Compare actual sales vs target sales side by side Visualize customer satisfaction scores distribution Show relationships between advertising spend and sales revenue Which visuals should you use? (Select all that apply)",
+    "text": "You are preparing a Power BI report for the Sales & Supply Chain team. They want to: Show the proportion of sales contributed by each product category. Visualize the stages of the sales pipeline, from Lead to Closed Won. Compare actual sales vs target sales for each product category. Show the relationship between advertising spend and sales revenue. Show how total revenue is affected by a sequence of increases and decreases across the year. Which visuals should you use? (Select all that apply)",
     "options": [
       {
         "id": "a",
@@ -10214,12 +10213,12 @@
       {
         "id": "b",
         "text": "B. Funnel Chart",
-        "explanation": "A Funnel Chart is ideal for displaying a hierarchical breakdown of regions, countries, and cities as it represents a sequential process or stages in a visually appealing manner, making it easy to track the flow from one level to another."
+        "explanation": "A Funnel Chart is the standard visual for a sequential process with a shrinking count at each stage, such as a sales pipeline moving from Lead through to Closed Won."
       },
       {
         "id": "c",
         "text": "C. Stacked Bar Chart",
-        "explanation": "A Stacked Bar Chart is effective for comparing actual sales vs target sales side by side as it allows for a clear comparison of the total sales and target sales for each category, showing the contribution of each category to the overall target."
+        "explanation": "A Stacked Bar Chart is effective for comparing actual sales vs target sales for each product category, showing the total and the breakdown side by side."
       },
       {
         "id": "d",
@@ -10234,7 +10233,7 @@
       {
         "id": "f",
         "text": "F. Waterfall Chart",
-        "explanation": "A Waterfall Chart is suitable for visualizing customer satisfaction scores distribution as it shows the cumulative effect of positive and negative values, making it easy to track the overall trend and identify areas of improvement or concern in customer satisfaction."
+        "explanation": "A Waterfall Chart is the standard visual for showing how a starting value is affected by a sequence of positive and negative changes over time - exactly what's needed to show how total revenue moves up and down across the year."
       }
     ],
     "correct": [
@@ -10244,7 +10243,7 @@
       "d",
       "f"
     ],
-    "explanation": "A (Donut Chart) - Good for showing proportions of sales by product category.\n\nB (Funnel Chart) - Useful for hierarchical breakdowns like region - country - city or sales pipeline stages.\n\nC (Stacked Bar Chart) - Ideal for comparing actual vs target sales side by side.\n\nD (Scatter Chart) - Best for showing relationships (e.g., advertising spend vs revenue).\n\nE (Gauge Chart) - More suited for KPI tracking (e.g., single value vs target), not for these scenarios.\n\nF (Waterfall Chart) - Great for showing how customer satisfaction scores or sales values change step by step."
+    "explanation": "A (Donut Chart) - Good for showing the proportion of sales contributed by each product category.\n\nB (Funnel Chart) - The standard visual for a sequential, narrowing process like a sales pipeline (Lead -> Qualified -> Proposal -> Closed Won).\n\nC (Stacked Bar Chart) - Effective for comparing actual vs target sales for each product category.\n\nD (Scatter Chart) - Best for showing the relationship between two numeric measures, like advertising spend vs sales revenue.\n\nE (Gauge Chart) - Not needed here. A Gauge Chart is meant for tracking a single value against a single target (like a KPI), not for any of these five requirements.\n\nF (Waterfall Chart) - The standard visual for showing how a starting value is affected by a sequence of increases and decreases, such as revenue changes across the year."
   },
   {
     "id": "q301",
@@ -12939,7 +12938,7 @@
       }
     ],
     "correct": [
-      "a"
+      "b"
     ],
     "explanation": "<img src=\"images/questions/m4-image50.png\" alt=\"\" />\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/create-dashboards-power-bi/1-introduction\" target=\"_blank\" rel=\"noopener\">Introduction to dashboards - Training | Microsoft Learn</a>"
   },
@@ -12963,7 +12962,7 @@
       }
     ],
     "correct": [
-      "a"
+      "b"
     ],
     "explanation": "Dashboards are created by pinning report visuals, and are then called tiles within reports. When you make changes to the visuals in the report, and then republish to Power BI Service, changes are reflected on the dashboard.\n\nFirst log into the Power BI service and navigate to a workspace with reports. Open a report and in the visual header, select the Pin Visual icon. You can choose to pin this visual to a new or existing dashboard.\n\nAfter pinning your visuals, you can resize and move the visuals to suit your needs.\n\n<img src=\"images/questions/m4-image52.png\" alt=\"\" />\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/create-dashboards-power-bi/1-introduction\" target=\"_blank\" rel=\"noopener\">Introduction to dashboards - Training | Microsoft Learn</a>"
   },
@@ -13464,23 +13463,23 @@
     "testSet": 12,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "State True or False: In Power BI Premium, you can schedule up to 48 dataset refreshes per day. In Power BI Pro (shared capacity), you can schedule up to 8 dataset refreshes per day. The maximum dataset size in Power BI Pro is 1 GB, while Premium supports much larger datasets (up to 400 GB with large models). Exporting summarized data from Power BI Service to Excel is limited to 150,000 rows. A dashboard can be shared with a maximum of 500 recipients per share action. A single dashboard in Power BI can contain up to 200 tiles.",
+    "text": "State True or False: In Power BI Premium, you can schedule up to 48 dataset refreshes per day. In Power BI Pro (shared capacity), you can schedule up to 8 dataset refreshes per day. The maximum dataset size in Power BI Pro is 1 GB, while Premium supports much larger datasets (up to 400 GB with large models). Exporting summarized data from Power BI Service to Excel is limited to 150,000 rows. A dashboard can be shared with a maximum of 100 users or groups per share action. A single report can't have more than 1,000 sharing links.",
     "options": [
       {
         "id": "a",
-        "text": "In Power BI Premium, you can schedule up to 48 dataset refreshes per day. - True In Power BI Pro (shared capacity), you can schedule up to 8 dataset refreshes per day. - True The maximum dataset size in Power BI Pro is 1 GB, while Premium supports much larger datasets (up to 400 GB with large models). - False Exporting summarized data from Power BI Service to Excel is limited to 150,000 rows. - False A dashboard can be shared with a maximum of 500 recipients per share action. - True A single dashboard in Power BI can contain up to 200 tiles. - False",
-        "explanation": "This is incorrect option"
+        "text": "In Power BI Premium, you can schedule up to 48 dataset refreshes per day. - True In Power BI Pro (shared capacity), you can schedule up to 8 dataset refreshes per day. - True The maximum dataset size in Power BI Pro is 1 GB, while Premium supports much larger datasets (up to 400 GB with large models). - False Exporting summarized data from Power BI Service to Excel is limited to 150,000 rows. - False A dashboard can be shared with a maximum of 100 users or groups per share action. - True A single report can't have more than 1,000 sharing links. - False",
+        "explanation": "This is incorrect option. The dataset size limit, the Excel export row limit, and the sharing-links limit are all real, documented figures - flagging them False makes this option inaccurate."
       },
       {
         "id": "b",
-        "text": "In Power BI Premium, you can schedule up to 48 dataset refreshes per day. - True In Power BI Pro (shared capacity), you can schedule up to 8 dataset refreshes per day. - True The maximum dataset size in Power BI Pro is 1 GB, while Premium supports much larger datasets (up to 400 GB with large models). - True Exporting summarized data from Power BI Service to Excel is limited to 150,000 rows. - True A dashboard can be shared with a maximum of 500 recipients per share action. - True A single dashboard in Power BI can contain up to 200 tiles. - True",
-        "explanation": "This is correct option. <a href=\"https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing?msockid=31478d7ea3f1671e00e59baba2b466bf\" target=\"_blank\" rel=\"noopener\">Power BI: Pricing Plan | Microsoft Power Platform</a> <a href=\"https://www.youtube.com/watch?v=6tTJkA3Cv_w&t=2s\" target=\"_blank\" rel=\"noopener\">Power BI: Free vs. Pro vs. Premium - which one should YOU get?</a> <img src=\"images/questions/m4-image75.png\" alt=\"\" />"
+        "text": "In Power BI Premium, you can schedule up to 48 dataset refreshes per day. - True In Power BI Pro (shared capacity), you can schedule up to 8 dataset refreshes per day. - True The maximum dataset size in Power BI Pro is 1 GB, while Premium supports much larger datasets (up to 400 GB with large models). - True Exporting summarized data from Power BI Service to Excel is limited to 150,000 rows. - True A dashboard can be shared with a maximum of 100 users or groups per share action. - True A single report can't have more than 1,000 sharing links. - True",
+        "explanation": "This is the correct option - all six statements are accurate per current Microsoft documentation."
       }
     ],
     "correct": [
       "b"
     ],
-    "explanation": "Dataset Refresh Limits\n\nPower BI Premium - 48 refreshes/day\n\nPremium capacity allows scheduling up to 48 dataset refreshes per day.\n\nThis means you can refresh every 30 minutes, enabling near realtime updates for critical dashboards.\n\nIdeal for scenarios like finance or operations where data changes frequently.\n\nPower BI Pro (shared capacity) - 8 refreshes/day\n\nIn Pro, you can schedule up to 8 refreshes per day.\n\nThis is sufficient for many business needs but not enough for near realtime monitoring.\n\nRefreshes are spread across shared capacity, so performance may vary depending on tenant load.\n\nDataset Size Limits\n\nPower BI Pro - 1 GB per dataset\n\nEach dataset published to the Service is limited to 1 GB in size.\n\nThis constraint is due to shared capacity and is suitable for small to medium datasets.\n\nPower BI Premium - up to 400 GB with large models\n\nPremium supports much larger datasets, scaling up to 400 GB when using large models.\n\nThis allows enterprisescale analytics with massive datasets, such as detailed transaction logs or IoT data.\n\nExport Limits\n\nExport summarized data to Excel - 150,000 rows\n\nWhen exporting summarized data from Power BI Service to Excel, the limit is 150,000 rows.\n\nThis ensures performance and usability in Excel, while still allowing substantial data analysis.\n\nFor larger exports, users typically rely on Paginated Reports or direct queries.\n\nSharing Limits\n\nDashboard sharing - 500 recipients per share action\n\nA dashboard can be shared with up to 500 recipients at once.\n\nRecipients must have Power BI accounts to access the shared content.\n\nFor broader distribution, organizations often use Power BI Apps, which scale beyond individual share limits.\n\nDashboard Tile Limits\n\nMaximum tiles per dashboard - 200 tiles\n\nA single dashboard can contain up to 200 tiles.\n\nTiles can be pinned from reports, Q&A, or other dashboards.\n\nThis limit ensures dashboards remain performant and manageable."
+    "explanation": "Dataset Refresh Limits\n\nPower BI Premium - 48 refreshes/day\n\nPremium capacity allows scheduling up to 48 dataset refreshes per day (about every 30 minutes), ideal for scenarios like finance or operations where data changes frequently.\n\nPower BI Pro (shared capacity) - 8 refreshes/day\n\nIn Pro, you can schedule up to 8 refreshes per day. Manual, UI-triggered on-demand refreshes don't count toward this limit.\n\nDataset Size Limits\n\nPower BI Pro - 1 GB per dataset. Power BI Premium - up to 400 GB with large models, enabling enterprise-scale analytics with much larger datasets.\n\nExport Limits\n\nExporting summarized data from Power BI Service to Excel is limited to 150,000 rows. For larger exports, users typically rely on Paginated Reports or direct queries.\n\nSharing Limits\n\nWhen you share a dashboard directly, the share dialog supports up to 100 separate users or groups per share action (not 500 - that's a common misconception). To reach a bigger audience, use a security group or publish an app from the workspace. Separately, a single report can't have more than 1,000 sharing links; once you hit that limit, remove links for \"Specific people\" and grant those users direct access instead.\n\nReference: <a href=\"https://learn.microsoft.com/en-us/power-bi/collaborate-share/service-share-dashboards\" target=\"_blank\" rel=\"noopener\">Share and Collaborate on Power BI Reports and Dashboards - Microsoft Learn</a>"
   },
   {
     "id": "q397",
@@ -14158,7 +14157,7 @@
     "options": [
       {
         "id": "a",
-        "text": "Capabilities",
+        "text": "Capacity",
         "explanation": "Capabilities in Power BI represent a set of resources used to host and deliver your Power BI content. These resources include features such as data visualization, data modeling, data transformation, and report publishing, making it the correct choice for this question."
       },
       {
@@ -14180,7 +14179,7 @@
     "correct": [
       "a"
     ],
-    "explanation": "The correct answer is Capabilities.\n\nThe term \"capabilities\" in the context of Power BI typically refers to the features and functionalities of the platform.\n\nIt includes the ability to host and deliver Power BI content, manage data sources, create reports and dashboards, and share insights with others.\n\nThese capabilities encompass a wide range of tools and resources available within the Power BI ecosystem.\n\nCapacities are a core Power BI concept representing a set of resources used to host and deliver your Power BI content. Capacities are either shared or dedicated.\n\nA shared capacity is shared with other Microsoft customers, while a dedicated capacity is fully committed to a single customer.\n\nDedicated capacities require a subscription. By default, workspaces are created in a shared capacity.\n\nIn summary, the choice between Shared and Dedicated capacities in Power BI depends on factors such as an organization's data volume, performance requirements, budget, and control over resources. Small to medium-sized organizations may find shared capacity suitable, while larger enterprises with extensive data and reporting needs often opt for dedicated capacity to ensure consistent performance and control over resources.\n\n<img src=\"images/questions/m5-image16.png\" alt=\"\" />\n\nHere's an explanation of why the other options are incorrect:\n\nWorkflows: Workflows refer to sequences of automated actions or processes that can be created and managed using tools like Power Automate (Microsoft Flow). While workflows can be used to automate various tasks, they are not the core concept representing a set of resources used to host and deliver Power BI content.\n\nApp Designer: App Designer is a tool within the Power Platform used for designing custom applications. It is not a core concept representing resources for hosting and delivering Power BI content.\n\nPower Automate: Power Automate (formerly known as Microsoft Flow) is a workflow automation tool that allows you to create automated workflows. While it can be used to automate tasks related to Power BI, it is not the core concept representing the set of resources used to host and deliver Power BI content."
+    "explanation": "The correct answer is Capacity.\n\nCapacities are a core Power BI concept representing a set of resources used to host and deliver your Power BI content. Capacities are either shared or dedicated.\n\nA shared capacity is shared with other Microsoft customers, while a dedicated capacity is fully committed to a single customer.\n\nDedicated capacities require a subscription. By default, workspaces are created in a shared capacity.\n\nIn summary, the choice between Shared and Dedicated capacities in Power BI depends on factors such as an organization's data volume, performance requirements, budget, and control over resources. Small to medium-sized organizations may find shared capacity suitable, while larger enterprises with extensive data and reporting needs often opt for dedicated capacity to ensure consistent performance."
   },
   {
     "id": "q418",
@@ -14337,33 +14336,29 @@
     "testSet": 2,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Imagine you've already published an app in Power BI that includes various reports and dashboards. Now, you've made some updates to the content within the app. When you click \"Update\" in this situation, what exactly occurs, and how does it affect the users who have access to your app?",
+    "text": "You have already published a Power BI organizational app that contains several reports and dashboards. You then make changes to the content in the app's underlying workspace. When you select Update app, what happens to users who already have access to the published app?",
     "options": [
       {
         "id": "a",
-        "text": "Nothing. You have now created a new fork of that content.",
-        "explanation": "This option is incorrect. Choosing this option implies that updating the content within the app does not affect the existing users who have access to the app. It suggests that a new version of the content is created separately, leaving the original content unchanged for the users."
+        "text": "Nothing happens to the published app; you must publish a completely new app."
       },
       {
         "id": "b",
-        "text": "The new content will automatically update anyone who has connected to your app",
-        "explanation": "This option is incorrect. This option suggests that the new content updates automatically for anyone who has connected to the app without any user intervention. It implies that the changes are immediately applied to all users without giving them the option to review or accept the updates."
+        "text": "The updated content is automatically made available to users who already have access to the app."
       },
       {
         "id": "c",
-        "text": "Anyone who has connected to your app will receive a message and they can decide whether to  accept the changes or keep the older version",
-        "explanation": "This option correctly states that when you click \"Update\" in Power BI for the app, users who have connected to the app will receive a message notifying them of the changes. Users can then decide whether to accept the changes and continue with the updated content or keep the older version if they prefer."
+        "text": "Each user receives a notification and must choose whether to accept the update or continue using the previous version."
       },
       {
         "id": "d",
-        "text": "Anyone who has connected to your app will automatically update but they can roll back to the  older version whenever they choose",
-        "explanation": "This option is incorrect. This option suggests that the new content will automatically update for users who have connected to the app, but they have the option to roll back to the older version if they choose to do so. It implies that users have the flexibility to revert to the previous version of the content if they are not satisfied with the updates."
+        "text": "The app automatically updates for users, but each user can independently roll back to the previous version whenever they want."
       }
     ],
     "correct": [
-      "c"
+      "b"
     ],
-    "explanation": "The correct answer is that anyone who has connected to your app will receive a message and they can decide whether to  accept the changes or keep the older version\n\nWhen you click Update, users of your app will receive a message. They can choose whether to accept or ignore your updates to the app.\n\nThe other options are incorrect, and it's essential to understand why they are incorrect. Knowing why the alternatives are wrong is valuable, not just for finding the right answer but for improving your understanding.\n\nNothing. You have now created a new fork of that content: This option is incorrect because clicking \"Update\" in Power BI for an app does not automatically create a new fork of the content. Instead, it initiates the update process.\n\nThe new content will automatically update anyone who has connected to your app: While updating the app does indeed push the changes to users, it does not happen automatically without user involvement. Users typically receive a notification or message about the update.\n\nAnyone who has connected to your app will automatically update, but they can roll back to the older version whenever they choose: This option is not entirely accurate. Users typically have the option to accept or decline the update, but rolling back to an older version may not always be a straightforward process and depends on the app's settings and version history.\n\nExam Tips: Atleast one question is guaranteed on apps in Power BI: Power BI Apps are used to bundle and share dashboards, reports, and datasets together. Apps are read-only for users unless specific permissions are given. Apps are published from workspaces, not created separately. Sharing content through an app is more efficient than sharing individual reports. You can set different audiences within an app to control what each group sees. Updating reports in a workspace does not update the app until you re-publish it. Apps can be accessed through both the Power BI service and mobile app. Apps are designed for structured, organization-wide distribution of Power BI content. A Power BI Pro or Premium license is required to publish or consume an app. Apps provide a clean and user-friendly interface that hides the underlying workspace content."
+    "explanation": "The correct answer is B: the updated content is automatically made available to users who already have access to the app.\n\nWhen you select Update app in Power BI, the changes are pushed out to everyone who already has access, no notification, no accept/decline step, and no per-user rollback. It's an automatic, organization-wide update.\n\nThe other options are incorrect, and it's essential to understand why:\n\nNothing happens to the published app; you must publish a completely new app: This option is incorrect because selecting Update app does update the existing published app directly. It doesn't require publishing a separate new app.\n\nEach user receives a notification and must choose whether to accept the update or continue using the previous version: This describes how AppSource template apps handle updates, not a standard organizational app. Organizational apps update automatically for everyone with access.\n\nThe app automatically updates for users, but each user can independently roll back to the previous version whenever they want: The update itself is automatic, but there's no per-user rollback option for organizational apps once the update is applied.\n\nExam Tips: Atleast one question is guaranteed on apps in Power BI: Power BI Apps are used to bundle and share dashboards, reports, and datasets together. Apps are read-only for users unless specific permissions are given. Apps are published from workspaces, not created separately. Sharing content through an app is more efficient than sharing individual reports. You can set different audiences within an app to control what each group sees. Updating reports in a workspace does not update the app until you re-publish it. Apps can be accessed through both the Power BI service and mobile app. Apps are designed for structured, organization-wide distribution of Power BI content. A Power BI Pro or Premium license is required to publish or consume an app. Apps provide a clean and user-friendly interface that hides the underlying workspace content."
   },
   {
     "id": "q423",
@@ -14397,7 +14392,7 @@
     "correct": [
       "b"
     ],
-    "explanation": "The statement that describes the golden ratio in analytical report design is A layout that produces symmetrical balance.\n\nSo what is the Golden Ratio?\n\nThe Golden Ratio is one of the tools we use to help guide how to select and layout those 12 widgets.\n\nThe gist of the layout is that the most important data you are communicating should be toward the top and to the left, with lower-priority information appearing further toward the bottom and right of your view.\n\nThe golden ratio uses a ratio that is based on the Fibonacci Sequence to produce asymmetrical balance.\n\nHere's an explanation of why the other options are incorrect:\n\nA layout that divides the report page into an invisible grid of nine equal parts is incorrect because the golden ratio does not divide the page into nine equal parts.\n\nA layout that produces symmetrical balance is incorrect because the golden ratio can be used to create both symmetrical and asymmetrical layouts. A symmetrical layout is one in which the elements on the page are mirror images of each other. An asymmetrical layout is one in which the elements on the page are not mirror images of each other, but they are still balanced.\n\nA report measure that uses the DIVIDE function is incorrect because the golden ratio is not a report measure. A report measure is a calculation that is performed on the data in a report. The golden ratio is a mathematical ratio that is used in design.\n\nRemember, The golden ratio is a powerful tool that can be used to create visually appealing and effective layouts. However, it is not the only way to create asymmetrical balance. By understanding the different principles of design, you can create layouts that are both visually appealing and effective.\n\nExam Tips: From an exam point of view, you need to understand at a high level and not in-depth how the Golden Ratio really works."
+    "explanation": "The statement that describes the golden ratio in analytical report design is: A layout that produces asymmetrical balance.\n\nSo what is the Golden Ratio?\n\nThe Golden Ratio is one of the tools we use to help guide how to select and layout those 12 widgets.\n\nThe gist of the layout is that the most important data you are communicating should be toward the top and to the left, with lower-priority information appearing further toward the bottom and right of your view.\n\nThe golden ratio uses a ratio that is based on the Fibonacci Sequence to produce asymmetrical balance.\n\nHere's an explanation of why the other options are incorrect:\n\nA layout that divides the report page into an invisible grid of nine equal parts is incorrect because the golden ratio does not divide the page into nine equal parts.\n\nA layout that produces symmetrical balance is incorrect because the golden ratio can be used to create both symmetrical and asymmetrical layouts. A symmetrical layout is one in which the elements on the page are mirror images of each other. An asymmetrical layout is one in which the elements on the page are not mirror images of each other, but they are still balanced.\n\nA report measure that uses the DIVIDE function is incorrect because the golden ratio is not a report measure. A report measure is a calculation that is performed on the data in a report. The golden ratio is a mathematical ratio that is used in design.\n\nRemember, The golden ratio is a powerful tool that can be used to create visually appealing and effective layouts. However, it is not the only way to create asymmetrical balance. By understanding the different principles of design, you can create layouts that are both visually appealing and effective.\n\nExam Tips: From an exam point of view, you need to understand at a high level and not in-depth how the Golden Ratio really works."
   },
   {
     "id": "q424",
@@ -14436,42 +14431,46 @@
     "testSet": 5,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Which of the following are types of anomaly insights available in Power BI?",
+    "text": "Which of the following statements about Anomaly Detection for line charts in Power BI are correct? (Select all that apply)",
     "options": [
       {
         "id": "a",
-        "text": "Significant anomaly",
-        "explanation": "Significant anomaly insights in Power BI highlight data points that deviate significantly from the expected pattern or trend. These anomalies are important to identify as they can indicate potential issues or opportunities within the data."
+        "text": "Anomaly detection is only supported for line chart visuals containing time series data in the Axis field.",
+        "explanation": "Correct. Anomaly detection in Power BI is a line-chart-only feature - it isn't available on other visual types."
       },
       {
         "id": "b",
-        "text": "Recent anomaly",
-        "explanation": "Recent anomaly insights in Power BI focus on detecting anomalies that have occurred recently in the data. These insights help users quickly identify any sudden changes or irregularities in the data that may require further investigation."
+        "text": "Anomaly detection requires at least four data points in the series to run.",
+        "explanation": "Correct. Per Microsoft Learn, anomaly detection requires a minimum of four data points before it can identify anomalies."
       },
       {
         "id": "c",
-        "text": "Anomaly summary",
-        "explanation": "Anomaly summary insights in Power BI provide a comprehensive overview of all anomalies detected in the data. This summary helps users understand the overall anomaly patterns and trends within their dataset."
+        "text": "You can drag fields into the “Explain by” well to control which fields Power BI analyzes when explaining an anomaly.",
+        "explanation": "Correct. The Explain by field well lets you restrict the analysis to specific fields, such as Seller or City, instead of scanning the whole model."
       },
       {
         "id": "d",
-        "text": "Historical trend anomaly",
-        "explanation": "Historical trend anomaly insights in Power BI analyze anomalies based on historical data trends and patterns. These insights help users identify anomalies that have occurred over a longer period of time, allowing for a deeper analysis of data irregularities."
+        "text": "Anomaly detection works normally even when the line chart has a legend or multiple values.",
+        "explanation": "Incorrect. Anomaly detection isn't supported with legends, multiple values, or secondary values on a line chart - it requires a single-series chart."
       },
       {
         "id": "e",
-        "text": "Predictive deviation anomaly",
-        "explanation": "Predictive deviation anomaly insights in Power BI use predictive modeling techniques to detect deviations from expected future trends. These insights help users anticipate potential anomalies before they occur, enabling proactive decision-making based on predictive analytics."
+        "text": "Increasing the sensitivity setting causes the algorithm to flag more data points as anomalies.",
+        "explanation": "Correct. Raising sensitivity makes the algorithm more sensitive to small deviations, so more points get flagged; lowering it makes the algorithm more selective, flagging only the most significant deviations."
+      },
+      {
+        "id": "f",
+        "text": "Anomaly detection is supported when the report uses a Live Connection to SQL Server Analysis Services.",
+        "explanation": "Incorrect. Anomaly detection explicitly isn't supported for Live Connections to Azure Analysis Services or SQL Server Analysis Services, DirectQuery over an SAP data source, or Power BI Report Server."
       }
     ],
     "correct": [
       "a",
       "b",
       "c",
-      "d",
       "e"
     ],
-    "explanation": "Being able to know the below is essential for demonstrating foundational knowledge in business analytics and automation with Microsoft tools.\n\nRecognize types of insights,\n\nUnderstand how anomaly detection works,\n\nAnd interpret what those insights mean for business users.\n\nRecommended YouTube Video(s)\n\n<a href=\"https://www.youtube.com/watch?v=Hl8DyrVdV6o\" target=\"_blank\" rel=\"noopener\">Exploring ANOMALY detection in Power BI and a SNEAK PEAK</a>"
+    "explanation": "Anomaly detection in Power BI automatically finds anomalies in line-chart time series data and highlights unexpected spikes and dips, then offers automated natural-language explanations for why they may have occurred.\n\nCorrect statements:\n\nA - Anomaly detection is only supported for line chart visuals with time series data in the Axis field.\n\nB - It requires at least four data points to run.\n\nC - You can drag fields into “Explain by” to control which fields Power BI analyzes for possible explanations (e.g., dragging in Seller and City restricts the analysis to just those dimensions).\n\nE - Increasing sensitivity makes the algorithm flag more points as anomalies; decreasing it makes the algorithm more selective.\n\nIncorrect statements:\n\nD - Anomaly detection is NOT supported with legends, multiple values, or secondary values in a line chart - it needs a single-series chart.\n\nF - Anomaly detection is NOT supported over a Live Connection to Azure Analysis Services or SQL Server Analysis Services, DirectQuery over an SAP data source, or Power BI Report Server.\n\nOther considerations: forecast, min, max, average, median, and percentile lines don't work with anomaly detection; anomaly explanations don't work with “Show Value As” options; and drilling down to the next hierarchy level isn't supported while anomaly detection is active.\n\nReference: <a href=\"https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-anomaly-detection\" target=\"_blank\" rel=\"noopener\">Anomaly Detection Tutorial for Power BI - Microsoft Learn</a>"
   },
   {
     "id": "q426",
@@ -14666,9 +14665,9 @@
       }
     ],
     "correct": [
-      "b"
+      "a"
     ],
-    "explanation": "If you need to create a calculated field, you use Power Query Editor. Query Editor is a part of the Power BI Desktop only. Power BI Service report editor doesn‘t provide this functionality.\n\nFeatures available in Power BI Desktop but not present in Power BI Service\n\n<img src=\"images/questions/m5-image23.png\" alt=\"\" />\n\nFeatures available in Power BI Service but not present in Power BI Desktop\n\n<img src=\"images/questions/m5-image24.png\" alt=\"\" />\n\nReferences: <a href=\"https://docs.microsoft.com/en-us/power-bi/fundamentals/service-service-vs-desktop\" target=\"_blank\" rel=\"noopener\">https://docs.microsoft.com/en-us/power-bi/fundamentals/service-service-vs-desktop</a>"
+    "explanation": "Update (Power BI Service now supports this): Power BI Service added the ability to create and edit DAX measures, calculated columns, calculated tables, and calculation groups directly in the browser-based semantic model editor, this is no longer limited to Power BI Desktop.\n\nFeatures available in Power BI Desktop but not present in Power BI Service\n\n<img src=\"images/questions/m5-image23.png\" alt=\"\" />\n\nFeatures available in Power BI Service but not present in Power BI Desktop\n\n<img src=\"images/questions/m5-image24.png\" alt=\"\" />\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/power-bi/transform-model/service-edit-data-models\" target=\"_blank\" rel=\"noopener\">Edit semantic models in the Power BI service - Training | Microsoft Learn</a>"
   },
   {
     "id": "q432",
@@ -15213,9 +15212,9 @@
       }
     ],
     "correct": [
-      "b"
+      "a"
     ],
-    "explanation": "Correct Answer: B. False\n\nExplanation: The nodes in a decomposition tree are not fixed. End-users can interact with the visual and modify the fields used for analysis. They can drill down into different dimensions, select specific fields, and explore the data dynamically based on their needs.\n\n<img src=\"images/questions/m5-image45.png\" alt=\"\" />\n\nExam Tip: Understand that decomposition trees are interactive visuals in Power BI. They allow end-users to dynamically explore data by selecting and modifying nodes.\n\nPoints to Remember:\n\nDecomposition trees are highly interactive and allow dynamic exploration of data.\n\nEnd-users can drill down into different dimensions and modify the fields used for analysis.\n\nThis visual is ideal for analyzing metrics across multiple dimensions.\n\nResources\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-decomposition-tree\" target=\"_blank\" rel=\"noopener\">Create and View Decomposition Tree Visuals in Power BI - Power BI | Microsoft Learn</a>"
+    "explanation": "Correct Answer: A. True\n\nExplanation: The nodes in a decomposition tree are not fixed. End-users can interact with the visual and modify the fields used for analysis. They can drill down into different dimensions, select specific fields, and explore the data dynamically based on their needs.\n\n<img src=\"images/questions/m5-image45.png\" alt=\"\" />\n\nExam Tip: Understand that decomposition trees are interactive visuals in Power BI. They allow end-users to dynamically explore data by selecting and modifying nodes.\n\nPoints to Remember:\n\nDecomposition trees are highly interactive and allow dynamic exploration of data.\n\nEnd-users can drill down into different dimensions and modify the fields used for analysis.\n\nThis visual is ideal for analyzing metrics across multiple dimensions.\n\nResources\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/power-bi/visuals/power-bi-visualization-decomposition-tree\" target=\"_blank\" rel=\"noopener\">Create and View Decomposition Tree Visuals in Power BI - Power BI | Microsoft Learn</a>"
   },
   {
     "id": "q450",
@@ -16926,6 +16925,8 @@
     ],
     "correct": [
       "a",
+      "c",
+      "d",
       "e"
     ],
     "explanation": "A - Correct: You must load the Management table into the model so that DAX can traverse its hierarchy.\n\nB - Incorrect: A single-direction, one-to-many relationship from Management to Sales suffices; bidirectional filtering is unnecessary and may cause ambiguous contexts.\n\nC - Correct: PATH and PATHCONTAINS let you dynamically identify all subordinates of the current user (via USERPRINCIPALNAME) in the hierarchy.\n\nD - Correct: Filtering Sales by those EmployeeIDs returned from the Management filter ensures that only relevant sales records appear.\n\nE - Correct: After you publish, you must assign manager email addresses to the role so that Power BI knows which user maps to the dynamic filter.\n\nF - Incorrect: Static roles for each manager would require manual maintenance and cannot handle indirect reports automatically."
@@ -17503,33 +17504,29 @@
     "testSet": 2,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "You want to calculate Total Sales across all regions, even if a slicer for Region is applied. The measure should ignore Region filters completely.",
+    "text": "You want to calculate Total Sales across all regions, even when a Region slicer is applied. The measure should remove only the Region filter while continuing to respect other filters, such as Year or Product.",
     "options": [
       {
         "id": "a",
-        "text": "A. REMOVEFILTERS(Sales[Region])",
-        "explanation": "The REMOVEFILTERS function removes all filters from the specified column or table, in this case, Sales[Region]. This will ensure that the Total Sales measure ignores any filters applied to the Region column and calculates the total across all regions. Exam tips: <img src=\"images/questions/m6-image3.png\" alt=\"\" />"
+        "text": "REMOVEFILTERS(Sales[Region])"
       },
       {
         "id": "b",
-        "text": "B. KEEPFILTERS(Sales[Region])",
-        "explanation": "The KEEPFILTERS function retains the existing filters on the specified column or table. Using this function would not achieve the desired result of calculating Total Sales across all regions while ignoring the Region filters."
+        "text": "KEEPFILTERS(Sales[Region])"
       },
       {
         "id": "c",
-        "text": "C. ALL(Sales[Region])",
-        "explanation": "The ALL function returns all the values in a column, ignoring any filters that may have been applied. However, in this scenario, using ALL(Sales[Region]) would not remove the filters on the Region column and calculate the total sales across all regions."
+        "text": "ALL(Sales)"
       },
       {
         "id": "d",
-        "text": "D. ALLEXCEPT(Sales, Sales[Region])",
-        "explanation": "The ALLEXCEPT function removes all filters from all columns in a table except for the specified columns. In this case, using ALLEXCEPT(Sales, Sales[Region]) would remove all filters except for the Region column, which is not the desired outcome for calculating Total Sales across all regions."
+        "text": "ALLEXCEPT(Sales, Sales[Region])"
       }
     ],
     "correct": [
       "a"
     ],
-    "explanation": "REMOVEFILTERS clears filters from the specified column, so Region slicers are ignored.\n\nKEEPFILTERS would add filters, not remove them.\n\nALL clears filters but is broader (often used for entire tables).\n\nALLEXCEPT preserves specified filters, which is not desired here.\n\nTip: REMOVEFILTERS = Clear filters from the specified tables or columns. In simple words, “wipe filters clean for that column.”\n\n<img src=\"images/questions/m6-image4.png\" alt=\"\" />\n\nSuppose you filter your report to Region = North.\n\nNormally, SUM(Sales[Sales Amount]) = 1000 (only North).\n\nBut if you use CALCULATE(SUM(Sales[Sales Amount]), REMOVEFILTERS(Sales[Region])), it ignores the region filter and returns 5000 (all regions)."
+    "explanation": "The correct answer is A: REMOVEFILTERS(Sales[Region]).\n\nWhy these work:\n\nREMOVEFILTERS(Sales[Region]): Correct. Removes only the Region filter, while Year and Product filters stay in effect.\n\nKEEPFILTERS(Sales[Region]): Incorrect. Keeps/intersects the Region filter rather than removing it, the opposite of what's needed here.\n\nALL(Sales): Incorrect. Removes filters from the entire Sales table, not just Region, this would also clear Year and Product filters.\n\nALLEXCEPT(Sales, Sales[Region]): Incorrect. Preserves the Region filter instead of removing it, ALLEXCEPT keeps the filter on the columns you list."
   },
   {
     "id": "q519",
@@ -17668,23 +17665,23 @@
       {
         "id": "a",
         "text": "<pre class=\"dax-code\">Blue Revenue =\nCALCULATE(\n    SUM(Sales[Sales Amount]),\n    'Product'[Color] = \"Blue\"\n)</pre>",
-        "explanation": "The DAX measure provided in Choice A attempts to filter the 'Product' table by color directly within the CALCULATE function. However, the correct approach should involve filtering the 'Sales' table by the color attribute in the 'Product' table, which is missing in this measure."
+        "explanation": "This is the correct option. CALCULATE fully supports a direct Boolean filter expression on a single column (here, 'Product'[Color] = \"Blue\") without wrapping it in FILTER. Per Microsoft's own DAX best-practice guidance, Boolean filter arguments are valid and are the recommended, better-performing pattern; FILTER should only be used when a simple Boolean expression can't express the condition."
       },
       {
         "id": "b",
         "text": "<pre class=\"dax-code\">Blue Revenue =\nCALCULATE(\n    SUM(Sales[Sales Amount]),\n    FILTER(Product, Product[Color] = \"Blue\")\n)</pre>",
-        "explanation": "The DAX measure in Choice B correctly calculates Blue Revenue by using the CALCULATE function along with the FILTER function to filter the 'Product' table by color and sum the sales amount from the 'Sales' table. This measure accurately captures the total revenue generated from products that are colored Blue."
+        "explanation": "This choice also returns the correct number, but it is not the best answer. Microsoft's DAX best practices explicitly recommend avoiding FILTER as a filter argument when a direct Boolean expression will do, because FILTER forces a full table scan while a Boolean expression lets the engine filter the column directly."
       },
       {
         "id": "c",
         "text": "<pre class=\"dax-code\">Blue Revenue =\nSUMX(\n    FILTER(Sales, Sales[Color] = \"Blue\"),\n    Sales[Sales Amount]\n)</pre>",
-        "explanation": "The DAX measure in Choice C uses the SUMX function along with the FILTER function to filter the 'Sales' table by color directly. This approach does not involve filtering the 'Product' table by color, which is necessary to accurately calculate the total revenue generated from products that are colored Blue."
+        "explanation": "This option is incorrect. It filters Sales[Color], but Color is a Product-table attribute in this model, not a Sales-table column, so this measure would fail or return no results."
       }
     ],
     "correct": [
-      "b"
+      "a"
     ],
-    "explanation": "Answer: B. The correct measure uses FILTER(Product, Product[Color] = \"Blue\") inside CALCULATE.\n\nWhy the others are wrong:\n\nOption A looks intuitive but is syntactically invalid. CALCULATE does not accept a direct Boolean expression like 'Product'[Color] = \"Blue\" unless wrapped in a filter function.\n\nOption C assumes Sales[Color] exists in the Sales table. If color is only in the Product table, this will not work correctly."
+    "explanation": "The correct answer is A: CALCULATE(SUM(Sales[Sales Amount]), 'Product'[Color] = \"Blue\").\n\nCALCULATE accepts filter arguments as Boolean expressions, table expressions, or filter functions. A direct Boolean expression like 'Product'[Color] = \"Blue\" is completely valid DAX as long as it references a single column from a single table (no measures, no nested CALCULATE, no table-scanning functions) — which is exactly the case here.\n\nWhy the others are wrong:\n\nOption B (CALCULATE with FILTER(Product, Product[Color] = \"Blue\")) also computes the correct number, but Microsoft's own DAX best-practice guidance is to avoid using FILTER as a filter argument whenever a Boolean expression can do the job — FILTER forces the engine to scan the whole Product table row by row, while a Boolean filter argument lets Power BI's in-memory column store filter the column directly and efficiently.\n\nOption C assumes Sales[Color] exists in the Sales table. Since Color is only available on the Product table in this model, this measure would not work correctly.\n\nReference: <a href=\"https://learn.microsoft.com/en-us/dax/best-practices/dax-avoid-avoid-filter-as-filter-argument\" target=\"_blank\" rel=\"noopener\">Avoid using FILTER as a filter argument in DAX - Microsoft Learn</a>"
   },
   {
     "id": "q524",
@@ -17858,17 +17855,12 @@
         "id": "c",
         "text": "<pre class=\"dax-code\">High Value Sales =\nCALCULATETABLE(\n    Sales,\n    Product[Price] > 100\n)</pre>",
         "explanation": "The CALCULATETABLE function is used to evaluate a table expression in a context modified by filters. However, in this scenario, it is not the appropriate function to calculate Total Sales for products priced above 100 while respecting slicers for Region and Year."
-      },
-      {
-        "id": "d",
-        "text": "<pre class=\"dax-code\">High Value Sales =\nCALCULATE(\n    SUM(Sales[Amount]),\n    FILTER(\n        Product,\n        Product[Price] > 100\n    )\n)</pre>",
-        "explanation": "The correct choice. The FILTER function is used to apply a filter to a table. In this case, it filters the Product table based on the condition that Product Price is greater than 100. This ensures that only products priced above 100 are considered when calculating Total Sales, while still respecting slicers for Region and Year."
       }
     ],
     "correct": [
-      "d"
+      "a"
     ],
-    "explanation": "Keep in Mind:\n\nUse CALCULATE + FILTER when applying rowlevel conditions (like Price > 100).\n\nREMOVEFILTERS wipes filters, not applies them.\n\nCALCULATETABLE returns a table, not a number.\n\nDirect Boolean conditions must be wrapped in FILTER.\n\nDax Tips:\n\nUnderstand the Question Context\n\nIdentify whether the problem is asking for a scalar value (number) or a table.\n\nBreak Down the Filters\n\nAsk: Do I need to clear filters, keep them, or add new ones?\n\nUse:\n\nALL / REMOVEFILTERS - clear filters.\n\nKEEPFILTERS - add filters without overriding slicers.\n\nALLEXCEPT / ALLSELECTED - keep specific filters or slicer context.\n\nCheck Row vs Aggregate Logic\n\nRowbyrow conditions - FILTER inside CALCULATE.\n\nAggregate conditions - CALCULATE with direct filter arguments\n\nValidate Output Type\n\nIf the measure must return a number - use CALCULATE.\n\nIf the measure must return a table - use CALCULATETABLE.\n\nConsider the table below:\n\n<img src=\"images/questions/m6-image9.png\" alt=\"\" />\n\nLet's see how this DAX works:\n\nHigh Value Sales =\n\nCALCULATE(\n\n    SUM(Sales[Amount]),\n\n    FILTER(\n\n        Product,\n\n        Product[Price] > 100\n\n    )\n\n)\n\nProducts with Price > 100 = Phone (120), Laptop (900).\n\nSales linked to those products:\n\nPhone - 500\n\nLaptop - 1000\n\nSUM = 500 + 1000 = 1500\n\nSo the measure returns 1500."
+    "explanation": "Keep in Mind:\n\nUse a direct Boolean condition (like Price > 100) as CALCULATE’s filter argument for a simple single-column filter, it’s simpler and is Microsoft’s own recommended DAX pattern over wrapping it in FILTER.\n\nREMOVEFILTERS wipes filters, not applies them.\n\nCALCULATETABLE returns a table, not a number.\n\nDirect Boolean conditions do not need to be wrapped in FILTER for a simple single-column condition, wrapping it adds unnecessary complexity without changing the result.\n\nDax Tips:\n\nUnderstand the Question Context\n\nIdentify whether the problem is asking for a scalar value (number) or a table.\n\nBreak Down the Filters\n\nAsk: Do I need to clear filters, keep them, or add new ones?\n\nUse:\n\nALL / REMOVEFILTERS - clear filters.\n\nKEEPFILTERS - add filters without overriding slicers.\n\nALLEXCEPT / ALLSELECTED - keep specific filters or slicer context.\n\nCheck Row vs Aggregate Logic\n\nRowbyrow conditions - FILTER inside CALCULATE.\n\nAggregate conditions - CALCULATE with direct filter arguments\n\nValidate Output Type\n\nIf the measure must return a number - use CALCULATE.\n\nIf the measure must return a table - use CALCULATETABLE.\n\nConsider the table below:\n\n<img src=\"images/questions/m6-image9.png\" alt=\"\" />\n\nLet's see how this DAX works:\n\nHigh Value Sales =\n\nCALCULATE(\n\n    SUM(Sales[Amount]),\n\n    Product[Price] > 100\n\n)\n\nProducts with Price > 100 = Phone (120), Laptop (900).\n\nSales linked to those products:\n\nPhone - 500\n\nLaptop - 1000\n\nSUM = 500 + 1000 = 1500\n\nSo the measure returns 1500."
   },
   {
     "id": "q530",
@@ -18008,9 +18000,9 @@
       }
     ],
     "correct": [
-      "a"
+      "b"
     ],
-    "explanation": "Case 1: \"abcd\" contains \"bc\" - TRUE\n\nCase 2: \"abcd\" does not contain \"BC\" because CONTAINSSTRING is case-sensitive - FALSE\n\nCase 3: \"abcd\" does not interpret \"a*d\" as a wildcard pattern; it looks for the literal substring \"a*d\" - FALSE\n\nCase 4: \"abcd\" does not contain \"ef\" - FALSE\n\nCONTAINSSTRING - Returns TRUE or FALSE indicating whether one string contains another string.\n\nDAX:\n\nCONTAINSSTRING(<within_text>, <find_text>)\n\nwithin_textThe text in which you want to search for find_text.\n\nfind_textThe text you want to find.\n\nExam Tips: CONTAINSSTRING is not case-sensitive. You can use ? and * wildcard characters. Use ~ to escape wildcard characters. Wildcard Characters ? (question mark) - Matches any single character. Example: Pattern: b?t Matches: bat, bet, bit (but not boot because that has two characters in the middle). * (asterisk) - Matches zero or more characters. Example: Pattern: pro* Matches: pro, program, process, production. Escaping Wildcards Sometimes you want to search for the actual characters ? or * instead of using them as wildcards. To do this, you use ~ (tilde) before the character. Example: Pattern: file~?name Matches: file?name (the literal text), not fileXname. Pattern: data~*set Matches: data*set (the literal text), not dataset or datamodelset"
+    "explanation": "Case 1: \"abcd\" contains \"bc\" - TRUE\n\nCase 2: \"abcd\" contains \"BC\" because CONTAINSSTRING is not case-sensitive - TRUE\n\nCase 3: \"abcd\" matches the wildcard pattern \"a*d\" (a, then anything, then d) - TRUE\n\nCase 4: \"abcd\" does not contain \"ef\" - FALSE\n\nCONTAINSSTRING - Returns TRUE or FALSE indicating whether one string contains another string.\n\nDAX:\n\nCONTAINSSTRING(<within_text>, <find_text>)\n\nwithin_textThe text in which you want to search for find_text.\n\nfind_textThe text you want to find.\n\nExam Tips: CONTAINSSTRING is not case-sensitive. You can use ? and * wildcard characters. Use ~ to escape wildcard characters. Wildcard Characters ? (question mark) - Matches any single character. Example: Pattern: b?t Matches: bat, bet, bit (but not boot because that has two characters in the middle). * (asterisk) - Matches zero or more characters. Example: Pattern: pro* Matches: pro, program, process, production. Escaping Wildcards Sometimes you want to search for the actual characters ? or * instead of using them as wildcards. To do this, you use ~ (tilde) before the character. Example: Pattern: file~?name Matches: file?name (the literal text), not fileXname. Pattern: data~*set Matches: data*set (the literal text), not dataset or datamodelset"
   },
   {
     "id": "q534",
@@ -18435,7 +18427,7 @@
   },
   {
     "id": "q548",
-    "type": "single",
+    "type": "multi",
     "testSet": 8,
     "module": 6,
     "section": "Complete DAX Mastery",
@@ -18444,23 +18436,24 @@
       {
         "id": "a",
         "text": "<pre class=\"dax-code\">Last Refreshed =\nUTCNOW()</pre>",
-        "explanation": "The UTCNOW() function in DAX returns the current date and time in Coordinated Universal Time (UTC). This function is suitable for displaying the exact date and time of the dataset refresh, meeting the requirement of showing the last refreshed timestamp accurately."
+        "explanation": "This is a correct option. UTCNOW() returns the exact UTC date and time, satisfying the \"exact date and time of refresh\" requirement."
       },
       {
         "id": "b",
         "text": "<pre class=\"dax-code\">Last Refreshed =\nUTCTODAY()</pre>",
-        "explanation": "The UTCTODAY() function in DAX returns the current date in Coordinated Universal Time (UTC). While it provides the date information, it does not include the time component, which may not fulfill the requirement of displaying the exact date and time of the dataset refresh."
+        "explanation": "This is a correct option. UTCTODAY() returns the UTC date with the time fixed at 12:00:00 PM, satisfying the \"just the date (with a fixed time)\" requirement."
       },
       {
         "id": "c",
         "text": "<pre class=\"dax-code\">Last Refreshed =\nMAX ( 'Date'[Date] )</pre>",
-        "explanation": "The MAX('Date'[Date]) function in DAX returns the maximum date value from the 'Date' column. This function is not suitable for displaying the last refreshed timestamp as it does not capture the date and time of the dataset refresh. It only retrieves the maximum date value from a specific column in the dataset."
+        "explanation": "This option is incorrect. MAX('Date'[Date]) returns the latest date already present in your Date table — it has nothing to do with when the dataset itself was last refreshed."
       }
     ],
     "correct": [
-      "a"
+      "a",
+      "b"
     ],
-    "explanation": "Option A (UTCNOW()): Correct. Returns the exact UTC date and time when the dataset was last refreshed.\n\nUTCNOW() returns the current date and time in UTC format.\n\nThis formula creates a calculated column or measure that shows when the data model was last refreshed - but only at the time the formula is evaluated.\n\nIn Power BI, UTCNOW() (or NOW()) is evaluated only when the report is refreshed, not every time you open the report.\n\nSo the value stays static until the next refresh.\n\nIf you refresh your report on Dec 29, 2025 at 12:30 UTC, the result will be, Last Refreshed = 29-Dec-2025 12:30:00\n\nOption B (UTCTODAY()): Correct. Returns the UTC date of refresh, but the time is always fixed at 12:00:00 PM.\n\nReturns the current UTC date at the time of refresh.\n\nThe time portion is always fixed at 12:00:00 PM (no matter when the refresh happens).\n\nUseful when you only care about the date of refresh, not the exact timestamp.\n\nIf refreshed on Dec 29, 2025 at 18:14 IST, then it returns: 2025-12-29 12:00:00\n\nKeep in Mind:\n\nUTCTODAY() - Date only, fixed at noon.\n\nUTCNOW() - Date + exact time of refresh.\n\nOption C (MAX('Date'[Date])): Incorrect. This only returns the latest date in your Date table, not the dataset refresh timestamp."
+    "explanation": "The requirement describes two acceptable outcomes — \"the exact date and time of refresh\" OR \"just the date (with a fixed time)\" — so both UTCNOW() and UTCTODAY() are correct, depending on which of the two you need.\n\nOption A (UTCNOW()): Correct. Returns the exact UTC date and time when the dataset was last refreshed.\n\nUTCNOW() returns the current date and time in UTC format.\n\nThis formula creates a calculated column or measure that shows when the data model was last refreshed - but only at the time the formula is evaluated.\n\nIn Power BI, UTCNOW() (or NOW()) is evaluated only when the report is refreshed, not every time you open the report.\n\nSo the value stays static until the next refresh.\n\nIf you refresh your report on Dec 29, 2025 at 12:30 UTC, the result will be, Last Refreshed = 29-Dec-2025 12:30:00\n\nOption B (UTCTODAY()): Correct. Returns the UTC date of refresh, but the time is always fixed at 12:00:00 PM.\n\nReturns the current UTC date at the time of refresh.\n\nThe time portion is always fixed at 12:00:00 PM (no matter when the refresh happens).\n\nUseful when you only care about the date of refresh, not the exact timestamp.\n\nIf refreshed on Dec 29, 2025 at 18:14 IST, then it returns: 2025-12-29 12:00:00\n\nKeep in Mind:\n\nUTCTODAY() - Date only, fixed at noon.\n\nUTCNOW() - Date + exact time of refresh.\n\nOption C (MAX('Date'[Date])): Incorrect. This only returns the latest date in your Date table, not the dataset refresh timestamp."
   },
   {
     "id": "q549",
@@ -18698,7 +18691,6 @@
     "correct": [
       "a",
       "b",
-      "c",
       "d",
       "e",
       "f"
@@ -18730,7 +18722,7 @@
       }
     ],
     "correct": [
-      "a"
+      "c"
     ],
     "explanation": "Option A: Uses DISTINCT to create a virtual table of unique customer keys, then COUNTROWS to count them.\n\nOption B: DISTINCTCOUNT is a shorthand function that directly counts distinct values in a column.\n\nOption C: COUNT only counts nonblank rows, not distinct values.\n\nYou cannot paste the list of values that DISTINCT returns directly into a column. Instead, you pass the results of the DISTINCT function to another function that counts, filters, or aggregates values by using the list. To make the example as simple as possible, here the table of distinct values has been passed to the COUNTROWS function and listed in Grand Total Column.\n\n<img src=\"images/questions/m6-image33.png\" alt=\"\" />\n\nAlso, note that the results are not additive. That is to say, the total number of unique customers in 2007 is not the sum of unique customers of Accessories, Bikes and Clothing for that year. The reason is that a customer can be counted in multiple groups."
   },
@@ -19514,33 +19506,33 @@
     "testSet": 5,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Fill in the blanks to correctly create a measure that applies different multipliers to Sales Amount depending on the year. Adjusted Sales = …………… (     ……….. (……………… ('Date'[Year]),              'Date'[Year] < 2015     ),     …………… ('Date'[Year] >= 2010,                  [Sales Amount] * 1.2,                  [Sales Amount] * 1.1     ) )",
+    "text": "You need a measure that applies different multipliers to Sales Amount based on the year: years 2015 and later get a 1.2x multiplier, years 2010-2014 get a 1.1x multiplier, and all earlier years are left unchanged. Which DAX formula correctly implements this?",
     "options": [
       {
         "id": "a",
-        "text": "A) CALCULATE, FILTER, VALUES, IF",
-        "explanation": "The functions CALCULATE, FILTER, VALUES, and IF are not the correct combination to achieve the desired outcome of applying different multipliers to Sales Amount based on the year in Power BI DAX. These functions do not provide the functionality needed for this specific scenario."
+        "text": "<pre class=\"dax-code\">Adjusted Sales =\nSWITCH(\n    TRUE(),\n    MAX('Date'[Year]) &gt;= 2015, [Sales Amount] * 1.2,\n    MAX('Date'[Year]) &gt;= 2010, [Sales Amount] * 1.1,\n    [Sales Amount]\n)</pre>",
+        "explanation": "Correct. SWITCH(TRUE(), ...) evaluates each condition top to bottom and returns the result of the first one that's TRUE. Because the >= 2015 condition is checked before the >= 2010 condition, years 2015+ correctly get 1.2x, years 2010-2014 fall through to 1.1x, and earlier years fall through to the unchanged default."
       },
       {
         "id": "b",
-        "text": "B) CALCULATETABLE, FILTER, DISTINCT, SWITCH",
-        "explanation": "The combination of CALCULATETABLE, FILTER, DISTINCT, and SWITCH is not suitable for creating a measure that applies different multipliers to Sales Amount based on the year in Power BI DAX. These functions do not align with the logic required to implement the desired calculation."
+        "text": "<pre class=\"dax-code\">Adjusted Sales =\nSWITCH(\n    TRUE(),\n    MAX('Date'[Year]) &gt;= 2010, [Sales Amount] * 1.1,\n    MAX('Date'[Year]) &gt;= 2015, [Sales Amount] * 1.2,\n    [Sales Amount]\n)</pre>",
+        "explanation": "Incorrect - condition order is reversed. SWITCH(TRUE()) stops at the first TRUE condition, so since >= 2010 is checked first, every year from 2010 onward (including 2015+) matches it and gets 1.1x. The 1.2x branch would never be reached."
       },
       {
         "id": "c",
-        "text": "C) CALCULATE, FILTER, VALUES, SWITCH",
-        "explanation": "<pre class=\"dax-code\">The correct combination of functions to achieve the desired outcome of applying different multipliers to Sales Amount based on the year in Power BI DAX is CALCULATE, FILTER, VALUES, and SWITCH. This combination allows for the conditional logic needed to adjust Sales Amount based on the year specified in the calculation.\nAdjusted Sales =\nCALCULATE(\n    FILTER(\n        VALUES('Date'[Year]),\n        'Date'[Year] < 2015\n    ),\n    SWITCH(\n        TRUE(),\n        'Date'[Year] >= 2010, [Sales Amount] * 1.2,\n        [Sales Amount] * 1.1\n    )\n)</pre>"
+        "text": "<pre class=\"dax-code\">Adjusted Sales =\nIF(\n    MAX('Date'[Year]) &gt;= 2015,\n    [Sales Amount] * 1.2,\n    [Sales Amount] * 1.1\n)</pre>",
+        "explanation": "Incorrect. IF is binary and can only express one condition. This formula misses the \"leave earlier years unchanged\" tier entirely - every year before 2015, including years before 2010, incorrectly gets the 1.1x multiplier."
       },
       {
         "id": "d",
-        "text": "D) SUMX, FILTER, VALUES, IF",
-        "explanation": "The functions SUMX, FILTER, VALUES, and IF are not the appropriate combination to create a measure that applies different multipliers to Sales Amount based on the year in Power BI DAX. These functions do not provide the necessary logic to implement the required calculation for adjusting Sales Amount based on the specified conditions."
+        "text": "<pre class=\"dax-code\">Adjusted Sales =\nCALCULATE(\n    FILTER(\n        VALUES('Date'[Year]),\n        'Date'[Year] &gt;= 2010\n    ),\n    [Sales Amount] * 1.1\n)</pre>",
+        "explanation": "Incorrect - invalid DAX. CALCULATE's first argument must be a scalar expression, but FILTER(VALUES('Date'[Year]), ...) returns a table, not a scalar. This formula would raise an error, not just return the wrong number."
       }
     ],
     "correct": [
-      "c"
+      "a"
     ],
-    "explanation": "CALCULATE - changes filter context and evaluates the measure.\n\nFILTER - builds a filter table with the condition 'Date'[Year] < 2015.\n\nVALUES - returns distinct values of 'Date'[Year] to be filtered.\n\nSWITCH - applies conditional logic to choose between [Sales Amount] * 1.2 or [Sales Amount] * 1.1.\n\nAdjusted Sales =\n\nCALCULATE(\n\n    FILTER(\n\n        VALUES('Date'[Year]),\n\n        'Date'[Year] < 2015\n\n    ),\n\n    SWITCH(\n\n        TRUE(),\n\n        'Date'[Year] >= 2010, [Sales Amount] * 1.2,\n\n        [Sales Amount] * 1.1\n\n    )\n\n)\n\nWhy the other options are incorrect:\n\nA) CALCULATE, FILTER, VALUES, IF\n\nIssue: IF is binary (true/false) and becomes messy or ambiguous for multiple branches. The pattern in the blanks expects multi-branch logic; SWITCH(TRUE()) is standard and clearer for ≥2 conditions.\n\nConsequence: Harder to extend (e.g., add more year bands), more nesting, lower readability, and easier to make ordering mistakes.\n\nB) CALCULATETABLE, FILTER, DISTINCT, SWITCH\n\nIssue 1: CALCULATETABLE returns a table, but a measure needs a scalar result.\n\nIssue 2: DISTINCT('Date'[Year]) could work as a table source, but VALUES is idiomatic and better in visuals because it respects current context more predictably.\n\nConsequence: Wrong return type from CALCULATETABLE breaks the measure; DISTINCT vs VALUES isn’t the core failure, CALCULATETABLE is.\n\nD) SUMX, FILTER, VALUES, IF\n\nIssue 1: SUMX requires a table and an expression to iterate; the outermost function here isn’t an iterator scenario and we need context modification, not iteration.\n\nIssue 2: IF has the same multi-branch weakness as option A.\n\nConsequence: SUMX cannot replace CALCULATE for filter context changes; the measure would not evaluate as intended."
+    "explanation": "The correct formula is Option A, using SWITCH(TRUE(), ...) with conditions ordered from the most specific (highest year threshold) to least specific:\n\n<pre class=\"dax-code\">Adjusted Sales =\nSWITCH(\n    TRUE(),\n    MAX('Date'[Year]) &gt;= 2015, [Sales Amount] * 1.2,\n    MAX('Date'[Year]) &gt;= 2010, [Sales Amount] * 1.1,\n    [Sales Amount]\n)</pre>\n\nSWITCH(TRUE(), condition1, result1, condition2, result2, ..., default) is the standard DAX pattern for multi-branch conditional logic in a measure. It evaluates each condition in order and returns the result of the first one that's TRUE, falling through to the default if none match.\n\nWhy the other options are wrong:\n\nB) Same functions, wrong order. Because SWITCH stops at the first TRUE condition, checking >= 2010 before >= 2015 means every year from 2010 onward - including 2015 and later - matches the >= 2010 branch first and gets 1.1x. The 1.2x branch becomes unreachable.\n\nC) IF is binary (true/false) and can't express three tiers of logic in one condition. This version only distinguishes \"2015+\" from \"everything else,\" so years before 2010 - which should be left unchanged - incorrectly get the 1.1x multiplier along with 2010-2014.\n\nD) This is structurally invalid DAX. CALCULATE's first argument has to be a scalar expression that produces the measure's result, but FILTER(VALUES('Date'[Year]), 'Date'[Year] >= 2010) returns a table. A table can't be CALCULATE's expression argument, so this formula would error out rather than compute anything.\n\nExam tip: when a DAX \"fill in the blank\" or multi-choice formula question involves tiered/conditional logic evaluated per row or per filter context (not a filter-context change), SWITCH(TRUE(), ...) is almost always the pattern being tested - watch for condition ordering and for CALCULATE/FILTER being misused where a scalar is required."
   },
   {
     "id": "q582",
