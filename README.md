@@ -28,7 +28,7 @@ As I worked toward the PL-300 Microsoft Power BI Data Analyst certification, I w
 
 While studying, I realized that learning the material was only one part of the preparation. The real challenge was applying that knowledge to questions and recognizing where there were still gaps.
 
-That is why I created this practice test.
+That is why I created this practice test for free.
 
 I wanted a simple, practical place where learners could test themselves, revisit topics they found difficult, and build confidence before sitting for the actual exam.
 
