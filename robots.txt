@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rlashmibai.github.io/LR-PL-300-Practice-Test/sitemap.xml
