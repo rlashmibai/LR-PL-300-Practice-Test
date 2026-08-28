@@ -1394,7 +1394,10 @@ function gotoQuestion(i) {
   // Next/Skip/Prev can be pressed after scrolling down to read the previous
   // question's explanation — without this, the new question renders off the
   // top of the viewport and the page just looks blank until the user scrolls
-  // back up themselves.
+  // back up themselves. On mobile, the verbose question-preview list is
+  // hidden and the compact overview strip is reordered above the question
+  // (see the max-width: 900px block in style.css), so scrolling to the page
+  // top now lands right above the question instead of behind a long list.
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 

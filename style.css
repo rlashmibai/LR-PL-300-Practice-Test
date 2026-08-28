@@ -721,11 +721,30 @@ th { color: var(--text-muted); font-weight: 600; }
 
 @media (max-width: 900px) {
   .test-layout { flex-direction: column; }
-  .test-sidebar { flex: 1 1 auto; width: 100%; max-height: 260px; }
-  .test-status-grid { flex: 1 1 auto; width: 100%; }
+  /* The detailed question-preview list is redundant with the compact chip
+     strip below (both jump to a question and show the same status colors)
+     and would otherwise push the actual question far down the page on a
+     phone — hide it and rely on the strip. Desktop keeps both panels. */
+  .test-sidebar { display: none; }
+  /* Reorder so the compact overview strip renders directly under the
+     progress bar and the question comes right after it — matches the order
+     a phone screen can actually show without a long scroll. */
+  .test-status-grid { order: -1; width: 100%; }
+  .test-main { order: 0; width: 100%; }
+  .test-sidebar-header { padding: 8px 16px; font-size: 0.75rem; }
+  .nav-grid-legend { flex-direction: row; flex-wrap: wrap; gap: 8px 14px; padding: 6px 16px; font-size: 0.74rem; }
+  /* Horizontally scrollable single row instead of a wrapping grid — keeps
+     the navigator to one thumb-swipeable strip instead of several rows of
+     tiny buttons stacked above the question. */
+  .nav-grid {
+    display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 6px;
+    padding: 10px 16px 14px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
+  }
+  .nav-grid button { flex: 0 0 36px; width: 36px; height: 36px; scroll-snap-align: start; }
 }
 
 @media (max-width: 480px) {
   .container { padding: 14px 10px 50px; }
   .card { padding: 16px; }
+  .nav-grid button { flex-basis: 32px; width: 32px; height: 32px; font-size: 0.72rem; }
 }
