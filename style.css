@@ -226,7 +226,7 @@ h3 { margin: 18px 0 8px; font-size: 1rem; }
   padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 8px 20px; font-size: 0.85rem;
 }
-.app-footer-left { font-weight: 600; color: #fff; }
+.app-footer-left { font-weight: 600; color: #fff; font-size: 1.05rem; }
 .app-footer-center { color: rgba(255, 255, 255, 0.7); }
 .app-footer-right { display: flex; gap: 18px; flex-wrap: wrap; }
 .footer-link-btn {
