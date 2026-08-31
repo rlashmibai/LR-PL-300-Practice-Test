@@ -21,7 +21,12 @@ const TEST_START_LOG_URL = "https://script.google.com/macros/s/AKfycbw9mgiX8xqx6
 function logTestStart(mode, param) {
   if (!TEST_START_LOG_URL || TEST_START_LOG_URL.startsWith("PASTE_")) return;
   try {
-    const payload = JSON.stringify({ site: "PL300", mode, param: String(param) });
+    // Lets the site owner tell their own testing and Claude Code's dev-server testing
+    // apart from real visitors in the log sheet — never sends an IP or any identifying
+    // data for anyone. Real visitors get no "source" field at all, same as today.
+    const isDevHost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+    const source = isDevHost ? "claude-dev" : localStorage.getItem("lr_owner_mode") === "1" ? "owner" : undefined;
+    const payload = JSON.stringify({ site: "PL300", mode, param: String(param), source });
     navigator.sendBeacon(TEST_START_LOG_URL, new Blob([payload], { type: "text/plain;charset=UTF-8" }));
   } catch (err) {
     // Logging is best-effort only — never let it block a test from starting.
@@ -901,6 +906,13 @@ document.addEventListener("cut", (e) => { if (!inField(e)) e.preventDefault(); }
 document.addEventListener("paste", (e) => { if (!inField(e)) e.preventDefault(); });
 
 async function boot() {
+  // One-time opt-in so the site owner's own manual testing on the live site can be told
+  // apart from real visitors in the test-start log, without collecting anything (no IP,
+  // no login) from anyone else. ?lrtest=owner sets it; ?lrtest=clear removes it.
+  const lrtestParam = new URLSearchParams(location.search).get("lrtest");
+  if (lrtestParam === "owner") localStorage.setItem("lr_owner_mode", "1");
+  else if (lrtestParam === "clear") localStorage.removeItem("lr_owner_mode");
+
   // Load the question bank defensively: if this fetch fails or the response is
   // malformed (flaky connection, offline, etc.), fall back to an empty array
   // instead of throwing — an uncaught rejection here would abort boot() before
