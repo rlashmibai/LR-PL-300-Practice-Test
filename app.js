@@ -13,23 +13,43 @@ const TEST_SET_COUNT = 12;
 // Practice mode uses a count-up timer with no enforced limit.
 const TEST_SET_MINUTES_PER_QUESTION = 2;
 
-// Anonymous "test started" click counter (no login required, no personal data sent).
-// Fires a single fire-and-forget beacon to a Google Apps Script Web App that appends
-// one row (timestamp, site, mode, test/section) to a private Sheet only the site owner
-// can view. Never blocks or delays starting a test if the request fails or is offline.
+// Anonymous usage beacons (no login required, no personal data sent). Both
+// logTestStart and logHomePageVisit fire a single fire-and-forget beacon to a Google
+// Apps Script Web App that appends one row to a private Sheet only the site owner can
+// view. Never blocks or delays the page/test if the request fails or is offline.
 const TEST_START_LOG_URL = "https://script.google.com/macros/s/AKfycbw9mgiX8xqx6j_1HCg4YuWZGMMkG3cNkkVG9Jlz0D4TZeQzyowrP2XyjayYm50Dxrod/exec";
+
+// Lets the site owner tell their own testing and Claude Code's dev-server testing apart
+// from real visitors in the log sheet — never sends an IP or any identifying data for
+// anyone. Real visitors get no "source" field at all (this returns undefined, and
+// JSON.stringify drops undefined-valued keys entirely).
+function beaconSource() {
+  const isDevHost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+  if (isDevHost) return "claude-dev";
+  if (localStorage.getItem("lr_owner_mode") === "1") return "owner";
+  return undefined;
+}
+
 function logTestStart(mode, param) {
   if (!TEST_START_LOG_URL || TEST_START_LOG_URL.startsWith("PASTE_")) return;
   try {
-    // Lets the site owner tell their own testing and Claude Code's dev-server testing
-    // apart from real visitors in the log sheet — never sends an IP or any identifying
-    // data for anyone. Real visitors get no "source" field at all, same as today.
-    const isDevHost = location.hostname === "localhost" || location.hostname === "127.0.0.1";
-    const source = isDevHost ? "claude-dev" : localStorage.getItem("lr_owner_mode") === "1" ? "owner" : undefined;
-    const payload = JSON.stringify({ site: "PL300", mode, param: String(param), source });
+    const payload = JSON.stringify({ site: "PL300", event: "test_start", mode, param: String(param), source: beaconSource() });
     navigator.sendBeacon(TEST_START_LOG_URL, new Blob([payload], { type: "text/plain;charset=UTF-8" }));
   } catch (err) {
     // Logging is best-effort only — never let it block a test from starting.
+  }
+}
+
+// Fires once per fresh page load when a guest lands on the home view — not on every
+// in-app navigation back to it (e.g. clicking the header logo, logging out). Signed-in
+// users skip straight to their dashboard on load and are never counted here.
+function logHomePageVisit() {
+  if (!TEST_START_LOG_URL || TEST_START_LOG_URL.startsWith("PASTE_")) return;
+  try {
+    const payload = JSON.stringify({ site: "PL300", event: "home_visit", source: beaconSource() });
+    navigator.sendBeacon(TEST_START_LOG_URL, new Blob([payload], { type: "text/plain;charset=UTF-8" }));
+  } catch (err) {
+    // Logging is best-effort only — never let it block the page from loading.
   }
 }
 
@@ -937,6 +957,7 @@ async function boot() {
     show("view-dashboard");
   } else {
     show("view-home");
+    logHomePageVisit();
   }
 
   // Header brand name doubles as a home link from anywhere in the app
