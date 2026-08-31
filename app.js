@@ -991,12 +991,32 @@ async function boot() {
   });
 
   // Up/Down arrows move between questions during a test, so you don't have
-  // to reach for the mouse every single question. Ignored while typing in a
-  // fill-in-the-blank field (or any other input) so arrow keys still work
-  // normally there, and only active while the test view is actually showing.
+  // to reach for the mouse every single question — but only once the learner
+  // has actively clicked into the question's answer options. Without this
+  // "armed" gate, Up/Down would hijack the arrow keys' normal job (scrolling
+  // the page) everywhere on the test view, all the time. Clicking anywhere
+  // outside the answer options disarms it again, so plain page scrolling
+  // with the arrow keys works normally there.
+  let arrowNavArmed = false;
+  // Capture phase (not bubble) — clicking an option synchronously re-renders
+  // the question and wipes #questionBody's contents (including the clicked
+  // element itself) before a bubble-phase listener here would ever run,
+  // which would make e.target.closest() fail to find its now-detached
+  // ancestor. Capturing on the way down sees the DOM before that happens.
+  document.addEventListener(
+    "click",
+    (e) => {
+      arrowNavArmed = !!e.target.closest("#questionBody");
+    },
+    true
+  );
+  // Ignored while typing in a fill-in-the-blank field (or any other input) so
+  // arrow keys still work normally there, and only active while the test
+  // view is actually showing.
   document.addEventListener("keydown", (e) => {
     if (!session || !document.getElementById("view-test").classList.contains("active")) return;
     if (e.key !== "ArrowUp" && e.key !== "ArrowDown") return;
+    if (!arrowNavArmed) return;
     const tag = document.activeElement && document.activeElement.tagName;
     if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
     e.preventDefault();
