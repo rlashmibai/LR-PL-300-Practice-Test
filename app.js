@@ -206,6 +206,20 @@ const EXPL_HEADERS = [
   "Storage:", "Ask:", "Limitation:",
   "Situation:", "Memory Hook:", "Result:", "Consequence:",
   "Definition:", "Effect:", "Function:",
+  // Added from spot-checking a batch of explanations with an option-by-option
+  // "why this one's right/wrong" breakdown -- every occurrence of each of
+  // these confirmed to sit right after a "\n\n" (or, for a couple, glued
+  // straight onto the next word with no separator at all -- the EXPL_HEADERS
+  // split-and-rejoin below inserts the blank-line break regardless, so that's
+  // still handled correctly) rather than appearing mid-sentence. Deliberately
+  // NOT adding a bare "Correct Answer"/"Correct Answers" (no colon): spot
+  // checking those turned up real mid-sentence uses ("Data Analyst (Correct
+  // Answer)", "Correct Answer is C - Using...", "Correct Answer Option A -
+  // Align...") that a header-isolating split would garble.
+  "Correct Answers:", "Correct Answers", "Correct Answer:",
+  "Why correct:", "Why correct", "Why Correct:", "Why Correct",
+  "Why wrong:", "Why wrong", "Why Wrong:", "Why Wrong",
+  "Why incorrect:", "Why incorrect", "Why Incorrect:", "Why Incorrect",
 ];
 
 // Recurring section-header phrases that have variable trailing content (so they
