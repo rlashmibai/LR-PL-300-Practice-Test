@@ -775,6 +775,19 @@ const SENTENCE_ABBREVIATIONS = [
 ];
 const SENTENCE_ABBREV_RE = new RegExp("\\b(" + SENTENCE_ABBREVIATIONS.join("|") + ")\\.", "g");
 
+// Shared by breakLongParagraph() and formatCuedStatementList() below: splits
+// text into an array of real sentences, protecting decimal numbers ("3.5"),
+// digit-preceded periods in general (also protects list markers like "1."),
+// ellipses, and common abbreviations (e.g., etc., Mr., U.S., ...) from being
+// mistaken for a sentence boundary.
+function splitIntoSentences(text) {
+  let working = text.replace(/\.\.\./g, "\x00\x00\x00");
+  working = working.replace(SENTENCE_ABBREV_RE, (m) => m.slice(0, -1) + "\x02");
+  working = working.replace(/(?<=[a-zA-Z)"'”])([.!?])\s+(?=[A-Z0-9"'(“])/g, "$1\x03");
+  working = working.replace(/\x02/g, ".").replace(/\x00\x00\x00/g, "...");
+  return working.split("\x03");
+}
+
 // Long, dense narrative stems (scenario setups running several sentences
 // before the actual question) read as one wall of text — breaks each real
 // sentence onto its own line so they scan like a scenario instead of a
@@ -792,27 +805,79 @@ const SENTENCE_ABBREV_RE = new RegExp("\\b(" + SENTENCE_ABBREVIATIONS.join("|") 
 // against, so a stem that only picked up a <br> from the mid-sentence
 // "true or false:" rewrite above still gets its long run of statements
 // broken up rather than being mistaken for already-structured content.
-//
-// A stem opening with "Choose Right or Wrong."/"State True or False." etc.
-// is always a run of several separate claims to judge one at a time --
-// worth breaking apart even when the whole thing happens to land just
-// under the usual length gate, since the whole point of the stem is one
-// claim per line.
-const MULTI_STATEMENT_CUE_RE = /^(state|choose|evaluate)\b.{0,30}\b(true or false|right or wrong)\b/i;
-
 function breakLongParagraph(text, rawText) {
-  const isCuedList = MULTI_STATEMENT_CUE_RE.test(rawText !== undefined ? rawText : text);
-  if (!isCuedList && text.length < 350) return text;
+  if (text.length < 350) return text;
   if (/<img|<a\s|<table|<br/i.test(rawText !== undefined ? rawText : text)) return text;
   const letterMarkers = (text.match(/\b[A-Z]\.\s/g) || []).length;
   const numMarkers = (text.match(/\b\d{1,2}\.\s/g) || []).length;
   if (letterMarkers >= 2 || numMarkers >= 2) return text;
+  return splitIntoSentences(text).join("<br><br>");
+}
 
-  let working = text.replace(/\.\.\./g, "\x00\x00\x00");
-  working = working.replace(SENTENCE_ABBREV_RE, (m) => m.slice(0, -1) + "\x02");
-  working = working.replace(/(?<=[a-zA-Z)"'”])([.!?])\s+(?=[A-Z0-9"'(“])/g, "$1<br><br>");
-  working = working.replace(/\x02/g, ".").replace(/\x00\x00\x00/g, "...");
-  return working;
+// A stem opening with "Choose Right or Wrong."/"State True or False:" etc.
+// lists several separate claims to judge one at a time -- numbers each one
+// (1., 2., 3., ...) instead of just breaking them onto separate lines, so
+// it's unambiguous which numbered claim a numbered True/False in the
+// matching answer option (see formatTrueFalseOptionText below) refers to.
+// Runs regardless of overall length, since the whole point of the stem is
+// one claim per line even when the combined text is fairly short.
+const MULTI_STATEMENT_CUE_RE = /^(state|choose|evaluate)\b.{0,30}\b(true or false|right or wrong)\b/i;
+
+function formatCuedStatementList(text) {
+  const m = text.match(/^([\s\S]*?(?:true or false|right or wrong)\s*[:.]?\s*(?:<br\s*\/?>){0,4})([\s\S]*)$/i);
+  if (!m) return null;
+  const intro = m[1];
+  const statements = splitIntoSentences(m[2])
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (statements.length < 2) return null;
+  const items = statements.map((s, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${s}</div>`).join("");
+  return intro + items;
+}
+
+// The answer-option equivalent of a "State True or False"/"Choose Right or
+// Wrong" stem: each option restates every claim right next to the verdict
+// for it ("Claim one. - True Claim two. - False ..."), all run into one
+// paragraph. Splits on whichever marker order the source uses -- a leading
+// "True - "/"False - " before each claim, or a trailing "- True"/"- False"
+// (also accepting the abbreviated "- T"/"- F") after it -- and numbers each
+// claim to match formatCuedStatementList()'s numbering of the stem itself.
+// Strips any pre-existing <br> first so a source that only had some claims
+// manually broken (never all of them) still comes out consistently
+// formatted rather than half-fixed. Returns the original text untouched if
+// fewer than two markers are found, so a short option like "True, False,
+// True" (no restated claims) or one already wrapped in <pre> is never
+// touched.
+function formatTrueFalseOptionText(text) {
+  if (/<pre[\s>]/i.test(text)) return text;
+  const clean = text.replace(/<br\s*\/?>/gi, " ").replace(/\s+/g, " ").trim();
+  const normalizeMark = (raw) => (/^t/i.test(raw) ? "True" : "False");
+
+  const leadingRe = /\b(True|False)\s*-\s*/g;
+  const leadingMatches = [...clean.matchAll(leadingRe)];
+  const trailingRe = /-\s*(True|False|T|F)\.?(?=\s|$)/g;
+  const trailingMatches = [...clean.matchAll(trailingRe)];
+
+  let items = null;
+  if (leadingMatches.length >= 2 && leadingMatches.length >= trailingMatches.length) {
+    items = leadingMatches
+      .map((m, i) => {
+        const start = m.index + m[0].length;
+        const end = i + 1 < leadingMatches.length ? leadingMatches[i + 1].index : clean.length;
+        return { mark: normalizeMark(m[1]), text: clean.slice(start, end).trim() };
+      })
+      .filter((it) => it.text);
+  } else if (trailingMatches.length >= 2) {
+    items = [];
+    let cursor = 0;
+    for (const m of trailingMatches) {
+      const stmt = clean.slice(cursor, m.index).trim();
+      if (stmt) items.push({ mark: normalizeMark(m[1]), text: stmt });
+      cursor = m.index + m[0].length;
+    }
+  }
+  if (!items || items.length < 2) return text;
+  return items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it.text} - <strong>${it.mark}</strong></div>`).join("");
 }
 
 function formatQuestionText(text) {
@@ -827,6 +892,10 @@ function formatQuestionText(text) {
   // starting fresh on the next.
   text = text.replace(/(\S)\s+true or false\s*[:,]\s*/i, "$1<br><br>True or False:<br><br>");
   if (/\bmatch (the|each)\b/i.test(text) || ORDER_STEPS_RE.test(text)) return formatMatchingQuestionText(text);
+  if (MULTI_STATEMENT_CUE_RE.test(rawText)) {
+    const cued = formatCuedStatementList(text);
+    if (cued) return cued;
+  }
   return formatYesNoQuestionText(text) || breakLongParagraph(text, rawText);
 }
 
@@ -956,7 +1025,7 @@ function renderExplanationBreakdown(q, given) {
             : "<p>This is not the right option.</p>";
           return `
             <div class="${cls}">
-              <div class="option-expl-label">${mark ? `<span class="option-expl-mark">${mark}</span> ` : ""}${opt.text}${
+              <div class="option-expl-label">${mark ? `<span class="option-expl-mark">${mark}</span> ` : ""}${formatTrueFalseOptionText(opt.text)}${
                 tag ? `<span class="option-expl-tag">${tag}</span>` : ""
               }</div>
               ${explBody ? `<div class="option-expl-text">${explBody}</div>` : ""}
@@ -1600,7 +1669,7 @@ function renderQuestion() {
         else if (selected.includes(opt.id)) cls += " incorrect";
       }
       div.className = cls;
-      div.innerHTML = `<input type="radio" ${selected.includes(opt.id) ? "checked" : ""} disabled /> ${opt.text}`;
+      div.innerHTML = `<input type="radio" ${selected.includes(opt.id) ? "checked" : ""} disabled /> ${formatTrueFalseOptionText(opt.text)}`;
       if (!locked) {
         div.addEventListener("click", () => {
           session.answers[q.id] = [opt.id];
@@ -1626,7 +1695,7 @@ function renderQuestion() {
         else if (selected.includes(opt.id)) cls += " incorrect";
       }
       div.className = cls;
-      div.innerHTML = `<input type="checkbox" ${selected.includes(opt.id) ? "checked" : ""} disabled /> ${opt.text}`;
+      div.innerHTML = `<input type="checkbox" ${selected.includes(opt.id) ? "checked" : ""} disabled /> ${formatTrueFalseOptionText(opt.text)}`;
       if (!locked) {
         div.addEventListener("click", () => {
           const set = new Set(selected);

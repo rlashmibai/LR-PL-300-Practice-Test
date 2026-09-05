@@ -8897,7 +8897,7 @@
     "testSet": 12,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "Scenario: Ramesh wants to create a bookmark in Power BI that resets slicers but does not change other visuals on the page. To achieve this, he should configure the bookmark with the __________ scope and enable the __________ state. Options for Blank 1: A. All visuals B. Selected visuals C. Entire report D. Current page Options for Blank 2: A. Display B. Data C. Current view D. Format",
+    "text": "Scenario: Ramesh wants to create a bookmark in Power BI that resets slicers but does not change other visuals on the page. To achieve this, he should configure the bookmark with the __________ scope and enable the __________ state.<br><br>Options for Blank 1:<br>A. All visuals<br>B. Selected visuals<br>C. Entire report<br>D. Current page<br><br>Options for Blank 2:<br>A. Display<br>B. Data<br>C. Current view<br>D. Format",
     "options": [
       {
         "id": "a",
