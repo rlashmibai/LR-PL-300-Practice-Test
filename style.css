@@ -547,10 +547,13 @@ th { color: var(--text-muted); font-weight: 600; }
 /* Matching-question line-per-item layout: only the "Tasks:"/"Places:" label
    or "1."/"A." marker should be bold (handled via an inline <strong>), not
    the whole line — override the .question-text default here. */
-.question-text .match-line { margin-bottom: 6px; font-weight: 400; }
-.question-text .match-line:last-child { margin-bottom: 0; }
-.question-text .match-line.match-section { margin-top: 14px; }
-.question-text .match-line.match-section:first-of-type { margin-top: 0; }
+/* Not scoped to .question-text -- match-line also formats answer-option text
+   (inside .option-text/.option-expl-label-text below), which needs the same
+   one-item-per-line treatment. */
+.match-line { margin-bottom: 6px; font-weight: 400; }
+.match-line:last-child { margin-bottom: 0; }
+.match-line.match-section { margin-top: 14px; }
+.match-line.match-section:first-of-type { margin-top: 0; }
 
 .question-text .match-intro { font-weight: 600; margin: 0 0 12px; }
 .match-table { width: 100%; border-collapse: collapse; font-weight: 500; font-size: 0.95rem; }
@@ -578,6 +581,11 @@ th { color: var(--text-muted); font-weight: 600; }
   padding: 12px 14px; margin-bottom: 8px; cursor: pointer;
 }
 .option:hover { border-color: var(--accent); }
+/* An option formatted into several match-line divs (a numbered True/False
+   or answer-key list) must land as ONE flex item next to the radio/checkbox
+   input, not several -- otherwise .option's flex row lays each match-line
+   out side by side instead of stacked. */
+.option-text { flex: 1 1 auto; min-width: 0; }
 
 /* Multi-line DAX formula blocks — as an answer option's own text, or quoted
    inside an explanation. white-space:pre preserves the source's exact line
@@ -652,6 +660,9 @@ th { color: var(--text-muted); font-weight: 600; }
 .option-expl-item.correct { border-color: var(--green); background: #f3fbf3; }
 .option-expl-item.incorrect { border-color: var(--red); background: #fdf5f5; }
 .option-expl-label { font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+/* Same fix as .option-text above -- keeps a multi-line formatted option as
+   one flex item so it stacks internally instead of laying out in the row. */
+.option-expl-label-text { flex: 1 1 auto; min-width: 0; }
 .option-expl-mark { font-weight: 800; }
 .option-expl-item.correct .option-expl-mark { color: var(--green); }
 .option-expl-item.incorrect .option-expl-mark { color: var(--red); }

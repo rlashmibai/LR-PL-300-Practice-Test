@@ -4796,7 +4796,7 @@
     "testSet": 11,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "What does the following DAX measure calculate? DAX ANZ Revenue = CALCULATE(     [Revenue],     Customer[Country-Region] IN {         \"Australia\",         \"New Zealand\"     } )",
+    "text": "What does the following DAX measure calculate?<br><br><pre class=\"dax-code\">DAX ANZ Revenue = CALCULATE(\n     [Revenue],\n     Customer[Country-Region] IN {\n         \"Australia\",\n         \"New Zealand\"\n     } )</pre>",
     "options": [
       {
         "id": "a",
@@ -5072,7 +5072,7 @@
     "testSet": 8,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Consider the following two DAX measures: Revenue Red = CALCULATE(     [Revenue],     'Product'[Color] = \"Red\" ) Revenue Red or Blue = CALCULATE(     [Revenue],     'Product'[Color] IN {\"Red\", \"Blue\"} ) Which of the following statements is correct?",
+    "text": "Consider the following two DAX measures:<br><br><pre class=\"dax-code\">Revenue Red = CALCULATE(\n     [Revenue],\n     'Product'[Color] = \"Red\" )</pre><br><br><pre class=\"dax-code\">Revenue Red or Blue = CALCULATE(\n     [Revenue],\n     'Product'[Color] IN {\"Red\", \"Blue\"} )</pre><br><br>Which of the following statements is correct?",
     "options": [
       {
         "id": "a",
@@ -5106,7 +5106,7 @@
     "testSet": 9,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "In the following measure, what is the role of the FILTER function inside CALCULATE? Code Revenue High Margin Products = CALCULATE(     [Revenue],     FILTER(         'Product',         'Product'[List Price] > 'Product'[Standard Cost] * 2     ) )",
+    "text": "In the following measure, what is the role of the FILTER function inside CALCULATE?<br><br><pre class=\"dax-code\">Revenue High Margin Products = CALCULATE(\n     [Revenue],\n     FILTER(\n         'Product',\n         'Product'[List Price] > 'Product'[Standard Cost] * 2\n     ) )</pre>",
     "options": [
       {
         "id": "a",
@@ -5329,7 +5329,7 @@
     "testSet": 4,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "What is the effect of the following DAX expression? CALCULATE(      [Total Sales],      CROSSFILTER(Customer[CustomerKey], Sales[CustomerKey], BOTH)  )",
+    "text": "What is the effect of the following DAX expression?<br><br><pre class=\"dax-code\">CALCULATE(\n      [Total Sales],\n      CROSSFILTER(Customer[CustomerKey], Sales[CustomerKey], BOTH) )</pre>",
     "options": [
       {
         "id": "a",
@@ -9461,7 +9461,7 @@
     "testSet": 4,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "What is the purpose of the following DAX measure in Power BI? Outliers = CALCULATE (     [Order Qty],     FILTER (         VALUES ( 'Product'[Product Name] ),         COUNTROWS (             FILTER (                 Sales,                 [Order Qty] >= [Min Qty]             )         ) > 0     ) )",
+    "text": "What is the purpose of the following DAX measure in Power BI?<br><br><pre class=\"dax-code\">Outliers = CALCULATE (\n     [Order Qty],\n     FILTER (\n         VALUES ( 'Product'[Product Name] ),\n         COUNTROWS (\n             FILTER (\n                 Sales,\n                 [Order Qty] >= [Min Qty]\n             )\n         ) > 0\n     ) )</pre>",
     "options": [
       {
         "id": "a",
@@ -17329,7 +17329,7 @@
     "testSet": 8,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "You are building a measure to calculate the percentage of total sales within a visual. The report has slicers applied by the user (for example, Region and Product Category). You want the measure to respect the user’s slicer selections but ignore filters applied inside the visual itself, so that the percentage is calculated against the user’s chosen context. Sales % of Total = DIVIDE(     SUM(Sales[Amount]),     CALCULATE(         SUM(Sales[Amount]),         ________(Sales)     ) )",
+    "text": "You are building a measure to calculate the percentage of total sales within a visual. The report has slicers applied by the user (for example, Region and Product Category). You want the measure to respect the user's slicer selections but ignore filters applied inside the visual itself, so that the percentage is calculated against the user's chosen context.<br><br><pre class=\"dax-code\">Sales % of Total = DIVIDE(\n     SUM(Sales[Amount]),\n     CALCULATE(\n         SUM(Sales[Amount]),\n         ________(Sales)\n     ) )</pre>",
     "options": [
       {
         "id": "a",
@@ -17397,7 +17397,7 @@
     "testSet": 10,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "You need to return a table of distinct product categories that have sales in 2025. Which DAX function should be used to evaluate a table expression under a modified filter context? Categories 2025 = __________(     VALUES(Product[Category]),     Sales[Year] = 2025 )",
+    "text": "You need to return a table of distinct product categories that have sales in 2025. Which DAX function should be used to evaluate a table expression under a modified filter context?<br><br><pre class=\"dax-code\">Categories 2025 = __________(\n     VALUES(Product[Category]),\n     Sales[Year] = 2025 )</pre>",
     "options": [
       {
         "id": "a",
@@ -17571,7 +17571,7 @@
     "testSet": 4,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "You want to calculate Sales for Electronics category but still respect slicers for Region and Year. The measure should add the Electronics filter without overriding existing slicers. Fill in the blanks with the right DAX function Electronics Sales = CALCULATE(     SUM(Sales[Amount]),     _______________( Product[Category] = \"Electronics\" ) )",
+    "text": "You want to calculate Sales for Electronics category but still respect slicers for Region and Year. The measure should add the Electronics filter without overriding existing slicers. Fill in the blanks with the right DAX function:<br><br><pre class=\"dax-code\">Electronics Sales = CALCULATE(\n     SUM(Sales[Amount]),\n     _______________( Product[Category] = \"Electronics\" ) )</pre>",
     "options": [
       {
         "id": "a",
@@ -17950,7 +17950,7 @@
     "testSet": 4,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "EVALUATE FILTER (     ALL ( Product[Color] ),     CONTAINSROW (         {             \"Red\",             \"Yellow\",             \"Blue\"         },         [Color]     ) ) ORDER BY [Color] What will this query return?",
+    "text": "<pre class=\"dax-code\">EVALUATE FILTER (\n     ALL ( Product[Color] ),\n     CONTAINSROW (\n         {\n             \"Red\",\n             \"Yellow\",\n             \"Blue\"\n         },\n         [Color]\n     ) ) ORDER BY [Color]</pre><br><br>What will this query return?",
     "options": [
       {
         "id": "a",
@@ -17984,7 +17984,7 @@
     "testSet": 5,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "A data analyst is testing the CONTAINSSTRING function in DAX to understand how it behaves with case sensitivity, special characters, and non-matching substrings. What will be the output of this query? EVALUATE ROW(     \"Case 1\", CONTAINSSTRING(\"abcd\", \"bc\"),     \"Case 2\", CONTAINSSTRING(\"abcd\", \"BC\"),     \"Case 3\", CONTAINSSTRING(\"abcd\", \"a*d\"),     \"Case 4\", CONTAINSSTRING(\"abcd\", \"ef\") )",
+    "text": "A data analyst is testing the CONTAINSSTRING function in DAX to understand how it behaves with case sensitivity, special characters, and non-matching substrings. What will be the output of this query?<br><br><pre class=\"dax-code\">EVALUATE ROW(\n     \"Case 1\", CONTAINSSTRING(\"abcd\", \"bc\"),\n     \"Case 2\", CONTAINSSTRING(\"abcd\", \"BC\"),\n     \"Case 3\", CONTAINSSTRING(\"abcd\", \"a*d\"),\n     \"Case 4\", CONTAINSSTRING(\"abcd\", \"ef\") )</pre>",
     "options": [
       {
         "id": "a",
@@ -18498,7 +18498,7 @@
     "testSet": 10,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Which of the following DAX formulas is correct? A: Safe Division = IFERROR (     DIVIDE ( Sales[TotalSales], Sales[TotalOrders] ),     BLANK() ) B: Safe Division = IFERROR (     DIVIDE ( Sales[TotalSales], Sales[TotalOrders] ) ) C: Safe Division = DIVIDE ( Sales[TotalSales], Sales[TotalOrders], BLANK() )",
+    "text": "Which of the following DAX formulas is correct?<br><br>A:<br><pre class=\"dax-code\">Safe Division = IFERROR (\n     DIVIDE ( Sales[TotalSales], Sales[TotalOrders] ),\n     BLANK() )</pre><br><br>B:<br><pre class=\"dax-code\">Safe Division = IFERROR (\n     DIVIDE ( Sales[TotalSales], Sales[TotalOrders] ) )</pre><br><br>C:<br><pre class=\"dax-code\">Safe Division = DIVIDE ( Sales[TotalSales], Sales[TotalOrders], BLANK() )</pre>",
     "options": [
       {
         "id": "a",
@@ -18997,7 +18997,7 @@
       },
       {
         "id": "b",
-        "text": "Remember,<br><br>CONCATENATE<br>A. Joins exactly two text strings into one<br>C. Accepts only two arguments (text or column reference)<br>E. Useful for creating a FullName column by joining FirstName and LastName<br><br>CONCATENATEX<br>B. Can combine text from multiple rows of a table into a single string<br>D. Requires an iterator (loops through rows of a table)<br>F. Useful for creating a comma-separated list of product categories<br><br>Quick Memory Trick:<br>CONCATENATE - 2 values only<br>CONCATENATEX - Many rows + iterator<br><br>CONCATENATE - B, D, E<br>CONCATENATEX - C, A, F",
+        "text": "CONCATENATE - B, D, E<br><br>CONCATENATEX - C, A, F",
         "explanation": "CONCATENATEX function, on the other hand, can combine text from multiple rows of a table into a single string by requiring an iterator to loop through the rows. This makes it useful for creating a comma-separated list of product categories from a table, as it can aggregate values from multiple rows."
       }
     ],
@@ -19267,7 +19267,7 @@
     "testSet": 9,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Fill in the blanks to correctly create a DAX measure that calculates a 12month rolling total of Total Sales. Rolling Total: 12 Months = …………… (     …………… (         …………… (             Sales[Date], MAX(Sales[Date]), -12, MONTH         ),         [Total Sales]     ) )",
+    "text": "Fill in the blanks to correctly create a DAX measure that calculates a 12month rolling total of Total Sales.<br><br><pre class=\"dax-code\">Rolling Total: 12 Months = …………… (\n     …………… (\n         …………… (\n             Sales[Date], MAX(Sales[Date]), -12, MONTH\n         ),\n         [Total Sales]\n     ) )</pre>",
     "options": [
       {
         "id": "a",
@@ -19325,7 +19325,7 @@
     "testSet": 11,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Given the following DAX measure. What does this measure return? = SUMX(         TOPN(             10,             SUMMARIZE(                     InternetSales,                     InternetSales[ProductKey],                     \"TotalSales\", SUM(InternetSales[SalesAmount])             ),             [TotalSales], DESC         ),         [TotalSales] )",
+    "text": "Given the following DAX measure. What does this measure return?<br><br><pre class=\"dax-code\">= SUMX(\n         TOPN(\n             10,\n             SUMMARIZE(\n                     InternetSales,\n                     InternetSales[ProductKey],\n                     \"TotalSales\", SUM(InternetSales[SalesAmount])\n             ),\n             [TotalSales], DESC\n         ),\n         [TotalSales] )</pre>",
     "options": [
       {
         "id": "a",
@@ -19359,7 +19359,7 @@
     "testSet": 12,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Given the following DAX measure. What does this measure return? = SUMX(         TOPN(             10,             SUMMARIZE(                     InternetSales,                     InternetSales[ProductKey],                     \"TotalSales\", SUM(InternetSales[SalesAmount])             ),             [TotalSales], ASC         ),         [TotalSales] )",
+    "text": "Given the following DAX measure. What does this measure return?<br><br><pre class=\"dax-code\">= SUMX(\n         TOPN(\n             10,\n             SUMMARIZE(\n                     InternetSales,\n                     InternetSales[ProductKey],\n                     \"TotalSales\", SUM(InternetSales[SalesAmount])\n             ),\n             [TotalSales], ASC\n         ),\n         [TotalSales] )</pre>",
     "options": [
       {
         "id": "a",
@@ -19393,7 +19393,7 @@
     "testSet": 1,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Fill in the blanks to correctly calculate Revenue by multiplying Quantity × Price for each row in the Sales table.<br><br>Revenue = …………… (     Sales,     Sales[Quantity] * Sales[Price] )",
+    "text": "Fill in the blanks to correctly calculate Revenue by multiplying Quantity × Price for each row in the Sales table.<br><br><pre class=\"dax-code\">Revenue = …………… (\n     Sales,\n     Sales[Quantity] * Sales[Price] )</pre>",
     "options": [
       {
         "id": "a",
@@ -19704,7 +19704,7 @@
     "testSet": 11,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Fill in the blanks to correctly create a DAX expression that groups sales by product and calculates total sales. GroupedSales = …………… (     Sales,     Sales[Product],     \"Total Sales\", ……………(………………(), Sales[Sales Amount]) )",
+    "text": "Fill in the blanks to correctly create a DAX expression that groups sales by product and calculates total sales.<br><br><pre class=\"dax-code\">GroupedSales = …………… (\n     Sales,\n     Sales[Product],\n     \"Total Sales\", ……………(………………(), Sales[Sales Amount]) )</pre>",
     "options": [
       {
         "id": "a",
@@ -19912,7 +19912,7 @@
     "testSet": 5,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "You have a Sales table with CustomerID and Region. You also have a Customer table with CustomerID, Region, and CustomerName. You want to bring the correct CustomerName into the Sales table, but only when both the CustomerID and the Region match. Sales[CustomerName] = LOOKUPVALUE(     Customer[CustomerName],        -- column to return     Customer[CustomerID], Sales[CustomerID],   -- first condition     Customer[Region], Sales[Region]            -- second condition ) Fill in the blanks to correctly complete the DAX formula that retrieves the CustomerName from the Customer table into the Sales table, matching both CustomerID and Region.",
+    "text": "You have a Sales table with CustomerID and Region. You also have a Customer table with CustomerID, Region, and CustomerName. You want to bring the correct CustomerName into the Sales table, but only when both the CustomerID and the Region match.<br><br><pre class=\"dax-code\">Sales[CustomerName] = LOOKUPVALUE(\n     Customer[CustomerName],       -- column to return\n     Customer[CustomerID], Sales[CustomerID],   -- first condition\n     Customer[Region], Sales[Region]            -- second condition\n )</pre><br><br>Fill in the blanks to correctly complete the DAX formula that retrieves the CustomerName from the Customer table into the Sales table, matching both CustomerID and Region.",
     "options": [
       {
         "id": "a",
@@ -19946,7 +19946,7 @@
     "testSet": 6,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Fill in the blanks to correctly create a DAX measure that calculates a 3month moving average of Total Sales. Moving Average: 3 Months = …………… (     …………… (         …………… (             Sales[Date], MAX(Sales[Date]), -3, MONTH         ),         [Total Sales]     ) )",
+    "text": "Fill in the blanks to correctly create a DAX measure that calculates a 3month moving average of Total Sales.<br><br><pre class=\"dax-code\">Moving Average: 3 Months = …………… (\n     …………… (\n         …………… (\n             Sales[Date], MAX(Sales[Date]), -3, MONTH\n         ),\n         [Total Sales]\n     ) )</pre>",
     "options": [
       {
         "id": "a",
@@ -20038,7 +20038,7 @@
     "testSet": 9,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "You need to create a Date table in Power BI that starts from January 1st, 2017 (9 years before the current year 2026) and ends on December 31st, 2026. Which DAX function should you use in the respective fill in the blanks? Assume the current year is 2026. VAR var1 = ________ (_______()) RETURN ____________(     DATE(var1 - 9, 1, 1),     DATE(var1, 12, 31) )",
+    "text": "You need to create a Date table in Power BI that starts from January 1st, 2017 (9 years before the current year 2026) and ends on December 31st, 2026. Which DAX function should you use in the respective fill in the blanks? Assume the current year is 2026.<br><br><pre class=\"dax-code\">VAR var1 = ________ (_______())\nRETURN\n____________(\n     DATE(var1 - 9, 1, 1),\n     DATE(var1, 12, 31) )</pre>",
     "options": [
       {
         "id": "a",

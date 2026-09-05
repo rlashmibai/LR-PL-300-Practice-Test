@@ -874,6 +874,20 @@ function formatTrueFalseOptionText(text) {
       .join("");
   }
 
+  // Same idea again, but each pair carries a parenthetical description too:
+  // "1 – f (Exponentiation) 2 – e (Sign – negative or positive) ...". The
+  // dash between the number and letter may be a plain hyphen or an en dash,
+  // and the description itself can contain an en dash -- matched greedily
+  // up to the first closing paren so an embedded dash never confuses the
+  // split between pairs.
+  const descKeyRe = /(\d{1,2})\s*[-–]\s*([A-Za-z])\s*(\([^)]*\))/g;
+  const descKeyMatches = [...clean.matchAll(descKeyRe)];
+  if (descKeyMatches.length >= 2 && descKeyMatches.map((m) => m[0]).join(" ") === clean) {
+    return descKeyMatches
+      .map((m) => `<div class="match-line"><strong>${m[1]}.</strong> ${m[2].toUpperCase()} ${m[3]}</div>`)
+      .join("");
+  }
+
   const leadingRe = /\b(True|False)\s*-\s*/g;
   const leadingMatches = [...clean.matchAll(leadingRe)];
   const trailingRe = /-\s*(True|False|T|F)\.?(?=\s|$)/g;
@@ -1046,7 +1060,7 @@ function renderExplanationBreakdown(q, given) {
             : "<p>This is not the right option.</p>";
           return `
             <div class="${cls}">
-              <div class="option-expl-label">${mark ? `<span class="option-expl-mark">${mark}</span> ` : ""}${formatTrueFalseOptionText(opt.text)}${
+              <div class="option-expl-label">${mark ? `<span class="option-expl-mark">${mark}</span> ` : ""}<span class="option-expl-label-text">${formatTrueFalseOptionText(opt.text)}</span>${
                 tag ? `<span class="option-expl-tag">${tag}</span>` : ""
               }</div>
               ${explBody ? `<div class="option-expl-text">${explBody}</div>` : ""}
@@ -1690,7 +1704,7 @@ function renderQuestion() {
         else if (selected.includes(opt.id)) cls += " incorrect";
       }
       div.className = cls;
-      div.innerHTML = `<input type="radio" ${selected.includes(opt.id) ? "checked" : ""} disabled /> ${formatTrueFalseOptionText(opt.text)}`;
+      div.innerHTML = `<input type="radio" ${selected.includes(opt.id) ? "checked" : ""} disabled /> <span class="option-text">${formatTrueFalseOptionText(opt.text)}</span>`;
       if (!locked) {
         div.addEventListener("click", () => {
           session.answers[q.id] = [opt.id];
@@ -1716,7 +1730,7 @@ function renderQuestion() {
         else if (selected.includes(opt.id)) cls += " incorrect";
       }
       div.className = cls;
-      div.innerHTML = `<input type="checkbox" ${selected.includes(opt.id) ? "checked" : ""} disabled /> ${formatTrueFalseOptionText(opt.text)}`;
+      div.innerHTML = `<input type="checkbox" ${selected.includes(opt.id) ? "checked" : ""} disabled /> <span class="option-text">${formatTrueFalseOptionText(opt.text)}</span>`;
       if (!locked) {
         div.addEventListener("click", () => {
           const set = new Set(selected);
