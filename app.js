@@ -853,6 +853,27 @@ function formatTrueFalseOptionText(text) {
   const clean = text.replace(/<br\s*\/?>/gi, " ").replace(/\s+/g, " ").trim();
   const normalizeMark = (raw) => (/^t/i.test(raw) ? "True" : "False");
 
+  // A bare comma-separated verdict sequence ("True, False, True, ...") has
+  // no restated claim to split on -- just a numbered answer key matching the
+  // stem's own numbered claims one-for-one -- so it's handled separately
+  // from the two restated-claim shapes below.
+  const bareTokens = clean.split(",").map((s) => s.trim());
+  if (bareTokens.length >= 2 && bareTokens.every((t) => /^(True|False|T|F|Right|Wrong)$/i.test(t))) {
+    const normalizeBare = (t) => (/^t/i.test(t) ? "True" : /^f/i.test(t) ? "False" : t[0].toUpperCase() + t.slice(1).toLowerCase());
+    return bareTokens.map((t, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${normalizeBare(t)}</div>`).join("");
+  }
+
+  // Same idea, but the bare answer key is space-separated pairs like
+  // "1 - B 2 - A 3 - C ..." (a numbered-scenario question's option, one
+  // letter per numbered item) instead of a comma list.
+  const keyPairRe = /\b(\d{1,2})\s*-\s*([A-Za-z])\b/g;
+  const keyPairMatches = [...clean.matchAll(keyPairRe)];
+  if (keyPairMatches.length >= 2 && keyPairMatches.map((m) => m[0]).join(" ") === clean) {
+    return keyPairMatches
+      .map((m) => `<div class="match-line"><strong>${m[1]}.</strong> ${m[2].toUpperCase()}</div>`)
+      .join("");
+  }
+
   const leadingRe = /\b(True|False)\s*-\s*/g;
   const leadingMatches = [...clean.matchAll(leadingRe)];
   const trailingRe = /-\s*(True|False|T|F)\.?(?=\s|$)/g;

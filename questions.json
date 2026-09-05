@@ -18992,12 +18992,12 @@
     "options": [
       {
         "id": "a",
-        "text": "CONCATENATE - A, C, E CONCATENATEX - B, D, F",
+        "text": "CONCATENATE - A, C, E<br><br>CONCATENATEX - B, D, F",
         "explanation": "CONCATENATE function is used to join exactly two text strings into one, making it suitable for creating a FullName column by combining FirstName and LastName. It accepts only two arguments, either text or column references, which makes it limited to joining two strings."
       },
       {
         "id": "b",
-        "text": "Remember, CONCATENATE A. Joins exactly two text strings into one C. Accepts only two arguments (text or column reference) E. Useful for creating a FullName column by joining FirstName and LastName CONCATENATEX B. Can combine text from multiple rows of a table into a single string D. Requires an iterator (loops through rows of a table) F. Useful for creating a comma-separated list of product categories Quick Memory Trick : CONCATENATE - 2 values only CONCATENATEX - Many rows + iterator CONCATENATE - B, D, E CONCATENATEX - C, A, F",
+        "text": "Remember,<br><br>CONCATENATE<br>A. Joins exactly two text strings into one<br>C. Accepts only two arguments (text or column reference)<br>E. Useful for creating a FullName column by joining FirstName and LastName<br><br>CONCATENATEX<br>B. Can combine text from multiple rows of a table into a single string<br>D. Requires an iterator (loops through rows of a table)<br>F. Useful for creating a comma-separated list of product categories<br><br>Quick Memory Trick:<br>CONCATENATE - 2 values only<br>CONCATENATEX - Many rows + iterator<br><br>CONCATENATE - B, D, E<br>CONCATENATEX - C, A, F",
         "explanation": "CONCATENATEX function, on the other hand, can combine text from multiple rows of a table into a single string by requiring an iterator to loop through the rows. This makes it useful for creating a comma-separated list of product categories from a table, as it can aggregate values from multiple rows."
       }
     ],
