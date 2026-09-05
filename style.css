@@ -390,6 +390,10 @@ input[type="text"], input[type="email"], textarea {
 }
 .modal-message { margin: 0 0 20px; font-size: 1rem; line-height: 1.45; color: var(--text); }
 .modal-actions { justify-content: flex-end; margin-top: 0; }
+#reportModalOverlay .modal-card { max-width: 420px; }
+#reportModalOverlay h3 { margin: 0 0 6px; font-size: 1.1rem; }
+#reportModalOverlay .modal-message { margin-bottom: 12px; }
+#reportModalOverlay textarea { width: 100%; box-sizing: border-box; resize: vertical; }
 
 .btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
 
@@ -612,8 +616,21 @@ th { color: var(--text-muted); font-weight: 600; }
 #questionBody input[type="text"].correct-input { border-color: var(--green); background: #dff6dd; }
 #questionBody input[type="text"].incorrect-input { border-color: var(--red); background: #fde7e9; }
 
-.flag-toggle { font-size: 0.85rem; cursor: pointer; user-select: none; color: var(--text-muted); }
-.flag-toggle.active { color: var(--amber); font-weight: 600; }
+.flag-toggle-label {
+  display: flex; align-items: center; gap: 6px; font-size: 0.85rem;
+  cursor: pointer; user-select: none; color: var(--text-muted);
+}
+.flag-toggle-label:has(input:checked) { color: var(--amber); font-weight: 600; }
+
+.report-reasons { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+.report-reasons label {
+  display: flex; align-items: center; gap: 8px; font-size: 0.92rem;
+  cursor: pointer; user-select: none; color: var(--text);
+}
+.report-status { font-size: 0.9rem; font-weight: 600; margin-top: 10px; min-height: 1.2em; }
+.report-status.ok { color: var(--green); }
+.report-status.error { color: var(--red); }
+.report-status.sending { color: var(--text-muted); }
 
 /* Verdict banner (Correct/Incorrect), shown above the explanation */
 .verdict-banner {

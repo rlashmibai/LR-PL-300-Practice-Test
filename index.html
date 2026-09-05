@@ -520,7 +520,8 @@
               <div id="questionBody"></div>
               <div id="checkAnswerArea"></div>
               <div class="btn-row" style="justify-content:space-between; align-items:center;">
-                <span class="flag-toggle" id="flagToggle">🚩 Flag for review</span>
+                <label class="flag-toggle-label"><input type="checkbox" id="flagToggle" /> 🚩 Flag for review</label>
+                <button id="reportQuestionBtn" class="btn ghost small" type="button">⚠️ Report Question</button>
               </div>
             </div>
           </div>
@@ -719,6 +720,29 @@
         <button id="confirmModalCancelBtn" class="btn secondary">Cancel</button>
         <button id="confirmModalOkBtn" class="btn">OK</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Report a question issue: lets a test-taker flag a specific question (wrong
+       answer, missing explanation, etc.) straight to the site owner's inbox. -->
+  <div id="reportModalOverlay" class="modal-overlay hidden">
+    <div class="modal-card">
+      <h3>Report a Question Issue</h3>
+      <p class="modal-message">Select all that apply:</p>
+      <div class="report-reasons">
+        <label><input type="checkbox" value="Explanation missing" /> Explanation missing</label>
+        <label><input type="checkbox" value="Wrong answer" /> Wrong answer</label>
+        <label><input type="checkbox" value="Images missing" /> Images missing</label>
+        <label><input type="checkbox" value="Duplicate question" /> Duplicate question</label>
+        <label><input type="checkbox" value="Outdated question" /> Outdated question</label>
+        <label><input type="checkbox" value="Other" /> Other</label>
+      </div>
+      <textarea id="reportDetails" rows="3" placeholder="Optional: add any extra detail..."></textarea>
+      <div class="btn-row modal-actions">
+        <button id="reportModalCancelBtn" class="btn secondary">Cancel</button>
+        <button id="reportModalSubmitBtn" class="btn">Submit Report</button>
+      </div>
+      <p class="report-status" id="reportStatus"></p>
     </div>
   </div>
 

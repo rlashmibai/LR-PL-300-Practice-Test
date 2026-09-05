@@ -977,6 +977,8 @@ async function boot() {
   document.getElementById("aboutGoHomeBtn").addEventListener("click", goHome);
   document.getElementById("contactGoHomeBtn").addEventListener("click", goHome);
   document.getElementById("contactForm").addEventListener("submit", onContactSubmit);
+  document.getElementById("reportModalCancelBtn").addEventListener("click", closeReportModal);
+  document.getElementById("reportModalSubmitBtn").addEventListener("click", onReportSubmit);
 
   // Footer legal pages, available from anywhere in the app
   document.getElementById("footerDisclaimerBtn").addEventListener("click", () => show("view-disclaimer"));
@@ -1163,6 +1165,64 @@ async function onContactSubmit(e) {
     status.className = "contact-status error";
   } finally {
     btn.disabled = false;
+  }
+}
+
+// ---------- Report a question issue (same FormSubmit.co delivery as the contact form) ----------
+let reportTargetQuestion = null; // set when the modal opens; the question currently being reported
+
+function openReportModal(q) {
+  reportTargetQuestion = q;
+  document.getElementById("reportDetails").value = "";
+  document.querySelectorAll("#reportModalOverlay input[type=checkbox]").forEach((cb) => (cb.checked = false));
+  document.getElementById("reportStatus").textContent = "";
+  document.getElementById("reportStatus").className = "report-status";
+  document.getElementById("reportModalOverlay").classList.remove("hidden");
+}
+
+function closeReportModal() {
+  document.getElementById("reportModalOverlay").classList.add("hidden");
+  reportTargetQuestion = null;
+}
+
+async function onReportSubmit() {
+  const reasons = [...document.querySelectorAll("#reportModalOverlay input[type=checkbox]:checked")].map((cb) => cb.value);
+  const details = document.getElementById("reportDetails").value.trim();
+  const status = document.getElementById("reportStatus");
+
+  if (!reasons.length) {
+    status.textContent = "Please select at least one reason.";
+    status.className = "report-status error";
+    return;
+  }
+  if (!reportTargetQuestion) return; // shouldn't happen, but never send a report with no question attached
+
+  const q = reportTargetQuestion;
+  status.textContent = "Sending...";
+  status.className = "report-status sending";
+
+  try {
+    const res = await fetch("https://formsubmit.co/ajax/rlashmibai@gmail.com", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: `LR PL300 Practice Test: question report (${q.id})`,
+        site: "PL300",
+        questionId: q.id,
+        testSet: q.testSet,
+        section: q.section,
+        questionText: stripHtml(q.text).slice(0, 300),
+        reasons: reasons.join(", "),
+        details: details || "(none)",
+      }),
+    });
+    if (!res.ok) throw new Error("Request failed");
+    status.textContent = "Thanks! Your report has been sent.";
+    status.className = "report-status ok";
+    setTimeout(closeReportModal, 1200);
+  } catch (err) {
+    status.textContent = "Something went wrong sending that. Please try again.";
+    status.className = "report-status error";
   }
 }
 
@@ -1577,14 +1637,17 @@ function renderQuestion() {
     body.appendChild(ul);
   }
 
-  // Flag toggle
+  // Flag toggle (checkbox — checked state is intrinsic, so no re-render needed here)
   const flagEl = document.getElementById("flagToggle");
-  flagEl.classList.toggle("active", session.flagged.has(q.id));
-  flagEl.onclick = () => {
+  flagEl.checked = session.flagged.has(q.id);
+  flagEl.onchange = () => {
     session.flagged.has(q.id) ? session.flagged.delete(q.id) : session.flagged.add(q.id);
-    renderQuestion();
     updateQuestionSidebar();
   };
+
+  // Report Question button — rebound each render so it always reports the
+  // question currently on screen.
+  document.getElementById("reportQuestionBtn").onclick = () => openReportModal(q);
 
   // Check-answer / instant-feedback area (Practice Test mode only)
   const checkArea = document.getElementById("checkAnswerArea");
@@ -1745,7 +1808,11 @@ function renderResults(reviewItems, attempt) {
         ${!r.isCorrect && !hasOptionExpl ? `<div class="verdict-answer">Correct answer: ${correctText}</div>` : ""}
       </div>
       ${renderExplanationBreakdown(q, r.given || [])}
+      <div class="btn-row" style="justify-content:flex-end;">
+        <button class="btn ghost small report-question-btn" type="button">⚠️ Report Question</button>
+      </div>
     `;
+    div.querySelector(".report-question-btn").addEventListener("click", () => openReportModal(q));
     reviewList.appendChild(div);
   });
 }
