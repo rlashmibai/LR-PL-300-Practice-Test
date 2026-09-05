@@ -849,6 +849,9 @@ function formatCuedStatementList(text) {
 // True" (no restated claims) or one already wrapped in <pre> is never
 // touched.
 function formatTrueFalseOptionText(text) {
+  return escapeStrayAngleBrackets(formatTrueFalseOptionTextInner(text));
+}
+function formatTrueFalseOptionTextInner(text) {
   if (/<pre[\s>]/i.test(text)) return text;
   const clean = text.replace(/<br\s*\/?>/gi, " ").replace(/\s+/g, " ").trim();
   const normalizeMark = (raw) => (/^t/i.test(raw) ? "True" : "False");
@@ -915,7 +918,41 @@ function formatTrueFalseOptionText(text) {
   return items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it.text} - <strong>${it.mark}</strong></div>`).join("");
 }
 
+// A source explanation or question stem occasionally embeds a DAX-doc-style
+// placeholder in angle brackets ("DATEADD(<dates>, <number_of_intervals>,
+// <interval>)") or a bare comparison operator ("Sales[Amount] < 2500") --
+// once injected via innerHTML, the browser parses either as the start of an
+// HTML tag. A placeholder's name becomes the (never-rendered) tag name, so
+// it silently vanishes; a bare "<" is worse, since the browser keeps
+// consuming characters looking for the closing ">" and can swallow a large
+// stretch of legitimate content in between (including, in a <pre> block,
+// content right up to the real closing tag).
+//
+// Applied as a FINAL pass over each formatter's finished HTML output, never
+// as pre-processing on the raw source -- a stem like q144's, which legitimately
+// lists bare "<"/">" as the literal DAX comparison operators being described,
+// needs those characters intact for the matching-table/list-splitting logic
+// upstream (label detection, item counts) to work correctly; escaping too
+// early would corrupt that structure instead of just sanitizing display.
+// Protects every real tag this codebase's formatters actually emit (plus the
+// handful the source data itself uses) first, then escapes every remaining
+// "<"/">" so a placeholder or operator displays as literal text instead of
+// disappearing or eating its neighbors.
+const REAL_TAG_RE = /<\/?(?:img|a|br|pre|strong|div|table|thead|tbody|tr|th|td|h[1-6]|p|ul|ol|li|span)(?:\s[^>]*)?>/gi;
+function escapeStrayAngleBrackets(text) {
+  const protectedTags = [];
+  let working = text.replace(REAL_TAG_RE, (m) => {
+    protectedTags.push(m);
+    return `\x00TAG${protectedTags.length - 1}\x00`;
+  });
+  working = working.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return working.replace(/\x00TAG(\d+)\x00/g, (_, i) => protectedTags[Number(i)]);
+}
+
 function formatQuestionText(text) {
+  return escapeStrayAngleBrackets(formatQuestionTextInner(text));
+}
+function formatQuestionTextInner(text) {
   const rawText = text;
   text = text.replace(/→|➔|➡/g, "-");
   // A handful of true/false stems bury "true or false" mid-sentence after a
@@ -935,6 +972,9 @@ function formatQuestionText(text) {
 }
 
 function formatExplanation(raw) {
+  return escapeStrayAngleBrackets(formatExplanationInner(raw));
+}
+function formatExplanationInner(raw) {
   if (!raw) return "";
 
   // Arrow characters (from source docx bullets like "Manager -> Approves") render
