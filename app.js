@@ -755,6 +755,41 @@ function formatYesNoQuestionText(text) {
   return `<p class="match-intro">${intro}</p>${itemsHtml}`;
 }
 
+// Sentence-ending abbreviations whose period must never be mistaken for the
+// end of a sentence by breakLongParagraph() below.
+const SENTENCE_ABBREVIATIONS = [
+  "e\\.g", "i\\.e", "etc", "vs", "Mr", "Mrs", "Ms", "Dr", "Inc", "Ltd", "approx",
+  "No", "Fig", "St", "Ave", "U\\.S", "U\\.K", "a\\.m", "p\\.m", "Jan", "Feb", "Mar",
+  "Apr", "Jun", "Jul", "Aug", "Sep", "Sept", "Oct", "Nov", "Dec",
+];
+const SENTENCE_ABBREV_RE = new RegExp("\\b(" + SENTENCE_ABBREVIATIONS.join("|") + ")\\.", "g");
+
+// Long, dense narrative stems (scenario setups running several sentences
+// before the actual question) read as one wall of text — breaks each real
+// sentence onto its own line so they scan like a scenario instead of a
+// paragraph. Deliberately conservative: only touches text long enough that
+// this actually helps, bails out entirely on anything that already has its
+// own structure (a match-table, an image, a link, an existing <br>) or that
+// looks like it embeds a lettered/numbered list ("A. ... B. ...", "1. ... 2.
+// ...") since a blind sentence-break would mistake each marker for a tiny
+// one-word sentence and shred the list. Never breaks a period preceded by a
+// digit at all (protects both decimal numbers like "3.5" and list markers),
+// which means a sentence that happens to end on a bare number won't get a
+// break at that exact spot -- a missed touch-up, never a corruption.
+function breakLongParagraph(text) {
+  if (text.length < 350) return text;
+  if (/<img|<a\s|<table|<br/i.test(text)) return text;
+  const letterMarkers = (text.match(/\b[A-Z]\.\s/g) || []).length;
+  const numMarkers = (text.match(/\b\d{1,2}\.\s/g) || []).length;
+  if (letterMarkers >= 2 || numMarkers >= 2) return text;
+
+  let working = text.replace(/\.\.\./g, "\x00\x00\x00");
+  working = working.replace(SENTENCE_ABBREV_RE, (m) => m.slice(0, -1) + "\x02");
+  working = working.replace(/(?<=[a-zA-Z)"'”])([.!?])\s+(?=[A-Z0-9"'(“])/g, "$1<br><br>");
+  working = working.replace(/\x02/g, ".").replace(/\x00\x00\x00/g, "...");
+  return working;
+}
+
 function formatQuestionText(text) {
   text = text.replace(/→|➔|➡/g, "-");
   // A handful of true/false stems bury "true or false" mid-sentence after a
@@ -766,7 +801,7 @@ function formatQuestionText(text) {
   // starting fresh on the next.
   text = text.replace(/(\S)\s+true or false\s*[:,]\s*/i, "$1<br><br>True or False:<br><br>");
   if (/\bmatch (the|each)\b/i.test(text)) return formatMatchingQuestionText(text);
-  return formatYesNoQuestionText(text) || text;
+  return formatYesNoQuestionText(text) || breakLongParagraph(text);
 }
 
 function formatExplanation(raw) {
