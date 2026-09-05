@@ -612,20 +612,20 @@ function formatBlock(p) {
 // into individual {marker, text} entries, preferring explicit letter/number
 // markers when present and falling back to semicolon- or comma-separated items.
 function splitMatchItems(raw) {
-  const letterMatches = [...raw.matchAll(/(?:^|\s)([A-H])[.)]\s(?=[A-Za-z])/g)];
+  const letterMatches = [...raw.matchAll(/(?:^|\s)([A-Z])[.)]\s(?=[A-Za-z])/g)];
   if (letterMatches.length >= 2) {
     return letterMatches.map((m, i) => {
       const start = m.index + m[0].length;
       const end = i + 1 < letterMatches.length ? letterMatches[i + 1].index : raw.length;
-      return { marker: m[1], text: raw.slice(start, end).replace(/[,.]\s*$/, "").trim() };
+      return { marker: m[1], text: raw.slice(start, end).replace(/[,.;]\s*$/, "").trim() };
     });
   }
-  const numMatches = [...raw.matchAll(/(?:^|\s)(\d)[.)]\s(?=[A-Za-z])/g)];
+  const numMatches = [...raw.matchAll(/(?:^|\s)(\d{1,2})[.)]\s(?=[A-Za-z])/g)];
   if (numMatches.length >= 2) {
     return numMatches.map((m, i) => {
       const start = m.index + m[0].length;
       const end = i + 1 < numMatches.length ? numMatches[i + 1].index : raw.length;
-      return { marker: m[1], text: raw.slice(start, end).replace(/[,.]\s*$/, "").trim() };
+      return { marker: m[1], text: raw.slice(start, end).replace(/[,.;]\s*$/, "").trim() };
     });
   }
   const parts = raw.includes(";") ? raw.split(";") : raw.split(",");

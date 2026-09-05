@@ -452,7 +452,7 @@
     "testSet": 3,
     "module": 1,
     "section": "Get started with Microsoft data analytics",
-    "text": "You create reports within Power BI to report on the status of a project. A manager asks you to share the reports with other team members. You decide to create a published app and set permissions to allow other team members to view the reports. For the following statements, select the correct combination of Yes and No‘s from the answers. 1. The Power BI published app is stored within-the Team site so that others can install it. 2. One of the other project managers installs and modifiers a dashboard within the Power BI published app. The changes are automatically made to the originally published app",
+    "text": "You create reports within Power BI to report on the status of a project. A manager asks you to share the reports with other team members. You decide to create a published app and set permissions to allow other team members to view the reports. For the following statements, select the correct combination of Yes and No's from the answers.<br /><br />1. The Power BI published app is stored within the Team site so that others can install it.<br /><br />2. One of the other project managers installs and modifies a dashboard within the Power BI published app. The changes are automatically made to the originally published app.",
     "options": [
       {
         "id": "a",
@@ -898,7 +898,7 @@
     "testSet": 4,
     "module": 1,
     "section": "Get started with Microsoft data analytics",
-    "text": "Match the correct option with its definition: Distinct values count Unique values count A. The total number of different values found in a given column. B. The total number of values that appear only once in a given column.",
+    "text": "Match the correct option with its definition. Options: Distinct values count; Unique values count. Definitions: A. The total number of different values found in a given column. B. The total number of values that appear only once in a given column.",
     "options": [
       {
         "id": "a",
@@ -1467,7 +1467,7 @@
     "testSet": 9,
     "module": 1,
     "section": "Get started with Microsoft data analytics",
-    "text": "Match the Following: Power BI Chart Types and Their Use Cases Chart Types: A. Donut ChartB. Q&A VisualC. Waterfall ChartD. Gauge ChartE. Stacked Column ChartF. Line ChartG. Matrix VisualH. Scatter Chart Use Cases:1. Best for visualizing part-to-whole relationships using circular representation.2. Allows users to ask questions in natural language to generate visuals dynamically.3. Ideal for showing how values increase or decrease sequentially, helpful for running totals.4. Useful for showing progress toward a goal, such as percentage toward a KPI.5. Compares multiple categories and subcategories across time or groups.6. Displays trends over time with continuous data points like months or years.7. Provides a pivot-table style display of data with rows and columns, useful for detailed comparisons.8. Great for showing relationships and correlations between two numeric values.",
+    "text": "Match each Power BI chart type with its correct use case. Chart Types: A. Donut Chart; B. Q&A Visual; C. Waterfall Chart; D. Gauge Chart; E. Stacked Column Chart; F. Line Chart; G. Matrix Visual; H. Scatter Chart. Use Cases: 1. Best for visualizing part-to-whole relationships using circular representation. 2. Allows users to ask questions in natural language to generate visuals dynamically. 3. Ideal for showing how values increase or decrease sequentially, helpful for running totals. 4. Useful for showing progress toward a goal, such as percentage toward a KPI. 5. Compares multiple categories and subcategories across time or groups. 6. Displays trends over time with continuous data points like months or years. 7. Provides a pivot-table style display of data with rows and columns, useful for detailed comparisons. 8. Great for showing relationships and correlations between two numeric values.",
     "options": [
       {
         "id": "a",
@@ -2485,7 +2485,7 @@
     "testSet": 3,
     "module": 1,
     "section": "Get started with Microsoft data analytics",
-    "text": "Match the correct definition of the errors you encounter while importing data into Power BI. Query Timeout Timeout expired Couldn't find data Could not find the file Data Type errors 1. Hardware resources are being constrained by concurrent users using the same data 2. Indicates you pulled too much data according to your org policy. 3. Power BI expects to find data formatted as a table from Excel. 4. Caused by the file moving locations or the permissions to the file changing. 5. An error in interpreting the data type in Power BI.",
+    "text": "Match the correct definition of the errors you encounter while importing data into Power BI. Errors: Query Timeout; Timeout expired; Couldn't find data; Could not find the file; Data Type errors. Definitions: 1. Hardware resources are being constrained by concurrent users using the same data. 2. Indicates you pulled too much data according to your org policy. 3. Power BI expects to find data formatted as a table from Excel. 4. Caused by the file moving locations or the permissions to the file changing. 5. An error in interpreting the data type in Power BI.",
     "options": [
       {
         "id": "a",
@@ -2796,7 +2796,7 @@
     "testSet": 12,
     "module": 1,
     "section": "Get started with Microsoft data analytics",
-    "text": "Match the following report and dashboard features with their functionalities: Features: Drill-Through Filters Drill-Down Cross-Filtering Functionalities: A. Allows users to see more detailed data by clicking a visual element. B. Enables the selection of specific data points to refine visualizations. C. Navigates from summarized data to more detailed information. D. Filter's visuals based on interactions with other visuals. Feel free to match the features (1-4) with their corresponding functionalities (A-D).",
+    "text": "Match the following report and dashboard features with their functionalities. Features: Drill-Through; Filters; Drill-Down; Cross-Filtering. Functionalities: A. Allows users to see more detailed data by clicking a visual element. B. Enables the selection of specific data points to refine visualizations. C. Navigates from summarized data to more detailed information. D. Filters visuals based on interactions with other visuals.",
     "options": [
       {
         "id": "a",
@@ -4615,7 +4615,7 @@
     "testSet": 6,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the model data type with its corresponding DAX data type and description: Model Data Types: Whole number; Decimal number; Boolean; Text; Date; Currency; N/A. Descriptions: A. Currency – Supports values from -9.22 x 10¹⁴ to 9.22 x 10¹⁴ with four decimal digits of fixed precision; B. Boolean – Represents TRUE or FALSE; C. String – Unicode character string; D. Date/time – Valid dates after January 1, 1900; E. BLANK – Equivalent to SQL NULL in some cases; F. 64-bit integer – Range from -2⁶³ to 2⁶³ - 1; G. 64-bit real – Supports negative and positive values with up to 17 decimal digits",
+    "text": "Match the model data type with its corresponding DAX data type and description. Model Data Types: Whole number; Decimal number; Boolean; Text; Date; Currency; N/A. Descriptions: A. Currency – Supports values from -9.22 x 10^14 to 9.22 x 10^14 with four decimal digits of fixed precision. B. Boolean – Represents TRUE or FALSE. C. String – Unicode character string. D. Date/time – Valid dates after January 1, 1900. E. BLANK – Equivalent to SQL NULL in some cases. F. A 64-bit integer – Range from -2^63 to 2^63 minus 1. G. A 64-bit real number – Supports negative and positive values with up to 17 decimal digits.",
     "options": [
       {
         "id": "a",
@@ -4835,7 +4835,7 @@
     "testSet": 12,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the following: ^ - (as in -1) * and / NOT + and - & =, ==, <, >, <=, >=, <> Operations: a. Addition and subtraction b. Concatenation of two strings of text c. Multiplication and division d. Comparison e. Sign (negative or positive) f. Exponentiation g. Logical NOT",
+    "text": "Match the following DAX operators with their operations, in DAX's order of precedence. Operators: ^ (exponentiation); - (as in -1, unary sign); * and /; NOT; + and -; &; =, ==, <, >, <=, >=, <>. Operations: A. Addition and subtraction. B. Concatenation of two strings of text. C. Multiplication and division. D. Comparison. E. Sign (negative or positive). F. Exponentiation. G. Logical NOT.",
     "options": [
       {
         "id": "a",
@@ -5568,7 +5568,7 @@
     "testSet": 11,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the following: Column A DATEADD PARALLELPERIOD SAMEPERIODLASTYEAR NEXTDAY, NEXTMONTH, NEXTQUARTER, NEXTYEAR, PREVIOUSDAY, PREVIOUSMONTH, PREVIOUSQUARTER, PREVIOUSYEAR Column B a. Returns a table of dates shifted forward or backward in time by the specified number of intervals from the dates in the current filter context. b. Returns a table of dates representing a full period parallel to the one in the current filter context, shifted forward or backward in time. c. Returns a table of dates shifted exactly one year back from the dates in the current filter context. d. Helper functions for moving exactly one full period forward or backward, each returning a table of dates.",
+    "text": "Match the following DAX time intelligence functions with their behavior. Column A: DATEADD; PARALLELPERIOD; SAMEPERIODLASTYEAR; NEXTDAY, NEXTMONTH, NEXTQUARTER, NEXTYEAR, PREVIOUSDAY, PREVIOUSMONTH, PREVIOUSQUARTER, PREVIOUSYEAR. Column B: A. Returns a table of dates shifted forward or backward in time by the specified number of intervals from the dates in the current filter context. B. Returns a table of dates representing a full period parallel to the one in the current filter context, shifted forward or backward in time. C. Returns a table of dates shifted exactly one year back from the dates in the current filter context. D. Helper functions for moving exactly one full period forward or backward, each returning a table of dates.",
     "options": [
       {
         "id": "a",
@@ -5684,7 +5684,7 @@
     "testSet": 3,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each concept with its comparison in visual calculations. Column A A. Measures B. Calculated columns C. Semantic model D. Filter context Column B Visual calculations avoid complexity of this Visual calculations offer similar simplicity to this Visual calculations are easier to write and maintain than this Visual calculations do not rely on this unless added to the visual",
+    "text": "Match each concept with its comparison in visual calculations. Column A: A. Measures; B. Calculated columns; C. Semantic model; D. Filter context. Column B: 1. Visual calculations offer similar simplicity to this. 2. Visual calculations are easier to write and maintain than this. 3. Visual calculations avoid complexity of this. 4. Visual calculations do not rely on this unless added to the visual.",
     "options": [
       {
         "id": "a",
@@ -5742,7 +5742,7 @@
     "testSet": 5,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the Sections of the Visual Calculation Window Left Side Options A. The visual preview B. A formula bar C. The visual matrix Right Side Options Shows the visual you're working with Where you can add visual calculations Shows the data in the visual and displays the results of visual calculations as you add them. Any styling or theming you apply to your visual isn't applied to the visual matrix",
+    "text": "Match the Sections of the Visual Calculation Window. Left Side Options: A. The visual preview; B. A formula bar; C. The visual matrix. Right Side Options: 1. Shows the visual you're working with. 2. Where you can add visual calculations. 3. Shows the data in the visual and displays the results of visual calculations as you add them, though any styling or theming you apply to your visual isn't applied here.",
     "options": [
       {
         "id": "a",
@@ -5965,7 +5965,7 @@
     "testSet": 11,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the following categories of visual performance logs with their descriptions: Left Column DAX query Visual display Other Right Column A. Time taken to send the query and receive results from Power BI B. Time taken to render the visual, including retrieving web images or geocoding C. Time spent preparing queries, waiting for other visuals, or background processing",
+    "text": "Match the following categories of visual performance logs with their descriptions. Left Column: DAX query; Visual display; Other. Right Column: A. Time taken to send the query and receive results from Power BI. B. Time taken to render the visual, including retrieving web images or geocoding. C. Time spent preparing queries, waiting for other visuals, or background processing.",
     "options": [
       {
         "id": "a",
@@ -6047,7 +6047,7 @@
     "testSet": 2,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each analytical feature with its correct description. Left (Feature) Improve performance by identifying and removing unnecessary rows and columns Identify poorly performing measures, relationships, and visuals by using Performance Analyzer and DAX query view Improve performance by reducing granularity Use reference lines, error bars, and forecasting Use grouping, binning, and clustering Detect outliers and anomalies Right (Description) A. Adds statistical overlays to visuals to highlight trends, uncertainty, and future projections B. Segments data into logical categories or clusters for better comparison and analysis C. Highlights unusual data points based on statistical thresholds or patterns D. Reduces the volume of data processed by summarizing detailed records E. Removes excess data to reduce memory usage and improve query speed F. Diagnoses slow visuals and inefficient DAX expressions to optimize report performance",
+    "text": "Match each analytical feature with its correct description. Features: Improve performance by identifying and removing unnecessary rows and columns; Identify poorly performing measures, relationships, and visuals by using Performance Analyzer and DAX query view; Improve performance by reducing granularity; Use reference lines, error bars, and forecasting; Use grouping, binning, and clustering; Detect outliers and anomalies. Descriptions: A. Removes excess data to reduce memory usage and improve query speed. B. Diagnoses slow visuals and inefficient DAX expressions to optimize report performance. C. Reduces the volume of data processed by summarizing detailed records. D. Adds statistical overlays to visuals to highlight trends, uncertainty, and future projections. E. Segments data into logical categories or clusters for better comparison and analysis. F. Highlights unusual data points based on statistical thresholds or patterns.",
     "options": [
       {
         "id": "a",
@@ -6105,7 +6105,7 @@
     "testSet": 4,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each modeling feature with its correct description. Left (Feature) Configure table and column properties Implement role-playing dimensions Define a relationship's cardinality and cross-filter direction Create a common date table Identify use cases for calculated columns and calculated tables Hide unused fields from report view Right (Description) A. Enables time intelligence functions and consistent date filtering across reports B. Allows the same dimension table to serve multiple roles in the model (e.g., OrderDate, ShipDate) C. Controls how tables relate and how filters propagate between them D. Adds semantic meaning, formatting, and metadata to improve usability and performance E. Used to add row-level logic or create new tables based on existing data F. Reduces clutter and improves report performance by removing irrelevant fields",
+    "text": "Match each modeling feature with its correct description. Features: Configure table and column properties; Implement role-playing dimensions; Define a relationship's cardinality and cross-filter direction; Create a common date table; Identify use cases for calculated columns and calculated tables; Hide unused fields from report view. Descriptions: A. Adds semantic meaning, formatting, and metadata to improve usability and performance. B. Allows the same dimension table to serve multiple roles in the model (e.g., OrderDate, ShipDate). C. Controls how tables relate and how filters propagate between them. D. Enables time intelligence functions and consistent date filtering across reports. E. Used to add row-level logic or create new tables based on existing data. F. Reduces clutter and improves report performance by removing irrelevant fields.",
     "options": [
       {
         "id": "a",
@@ -6192,7 +6192,7 @@
     "testSet": 7,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each modeling concept with its correct description. Left (Concept) Use surrogate keys for relationships Normalize data into fact and dimension tables Configure cardinality and cross-filter direction Implement calculation groups Use inactive relationships with USERELATIONSHIP Apply object-level security (OLS) Right (Description) A. Controls visibility of specific columns or tables based on user roles B. Replaces natural keys with integer-based keys to improve join performance C. Organizes data into a star schema to reduce redundancy and improve query efficiency D. Enables reusable logic across multiple measures, such as time intelligence or formatting E. Defines how filters propagate between tables and whether relationships are one-to-one or one-to-many F. Activates dormant relationships in DAX to support alternate filtering paths",
+    "text": "Match each modeling concept with its correct description. Concepts: Use surrogate keys for relationships; Normalize data into fact and dimension tables; Configure cardinality and cross-filter direction; Implement calculation groups; Use inactive relationships with USERELATIONSHIP; Apply object-level security (OLS). Descriptions: A. Replaces natural keys with integer-based keys to improve join performance. B. Organizes data into a star schema to reduce redundancy and improve query efficiency. C. Defines how filters propagate between tables and whether relationships are one-to-one or one-to-many. D. Enables reusable logic across multiple measures, such as time intelligence or formatting. E. Activates dormant relationships in DAX to support alternate filtering paths. F. Controls visibility of specific columns or tables based on user roles.",
     "options": [
       {
         "id": "a",
@@ -6496,7 +6496,7 @@
     "testSet": 4,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the Following: Power BI Connectivity Modes Requirements: Maximum interactivity and full transformation flexibility Near real-time changes plus historical context Large-scale lakehouse or warehouse with low-latency reads Access multiple external sources without importing all data Use a published enterprise model with centralized governance Filter data at source using user-driven parameters Connectivity Modes: A. Import B. Hybrid table (Import + DirectQuery) C. Direct Lake D. DirectQuery (composite model) E. Live connection to semantic model or Analysis Services F. DirectQuery with dynamic M parameters",
+    "text": "Match each business requirement to the Power BI connectivity mode that best fits it. Requirements: Maximum interactivity and full transformation flexibility; Near real-time changes plus historical context; Large-scale lakehouse or warehouse with low-latency reads; Access multiple external sources without importing all data; Use a published enterprise model with centralized governance; Filter data at source using user-driven parameters. Connectivity Modes: A. Import. B. Hybrid table (Import + DirectQuery). C. Direct Lake. D. DirectQuery (composite model). E. Live connection to semantic model or Analysis Services. F. DirectQuery with dynamic M parameters.",
     "options": [
       {
         "id": "a",
@@ -6588,7 +6588,7 @@
     "testSet": 7,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each modeling technique with its correct description. Left (Technique) Use role-based perspectives Configure data categories for columns Use composite keys in relationships Mark a table as a date table Apply summarization settings to columns Use calculated columns for slicer compatibility Right (Description) A. Enables time intelligence functions like YTD and MTD by identifying the official date table B. Controls how a column is interpreted (e.g., as an address, image URL, or web link) for visuals and tooltips C. Creates a relationship using multiple columns when a single key is insufficient D. Limits visible fields for specific user roles to simplify report authoring E. Allows columns to be summed, averaged, or counted automatically in visuals F. Ensures slicers work properly when filtering based on derived or transformed values",
+    "text": "Match each modeling technique with its correct description. Techniques: Use role-based perspectives; Configure data categories for columns; Use composite keys in relationships; Mark a table as a date table; Apply summarization settings to columns; Use calculated columns for slicer compatibility. Descriptions: A. Limits visible fields for specific user roles to simplify report authoring. B. Controls how a column is interpreted (e.g., as an address, image URL, or web link) for visuals and tooltips. C. Creates a relationship using multiple columns when a single key is insufficient. D. Enables time intelligence functions like YTD and MTD by identifying the official date table. E. Allows columns to be summed, averaged, or counted automatically in visuals. F. Ensures slicers work properly when filtering based on derived or transformed values.",
     "options": [
       {
         "id": "a",
@@ -6714,7 +6714,7 @@
     "testSet": 11,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "Match each report type to its most appropriate use case at Contoso Skateboard Store. Options A. Dashboard B. Analytical report C. Operational report D. Educational report Use Cases Sales analysis with drill-down from year to day Inventory report with a Submit Order button COVID-19 vaccination rollout explanation Executive summary of KPIs and performance trends",
+    "text": "Match each report type to its most appropriate use case at Contoso Skateboard Store. Options: A. Dashboard; B. Analytical report; C. Operational report; D. Educational report. Use Cases: 1. Sales analysis with drill-down from year to day. 2. Inventory report with a Submit Order button. 3. COVID-19 vaccination rollout explanation. 4. Executive summary of KPIs and performance trends.",
     "options": [
       {
         "id": "a",
@@ -7485,7 +7485,7 @@
     "testSet": 8,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "Match the Element Type with Its Description Left Side (Element Type): A. Text box B. Buttons C. Shapes D. Image Right Side (Description): Adds rich text like titles with formatting and hyperlinks Adds interactive controls that perform actions like navigation or drillthrough Adds decorative or functional visuals like arrows or icons; can include text and actions Uploads a graphic such as a logo; can also act as a button",
+    "text": "Match the Element Type with Its Description. Element Types: A. Text box; B. Buttons; C. Shapes; D. Image. Descriptions: 1. Adds rich text like titles with formatting and hyperlinks. 2. Adds interactive controls that perform actions like navigation or drillthrough. 3. Adds decorative or functional visuals like arrows or icons; can include text and actions. 4. Uploads a graphic such as a logo; can also act as a button.",
     "options": [
       {
         "id": "a",
@@ -7626,7 +7626,7 @@
     "testSet": 12,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "Match the Visual Type with Its Description Left Side (Visual Type): A. Line chart B. Stacked column chart C. Area chart D. Line and stacked column chart E. Ribbon chart Right Side (Description): Combines trend lines with category breakdowns in columns Displays rank changes over time across categories Shows cumulative values over time with emphasis on volume Ideal for showing trends and values over time Compares parts of a whole across time periods using stacked bars",
+    "text": "Match the Visual Type with Its Description. Visual Types: A. Line chart; B. Stacked column chart; C. Area chart; D. Line and stacked column chart; E. Ribbon chart. Descriptions: 1. Ideal for showing trends and values over time. 2. Compares parts of a whole across time periods using stacked bars. 3. Shows cumulative values over time with emphasis on volume. 4. Combines trend lines with category breakdowns in columns. 5. Displays rank changes over time across categories.",
     "options": [
       {
         "id": "a",
@@ -8262,7 +8262,7 @@
     "testSet": 6,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "Match the use case with the correct filter type: Show only products in the \"Electronics\" category Display transactions from the last 30 days Show top 5 cities by total sales Display customers whose purchase amount is greater than ₹10,000 Filter Types A. Top N B. Advanced C. Relative date and Relative time D. Basic",
+    "text": "Match the use case with the correct filter type. Use Cases: Show only products in the \"Electronics\" category; Display transactions from the last 30 days; Show top 5 cities by total sales; Display customers whose purchase amount is greater than ₹10,000. Filter Types: A. Top N. B. Advanced. C. Relative date and Relative time. D. Basic.",
     "options": [
       {
         "id": "a",
@@ -8286,7 +8286,7 @@
     "testSet": 7,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "Match the Filter Type with Its Example or Use Case Filter Types Automatic filters Manual filters Include/Exclude filters Drill-down filters Cross-drill filters Drillthrough filters Use Cases / Examples A. Clicking on a year in a column chart drills down to quarters B. Right-click a product name and drill through to a detailed product page C. Clicking a bar in a chart filters other visuals automatically D. Right-click a data point and choose \"Exclude\" to remove it from the visual E. Set by the report designer in the Filters pane to show only FY2025 data F. Not supported directly as a filter type; handled through interactions, not filter settings",
+    "text": "Match the Filter Type with Its Example or Use Case. Filter Types: Automatic filters; Manual filters; Include/Exclude filters; Drill-down filters; Cross-drill filters; Drillthrough filters. Use Cases / Examples: A. Clicking a bar in a chart filters other visuals automatically. B. Set by the report designer in the Filters pane to show only FY2025 data. C. Right-click a data point and choose \"Exclude\" to remove it from the visual. D. Clicking on a year in a column chart drills down to quarters. E. Not supported directly as a filter type; handled through interactions, not filter settings. F. Right-click a product name and drill through to a detailed product page.",
     "options": [
       {
         "id": "a",
@@ -13865,7 +13865,7 @@
     "testSet": 1,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match the Following Requirements: Create dashboards Create reports Create calculated columns Configure security Configure sharing Tools: A. Power BI Desktop or Power BI ServiceB. Power BI Service onlyC. Power BI Desktop only",
+    "text": "Match the Following Requirements with the tool that supports them. Requirements: Create dashboards; Create reports; Create calculated columns; Configure security; Configure sharing. Tools: A. Power BI Desktop or Power BI Service. B. Power BI Service only. C. Power BI Desktop only.",
     "options": [
       {
         "id": "a",
@@ -13924,7 +13924,7 @@
     "testSet": 3,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "A company uses Microsoft Excel workbooks to store consolidated sales data. Workbooks are stored on OneDrive for Business. From the options, match each Power BI feature to its requirement. 1. Requirement: Enable users friendly reporting on phone. Feature _________ 2. Requirement: Use natural language to query and aggregate data. Feature _________",
+    "text": "A company uses Microsoft Excel workbooks to store consolidated sales data. Workbooks are stored on OneDrive for Business. Match each Power BI feature to its requirement. Requirements: 1. Enable user-friendly reporting on phone. 2. Use natural language to query and aggregate data. Features: A. Mobile Apps. B. Q&A.",
     "options": [
       {
         "id": "a",
@@ -14631,7 +14631,7 @@
     "testSet": 10,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each term with its correct description: Terms: R Script Tree Maps Slicers Key Influencers Chart Description: a) Identify factors influencing a specific outcome or target in your data.b) Interactive filtering and slicing data in visuals or reports.c) Advanced data visualization and analysis using custom R scripts.d) Display hierarchical data with nested rectangles, suitable for visualizing data with categories and subcategories.",
+    "text": "Match each term with its correct description. Terms: R Script; Tree Maps; Slicers; Key Influencers Chart. Description: A. Identify factors influencing a specific outcome or target in your data. B. Interactive filtering and slicing data in visuals or reports. C. Advanced data visualization and analysis using custom R scripts. D. Display hierarchical data with nested rectangles, suitable for visualizing data with categories and subcategories.",
     "options": [
       {
         "id": "a",
@@ -14788,7 +14788,7 @@
     "testSet": 3,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "You create a Power BI dashboard. Match the task from options to the below statements. 1. Ensure that coworkers can see the dashboard 2. Display data from Microsoft Excel in the dashboard 3. A report title is viewed in the dashboard",
+    "text": "You create a Power BI dashboard. Match the task to the below statements. Statements: Ensure that coworkers can see the dashboard; Display data from Microsoft Excel in the dashboard; A report title is viewed in the dashboard. Tasks: A. Share. B. Get data. C. Pin.",
     "options": [
       {
         "id": "a",
@@ -14904,7 +14904,7 @@
     "testSet": 7,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each security concept with its enforcement method. Left (Concept) A. Dynamic Row-Level Security B. Static Row-Level Security C. Sensitivity Labels D. Data Loss Prevention E. Service Principal Auth F. FIPS Compliance Right (Enforcement) Labels applied to datasets to classify and enforce encryption Filters data at query time based on the current user’s identity Prevents sharing or exporting of sensitive content beyond rules Fixed rules applied to roles inside the model design Uses an Azure AD app identity instead of individual user credentials Ensures cryptographic operations meet government standards",
+    "text": "Match each security concept with its enforcement method. Concepts: A. Dynamic Row-Level Security; B. Static Row-Level Security; C. Sensitivity Labels; D. Data Loss Prevention; E. Service Principal Auth; F. FIPS Compliance. Enforcement: 1. Labels applied to datasets to classify and enforce encryption. 2. Filters data at query time based on the current user's identity. 3. Prevents sharing or exporting of sensitive content beyond rules. 4. Fixed rules applied to roles inside the model design. 5. Uses an Azure AD app identity instead of individual user credentials. 6. Ensures cryptographic operations meet government standards.",
     "options": [
       {
         "id": "a",
@@ -15020,7 +15020,7 @@
     "testSet": 11,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each user role with its correct definition. Left (Role) Workspace Admin Workspace Member Workspace Contributor Workspace Viewer Build Permission Fabric Administrator (previously Power BI Administrator) Right (Definition) A. Can connect to datasets to build new reports in other workspaces B. Full control of workspace, including managing user access and settings C. Tenant-level role for managing capacity, tenant settings, and governance D. Create, edit, and publish content as apps; share with others; cannot change workspace roles E. Create and edit content within the workspace; cannot publish apps or modify settings F. View and interact with content; cannot edit or publish",
+    "text": "Match each user role with its correct definition. Roles: Workspace Admin; Workspace Member; Workspace Contributor; Workspace Viewer; Build Permission; Fabric Administrator (previously Power BI Administrator). Definitions: A. Can connect to datasets to build new reports in other workspaces. B. Full control of workspace, including managing user access and settings. C. Tenant-level role for managing capacity, tenant settings, and governance. D. Create, edit, and publish content as apps; share with others; cannot change workspace roles. E. Create and edit content within the workspace; cannot publish apps or modify settings. F. View and interact with content; cannot edit or publish.",
     "options": [
       {
         "id": "a",
@@ -15149,7 +15149,7 @@
     "testSet": 3,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match the right option : Terms: Bookmarks Buttons Selections Definitions: Capture the configured view of a report page so that you can return to that view later. Create a more interactive experience for the report users. Determine what items in the report are visible and what items are hidden.",
+    "text": "Match the right option. Terms: Bookmarks; Buttons; Selections. Definitions: A. Capture the configured view of a report page so that you can return to that view later. B. Create a more interactive experience for the report users. C. Determine what items in the report are visible and what items are hidden.",
     "options": [
       {
         "id": "a",
@@ -15562,7 +15562,7 @@
     "testSet": 3,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each optimization concept with its function. Left (Concept) A. Query Folding B. Incremental Refresh C. Composite Model D. Drillthrough E. Star Schema F. Variable Scoping Right (Function) Partitioning large tables into segments for efficiency Combining Import and DirectQuery storage modes in one model DAX optimization technique to reuse calculations within a measure Data modeling pattern that separates facts and dimensions Pushing transformations back to the data source when possible Navigating from summary visuals to detailed report pages",
+    "text": "Match each optimization concept with its function. Concepts: A. Query Folding; B. Incremental Refresh; C. Composite Model; D. Drillthrough; E. Star Schema; F. Variable Scoping. Functions: 1. Partitioning large tables into segments for efficiency. 2. Combining Import and DirectQuery storage modes in one model. 3. DAX optimization technique to reuse calculations within a measure. 4. Data modeling pattern that separates facts and dimensions. 5. Pushing transformations back to the data source when possible. 6. Navigating from summary visuals to detailed report pages.",
     "options": [
       {
         "id": "a",
@@ -15741,7 +15741,7 @@
     "testSet": 9,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each tenant setting or concept with its administrative impact. Left (Setting) A. Privacy Level Settings B. Tenant Settings C. Deployment Pipelines D. Organizational Custom Visuals E. Service Principal Authentication F. Feature Rollout Options Right (Impact) Controls data isolation boundaries (Public, Org, Private) per source Controls global toggles for sharing, export, embedding, etc. Provides Dev-Test-Prod stages for content promotion Allows enterprise-certified custom visuals only Enables non-interactive Azure AD identities to call Power BI APIs Manages early access to upcoming Power BI features",
+    "text": "Match each tenant setting or concept with its administrative impact. Settings: A. Privacy Level Settings; B. Tenant Settings; C. Deployment Pipelines; D. Organizational Custom Visuals; E. Service Principal Authentication; F. Feature Rollout Options. Impacts: 1. Controls data isolation boundaries (Public, Org, Private) per source. 2. Controls global toggles for sharing, export, embedding, etc. 3. Provides Dev-Test-Prod stages for content promotion. 4. Allows enterprise-certified custom visuals only. 5. Enables non-interactive Azure AD identities to call Power BI APIs. 6. Manages early access to upcoming Power BI features.",
     "options": [
       {
         "id": "a",
@@ -15799,7 +15799,7 @@
     "testSet": 11,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each tool or pane with its advanced use in performance tuning. Left (Tool) A. VertiPaq Analyzer B. DAX Studio C. Tabular Editor D. Performance Analyzer E. SQL Server Profiler F. DAX Formatter Right (Use) Formats DAX code for readability and best practices Captures XML for Analysis events for DirectQuery troubleshooting Measures visual load, DAX query, and storage engine durations Profiles column storage, compression, and segment sizes Provides an external scripting interface to edit Tabular models Executes and benchmarks DAX queries against Power BI datasets",
+    "text": "Match each tool or pane with its advanced use in performance tuning. Tools: A. VertiPaq Analyzer; B. DAX Studio; C. Tabular Editor; D. Performance Analyzer; E. SQL Server Profiler; F. DAX Formatter. Uses: 1. Formats DAX code for readability and best practices. 2. Captures XML for Analysis events for DirectQuery troubleshooting. 3. Measures visual load, DAX query, and storage engine durations. 4. Profiles column storage, compression, and segment sizes. 5. Provides an external scripting interface to edit Tabular models. 6. Executes and benchmarks DAX queries against Power BI datasets.",
     "options": [
       {
         "id": "a",
@@ -15905,7 +15905,7 @@
     "testSet": 2,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each connectivity mode or gateway component with its capability. Left (Mode/Component) A. Import Mode B. DirectQuery Mode C. Live Connection D. Composite Model E. On-Premises Data Gateway F. XMLA Endpoint Right (Capability) Allows live connections to Analysis Services tabular models Mixes Import-cached tables and DirectQuery sources in one model Routes live queries from Power BI Service to on-prem data sources Loads data into the in-memory VertiPaq engine Enables programmatic read/write via connectivity APIs Queries the source on every interaction, without caching",
+    "text": "Match each connectivity mode or gateway component with its capability. Modes: A. Import Mode; B. DirectQuery Mode; C. Live Connection; D. Composite Model; E. On-Premises Data Gateway; F. XMLA Endpoint. Capabilities: 1. Allows live connections to Analysis Services tabular models. 2. Mixes Import-cached tables and DirectQuery sources in one model. 3. Routes live queries from Power BI Service to on-prem data sources. 4. Loads data into the in-memory VertiPaq engine. 5. Enables programmatic read/write via connectivity APIs. 6. Queries the source on every interaction, without caching.",
     "options": [
       {
         "id": "a",
@@ -16090,7 +16090,7 @@
     "testSet": 7,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each advanced modeling concept with its correct definition. Left (Concept) A. Calculation Group B. Composite Model C. Aggregation Table D. Auto Date/Time E. Bidirectional Filtering F. Query Reduction Right (Definition) Allows combining Import and DirectQuery sources in one model Enables reuse of DAX logic across multiple measures Improves performance by summarizing detailed data Automatically creates hidden date tables for time intelligence Allows filters to flow in both directions between related tables Minimizes the number of queries sent to the data source",
+    "text": "Match each advanced modeling concept with its correct definition. Concepts: A. Calculation Group; B. Composite Model; C. Aggregation Table; D. Auto Date/Time; E. Bidirectional Filtering; F. Query Reduction. Definitions: 1. Enables reuse of DAX logic across multiple measures. 2. Allows combining Import and DirectQuery sources in one model. 3. Improves performance by summarizing detailed data. 4. Automatically creates hidden date tables for time intelligence. 5. Allows filters to flow in both directions between related tables. 6. Minimizes the number of queries sent to the data source.",
     "options": [
       {
         "id": "a",
@@ -16436,7 +16436,7 @@
     "testSet": 5,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each AI-powered feature with its correct description. Left (AI Feature) Q&A Quick Insights Key Influencers Decomposition Tree Smart Narratives AI Insights Right (Description) A. Automatically generates written explanations and summaries of report data B. Uses statistical analysis to surface the factors that most affect a selected metric C. Provides an interactive visual that breaks a measure into nested categories for exploration D. Allows users to type natural language questions to create visuals and answers E. Enables execution of Azure Machine Learning models and cognitive services on datasets F. Scans a dataset to detect patterns, outliers, and trends, then presents findings",
+    "text": "Match each AI-powered feature with its correct description. Features: Q&A; Quick Insights; Key Influencers; Decomposition Tree; Smart Narratives; AI Insights. Descriptions: A. Allows users to type natural language questions to create visuals and answers. B. Uses statistical analysis to surface the factors that most affect a selected metric. C. Provides an interactive visual that breaks a measure into nested categories for exploration. D. Automatically generates written explanations and summaries of report data. E. Scans a dataset to detect patterns, outliers, and trends, then presents findings. F. Enables execution of Azure Machine Learning models and cognitive services on datasets.",
     "options": [
       {
         "id": "a",
@@ -16528,7 +16528,7 @@
     "testSet": 8,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each admin concept with its definition. Left (Concept) A. Power BI Pro License B. Power BI Premium License C. Capacity Workspace D. Dedicated Capacity E. License Assignment F. SKU Management Right (Definition) Enables sharing and collaboration in Power BI Service Provides enhanced performance and larger datasets Workspace assigned to Premium capacity Reserved resources for enterprise workloads Process of allocating licenses to users Selection and configuration of capacity tiers",
+    "text": "Match each admin concept with its definition. Concepts: A. Power BI Pro License; B. Power BI Premium License; C. Capacity Workspace; D. Dedicated Capacity; E. License Assignment; F. SKU Management. Definitions: 1. Enables sharing and collaboration in Power BI Service. 2. Provides enhanced performance and larger datasets. 3. Workspace assigned to Premium capacity. 4. Reserved resources for enterprise workloads. 5. Process of allocating licenses to users. 6. Selection and configuration of capacity tiers.",
     "options": [
       {
         "id": "a",
@@ -16634,7 +16634,7 @@
     "testSet": 12,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each embedding or developer feature with its role. Left (Feature) A. Embed Token B. Power BI Embedded C. JavaScript API D. REST API E. Custom Visual F. Power BI Developer SDK Right (Role) Grants time-limited access to embedded Power BI content Azure service that hosts embedded analytics in apps Client-side library for interacting with embedded reports and dashboards Service endpoints for programmatic management of Power BI objects Visual components built using TypeScript, D3.js, or React NuGet/npm packages and templates for building Power BI integrations",
+    "text": "Match each embedding or developer feature with its role. Features: A. Embed Token; B. Power BI Embedded; C. JavaScript API; D. REST API; E. Custom Visual; F. Power BI Developer SDK. Roles: 1. Grants time-limited access to embedded Power BI content. 2. Azure service that hosts embedded analytics in apps. 3. Client-side library for interacting with embedded reports and dashboards. 4. Service endpoints for programmatic management of Power BI objects. 5. Visual components built using TypeScript, D3.js, or React. 6. NuGet/npm packages and templates for building Power BI integrations.",
     "options": [
       {
         "id": "a",
@@ -16726,7 +16726,7 @@
     "testSet": 3,
     "module": 5,
     "section": "Manage and secure Power BI",
-    "text": "Match each administrative interface or API with its primary capability. Left (Interface/API) A. PowerShell Cmdlets B. REST Admin APIs C. Audit Log Export D. Tenant Settings API E. Capacity Metrics API F. Azure Purview Connector Right (Capability) Retrieves Premium capacity usage and health metrics programmatically Exposes and modifies organization’s tenant settings via API calls Scripts user, group, workspace, and capacity management tasks Streams audit events to Azure storage or SIEM solutions Provides programmatic endpoints for Power BI admin operations Integrates Power BI metadata into enterprise data governance catalog",
+    "text": "Match each administrative interface or API with its primary capability. Interfaces: A. PowerShell Cmdlets; B. REST Admin APIs; C. Audit Log Export; D. Tenant Settings API; E. Capacity Metrics API; F. Azure Purview Connector. Capabilities: 1. Retrieves Premium capacity usage and health metrics programmatically. 2. Exposes and modifies organization's tenant settings via API calls. 3. Scripts user, group, workspace, and capacity management tasks. 4. Streams audit events to Azure storage or SIEM solutions. 5. Provides programmatic endpoints for Power BI admin operations. 6. Integrates Power BI metadata into enterprise data governance catalog.",
     "options": [
       {
         "id": "a",
@@ -18134,7 +18134,7 @@
     "testSet": 10,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each DAX formula with its correct description = DATEADD ( DateTime[DateKey], -1, YEAR ) = DATEADD ( FiscalCalendar, -1, YEAR ) = DATEADD ( DateTime[DateKey], 1, MONTH ) Descriptions A. Shifts the set of dates one year back from the current context. B. Returns a table of dates shifted one year back, based on a fiscal calendar. C. Demonstrates special behavior when input is a date column, adding one month and extending to month-end if the last two days are selected.",
+    "text": "Match each DAX formula with its correct description. Formulas: DATEADD ( DateTime[DateKey], -1, YEAR ); DATEADD ( FiscalCalendar, -1, YEAR ); DATEADD ( DateTime[DateKey], 1, MONTH ). Descriptions: A. Shifts the set of dates one year back from the current context. B. Returns a table of dates shifted one year back, based on a fiscal calendar. C. Demonstrates special behavior when input is a date column, adding one month and extending to month-end if the last two days are selected.",
     "options": [
       {
         "id": "a",
@@ -18357,7 +18357,7 @@
     "testSet": 5,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each DAX concept with its correct description Concepts Calculated column Measure Calculated table Descriptions A. A model calculation used to add a column to a tabular model by writing a DAX formula. The formula must return a scalar value, and it is evaluated for each row in the table. B. A model calculation used to define business logic that aggregates or computes values dynamically based on filter context. They are not stored in tables; they are evaluated at query time. C. A model calculation used to add a table to a tabular model by writing a DAX formula. The formula must return a table object, resulting in a table that uses Import storage mode.",
+    "text": "Match each DAX concept with its correct description. Concepts: Calculated column; Measure; Calculated table. Descriptions: A. A model calculation used to add a column to a tabular model by writing a DAX formula. The formula must return a scalar value, and it is evaluated for each row in the table. B. A model calculation used to define business logic that aggregates or computes values dynamically based on filter context. They are not stored in tables; they are evaluated at query time. C. A model calculation used to add a table to a tabular model by writing a DAX formula. The formula must return a table object, resulting in a table that uses Import storage mode.",
     "options": [
       {
         "id": "a",
@@ -18415,7 +18415,7 @@
     "testSet": 7,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each measure type with the correct DAX example Measure Types Implicit measure Explicit measure Description: A. (Sum of Sales [SalesAmount]) - created by Power BI when you drag the numeric column B. Total Sales = SUM (Sales [SalesAmount])",
+    "text": "Match each measure type with the correct DAX example. Measure Types: Implicit measure; Explicit measure. Description: A. Sum of Sales [SalesAmount], created automatically by Power BI when you drag the numeric column. B. Total Sales = SUM (Sales [SalesAmount]).",
     "options": [
       {
         "id": "a",
@@ -18988,7 +18988,7 @@
     "testSet": 12,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match the Type: CONCATENATE vs CONCATENATEX Options (Functions) CONCATENATE CONCATENATEX Statements A. Joins exactly two text strings into one. B. Can combine text from multiple rows of a table into a single string. C. Accepts only two arguments (text or column reference). D. Requires an iterator (loops through rows of a table). E. Useful for creating a FullName column by joining FirstName and LastName. F. Useful for creating a commaseparated list of product categories from a table.",
+    "text": "Match each DAX function with the correct statement about it: CONCATENATE vs CONCATENATEX. Functions: CONCATENATE; CONCATENATEX. Statements: A. Joins exactly two text strings into one. B. Can combine text from multiple rows of a table into a single string. C. Accepts only two arguments (text or column reference). D. Requires an iterator (loops through rows of a table). E. Useful for creating a FullName column by joining FirstName and LastName. F. Useful for creating a comma-separated list of product categories from a table.",
     "options": [
       {
         "id": "a",
@@ -19161,7 +19161,7 @@
     "testSet": 5,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each DAX function to its correct description: Which function removes filters from a column or table? Which function retrieves a value from another related table? Which function changes the filter context of a calculation? Which function creates a summary table grouped by specified columns? Which function evaluates an expression for each row of a table and then sums the results? Which function returns all rows of a table or column, ignoring filters? Which function is often used to pull values across relationships in a star schema model?",
+    "text": "Match each DAX function to its correct description. Descriptions: 1. Which function removes filters from a column or table? 2. Which function retrieves a value from another related table? 3. Which function changes the filter context of a calculation? 4. Which function creates a summary table grouped by specified columns? 5. Which function evaluates an expression for each row of a table and then sums the results? 6. Which function returns all rows of a table or column, ignoring filters? 7. Which function is often used to pull values across relationships in a star schema model? Functions: A. ALL. B. RELATED. C. CALCULATE. D. SUMMARIZE. E. SUMX. F. ALL. G. RELATED.",
     "options": [
       {
         "id": "a",
@@ -19185,7 +19185,7 @@
     "testSet": 6,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each description to the correct DAX function or pattern: Which function returns the yeartodate total for a measure? Which function returns the parallel period (same period last year)? What does CALCULATETABLE do? Which pattern helps remove filter from one column but keep others? Which function is best to create a running total in DAX? Which function returns the last date in the current context? How do you compare monthovermonth growth in a measure? What is the effect of using ALL() inside CALCULATE on the specified table? Which DAX function helps to evaluate an expression for each row of a table and return a table of results? Which DAX function ranks values but can be unstable without a tiebreaker?",
+    "text": "Match each description to the correct DAX function or pattern. Descriptions: 1. Which function returns the year-to-date total for a measure? 2. Which function returns the parallel period (same period last year)? 3. What does CALCULATETABLE do? 4. Which pattern helps remove filter from one column but keep others? 5. Which function is best to create a running total in DAX? 6. Which function returns the last date in the current context? 7. How do you compare month-over-month growth in a measure? 8. What is the effect of using ALL() inside CALCULATE on the specified table? 9. Which DAX function helps to evaluate an expression for each row of a table and return a table of results? 10. Which DAX function ranks values but can be unstable without a tiebreaker? Functions or Patterns: A. TOTALYTD(). B. SAMEPERIODLASTYEAR(). C. Creates a table applying filters and returns it. D. ALLEXCEPT(). E. TOTALYTD(). F. LASTDATE(). G. Using DATEADD or SAMEPERIODLASTYEAR with CALCULATE. H. Removes filters from that table for evaluation. I. ADDCOLUMNS(). J. RANKX().",
     "options": [
       {
         "id": "a",
@@ -19209,7 +19209,7 @@
     "testSet": 7,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each scenario to the correct DAX function or pattern: In the Sales table, add the Product Category from the Product table. In the Customer table, list all the Orders placed by that customer. Group the Sales table by Region and calculate total sales with flexibility. Create a summary table grouped by Region and Product, optimized for measures. Compute total sales amount for products in the “Electronics” category. Return a table of all orders placed in 2025. Ignore all filters on the Sales table and calculate total sales. Calculate total sales but still respect slicers applied in the report. Assign a rank to each product based on total sales. Return the top 5 products by sales amount. Calculate total revenue by multiplying Quantity × Price for each row. Add up all values in the Sales[Amount] column directly. Add a new filter condition without overwriting current filters. Build a new filter context explicitly, e.g., Sales > 1000. Compare sales in March 2025 with March 2024. Shift current selection back by 1 month to compare February vs January. Compare sales in Q1 2025 with Q1 2024, shifting by whole quarters.",
+    "text": "Match each scenario to the correct DAX function or pattern. Scenarios: 1. In the Sales table, add the Product Category from the Product table. 2. In the Customer table, list all the Orders placed by that customer. 3. Group the Sales table by Region and calculate total sales with flexibility. 4. Create a summary table grouped by Region and Product, optimized for measures. 5. Compute total sales amount for products in the \"Electronics\" category. 6. Return a table of all orders placed in 2025. 7. Ignore all filters on the Sales table and calculate total sales. 8. Calculate total sales but still respect slicers applied in the report. 9. Assign a rank to each product based on total sales. 10. Return the top 5 products by sales amount. 11. Calculate total revenue by multiplying Quantity times Price for each row. 12. Add up all values in the Sales[Amount] column directly. 13. Add a new filter condition without overwriting current filters. 14. Build a new filter context explicitly, e.g., Sales greater than 1000. 15. Compare sales in March 2025 with March 2024. 16. Shift current selection back by 1 month to compare February vs January. 17. Compare sales in Q1 2025 with Q1 2024, shifting by whole quarters. Functions or Patterns: A. RELATED. B. RELATEDTABLE. C. SUMMARIZE. D. SUMMARIZECOLUMNS. E. CALCULATE. F. CALCULATETABLE. G. ALL. H. ALLSELECTED. I. RANKX. J. TOPN. K. SUMX. L. SUM. M. KEEPFILTERS. N. FILTER. O. SAMEPERIODLASTYEAR. P. DATEADD. Q. PARALLELPERIOD.",
     "options": [
       {
         "id": "a",
@@ -19301,7 +19301,7 @@
     "testSet": 10,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each description to the correct statement about Power BI paginated reports: Which tool is used to create paginated reports? Paginated reports are descendants of which Microsoft technology? What is the main purpose of paginated reports? Which file format is typically used to save paginated reports? Where can paginated reports be published and shared with users? Which feature is unique to paginated reports compared to standard Power BI reports? Paginated reports are best suited for which type of data presentation? Which subscription type is usually required to publish paginated reports in Power BI Service? Which rendering formats are commonly supported for exporting paginated reports? Which audience typically benefits most from paginated reports?",
+    "text": "Match each description to the correct statement about Power BI paginated reports. Descriptions: 1. Which tool is used to create paginated reports? 2. Paginated reports are descendants of which Microsoft technology? 3. What is the main purpose of paginated reports? 4. Which file format is typically used to save paginated reports? 5. Where can paginated reports be published and shared with users? 6. Which feature is unique to paginated reports compared to standard Power BI reports? 7. Paginated reports are best suited for which type of data presentation? 8. Which subscription type is usually required to publish paginated reports in Power BI Service? 9. Which rendering formats are commonly supported for exporting paginated reports? 10. Which audience typically benefits most from paginated reports? Answers: A. Power BI Report Builder. B. SQL Server Reporting Services (SSRS). C. Pixel-perfect, printable reports. D. The RDL (Report Definition Language) file format. E. Power BI Service. F. Page headers and footers with exact layout control. G. Detailed tabular data with precise formatting. H. Power BI Premium (or Premium Per User). I. PDF, Excel, and Word. J. Business users needing formal documents.",
     "options": [
       {
         "id": "a",
@@ -19461,7 +19461,7 @@
     "testSet": 3,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each description to the correct statement about Row Context and Filter Context in DAX: What does row context mean in DAX? Which functions typically create row context? What does filter context mean in DAX? Which function is most commonly used to modify filter context? If you write SUMX(Sales, Sales[Quantity] * Sales[Price]), which contexts are being used? Which statement is true about row and filter context? Which context is automatically created when a measure is placed in a visual with slicers applied? Which context is created when iterating through each row of a table? Which function can convert row context into filter context? Which context is primarily responsible for restricting data shown in visuals?",
+    "text": "Match each description to the correct statement about Row Context and Filter Context in DAX. Descriptions: 1. What does row context mean in DAX? 2. Which functions typically create row context? 3. What does filter context mean in DAX? 4. Which function is most commonly used to modify filter context? 5. If you write SUMX(Sales, Sales[Quantity] times Sales[Price]), which contexts are being used? 6. Which statement is true about row and filter context? 7. Which context is automatically created when a measure is placed in a visual with slicers applied? 8. Which context is created when iterating through each row of a table? 9. Which function can convert row context into filter context? 10. Which context is primarily responsible for restricting data shown in visuals? Answers: A. Current row being evaluated. B. SUMX, AVERAGEX. C. Filters applied to columns/tables before evaluation. D. CALCULATE. E. Both row context and filter context. F. Row context can be converted into filter context using CALCULATE. G. Filter context. H. Row context. I. CALCULATE. J. Filter context.",
     "options": [
       {
         "id": "a",
@@ -19888,7 +19888,7 @@
     "testSet": 4,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each description to the correct DAX function: Returns a set of dates in the year up to the current context date. Returns a set of dates from the previous year, aligned with the current context. Calculates yeartodate totals for a measure. Shifts a set of dates back by a specified number of intervals. Returns a set of dates in the same period of the previous year. Returns a set of dates in the current month up to the current context date.",
+    "text": "Match each description to the correct DAX function. Descriptions: 1. Returns a set of dates in the year up to the current context date. 2. Returns a set of dates from the previous year, aligned with the current context. 3. Calculates year-to-date totals for a measure. 4. Shifts a set of dates back by a specified number of intervals. 5. Returns a set of dates in the same period of the previous year. 6. Returns a set of dates in the current month up to the current context date. Functions: A. DATESYTD. B. PREVIOUSYEAR. C. TOTALYTD. D. DATEADD. E. SAMEPERIODLASTYEAR. F. DATESMTD.",
     "options": [
       {
         "id": "a",
