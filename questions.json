@@ -12716,7 +12716,7 @@
     "testSet": 11,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "Tailspin Traders wants to implement RowLevel Security (RLS) in Power BI Desktop so that each department only sees its own sales data. You are asked to arrange the steps in the correct order. A. Create a role for each department on the Manage security roles page. B. Add a filter or DAX expression to the role (e.g., [Department] = \"Game\"). C. Select the Modeling tab and choose Manage Roles. Arrange these steps in the correct order to successfully create RLS roles.",
+    "text": "Tailspin Traders wants to implement RowLevel Security (RLS) in Power BI Desktop so that each department only sees its own sales data. You are asked to arrange the steps in the correct order. A. Create a role for each department on the Manage security roles page. B. Add a filter or DAX expression to the role (e.g., [Department] = \"Game\"). C. Select the Modeling tab and choose Manage Roles.",
     "options": [
       {
         "id": "a",
@@ -12745,7 +12745,7 @@
     "testSet": 12,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "Tailspin Traders has created RowLevel Security (RLS) roles in Power BI Desktop. You need to validate that the filters are working correctly for the Game department. A. In the View as roles window, select the Game role. B. Select the Modeling tab, then choose View as Roles. C. Undo the filter by selecting View as roles again and then choosing None. Arrange these steps in the correct order to test the RLS role in Power BI Desktop",
+    "text": "Tailspin Traders has created RowLevel Security (RLS) roles in Power BI Desktop. You need to validate that the filters are working correctly for the Game department. Arrange these steps in the correct order to test the RLS role in Power BI Desktop. A. In the View as roles window, select the Game role. B. Select the Modeling tab, then choose View as Roles. C. Undo the filter by selecting View as roles again and then choosing None.",
     "options": [
       {
         "id": "a",
@@ -12808,7 +12808,7 @@
     "testSet": 2,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "Tailspin Traders has created a Game role in Power BI Service. You need to add the three employees from the Game department so that they only see data relevant to their department. A. Find the semantic model with the same name as your report. B. Select the ellipsis (…) button and then choose Security. C. In the RowLevel Security screen, add Microsoft Entra ID users or security groups to the role. Arrange these steps in the correct order to successfully add members to the role.",
+    "text": "Tailspin Traders has created a Game role in Power BI Service. You need to add the three employees from the Game department so that they only see data relevant to their department. Arrange these steps in the correct order to successfully add members to the role. A. Find the semantic model with the same name as your report. B. Select the ellipsis (…) button and then choose Security. C. In the RowLevel Security screen, add Microsoft Entra ID users or security groups to the role.",
     "options": [
       {
         "id": "a",
@@ -12972,7 +12972,7 @@
     "testSet": 8,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "Arrange the following steps in the correct order to configure a data alert in Power BI Service. A. Choose the threshold condition (Above or Below a specific value). B. Upload reports to Power BI Service and pin visuals (KPI, gauge, card) to a dashboard. C. Select the ellipsis (…) on the dashboard tile and choose Manage Alerts. D. Select + Add Alert Rule, turn the Active toggle On, name the alert, and set the condition. E. Configure how frequently alerts should be sent (Notification Center or email). F. Save and confirm the alert settings. B - Upload reports to Power BI Service and pin visuals to a dashboard.",
+    "text": "Arrange the following steps in the correct order to configure a data alert in Power BI Service. A. Choose the threshold condition (Above or Below a specific value). B. Upload reports to Power BI Service and pin visuals (KPI, gauge, card) to a dashboard. C. Select the ellipsis (…) on the dashboard tile and choose Manage Alerts. D. Select + Add Alert Rule, turn the Active toggle On, name the alert, and set the condition. E. Configure how frequently alerts should be sent (Notification Center or email). F. Save and confirm the alert settings.",
     "options": [
       {
         "id": "a",

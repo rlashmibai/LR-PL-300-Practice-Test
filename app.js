@@ -675,18 +675,29 @@ function formatMatchingTable(text) {
   `;
 }
 
+// "Arrange the steps in the correct order" / "Put the following steps in the
+// correct order" stems have the exact same problem as "match the" ones --
+// a dense run-on paragraph ending in "A. Step one B. Step two C. Step
+// three" -- just with one list to lay out instead of two. Requiring the
+// imperative verb ("arrange"/"put") together with "steps" and "order"
+// keeps this from firing on an ordinary "which represents the correct
+// order of steps" question whose lettered choices live in the options
+// array, not the stem itself (that phrasing has "order" before "steps"
+// and no "arrange"/"put").
+const ORDER_STEPS_RE = /\b(arrange|put)\b[\s\S]*\bsteps?\b[\s\S]*\border\b/i;
+
 // "Match each X to Y" question stems arrive as one dense run-on paragraph
 // ("Apps: Power Apps, Power Automate. Scenarios: A. ... B. ... C. ...").
 // Tries the real two-column table first; if the text doesn't cleanly split
 // into two equal-length lists, falls back to one line per label/item instead,
 // still far more readable than the original run-on, just not a table.
 // Only ever called for question text containing "match the"/"match each"
-// anywhere (not just at the very start, since some stems lead with a short
-// scenario sentence first), and always falls back to the untouched original
-// if neither approach finds real list structure, so it can never make an
-// ordinary question worse.
+// or the step-ordering phrasing above (not just at the very start, since
+// some stems lead with a short scenario sentence first), and always falls
+// back to the untouched original if neither approach finds real list
+// structure, so it can never make an ordinary question worse.
 function formatMatchingQuestionText(text) {
-  if (!/\bmatch (the|each)\b/i.test(text)) return text;
+  if (!/\bmatch (the|each)\b/i.test(text) && !ORDER_STEPS_RE.test(text)) return text;
 
   const table = formatMatchingTable(text);
   if (table) return table;
@@ -781,8 +792,17 @@ const SENTENCE_ABBREV_RE = new RegExp("\\b(" + SENTENCE_ABBREVIATIONS.join("|") 
 // against, so a stem that only picked up a <br> from the mid-sentence
 // "true or false:" rewrite above still gets its long run of statements
 // broken up rather than being mistaken for already-structured content.
+//
+// A stem opening with "Choose Right or Wrong."/"State True or False." etc.
+// is always a run of several separate claims to judge one at a time --
+// worth breaking apart even when the whole thing happens to land just
+// under the usual length gate, since the whole point of the stem is one
+// claim per line.
+const MULTI_STATEMENT_CUE_RE = /^(state|choose|evaluate)\b.{0,30}\b(true or false|right or wrong)\b/i;
+
 function breakLongParagraph(text, rawText) {
-  if (text.length < 350) return text;
+  const isCuedList = MULTI_STATEMENT_CUE_RE.test(rawText !== undefined ? rawText : text);
+  if (!isCuedList && text.length < 350) return text;
   if (/<img|<a\s|<table|<br/i.test(rawText !== undefined ? rawText : text)) return text;
   const letterMarkers = (text.match(/\b[A-Z]\.\s/g) || []).length;
   const numMarkers = (text.match(/\b\d{1,2}\.\s/g) || []).length;
@@ -806,7 +826,7 @@ function formatQuestionText(text) {
   // renders the same way: capitalized, on its own line, with the claim
   // starting fresh on the next.
   text = text.replace(/(\S)\s+true or false\s*[:,]\s*/i, "$1<br><br>True or False:<br><br>");
-  if (/\bmatch (the|each)\b/i.test(text)) return formatMatchingQuestionText(text);
+  if (/\bmatch (the|each)\b/i.test(text) || ORDER_STEPS_RE.test(text)) return formatMatchingQuestionText(text);
   return formatYesNoQuestionText(text) || breakLongParagraph(text, rawText);
 }
 
