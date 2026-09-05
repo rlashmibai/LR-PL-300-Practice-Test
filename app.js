@@ -776,9 +776,14 @@ const SENTENCE_ABBREV_RE = new RegExp("\\b(" + SENTENCE_ABBREVIATIONS.join("|") 
 // digit at all (protects both decimal numbers like "3.5" and list markers),
 // which means a sentence that happens to end on a bare number won't get a
 // break at that exact spot -- a missed touch-up, never a corruption.
-function breakLongParagraph(text) {
+// `rawText` (the text as authored, before formatQuestionText's own <br>-
+// inserting substitutions) is what the "already has structure" check runs
+// against, so a stem that only picked up a <br> from the mid-sentence
+// "true or false:" rewrite above still gets its long run of statements
+// broken up rather than being mistaken for already-structured content.
+function breakLongParagraph(text, rawText) {
   if (text.length < 350) return text;
-  if (/<img|<a\s|<table|<br/i.test(text)) return text;
+  if (/<img|<a\s|<table|<br/i.test(rawText !== undefined ? rawText : text)) return text;
   const letterMarkers = (text.match(/\b[A-Z]\.\s/g) || []).length;
   const numMarkers = (text.match(/\b\d{1,2}\.\s/g) || []).length;
   if (letterMarkers >= 2 || numMarkers >= 2) return text;
@@ -791,6 +796,7 @@ function breakLongParagraph(text) {
 }
 
 function formatQuestionText(text) {
+  const rawText = text;
   text = text.replace(/→|➔|➡/g, "-");
   // A handful of true/false stems bury "true or false" mid-sentence after a
   // narrative setup instead of leading with it — hard to scan since the
@@ -801,7 +807,7 @@ function formatQuestionText(text) {
   // starting fresh on the next.
   text = text.replace(/(\S)\s+true or false\s*[:,]\s*/i, "$1<br><br>True or False:<br><br>");
   if (/\bmatch (the|each)\b/i.test(text)) return formatMatchingQuestionText(text);
-  return formatYesNoQuestionText(text) || breakLongParagraph(text);
+  return formatYesNoQuestionText(text) || breakLongParagraph(text, rawText);
 }
 
 function formatExplanation(raw) {

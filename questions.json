@@ -5271,7 +5271,7 @@
     "testSet": 2,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "State True or False An inactive relationship can only be engaged in DAX using the USERELATIONSHIP function inside CALCULATE. When an inactive relationship is activated with USERELATIONSHIP, the currently active relationship remains active. Inactive relationships do not automatically participate in filter propagation. Using USERELATIONSHIP permanently changes the relationship’s status to active in the model. Multiple inactive relationships between the same tables can exist in a model.",
+    "text": "State True or False: An inactive relationship can only be engaged in DAX using the USERELATIONSHIP function inside CALCULATE. When an inactive relationship is activated with USERELATIONSHIP, the currently active relationship remains active. Inactive relationships do not automatically participate in filter propagation. Using USERELATIONSHIP permanently changes the relationship’s status to active in the model. Multiple inactive relationships between the same tables can exist in a model.",
     "options": [
       {
         "id": "a",
@@ -12842,7 +12842,7 @@
     "testSet": 3,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "State True or False You must create a DirectQuery model that connects to the database before enabling SSO. Publishing the DirectQuery model to the Power BI Service is required before setting credentials. Enabling SSO in the Power BI Service allows Power BI to pass the user’s identity to the data source. With SSO enabled, the database enforces RLS based on the user’s identity. You must still create RLS roles in Power BI when the database already enforces RLS. SSO works only with Import mode datasets",
+    "text": "State True or False: You must create a DirectQuery model that connects to the database before enabling SSO. Publishing the DirectQuery model to the Power BI Service is required before setting credentials. Enabling SSO in the Power BI Service allows Power BI to pass the user’s identity to the data source. With SSO enabled, the database enforces RLS based on the user’s identity. You must still create RLS roles in Power BI when the database already enforces RLS. SSO works only with Import mode datasets",
     "options": [
       {
         "id": "a",
@@ -12924,7 +12924,7 @@
     "testSet": 6,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "State True or False Dashboards in Power BI consist of a single page made up of tiles. Reports in Power BI can contain multiple pages for detailed analysis. Reports are created in Power BI Desktop, while dashboards are created in the Power BI Service. Dashboards in Power BI are highly interactive with drillthrough and filtering features. Reports in Power BI can connect to multiple different data sources directly. Dashboards are created in Power BI Desktop.",
+    "text": "State True or False: Dashboards in Power BI consist of a single page made up of tiles. Reports in Power BI can contain multiple pages for detailed analysis. Reports are created in Power BI Desktop, while dashboards are created in the Power BI Service. Dashboards in Power BI are highly interactive with drillthrough and filtering features. Reports in Power BI can connect to multiple different data sources directly. Dashboards are created in Power BI Desktop.",
     "options": [
       {
         "id": "a",
@@ -12948,7 +12948,7 @@
     "testSet": 7,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "State True or False You can pin a visual from a report to either a new dashboard or an existing dashboard. Once pinned, a visual becomes a tile on the dashboard. Dashboards can only contain visuals from a single report. Pinned tiles automatically update when the underlying report visual changes. After pinning, you can resize and move tiles on the dashboard. You cannot pin visuals from different semantic models into the same dashboard.",
+    "text": "State True or False: You can pin a visual from a report to either a new dashboard or an existing dashboard. Once pinned, a visual becomes a tile on the dashboard. Dashboards can only contain visuals from a single report. Pinned tiles automatically update when the underlying report visual changes. After pinning, you can resize and move tiles on the dashboard. You cannot pin visuals from different semantic models into the same dashboard.",
     "options": [
       {
         "id": "a",
@@ -13230,7 +13230,7 @@
     "testSet": 5,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "State True or False Security roles in Power BI are defined in Power BI Desktop and then published to the Service. RowLevel Security (RLS) restricts data access for specific users based on filters you set. Security roles can only be applied at the workspace level, not at the dataset level. You can test security roles in Power BI Desktop by using the View as Role feature. Assigning users to security roles is done in the Power BI Service, not in Desktop. Dynamic security can be implemented using DAX functions like USERPRINCIPALNAME().",
+    "text": "State True or False: Security roles in Power BI are defined in Power BI Desktop and then published to the Service. RowLevel Security (RLS) restricts data access for specific users based on filters you set. Security roles can only be applied at the workspace level, not at the dataset level. You can test security roles in Power BI Desktop by using the View as Role feature. Assigning users to security roles is done in the Power BI Service, not in Desktop. Dynamic security can be implemented using DAX functions like USERPRINCIPALNAME().",
     "options": [
       {
         "id": "a",
@@ -20067,7 +20067,7 @@
     "testSet": 10,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "State True or False FILTER(ALL(Sales), Sales[Amount] > 1000) removes all filters from the Sales table before applying the condition Amount > 1000. RELATED(Customer[Country]) can only be used when there is a one-to-many relationship from Customer to the current table. SUMX(FILTER(Sales, Sales[Region] = \"West\"), Sales[Amount]) iterates row by row over the filtered Sales table and sums the Amount column. RANKX(ALL(Sales[Product]), SUM(Sales[Amount])) ranks products by sales amount, ignoring any filters on Product. DIVIDE(SUM(Sales[Amount]), SUM(Sales[Quantity])) will throw an error if SUM(Sales[Quantity]) equals zero. ALLSELECTED(Sales[Region]) returns all regions in the Sales table, ignoring filters applied at any level.",
+    "text": "State True or False: FILTER(ALL(Sales), Sales[Amount] > 1000) removes all filters from the Sales table before applying the condition Amount > 1000. RELATED(Customer[Country]) can only be used when there is a one-to-many relationship from Customer to the current table. SUMX(FILTER(Sales, Sales[Region] = \"West\"), Sales[Amount]) iterates row by row over the filtered Sales table and sums the Amount column. RANKX(ALL(Sales[Product]), SUM(Sales[Amount])) ranks products by sales amount, ignoring any filters on Product. DIVIDE(SUM(Sales[Amount]), SUM(Sales[Quantity])) will throw an error if SUM(Sales[Quantity]) equals zero. ALLSELECTED(Sales[Region]) returns all regions in the Sales table, ignoring filters applied at any level.",
     "options": [
       {
         "id": "a",
@@ -20125,7 +20125,7 @@
     "testSet": 12,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "State True or False You can convert an entire semantic model from DirectQuery to Import, but not the reverse for a whole model (individual tables in a composite model can still switch storage mode more flexibly). In Import mode, all DAX functions are supported, while in DirectQuery mode some functions are restricted. DirectQuery mode always provides faster performance than Import mode because it queries the source directly. Composite models allow mixing Import and DirectQuery tables in the same dataset. When using DirectQuery, data is refreshed automatically every time a visual is interacted with. Import mode requires scheduled refreshes or manual refresh to update data. DirectQuery supports all time intelligence functions like SAMEPERIODLASTYEAR and DATESYTD. In Composite models, relationships can exist between Import tables and DirectQuery tables. Import mode stores data in memory, which can lead to faster calculations compared to DirectQuery. DirectQuery mode is recommended when working with very large datasets that cannot fit into memory.",
+    "text": "State True or False: You can convert an entire semantic model from DirectQuery to Import, but not the reverse for a whole model (individual tables in a composite model can still switch storage mode more flexibly). In Import mode, all DAX functions are supported, while in DirectQuery mode some functions are restricted. DirectQuery mode always provides faster performance than Import mode because it queries the source directly. Composite models allow mixing Import and DirectQuery tables in the same dataset. When using DirectQuery, data is refreshed automatically every time a visual is interacted with. Import mode requires scheduled refreshes or manual refresh to update data. DirectQuery supports all time intelligence functions like SAMEPERIODLASTYEAR and DATESYTD. In Composite models, relationships can exist between Import tables and DirectQuery tables. Import mode stores data in memory, which can lead to faster calculations compared to DirectQuery. DirectQuery mode is recommended when working with very large datasets that cannot fit into memory.",
     "options": [
       {
         "id": "a",
