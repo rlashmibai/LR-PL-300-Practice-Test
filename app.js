@@ -220,6 +220,18 @@ const EXPL_HEADERS = [
   "Why correct:", "Why correct", "Why Correct:", "Why Correct",
   "Why wrong:", "Why wrong", "Why Wrong:", "Why Wrong",
   "Why incorrect:", "Why incorrect", "Why Incorrect:", "Why Incorrect",
+  // Batch from a PT1 formatting-issue review (each confirmed via corpus-wide
+  // search to be a genuine standalone header, never mid-sentence, before
+  // adding). Only the colon form needs adding even for a term that appears
+  // bare with no colon in its own source (e.g. q361's "Key Advantages"
+  // paragraph) -- the headerNames lookup below strips the colon off every
+  // entry here and matches a whole paragraph against that stripped form too,
+  // so the bare form is covered automatically.
+  "Primary Key:", "Foreign Key:", "Unique Key:",
+  "Promoted:", "Limitations:", "Best Practice:",
+  "Full query folding:", "Partial query folding:", "No query folding:",
+  "Key Advantages:", "Data Source Parameters:", "Filter Parameters:",
+  "WhatIf Parameters:", "Dynamic Calculations:", "Parameter Properties:",
 ];
 
 // Recurring section-header phrases that have variable trailing content (so they
@@ -245,7 +257,12 @@ const EXPL_HEADER_PATTERNS = [
   // trailing "s" (e.g. "Recommended Youtube Videos:" -> heading "Recommended
   // Youtube Video" + a stray "s" paragraph). One atomic pattern covering
   // both cases (colon optional, singular/plural, Youtube/YouTube) avoids it.
-  /Recommended [Yy]ou[Tt]ube (?:[Vv]ideos?|[Ll]inks?)\b/g,
+  // Also consumes the literal "(s)" form some sources use for the same
+  // pluralization ("Recommended YouTube Video(s)") -- without the
+  // (?:s|\(s\))? alternation, only the bare "s" was consumed, leaving a
+  // stray "(s)" sitting in front of the first link once the header text
+  // ahead of it was isolated.
+  /Recommended [Yy]ou[Tt]ube (?:[Vv]ideo(?:s|\(s\))?|[Ll]ink(?:s|\(s\))?)(?=\s|$)/g,
   // Bare "References" (no colon): but ONLY right after a real sentence/clause
   // boundary (". "/": "/string start), never mid-phrase. Without this
   // restriction it also matches inside compound terms like "Connection
@@ -270,6 +287,16 @@ const EXPL_HEADER_PATTERNS = [
   /Common Confusion(?: to Avoid)?\b/g,
   /Why (?:It|This) Matters\b/g,
   /Simple Example\b/g,
+  // "Steps to Configure X:" / "Steps for Y:" (one source phrases it "Simple
+  // Steps to..." — the optional leading word covers that) — confirmed via
+  // corpus search to always be a genuine standalone header (7 occurrences),
+  // never mid-sentence. Isolating it lets the step-grouping pass below
+  // (which looks for this heading immediately followed by short title
+  // lines) recognize where a step list starts. Trailing colon left as a
+  // lookahead (not consumed) like the other variable-content patterns
+  // above, so it's stripped as dangling punctuation rather than baked into
+  // the heading text.
+  /(?:[A-Z][a-z]+\s)?Steps? (?:to|for) [^\n:]+(?=:)/g,
 ];
 
 function linkify(text) {
@@ -472,7 +499,7 @@ function extractColonList(sentences) {
     const m = sentences[i].match(/^(.*?:)\s+(\S.*)$/);
     if (!m) continue;
     const items = [m[2], ...sentences.slice(i + 1)];
-    const isShort = (s) => s.split(/\s+/).length <= 18;
+    const isShort = (s) => s.split(/\s+/).length <= 25;
     if (items.length >= 3 && items.every(isShort)) {
       return { before: sentences.slice(0, i), intro: m[1], items };
     }
@@ -625,8 +652,42 @@ function formatBlock(p) {
 // Splits one side of a matching question ("A. Item, B. Item" or "item; item; item")
 // into individual {marker, text} entries, preferring explicit letter/number
 // markers when present and falling back to semicolon- or comma-separated items.
+// Keeps only a strictly-consecutive run of markers (A,B,C,D... or 1,2,3,4...),
+// dropping any match that doesn't follow the previous KEPT one by exactly one
+// step. A real one-word item name that happens to end in a single capital
+// letter ("Top N.") reads exactly like a marker to the regex above -- e.g.
+// "A. Top N. B. Advanced." finds A, N, B in sequence, but N breaks the
+// alphabetical run (A -> N isn't A -> B), so it's dropped here and its text
+// ("Top N") is absorbed into item A's span instead of becoming its own
+// bogus row.
+function filterSequentialMarkers(matches, toIndex) {
+  const kept = [];
+  let lastIdx = null;
+  for (const m of matches) {
+    const idx = toIndex(m[1]);
+    if (lastIdx === null || idx === lastIdx + 1) {
+      kept.push(m);
+      lastIdx = idx;
+    }
+  }
+  return kept;
+}
 function splitMatchItems(raw) {
-  const letterMatches = [...raw.matchAll(/(?:^|\s)([A-Z])[.)]\s(?=[A-Za-z])/g)];
+  // Case-insensitive marker letter: most sources use "A. B. C." but a few
+  // (e.g. a lowercase-lettered Descriptions list) use "a. b. c." instead —
+  // same shape, just a different case convention from whoever wrote it. The
+  // required whitespace/string-start right before the letter already rules
+  // out an abbreviation's period ("e.g. ", "i.e. ") matching by accident:
+  // the letter right after THAT period ("g", "e") isn't preceded by
+  // whitespace, only by the abbreviation's own first period. A lookbehind
+  // (not a consuming group) for that leading whitespace matters here: with a
+  // consuming "(?:^|\s)", one marker's own trailing space could get eaten as
+  // part of ITS match, leaving nothing for the very next marker to anchor
+  // on and silently dropping it (this was a real bug — a stray one-letter
+  // "false" marker sitting between two real ones swallowed the whitespace
+  // the next real marker needed).
+  let letterMatches = [...raw.matchAll(/(?<=^|\s)([A-Za-z])[.)]\s(?=[A-Za-z])/g)];
+  letterMatches = filterSequentialMarkers(letterMatches, (l) => l.toUpperCase().charCodeAt(0));
   if (letterMatches.length >= 2) {
     return letterMatches.map((m, i) => {
       const start = m.index + m[0].length;
@@ -634,7 +695,8 @@ function splitMatchItems(raw) {
       return { marker: m[1], text: raw.slice(start, end).replace(/[,.;]\s*$/, "").trim() };
     });
   }
-  const numMatches = [...raw.matchAll(/(?:^|\s)(\d{1,2})[.)]\s(?=[A-Za-z])/g)];
+  let numMatches = [...raw.matchAll(/(?<=^|\s)(\d{1,2})[.)]\s(?=[A-Za-z])/g)];
+  numMatches = filterSequentialMarkers(numMatches, (n) => parseInt(n, 10));
   if (numMatches.length >= 2) {
     return numMatches.map((m, i) => {
       const start = m.index + m[0].length;
@@ -777,6 +839,29 @@ function formatYesNoQuestionText(text) {
     .filter(Boolean);
   if (items.length < 2) return null;
   const itemsHtml = items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it}.</div>`).join("");
+  return `<p class="match-intro">${intro}</p>${itemsHtml}`;
+}
+
+// "The process involves several steps, but they are listed below out of
+// order." stems present N unordered step-sentences with no letter/number
+// marker at all, immediately before answer options that reference them
+// purely by position ("2 - 4 - 3 - 1") — with no visible number on the steps
+// themselves, there's no way to tell which step is "1" vs "2". Numbers each
+// step so it lines up with the option text. Doesn't reuse
+// formatMatchingQuestionText's ORDER_STEPS_RE (which requires an
+// "arrange"/"put" imperative) since this phrasing is descriptive ("they are
+// listed below out of order"), not an instruction.
+const STEPS_OUT_OF_ORDER_RE = /\bsteps?\b[\s\S]{0,60}\blisted\b[\s\S]{0,30}\bout of order\b/i;
+function formatOutOfOrderStepsText(text) {
+  const m = text.match(/^([\s\S]*?\bout of order\.?\s*)([\s\S]+)$/i);
+  if (!m) return null;
+  const intro = m[1].trim();
+  const items = m[2]
+    .split(/\.\s+(?=[A-Z])/)
+    .map((s) => s.trim().replace(/\.$/, "") + ".")
+    .filter((s) => s.length > 3);
+  if (items.length < 3) return null;
+  const itemsHtml = items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it}</div>`).join("");
   return `<p class="match-intro">${intro}</p>${itemsHtml}`;
 }
 
@@ -978,11 +1063,154 @@ function formatQuestionTextInner(text) {
   // starting fresh on the next.
   text = text.replace(/(\S)\s+true or false\s*[:,]\s*/i, "$1<br><br>True or False:<br><br>");
   if (/\bmatch (the|each)\b/i.test(text) || ORDER_STEPS_RE.test(text)) return formatMatchingQuestionText(text);
+  if (STEPS_OUT_OF_ORDER_RE.test(rawText)) {
+    const stepped = formatOutOfOrderStepsText(text);
+    if (stepped) return stepped;
+  }
   if (MULTI_STATEMENT_CUE_RE.test(rawText)) {
     const cued = formatCuedStatementList(text);
     if (cued) return cued;
   }
-  return formatYesNoQuestionText(text) || breakLongParagraph(text, rawText);
+  // A genuine 1:1 matching stem that never says "match the"/"match each" at
+  // all (e.g. "Functions: A. ALL B. ... Situations: 1. ... 2. ...") still
+  // has the exact same "two labels, equal balanced lists" shape --
+  // formatMatchingTable's own internal checks (exactly two "Label:"
+  // sections, 2+ items each side, matching counts) are already strict
+  // enough to try unconditionally here without a trigger phrase: ordinary
+  // prose essentially never has that shape by accident. Only the strict
+  // table path is tried (not formatMatchingQuestionText's looser
+  // line-per-item fallback) so an ordinary question that merely LOOKS a bit
+  // list-like can never be dragged into the much less gated fallback.
+  return formatYesNoQuestionText(text) || formatMatchingTable(text) || breakLongParagraph(text, rawText);
+}
+
+// An "Exam Tips:" heading is sometimes followed by several imperative tips
+// glued into one run-on paragraph with no punctuation between them at all
+// ("Know which filtering features are unique to the Filters pane Understand
+// the difference between slicers and filters pane capabilities Expect...")
+// -- confirmed via corpus search to be a real recurring pattern (dozens of
+// occurrences), always using one of this small, consistent set of imperative
+// verbs to start each tip. Splits on a capitalized verb from that list
+// immediately following a lowercase word (never at the very start, so the
+// paragraph's own first tip is untouched) and re-joins with a period so each
+// tip becomes its own sentence -- from there the existing formatSentences
+// path (which already handles every OTHER Exam Tips section that already has
+// periods) puts each one in its own <p>, exactly matching how a
+// already-well-punctuated tip list already renders.
+const EXAM_TIP_VERBS = [
+  "Know", "Understand", "Expect", "Practice", "Recognize", "Design", "Match",
+  "Use", "Avoid", "Include", "Memorize", "Remember", "Be", "Identify",
+];
+function splitRunOnTips(text) {
+  if (/\.\s+[A-Z]/.test(text)) return null; // already has real sentence breaks -- leave it alone
+  const verbAlt = EXAM_TIP_VERBS.join("|");
+  // Any non-space character before the gap (not just lowercase) -- a tip
+  // ending in an acronym ("...in Power BI", "...between UI and UX") ends in
+  // an uppercase letter, and requiring lowercase specifically missed the
+  // split right after those. \S still correctly excludes the very start of
+  // the string (nothing but whitespace can precede position 0).
+  const re = new RegExp(`(?<=\\S)\\s+(?=(?:${verbAlt})\\b)`, "g");
+  const parts = text
+    .split(re)
+    .map((s) => s.trim().replace(/\.$/, ""))
+    .filter(Boolean);
+  if (parts.length < 2) return null; // need at least 2 real tips to trust this was actually a run-on list
+  return parts.map((p) => p + ".").join(" ");
+}
+
+// A "Steps to Configure X:" heading is sometimes followed by short title-only
+// lines ("Go to the Power BI Service") each immediately followed by its own
+// separate description paragraph ("Navigate to the workspace where you
+// published the HR report.") -- a shape formatTermList can't reach (that one
+// needs "Term: description" inline in a SINGLE paragraph; here title and
+// description are each their own \n\n-bounded paragraph). Groups that run
+// into a real <ol> so the steps read as a numbered procedure instead of a
+// wall of same-looking <p> lines with no visual separation between one
+// step's title and the next step's title.
+// A title line is a short, bare phrase -- no sentence-ending punctuation, a
+// handful of words -- never a real sentence (which always ends in ./!/?).
+function isStepTitleLine(p) {
+  return /^[A-Z][^.!?:]{1,45}$/.test(p) && p.split(/\s+/).length <= 6;
+}
+// A wrap-up sentence right after the last step's description ("So, configure
+// a scheduled refresh...") reads like a plain description-continuation (ends
+// in a period, isn't title-shaped) but isn't part of ANY step -- these
+// transition words reliably flag it so the list stops before swallowing it.
+const STEP_LIST_CONCLUDER_RE = /^(?:So,?\s|In summary\b|Overall,?\s|Thus,?\s|Therefore,?\s)/i;
+function groupStepsList(paragraphs, startIndex) {
+  let j = startIndex;
+  const items = [];
+  while (j < paragraphs.length && isStepTitleLine(paragraphs[j])) {
+    const title = paragraphs[j];
+    j++;
+    const desc = [];
+    while (
+      j < paragraphs.length &&
+      !isStepTitleLine(paragraphs[j]) &&
+      !STEP_LIST_CONCLUDER_RE.test(paragraphs[j]) &&
+      !/^\x02/.test(paragraphs[j])
+    ) {
+      desc.push(paragraphs[j]);
+      j++;
+    }
+    items.push(`<li><strong>${title}.</strong>${desc.length ? ` ${desc.map((d) => linkify(d)).join(" ")}` : ""}</li>`);
+  }
+  if (items.length < 2) return null;
+  return { html: `<ol class="expl-steps">${items.join("")}</ol>`, consumed: j - startIndex };
+}
+
+// A "Keep in Mind:" heading covers at least two different multi-paragraph
+// shapes the general per-paragraph rendering leaves as a wall of
+// same-looking <p> tags with no grouping between one point and the next:
+//   1. A short noun-phrase title glued straight onto "Example: ..." with no
+//      punctuation between them ("Multiple relationships to a single
+//      dimension table Example: A Sales table has..."), continuing into
+//      further plain paragraphs until the next title-glued one starts.
+//   2. A "N. <question>?" title as its OWN paragraph (already bolded by the
+//      standalone-numbered-line rule above) followed by its answer as a
+//      separate paragraph (or a short run of them).
+// Both are turned into <li> items in one <ul> so the list reads as a real
+// set of points instead of indistinguishable paragraphs. Only fires when 2+
+// items in a row match ONE of the two shapes consistently -- an ordinary
+// "Keep in Mind" whose points are already fine standalone paragraphs (most
+// of them, corpus-wide) never matches either shape and falls through
+// completely unchanged.
+function splitTitleBeforeExample(p) {
+  const m = p.match(/^([A-Z][a-zA-Z](?:[a-zA-Z ,'-]){2,70}?)\s+(Example:[\s\S]*)$/);
+  if (!m) return null;
+  return { title: m[1].trim(), rest: m[2] };
+}
+function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
+  let j = startIndex;
+  const items = [];
+  while (j < paragraphs.length && !isBoundary(paragraphs[j])) {
+    const p = paragraphs[j];
+    const numTitle = !/\n/.test(p) && p.match(/^(\d{1,2}\.\s.{1,130})$/);
+    if (numTitle) {
+      j++;
+      const desc = [];
+      while (j < paragraphs.length && !isBoundary(paragraphs[j]) && !/^\d{1,2}\.\s/.test(paragraphs[j])) {
+        desc.push(paragraphs[j]);
+        j++;
+      }
+      items.push(`<li><strong>${numTitle[1]}</strong>${desc.length ? ` ${desc.map((d) => linkify(d)).join(" ")}` : ""}</li>`);
+      continue;
+    }
+    const ex = splitTitleBeforeExample(p);
+    if (ex) {
+      j++;
+      const desc = [ex.rest];
+      while (j < paragraphs.length && !isBoundary(paragraphs[j]) && !splitTitleBeforeExample(paragraphs[j]) && !/^\d{1,2}\.\s/.test(paragraphs[j])) {
+        desc.push(paragraphs[j]);
+        j++;
+      }
+      items.push(`<li><strong>${ex.title}.</strong> ${desc.map((d) => linkify(d)).join(" ")}</li>`);
+      continue;
+    }
+    break; // next paragraph doesn't match either known shape -- stop here
+  }
+  if (items.length < 2) return null;
+  return { html: `<ul class="expl-steps">${items.join("")}</ul>`, consumed: j - startIndex };
 }
 
 function formatExplanation(raw) {
@@ -1054,19 +1282,89 @@ function formatExplanationInner(raw) {
   // of the known header names, or the whole thing is a \x02-wrapped dynamic
   // header — never just "the first character of any paragraph" (that was the
   // earlier bug: every paragraph got its first letter sliced off).
-  let html = paragraphs
-    .map((p) => {
-      if (headerNames.has(p)) return `<h4 class="expl-heading">${p}</h4>`;
-      const dynamicHeading = p.match(/^\x02(.+)\x02$/);
-      if (dynamicHeading) return `<h4 class="expl-heading">${dynamicHeading[1]}</h4>`;
-      // A paragraph that's ENTIRELY one <pre> placeholder (own blank-line-
-      // separated block, not mixed with other prose) must come out bare —
-      // wrapping it in <p> here would nest a block-level <pre> inside a <p>
-      // once the placeholder is restored below, which is invalid HTML.
-      if (/^\x00PRE\d+\x00$/.test(p)) return p;
-      return formatBlock(p);
-    })
-    .join("");
+  const htmlParts = [];
+  // A heading's text can reach this loop two ways -- a plain string that
+  // exactly matches headerNames (the fixed EXPL_HEADERS list), or a
+  // \x02-wrapped dynamic match (EXPL_HEADER_PATTERNS) -- and "Exam Tips"
+  // specifically can arrive via EITHER path depending on whether the source
+  // used a colon (EXPL_HEADERS strips it) or not (only the bare
+  // EXPL_HEADER_PATTERNS entry catches that): once EXPL_HEADERS has already
+  // isolated a colon form onto its own bare-text line, the bare pattern
+  // matches it a second time and re-wraps it as \x02-dynamic, so a hook
+  // gated to only one of the two paths would miss the colon form. Shared
+  // here so both paths behind it try the same post-heading follow-ups.
+  // A paragraph is a "boundary" for a grouping pass (something a group must
+  // stop before, never swallow) if it's itself a header of either kind, or a
+  // <pre> code-block placeholder.
+  const isBoundary = (q) => headerNames.has(q) || /^\x02/.test(q) || /^\x00PRE\d+\x00$/.test(q);
+  // Returns how many EXTRA paragraphs (beyond the heading itself) a
+  // post-heading follow-up consumed, so the caller's loop index can skip
+  // past them; 0 if nothing fired. Any HTML a follow-up produces is pushed
+  // straight onto htmlParts here.
+  function afterHeading(headingText, i) {
+    if (/^Exam Tips?$/i.test(headingText) && i + 1 < paragraphs.length) {
+      const split = splitRunOnTips(paragraphs[i + 1]);
+      if (split) paragraphs[i + 1] = split;
+      return 0;
+    }
+    if (/^Keep in Mind$/i.test(headingText)) {
+      const grouped = groupKeepInMindList(paragraphs, i + 1, isBoundary);
+      if (grouped) {
+        htmlParts.push(grouped.html);
+        return grouped.consumed;
+      }
+    }
+    // A "Steps to/for X:" heading (one of the EXPL_HEADER_PATTERNS entries)
+    // right before a run of title/description paragraph pairs -- try
+    // grouping them into a real numbered list before falling through to the
+    // default one-<p>-per-paragraph handling below.
+    if (/\bSteps? (?:to|for) /.test(headingText)) {
+      const grouped = groupStepsList(paragraphs, i + 1);
+      if (grouped) {
+        htmlParts.push(grouped.html);
+        return grouped.consumed;
+      }
+    }
+    return 0;
+  }
+  for (let i = 0; i < paragraphs.length; i++) {
+    const p = paragraphs[i];
+    if (headerNames.has(p)) {
+      htmlParts.push(`<h4 class="expl-heading">${p}</h4>`);
+      i += afterHeading(p, i);
+      continue;
+    }
+    const dynamicHeading = p.match(/^\x02(.+)\x02$/);
+    if (dynamicHeading) {
+      htmlParts.push(`<h4 class="expl-heading">${dynamicHeading[1]}</h4>`);
+      i += afterHeading(dynamicHeading[1], i);
+      continue;
+    }
+    // A paragraph that's ENTIRELY one <pre> placeholder (own blank-line-
+    // separated block, not mixed with other prose) must come out bare —
+    // wrapping it in <p> here would nest a block-level <pre> inside a <p>
+    // once the placeholder is restored below, which is invalid HTML.
+    if (/^\x00PRE\d+\x00$/.test(p)) {
+      htmlParts.push(p);
+      continue;
+    }
+    // A standalone short paragraph that's just "N. <short phrase>" (a
+    // numbered sub-heading/mini-question ahead of its own answer, e.g. "1.
+    // What are model calculations in DAX?", or a matching-question recap
+    // like "2. References to Model Objects - C. Can only refer to...")
+    // reads as a real heading in the source but got no distinct treatment.
+    // Bolds the whole line (plain bold, not the bigger blue-caps
+    // .expl-heading style, since it's one item in a numbered set rather
+    // than a top-level section) -- gated tightly (single line, <=130 chars
+    // after the marker) so an ordinary long paragraph that merely starts
+    // with a number can never be caught by mistake.
+    if (/^\d{1,2}\.\s.{1,130}$/.test(p) && !/\n/.test(p)) {
+      htmlParts.push(`<p><strong>${p}</strong></p>`);
+      continue;
+    }
+    htmlParts.push(formatBlock(p));
+  }
+  let html = htmlParts.join("");
 
   html = html.replace(/\x00IMG(\d+)\x00/g, (_, i) => imgTags[Number(i)]);
   html = html.replace(/\x00PRE(\d+)\x00/g, (_, i) => preTags[Number(i)]);
