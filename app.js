@@ -256,6 +256,20 @@ const EXPL_HEADERS = [
   "Correct Options:", "Incorrect Options:",
   "Limitations of DirectQuery connections",
   "Phrase from Learning Path:", "TopN vs RANKX:", "Everything about Power BI App:",
+  "The other options are not suitable:",
+  "How to Add a Slicer:",
+  // "Features:"/"Use Cases:"/"Functionalities:" are each genuinely
+  // standalone (always right after "\n\n") in every occurrence except one:
+  // q230's option explanation reuses "Features:" (and other bare labels
+  // this doesn't cover) as a glued, unpunctuated mid-sentence lead-in twice
+  // in one dense paragraph -- a different, messier shape this entry alone
+  // can't fully clean up, so isolating "Features:" there is a partial,
+  // harmless improvement, not a complete fix.
+  "Features:", "Use Cases:", "Functionalities:",
+  "10 basic transformations that support query folding:",
+  "All about Parametres:", "Types of Parameters in Power BI:", "Use cases of PArameters:",
+  "Purpose of folders:", "Supported items:", "Collaboration benefits:", "Practical example:",
+  "Creating a New Workspace:", "Deleting a Workspace:", "Renaming a Workspace:", "Sharing a Workspace:",
   "Here’s why this works:",
 ];
 
@@ -811,15 +825,15 @@ function formatMatchingTable(text) {
 }
 
 // "Arrange the steps in the correct order" / "Put the following steps in the
-// correct order" stems have the exact same problem as "match the" ones --
-// a dense run-on paragraph ending in "A. Step one B. Step two C. Step
-// three" -- just with one list to lay out instead of two. Requiring the
-// imperative verb ("arrange"/"put") together with "steps" and "order"
-// keeps this from firing on an ordinary "which represents the correct
-// order of steps" question whose lettered choices live in the options
-// array, not the stem itself (that phrasing has "order" before "steps"
-// and no "arrange"/"put").
-const ORDER_STEPS_RE = /\b(arrange|put)\b[\s\S]*\bsteps?\b[\s\S]*\border\b/i;
+// correct order" / "Rank the below tasks in the right order" stems have the
+// exact same problem as "match the" ones -- a dense run-on paragraph ending
+// in "A. Step one B. Step two C. Step three" -- just with one list to lay
+// out instead of two. Requiring the imperative verb ("arrange"/"put"/"rank")
+// together with "steps"/"tasks" and "order" keeps this from firing on an
+// ordinary "which represents the correct order of steps" question whose
+// lettered choices live in the options array, not the stem itself (that
+// phrasing has "order" before "steps" and no "arrange"/"put"/"rank").
+const ORDER_STEPS_RE = /\b(arrange|put|rank)\b[\s\S]*\b(?:steps?|tasks?)\b[\s\S]*\border\b/i;
 
 // "Match each X to Y" question stems arrive as one dense run-on paragraph
 // ("Apps: Power Apps, Power Automate. Scenarios: A. ... B. ... C. ...").
@@ -934,6 +948,56 @@ function formatOutOfOrderStepsText(text) {
   if (items.length < 3) return null;
   const itemsHtml = items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it}</div>`).join("");
   return `<p class="match-intro">${intro}</p>${itemsHtml}`;
+}
+
+// A stem's setup sentence sometimes ends with "...Which features should you
+// use? 1. Send an email... 2. Quantify the adoption..." -- two or more
+// scenario options run together right after the question mark, with no
+// other trigger phrase ("match the", "arrange", "out of order") for any of
+// the checks above to key off. Tried as a last-resort fallback (right
+// before the plain-paragraph default): requires a "?" followed by 2+
+// STRICTLY SEQUENTIAL "N. " markers, which essentially never happens by
+// accident in ordinary prose.
+function formatTrailingNumberedScenarios(text) {
+  const m = text.match(/^([\s\S]*?\?\s*)(\d{1,2}\.\s[\s\S]+)$/);
+  if (!m) return null;
+  const intro = m[1].trim();
+  const rest = m[2];
+  const numMatches = [...rest.matchAll(/(?:^|\s)(\d{1,2})\.\s(?=[A-Z])/g)];
+  const nums = numMatches.map((mm) => parseInt(mm[1], 10));
+  const sequential = nums.length >= 2 && nums.every((n, i) => i === 0 || n === nums[i - 1] + 1);
+  if (!sequential) return null;
+  const items = numMatches.map((mm, i) => {
+    const start = mm.index + mm[0].length;
+    const end = i + 1 < numMatches.length ? numMatches[i + 1].index : rest.length;
+    return rest.slice(start, end).trim();
+  });
+  const itemsHtml = items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it}</div>`).join("");
+  return `<p class="match-intro">${intro}</p>${itemsHtml}`;
+}
+
+// A handful of stems open with a two-person dialogue ("Anita: I noticed the
+// Performance Analyzer shows... Rohan: Which of the following best
+// describes...?"), run together with no visual break between the two
+// speakers' lines. This corpus also uses "Name:" as a matching-question
+// label pair far more often than as a real speaker ("Features:"/"Benefits:",
+// "Types:"/"Cases:", ...) -- this blocklist of the actual label words seen
+// in the corpus keeps the check from firing on those; anything not on it is
+// treated as a real first name.
+const DIALOGUE_LABEL_WORDS = new Set([
+  "Scenario", "Question", "Features", "Benefits", "Options", "Definitions",
+  "Types", "Cases", "Errors", "Functionalities", "Terms", "Descriptions",
+  "Concepts", "Operators", "Operations", "Column", "Situations", "Functions",
+  "Tools", "Requirements", "Left", "Right", "Statements", "Tasks", "Given",
+  "Required", "Settings", "Impacts", "Modes", "Capabilities", "Product",
+  "Color", "Table", "Scenarios", "Patterns", "Interfaces",
+]);
+function formatDialogueStem(text) {
+  const m = text.match(/^([A-Z][a-z]+):\s(.+?[.!?])\s+([A-Z][a-z]+):\s(.+)$/);
+  if (!m) return null;
+  const [, name1, line1, name2, rest] = m;
+  if (name1 === name2 || DIALOGUE_LABEL_WORDS.has(name1) || DIALOGUE_LABEL_WORDS.has(name2)) return null;
+  return `${name1}: ${line1}<br><br>${name2}: ${rest}`;
 }
 
 // Sentence-ending abbreviations whose period must never be mistaken for the
@@ -1151,6 +1215,12 @@ function formatQuestionTextInner(text) {
   // renders the same way: capitalized, on its own line, with the claim
   // starting fresh on the next.
   text = text.replace(/(\S)\s+true or false\s*[:,]\s*/i, "$1<br><br>True or False:<br><br>");
+  // A two-person dialogue opening ("Anita: ... Rohan: ...?") reads as one
+  // run-on paragraph with no visual break between speakers -- inserted as a
+  // preprocessing step (like the True/False rewrite above) so the rest of
+  // this function's usual checks still run on the result.
+  const dialogue = formatDialogueStem(text);
+  if (dialogue) text = dialogue;
   if (/\bmatch (the|each)\b/i.test(text) || ORDER_STEPS_RE.test(text)) return formatMatchingQuestionText(text);
   if (STEPS_OUT_OF_ORDER_RE.test(rawText)) {
     const stepped = formatOutOfOrderStepsText(text);
@@ -1170,7 +1240,12 @@ function formatQuestionTextInner(text) {
   // table path is tried (not formatMatchingQuestionText's looser
   // line-per-item fallback) so an ordinary question that merely LOOKS a bit
   // list-like can never be dragged into the much less gated fallback.
-  return formatYesNoQuestionText(text) || formatMatchingTable(text) || breakLongParagraph(text, rawText);
+  return (
+    formatYesNoQuestionText(text) ||
+    formatMatchingTable(text) ||
+    formatTrailingNumberedScenarios(text) ||
+    breakLongParagraph(text, rawText)
+  );
 }
 
 // An "Exam Tips:" heading is sometimes followed by several imperative tips
@@ -1315,7 +1390,7 @@ function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
     // splitTermColon below, which needs the description on the SAME line as
     // the title; here title and description are already separate paragraphs,
     // just like the numbered case right above.
-    const bareColonTitle = !/\n/.test(p) && p.length <= 60 && p.match(/^([A-Z][a-zA-Z0-9 &'/]{1,55}):$/);
+    const bareColonTitle = !/\n/.test(p) && p.length <= 60 && p.match(/^([A-Z][a-zA-Z0-9 &'/-]{1,55}):$/);
     if (bareColonTitle) {
       j++;
       const desc = [];
