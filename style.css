@@ -256,19 +256,16 @@ h3 { margin: 18px 0 8px; font-size: 1rem; }
   font-weight: 600; font-size: 0.9rem;
 }
 
-/* Home/dashboard banner offering to resume (or discard) a test saved via the
-   Pause button or picked up automatically after an accidental refresh. */
-.paused-test-banner {
-  background: #fff8ed; border: 1px solid #f3e6c8; border-radius: var(--radius);
-  padding: 14px 18px; margin-bottom: 16px; font-size: 0.95rem; color: var(--text);
+/* Dedicated "you have a paused test" screen -- shown instead of the home/
+   dashboard page (see boot()/pauseTest() in app.js) whenever a test saved
+   via the Pause button, or picked up automatically after an accidental
+   refresh, is still waiting to be resumed or discarded. */
+.paused-test-card {
+  max-width: 460px; margin: 40px auto; padding: 40px 32px;
 }
-.paused-test-banner.hidden { display: none; }
-.paused-test-name { font-weight: 700; }
-.paused-test-banner .link-btn {
-  background: none; border: none; padding: 0; margin: 0; font: inherit;
-  color: var(--accent); font-weight: 700; cursor: pointer; text-decoration: none;
-}
-.paused-test-banner .link-btn:hover { text-decoration: underline; }
+.paused-test-icon { font-size: 2.4rem; margin-bottom: 6px; }
+.paused-test-name { font-weight: 700; font-size: 1.1rem; color: var(--accent-dark); margin: 4px 0 10px; }
+.paused-test-sub { color: var(--text-muted); margin-bottom: 20px; }
 .eyebrow {
   font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;
   color: var(--accent-dark); margin-bottom: 8px;

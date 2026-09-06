@@ -1170,15 +1170,20 @@ async function boot() {
   }
 
   const user = DB.getUser();
-  if (user) {
-    setUserChip();
+  if (user) setUserChip();
+  const pausedSession = loadPausedSession();
+  if (pausedSession) {
+    // A test was left paused (or an accidental refresh caught it mid-test) --
+    // that decision (resume or discard) takes priority over the normal
+    // home/dashboard landing page.
+    showPausedTestScreen(pausedSession);
+  } else if (user) {
     renderDashboard();
     show("view-dashboard");
   } else {
     show("view-home");
     logHomePageVisit();
   }
-  checkPausedSession();
   document.querySelectorAll(".paused-resume-btn").forEach((btn) => btn.addEventListener("click", resumePausedTest));
   document.querySelectorAll(".paused-start-over-btn").forEach((btn) => btn.addEventListener("click", startOverPausedTest));
 
@@ -1322,7 +1327,6 @@ async function goHomeFromTest() {
   clearPausedSession();
   show(DB.getUser() ? "view-dashboard" : "view-home");
   if (DB.getUser()) renderDashboard();
-  checkPausedSession();
 }
 
 async function cancelTest() {
@@ -1335,7 +1339,6 @@ async function cancelTest() {
   } else {
     show("view-home");
   }
-  checkPausedSession();
 }
 
 // ---------- Welcome / guest login ----------
@@ -1705,34 +1708,37 @@ function loadPausedSession() {
   }
 }
 
-// Shows/hides every paused-test banner on the page (home and dashboard both
-// carry one, since either could be the landing view depending on sign-in
-// state) based on whether a valid saved session currently exists.
-function checkPausedSession() {
-  const saved = loadPausedSession();
-  const banners = document.querySelectorAll(".paused-test-banner");
-  if (!saved) {
-    banners.forEach((b) => b.classList.add("hidden"));
-    return;
+// Shown instead of the home/dashboard page whenever a saved session exists
+// (at boot, and right after Pause is clicked) -- a dedicated screen rather
+// than a banner mixed into a busy home page, so resuming/discarding is the
+// one decision on screen instead of competing with everything else there.
+function showPausedTestScreen(saved) {
+  document.getElementById("pausedTestName").textContent = saved.testName || saved.mode;
+  show("view-paused-test");
+}
+
+// The normal landing view for the current sign-in state -- used after
+// Start Over, and by boot() when there's no paused test waiting. Doesn't
+// call logHomePageVisit() itself; that's only for an actual fresh page load
+// (boot()'s own else-branch), not every in-app navigation back to home.
+function showLandingView() {
+  if (DB.getUser()) {
+    renderDashboard();
+    show("view-dashboard");
+  } else {
+    show("view-home");
   }
-  banners.forEach((b) => {
-    b.classList.remove("hidden");
-    const label = b.querySelector(".paused-test-name");
-    if (label) label.textContent = saved.testName || saved.mode;
-  });
 }
 
 // Stops the timer, saves a final snapshot, and leaves the test without
 // discarding anything -- unlike Cancel/"leave this test" (which explicitly
 // warn progress will be lost), Pause is non-destructive so it needs no
-// confirm dialog, just an immediate save-and-go-home.
+// confirm dialog, just an immediate save-and-show-the-paused-screen.
 function pauseTest() {
   if (!session) return;
   clearInterval(session.timerHandle);
   savePausedSession();
-  show(DB.getUser() ? "view-dashboard" : "view-home");
-  if (DB.getUser()) renderDashboard();
-  checkPausedSession();
+  showPausedTestScreen(loadPausedSession());
 }
 
 function resumePausedTest() {
@@ -1744,7 +1750,7 @@ function resumePausedTest() {
     // can't safely reconstruct the exact same test, so bail out cleanly
     // instead of resuming with holes in the question list.
     clearPausedSession();
-    checkPausedSession();
+    showLandingView();
     alert("Sorry, this paused test can no longer be resumed. Please start a new test.");
     return;
   }
@@ -1777,7 +1783,7 @@ function resumePausedTest() {
 
 function startOverPausedTest() {
   clearPausedSession();
-  checkPausedSession();
+  showLandingView();
 }
 
 function updateTimerDisplay() {
