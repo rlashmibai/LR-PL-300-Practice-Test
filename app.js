@@ -180,6 +180,12 @@ const EXPL_HEADERS = [
   // gets a chance to tear it into a stray "Detailed" paragraph + heading.
   "Detailed Explanation:",
   "Explanation:",
+  // Must come before the bare "Exam Tips:" entry below (same
+  // "longer-first" ordering rule as Detailed Explanation:/Explanation:) --
+  // otherwise that shorter entry's own split-and-rejoin runs first and
+  // isolates just "Exam Tips:", stranding "Power BI" in front of it as its
+  // own orphaned paragraph.
+  "Power BI Exam Tips:",
   "Exam Tips:", "Exam Tip:",
   "Keep in Mind:", "Keep in Mind", "Study Links:", "Study links:", "Study Links", "Study links",
   "Remember,", "Remember:", "FAQ:", "Key Takeaways.", "Key Takeaway:",
@@ -197,6 +203,13 @@ const EXPL_HEADERS = [
   // Compound forms must come before their shorter counterpart below (same
   // "longer phrase consumed first" rule as Detailed Explanation:/Explanation:
   // above) — each confirmed present in the corpus via direct search.
+  // Must come before the shorter "Substitute DAX:" entry below (same
+  // "longer phrase first" rule) -- this is the one place that fixed entry's
+  // own title actually continues a longer phrase ("Comparison of Replace
+  // and Substitute DAX:"), and letting the shorter one consume its tail
+  // first would strand "Comparison of Replace and" in front of it.
+  "Comparison of Replace and Substitute DAX:",
+  "When you can use VALUES DAX:", "This pattern is consistent across DAX:",
   "Substitute DAX:", "VALUES DAX:", "DAX:",
   "Quick Tip:", "Tip to Remember:", "Tip:",
   "Load Behavior:", "Export Behavior:", "Behavior:",
@@ -217,6 +230,9 @@ const EXPL_HEADERS = [
   // Answer)", "Correct Answer is C - Using...", "Correct Answer Option A -
   // Align...") that a header-isolating split would garble.
   "Correct Answers:", "Correct Answers", "Correct Answer:",
+  // Same "bare, no colon" shape, checked the same way for this one (every
+  // occurrence sits right after "\n\n", never mid-sentence, before adding).
+  "Incorrect Answers:", "Incorrect Answers", "Incorrect Answer:", "Incorrect Answer",
   "Why correct:", "Why correct", "Why Correct:", "Why Correct",
   "Why wrong:", "Why wrong", "Why Wrong:", "Why Wrong",
   "Why incorrect:", "Why incorrect", "Why Incorrect:", "Why Incorrect",
@@ -237,6 +253,10 @@ const EXPL_HEADERS = [
   // pattern above already covers -- confirmed always standalone, never
   // mid-sentence, before adding.
   "Youtube Video:", "Youtube Videos:", "YouTube Video:", "YouTube Videos:",
+  "Correct Options:", "Incorrect Options:",
+  "Limitations of DirectQuery connections",
+  "Phrase from Learning Path:", "TopN vs RANKX:", "Everything about Power BI App:",
+  "Here’s why this works:",
 ];
 
 // Recurring section-header phrases that have variable trailing content (so they
@@ -253,7 +273,12 @@ const EXPL_HEADER_PATTERNS = [
   // isolated, orphaning the trailing "s" (the exact bug that hit
   // References/Reference earlier this project). The colon-suffixed forms
   // above stay in EXPL_HEADERS since the colon makes them distinct strings.
-  /\bExam Tips?\b/g,
+  // Optional leading "Power BI " covers the one corpus variant phrased
+  // "Power BI Exam Tips:" -- without it, the match still starts at "Exam",
+  // orphaning "Power BI" as its own stray one-word-ish paragraph in front
+  // (the same "Simple Steps to..." class of bug fixed above for a
+  // different header).
+  /(?:Power BI )?Exam Tips?\b/g,
   // Same "singular vs plural" collision as Exam Tip(s) above — "Recommended
   // Youtube Video" (no colon, bare) used to sit in EXPL_HEADERS right next to
   // the plural "Recommended Youtube Videos:", and since EXPL_HEADERS applies
@@ -280,6 +305,10 @@ const EXPL_HEADER_PATTERNS = [
   // "\n\nExam Tips\n\n   References ..." — the colon itself is gone by now).
   /(?:^|(?<=(?<!\d)[.:]\s+)|(?<=\n\n\s*))References\b/g,
   /Why (?:the )?Other[s]?(?: Answers?| Options?)?\s*(?:Are|Is)\s*(?:Correct|Incorrect|Wrong|Right)\b/gi,
+  // Same phrase, reversed word order ("Why ARE the other options incorrect"
+  // instead of "Why the other options ARE incorrect") -- both orders read
+  // naturally in English, and this corpus uses each at least once.
+  /Why (?:Are|Is) (?:the )?Other[s]?(?: Answers?| Options?)?\s*(?:Correct|Incorrect|Wrong|Right)\b/gi,
   // Same lead-in phrase, but with a less common trailing word this corpus
   // also uses ("not best option", "not ideal", "valid in M") that the fixed
   // word list above doesn't cover -- unlike that one (which also matches a
@@ -544,15 +573,21 @@ function formatSentences(text) {
   // "X." here is essentially never a real list marker. Two abbreviation
   // shapes are excluded outright: "vs." (never a sentence end — "Standard
   // vs. Custom Tables" must stay one phrase), and a single capital letter
-  // followed by a period used as an inline answer reference ("...B.
-  // Microsoft 365 admin centre" must stay one phrase, not split after "B.").
+  // preceded by whitespace/start/open-paren and followed by a period, used
+  // as an inline answer reference ("...B. Microsoft 365 admin centre" must
+  // stay one phrase, not split after "B."). That exclusion is deliberately
+  // anchored to whitespace/start rather than a bare word boundary -- a
+  // word boundary alone also sits right before the "A" in "Q&A." (the "&"
+  // isn't a word character either), which used to wrongly suppress the
+  // split after a "Q&A." ending a sentence -- exactly the acronym case the
+  // paragraph above says this whole rule must still split on.
   // A third shape: a bare numbered-list marker ("1.", "2." ... up to 2 digits)
   // that starts a paragraph on its own, with the item's actual title/content
   // sitting right after it on the same logical line — e.g. "1. DAX Operators
   // - A. Used to perform..." must stay one phrase, not split right after "1."
   // and orphan the marker onto its own paragraph.
   const sentences = safe
-    .split(/(?<!\bvs\.)(?<!\b[A-Z]\.)(?<!\b\d{1,2}\.)(?<=[a-zA-Z0-9\)"']\.)\s+(?=[A-Z])/g)
+    .split(/(?<!\bvs\.)(?<!(?:^|[\s(])[A-Z]\.)(?<!\b\d{1,2}\.)(?<=[a-zA-Z0-9\)"']\.)\s+(?=[A-Z])/g)
     .map((s) => s.trim())
     .filter(Boolean);
   if (sentences.length < 2) return `<p>${linkify(text)}</p>`;
@@ -872,15 +907,27 @@ function formatYesNoQuestionText(text) {
 // purely by position ("2 - 4 - 3 - 1") — with no visible number on the steps
 // themselves, there's no way to tell which step is "1" vs "2". Numbers each
 // step so it lines up with the option text. Doesn't reuse
-// formatMatchingQuestionText's ORDER_STEPS_RE (which requires an
-// "arrange"/"put" imperative) since this phrasing is descriptive ("they are
-// listed below out of order"), not an instruction.
-const STEPS_OUT_OF_ORDER_RE = /\bsteps?\b[\s\S]{0,60}\blisted\b[\s\S]{0,30}\bout of order\b/i;
+// formatMatchingQuestionText's ORDER_STEPS_RE (which requires "arrange"/"put"
+// to appear BEFORE "steps"/"order" in the text) since a stem can equally
+// well say "The steps below are out of order. Arrange them in the correct
+// sequence: ..." -- order/steps first, the imperative second -- which
+// ORDER_STEPS_RE's left-to-right sequencing can't match at all.
+const STEPS_OUT_OF_ORDER_RE = /\bsteps?\b[\s\S]{0,80}\bout of order\b/i;
 function formatOutOfOrderStepsText(text) {
   const m = text.match(/^([\s\S]*?\bout of order\.?\s*)([\s\S]+)$/i);
   if (!m) return null;
-  const intro = m[1].trim();
-  const items = m[2]
+  let intro = m[1].trim();
+  let rest = m[2];
+  // A lead-in imperative clause ("Arrange them in the correct sequence:")
+  // right after "out of order." belongs with the intro, not as the first
+  // step -- without peeling it off here, it would glue onto the real first
+  // step's own text, joined by the clause's own colon rather than a period.
+  const leadIn = rest.match(/^(?:Arrange|Put|Order)\b[^:]{0,60}:\s*/i);
+  if (leadIn) {
+    intro = `${intro} ${leadIn[0]}`.trim();
+    rest = rest.slice(leadIn[0].length);
+  }
+  const items = rest
     .split(/\.\s+(?=[A-Z])/)
     .map((s) => s.trim().replace(/\.$/, "") + ".")
     .filter((s) => s.length > 3);
@@ -1222,6 +1269,18 @@ function splitTitleBeforeExample(p) {
   if (!m) return null;
   return { title: m[1].trim(), rest: m[2] };
 }
+// Same idea as the dash shape below, but colon-glued ("Read-only experience:
+// Users can view and interact with reports...") -- the single-paragraph
+// version of this (3+ "Term: description" pairs packed into ONE block) is
+// already formatTermList's job; this covers the same shape spread across
+// several already-separate paragraphs instead, which formatTermList never
+// sees since it only ever looks at one paragraph at a time.
+function splitTermColon(p) {
+  const m = p.match(/^([A-Z][a-zA-Z0-9 '&/-]{1,40}):\s+(.+)$/);
+  if (!m || /\n/.test(p)) return null;
+  if (m[1].split(/\s+/).length > 6) return null;
+  return { title: m[1].trim(), rest: m[2] };
+}
 // A third shape: "Short Title - full description." already complete in ONE
 // paragraph (no separate description paragraph needed) -- e.g. "Instant Data
 // Updates - Dashboards refresh dynamically as soon as data is logged...".
@@ -1250,10 +1309,51 @@ function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
       items.push(`<li><strong>${numTitle[1]}</strong>${desc.length ? ` ${desc.map((d) => linkify(d)).join(" ")}` : ""}</li>`);
       continue;
     }
+    // Same idea, but the title is a bare "Term:" line by itself (nothing
+    // else on it) rather than a numbered one -- e.g. "Master Report
+    // Interactivity:" followed by two sentences describing it. Distinct from
+    // splitTermColon below, which needs the description on the SAME line as
+    // the title; here title and description are already separate paragraphs,
+    // just like the numbered case right above.
+    const bareColonTitle = !/\n/.test(p) && p.length <= 60 && p.match(/^([A-Z][a-zA-Z0-9 &'/]{1,55}):$/);
+    if (bareColonTitle) {
+      j++;
+      const desc = [];
+      while (j < paragraphs.length && !isBoundary(paragraphs[j]) && !/:$/.test(paragraphs[j].trim()) && !/\n/.test(paragraphs[j])) {
+        desc.push(paragraphs[j]);
+        j++;
+      }
+      if (desc.length) {
+        items.push(`<li><strong>${bareColonTitle[1]}:</strong> ${desc.map((d) => linkify(d)).join(" ")}</li>`);
+        continue;
+      }
+      j--; // no description followed -- back out and let it fall through normally
+    }
     const dash = splitTitleBeforeDash(p);
     if (dash) {
       j++;
       items.push(`<li><strong>${dash.title}.</strong> ${linkify(dash.rest)}</li>`);
+      continue;
+    }
+    const colon = splitTermColon(p);
+    if (colon) {
+      j++;
+      items.push(`<li><strong>${colon.title}:</strong> ${linkify(colon.rest)}</li>`);
+      continue;
+    }
+    // A fifth shape: a bare short term with no description at all ("Performance",
+    // "Data transformation") -- just a flat list of category names, each its
+    // own paragraph. Deliberately narrow (single short line, no follow-on
+    // consumption of later paragraphs): a broader version of this that also
+    // tried to claim a "description" for the title produced real breakage on
+    // sources where the lines after a title are their own separate flat
+    // items (e.g. several one-line job duties in a row) rather than one
+    // title's description -- each subsequent line looks exactly as
+    // title-shaped as the first, so there's no reliable way to tell the two
+    // shapes apart from structure alone.
+    if (!/\n/.test(p) && p.length <= 30 && /^[A-Z][a-zA-Z ]*$/.test(p) && p.split(/\s+/).length <= 4) {
+      j++;
+      items.push(`<li>${p}</li>`);
       continue;
     }
     // A fourth shape: a question ("What is cross filtering in Power BI?")
@@ -1384,10 +1484,14 @@ function formatExplanationInner(raw) {
   // past them; 0 if nothing fired. Any HTML a follow-up produces is pushed
   // straight onto htmlParts here.
   function afterHeading(headingText, i) {
-    if (/^Exam Tips?$/i.test(headingText) && i + 1 < paragraphs.length) {
+    if (/Exam Tips?$/i.test(headingText) && i + 1 < paragraphs.length) {
       const split = splitRunOnTips(paragraphs[i + 1]);
       if (split) paragraphs[i + 1] = split;
-      return 0;
+      // No early return -- an Exam Tips section can ALSO use the
+      // title/description shapes below (e.g. "Master Report Interactivity:"
+      // followed by descriptive sentences) even when it isn't the flat
+      // run-on-verb-list splitRunOnTips handles, so still give the general
+      // grouping attempt further down a chance to fire.
     }
     // A "Steps to/for X:" heading (one of the EXPL_HEADER_PATTERNS entries)
     // right before a run of title/description paragraph pairs -- try
@@ -1413,7 +1517,17 @@ function formatExplanationInner(raw) {
     }
     return 0;
   }
-  for (let i = 0; i < paragraphs.length; i++) {
+  // A Q&A/title-description run can also open the WHOLE explanation with no
+  // heading in front of it at all (nothing for afterHeading's per-heading
+  // hook to attach to) -- tried once, up front, the same way as after any
+  // other heading.
+  let startAt = 0;
+  const leadGroup = groupKeepInMindList(paragraphs, 0, isBoundary);
+  if (leadGroup) {
+    htmlParts.push(leadGroup.html);
+    startAt = leadGroup.consumed;
+  }
+  for (let i = startAt; i < paragraphs.length; i++) {
     const p = paragraphs[i];
     if (headerNames.has(p)) {
       htmlParts.push(`<h4 class="expl-heading">${p}</h4>`);
@@ -1431,6 +1545,13 @@ function formatExplanationInner(raw) {
     // wrapping it in <p> here would nest a block-level <pre> inside a <p>
     // once the placeholder is restored below, which is invalid HTML.
     if (/^\x00PRE\d+\x00$/.test(p)) {
+      htmlParts.push(p);
+      continue;
+    }
+    // Same idea for a paragraph that's ENTIRELY a hand-written <ul>/<ol>
+    // block already (a rare hand-fix for source data with no other
+    // structure to key off) -- must come out bare, not wrapped in <p>.
+    if (/^<(ul|ol)>[\s\S]*<\/\1>$/.test(p)) {
       htmlParts.push(p);
       continue;
     }
