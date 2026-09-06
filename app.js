@@ -232,6 +232,11 @@ const EXPL_HEADERS = [
   "Full query folding:", "Partial query folding:", "No query folding:",
   "Key Advantages:", "Data Source Parameters:", "Filter Parameters:",
   "WhatIf Parameters:", "Dynamic Calculations:", "Parameter Properties:",
+  // A handful of explanations link a video via a bare "Youtube Video(s):"
+  // heading instead of the "Recommended YouTube Video(s)" phrasing the
+  // pattern above already covers -- confirmed always standalone, never
+  // mid-sentence, before adding.
+  "Youtube Video:", "Youtube Videos:", "YouTube Video:", "YouTube Videos:",
 ];
 
 // Recurring section-header phrases that have variable trailing content (so they
@@ -275,14 +280,33 @@ const EXPL_HEADER_PATTERNS = [
   // "\n\nExam Tips\n\n   References ..." — the colon itself is gone by now).
   /(?:^|(?<=(?<!\d)[.:]\s+)|(?<=\n\n\s*))References\b/g,
   /Why (?:the )?Other[s]?(?: Answers?| Options?)?\s*(?:Are|Is)\s*(?:Correct|Incorrect|Wrong|Right)\b/gi,
+  // Same lead-in phrase, but with a less common trailing word this corpus
+  // also uses ("not best option", "not ideal", "valid in M") that the fixed
+  // word list above doesn't cover -- unlike that one (which also matches a
+  // "?"-terminated variant with no colon), every one of these is always
+  // colon-terminated, so this variant is anchored to the colon instead of a
+  // fixed trailing word, capped short so it can never run past a genuine
+  // heading phrase into ordinary prose.
+  /Why (?:the )?Other[s]?(?: Answers?| Options?)?\s*(?:Are|Is)\s*[^\n:]{1,40}(?=:)/gi,
   // Same idea, but naming specific option letters instead of saying "other"
   // ("Why D and E are incorrect", "Why C is correct") — common when this
   // aside sits mid-list, between one lettered item's body and the next.
   /Why [A-H](?:\s*(?:and|,)\s*[A-H])*\s+(?:is|are)\s+(?:correct|incorrect|wrong|right)\b/gi,
-  /Advantages of (?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or|with|using)(?:\s(?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or|with|using)){0,6}(?=\s[A-Z][a-z]|:|\.)/g,
-  /Benefits of (?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or|with|using)(?:\s(?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or|with|using)){0,6}(?=\s[A-Z][a-z]|:|\.)/g,
-  /Challenges (?:in|of|with) (?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or)(?:\s(?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or)){0,4}(?=\s[A-Z][a-z]|:|\.)/g,
-  /Potential Downsides(?: to (?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or|all)(?:\s(?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or|all)){0,12})?(?=\s[A-Z][a-z]|:|\.)/g,
+  // Optional leading "Key " (as in "Key Benefits of Sensitivity Labels")
+  // covers the one corpus variant that isn't just a bare "Advantages
+  // of"/"Benefits of" -- without it, the pattern still matches starting at
+  // "Benefits", orphaning "Key" as its own one-word paragraph in front of
+  // the isolated heading (the same bug the "Simple Steps to..." fix above
+  // addressed for a different header).
+  // A hyphenated Title-Case word ("Real-Time", "Role-Playing") is one word
+  // for this heading's purposes -- without the optional "-[A-Za-z]+" tail,
+  // the repeated-word group can't step past its hyphen (it only recognizes
+  // whitespace between words), so the match dies right there and the whole
+  // heading is missed even though everything up to the hyphen looked fine.
+  /(?:Key )?Advantages of (?:[A-Z][a-zA-Z]*(?:-[A-Za-z]+)?|and|of|for|the|in|to|on|or|with|using)(?:\s(?:[A-Z][a-zA-Z]*(?:-[A-Za-z]+)?|and|of|for|the|in|to|on|or|with|using)){0,6}(?=\s+[A-Z][a-z]|:|\.)/g,
+  /(?:Key )?Benefits of (?:[A-Z][a-zA-Z]*(?:-[A-Za-z]+)?|and|of|for|the|in|to|on|or|with|using)(?:\s(?:[A-Z][a-zA-Z]*(?:-[A-Za-z]+)?|and|of|for|the|in|to|on|or|with|using)){0,6}(?=\s+[A-Z][a-z]|:|\.)/g,
+  /Challenges (?:in|of|with) (?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or)(?:\s(?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or)){0,4}(?=\s+[A-Z][a-z]|:|\.)/g,
+  /Potential Downsides(?: to (?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or|all)(?:\s(?:[A-Z][a-zA-Z]*|and|of|for|the|in|to|on|or|all)){0,12})?(?=\s+[A-Z][a-z]|:|\.)/g,
   /Key Focus Area\b/g,
   /Common Confusion(?: to Avoid)?\b/g,
   /Why (?:It|This) Matters\b/g,
@@ -1013,8 +1037,26 @@ function formatTrueFalseOptionTextInner(text) {
       cursor = m.index + m[0].length;
     }
   }
-  if (!items || items.length < 2) return text;
-  return items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it.text} - <strong>${it.mark}</strong></div>`).join("");
+  if (items && items.length >= 2) {
+    return items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it.text} - <strong>${it.mark}</strong></div>`).join("");
+  }
+
+  // A handful of options are several distinct steps/clauses run together with
+  // no punctuation at all between them ("Share the dashboard with others
+  // Build a dashboard in Power BI Service Publish to..."), each a genuine
+  // reordering of the same known steps -- there's no reliable punctuation to
+  // split on in the source, so a "|" was hand-inserted at each real step
+  // boundary during a formatting-issue review. Never a naturally-occurring
+  // character in this corpus's option text (unlike ";", which several
+  // ordinary compound-sentence options already use once legitimately), so
+  // treating it as an explicit, unambiguous split point is safe.
+  if (clean.includes("|")) {
+    const parts = clean.split("|").map((s) => s.trim()).filter(Boolean);
+    if (parts.length >= 2) {
+      return parts.map((p, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${p}</div>`).join("");
+    }
+  }
+  return text;
 }
 
 // A source explanation or question stem occasionally embeds a DAX-doc-style
@@ -1180,6 +1222,18 @@ function splitTitleBeforeExample(p) {
   if (!m) return null;
   return { title: m[1].trim(), rest: m[2] };
 }
+// A third shape: "Short Title - full description." already complete in ONE
+// paragraph (no separate description paragraph needed) -- e.g. "Instant Data
+// Updates - Dashboards refresh dynamically as soon as data is logged...".
+// Gated to a short title (<=8 words, no further punctuation before the
+// dash) so this can't misfire on an ordinary sentence that merely happens to
+// contain a hyphen further in.
+function splitTitleBeforeDash(p) {
+  const m = p.match(/^([A-Z][a-zA-Z0-9 &'/-]{2,55}?)\s+-\s+(.+)$/);
+  if (!m || /\n/.test(p)) return null;
+  if (m[1].split(/\s+/).length > 8) return null;
+  return { title: m[1].trim(), rest: m[2] };
+}
 function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
   let j = startIndex;
   const items = [];
@@ -1195,6 +1249,34 @@ function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
       }
       items.push(`<li><strong>${numTitle[1]}</strong>${desc.length ? ` ${desc.map((d) => linkify(d)).join(" ")}` : ""}</li>`);
       continue;
+    }
+    const dash = splitTitleBeforeDash(p);
+    if (dash) {
+      j++;
+      items.push(`<li><strong>${dash.title}.</strong> ${linkify(dash.rest)}</li>`);
+      continue;
+    }
+    // A fourth shape: a question ("What is cross filtering in Power BI?")
+    // as its own paragraph, answered by the paragraph(s) right after it --
+    // an FAQ-style list, sometimes with NO "Q:"/"A:" labels in the source at
+    // all, sometimes already carrying its own "Q:"/"A:" (only the grouping
+    // and bolding is missing there). Either way, a leading "Q:"/"A:" is
+    // stripped from what the source gave before re-adding it here, so a
+    // question already labeled "Q: What is...?" never ends up double-tagged
+    // "Q: Q: What is...?".
+    const qMatch = !/\n/.test(p) && p.length <= 160 && p.match(/^(?:Q:\s*)?([A-Z].{4,}\?)$/);
+    if (qMatch) {
+      j++;
+      const desc = [];
+      while (j < paragraphs.length && !isBoundary(paragraphs[j]) && !/\?$/.test(paragraphs[j].trim())) {
+        desc.push(paragraphs[j].replace(/^A:\s*/, ""));
+        j++;
+      }
+      if (desc.length) {
+        items.push(`<li><strong>Q: ${qMatch[1]}</strong><br>A: ${desc.map((d) => linkify(d)).join(" ")}</li>`);
+        continue;
+      }
+      j--; // no answer followed -- not actually this shape, back out and let it fall through normally
     }
     const ex = splitTitleBeforeExample(p);
     if (ex) {
@@ -1307,13 +1389,6 @@ function formatExplanationInner(raw) {
       if (split) paragraphs[i + 1] = split;
       return 0;
     }
-    if (/^Keep in Mind$/i.test(headingText)) {
-      const grouped = groupKeepInMindList(paragraphs, i + 1, isBoundary);
-      if (grouped) {
-        htmlParts.push(grouped.html);
-        return grouped.consumed;
-      }
-    }
     // A "Steps to/for X:" heading (one of the EXPL_HEADER_PATTERNS entries)
     // right before a run of title/description paragraph pairs -- try
     // grouping them into a real numbered list before falling through to the
@@ -1324,6 +1399,17 @@ function formatExplanationInner(raw) {
         htmlParts.push(grouped.html);
         return grouped.consumed;
       }
+    }
+    // Any other heading (not just "Keep in Mind") can be followed by the
+    // same title/description paragraph-pair shapes groupKeepInMindList
+    // detects -- tried after every heading since each shape is tightly
+    // gated on its own (2+ consistent matches required), so an ordinary
+    // heading whose body is already fine standalone paragraphs never
+    // matches and falls through completely unchanged.
+    const grouped = groupKeepInMindList(paragraphs, i + 1, isBoundary);
+    if (grouped) {
+      htmlParts.push(grouped.html);
+      return grouped.consumed;
     }
     return 0;
   }
