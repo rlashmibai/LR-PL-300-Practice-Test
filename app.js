@@ -1371,6 +1371,12 @@ function splitTitleBeforeDash(p) {
 function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
   let j = startIndex;
   const items = [];
+  // A lone genuine question (no second one anywhere in this section) is
+  // still trusted on its own -- the literal "?" ending is already a strong
+  // enough signal that this one deserves the bold Q/A treatment, unlike the
+  // other shapes here, which need 2+ matches to trust the pattern wasn't
+  // just incidental prose.
+  let hasQuestionItem = false;
   while (j < paragraphs.length && !isBoundary(paragraphs[j])) {
     const p = paragraphs[j];
     const numTitle = !/\n/.test(p) && p.match(/^(\d{1,2}\.\s.{1,130})$/);
@@ -1443,12 +1449,19 @@ function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
     if (qMatch) {
       j++;
       const desc = [];
+      // Deliberately does NOT also stop at a bare title-shaped line: a real
+      // answer legitimately continues into its own short sub-bullet lines
+      // ("It is used to: Clean data / Transform data / Reshape datasets"),
+      // which look exactly as title-shaped as a genuine new section header
+      // -- an earlier attempt to also stop there broke that case (q6) by
+      // cutting a real answer short right at its first sub-bullet.
       while (j < paragraphs.length && !isBoundary(paragraphs[j]) && !/\?$/.test(paragraphs[j].trim())) {
         desc.push(paragraphs[j].replace(/^A:\s*/, ""));
         j++;
       }
       if (desc.length) {
         items.push(`<li><strong>Q: ${qMatch[1]}</strong><br>A: ${desc.map((d) => linkify(d)).join(" ")}</li>`);
+        hasQuestionItem = true;
         continue;
       }
       j--; // no answer followed -- not actually this shape, back out and let it fall through normally
@@ -1466,7 +1479,7 @@ function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
     }
     break; // next paragraph doesn't match either known shape -- stop here
   }
-  if (items.length < 2) return null;
+  if (items.length < 2 && !(items.length === 1 && hasQuestionItem)) return null;
   return { html: `<ul class="expl-steps">${items.join("")}</ul>`, consumed: j - startIndex };
 }
 
