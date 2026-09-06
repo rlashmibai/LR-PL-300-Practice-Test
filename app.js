@@ -1178,6 +1178,9 @@ async function boot() {
     show("view-home");
     logHomePageVisit();
   }
+  checkPausedSession();
+  document.querySelectorAll(".paused-resume-btn").forEach((btn) => btn.addEventListener("click", resumePausedTest));
+  document.querySelectorAll(".paused-start-over-btn").forEach((btn) => btn.addEventListener("click", startOverPausedTest));
 
   // Header brand name doubles as a home link from anywhere in the app
   const goHome = () => {
@@ -1277,6 +1280,7 @@ async function boot() {
     if (e.key === "ArrowDown") gotoQuestion(session.index + 1);
     else gotoQuestion(session.index - 1);
   });
+  document.getElementById("testPauseBtn").addEventListener("click", () => pauseTest());
   document.getElementById("testCancelBtn").addEventListener("click", () => cancelTest());
   document.getElementById("backToDashBtn").addEventListener("click", () => {
     if (DB.getUser()) {
@@ -1315,19 +1319,23 @@ async function boot() {
 async function goHomeFromTest() {
   if (!(await showConfirm("Leave this test? Your progress on this attempt will be lost."))) return;
   clearInterval(session && session.timerHandle);
+  clearPausedSession();
   show(DB.getUser() ? "view-dashboard" : "view-home");
   if (DB.getUser()) renderDashboard();
+  checkPausedSession();
 }
 
 async function cancelTest() {
   if (!(await showConfirm("Cancel this test? Your progress on this attempt will be lost."))) return;
   clearInterval(session && session.timerHandle);
+  clearPausedSession();
   if (DB.getUser()) {
     renderDashboard();
     show("view-dashboard");
   } else {
     show("view-home");
   }
+  checkPausedSession();
 }
 
 // ---------- Welcome / guest login ----------
@@ -1574,6 +1582,7 @@ function startTest(mode, param, feedbackMode) {
 
   session = {
     mode: modeLabel,
+    testName, // plain test/section name, no "(Practice)"/"(Timed)" suffix -- shown as testNameLabel
     feedbackMode, // "deferred" | "immediate"
     questions,
     index: 0,
@@ -1597,6 +1606,7 @@ function startTest(mode, param, feedbackMode) {
   renderNavGrid();
   renderQuestion();
   startTimer();
+  savePausedSession();
   show("view-test");
 }
 
@@ -1629,12 +1639,145 @@ function startTimer() {
       if (session.remainingSec <= 0) {
         clearInterval(session.timerHandle);
         finishTest();
+        return;
       }
     } else {
       session.elapsedSec++;
       updateTimerDisplay();
     }
+    // Autosave every tick (once a second) -- catches an accidental refresh or
+    // closed tab without needing to hook every individual answer/flag/nav
+    // click separately. Cheap: just a JSON.stringify of plain data into
+    // localStorage, no network involved.
+    savePausedSession();
   }, 1000);
+}
+
+// ---------- Pause / resume a test ----------
+// Nothing persists a test in progress today -- closing the tab or refreshing
+// mid-test silently loses everything, and Cancel/leaving intentionally
+// discards. This saves enough to fully reconstruct `session` later: the
+// literal list of question ids (not just a testSet/section param) so it
+// works whether the question order was deterministic (testSet mode,
+// sortById) or shuffled per-attempt (section mode) -- either way, resuming
+// just re-maps the saved ids back through ALL_QUESTIONS in the same order.
+// Sets don't survive JSON.stringify as sets, so flagged/visited are spread
+// into plain arrays here and rebuilt with `new Set(...)` on resume.
+const PAUSED_SESSION_KEY = "pl300_paused_session";
+
+function savePausedSession() {
+  if (!session) return;
+  const saved = {
+    version: 1,
+    savedAt: Date.now(),
+    testName: session.testName,
+    mode: session.mode,
+    feedbackMode: session.feedbackMode,
+    questionIds: session.questions.map((q) => q.id),
+    index: session.index,
+    answers: session.answers,
+    checked: session.checked,
+    flagged: [...session.flagged],
+    visited: [...session.visited],
+    timerMode: session.timerMode,
+    durationSec: session.durationSec,
+    remainingSec: session.remainingSec,
+    elapsedSec: session.elapsedSec,
+  };
+  try {
+    localStorage.setItem(PAUSED_SESSION_KEY, JSON.stringify(saved));
+  } catch (err) {
+    // Storage full/unavailable (private browsing, quota) -- pausing/autosave
+    // just silently doesn't work rather than breaking the test itself.
+  }
+}
+
+function clearPausedSession() {
+  localStorage.removeItem(PAUSED_SESSION_KEY);
+}
+
+function loadPausedSession() {
+  try {
+    const raw = localStorage.getItem(PAUSED_SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+// Shows/hides every paused-test banner on the page (home and dashboard both
+// carry one, since either could be the landing view depending on sign-in
+// state) based on whether a valid saved session currently exists.
+function checkPausedSession() {
+  const saved = loadPausedSession();
+  const banners = document.querySelectorAll(".paused-test-banner");
+  if (!saved) {
+    banners.forEach((b) => b.classList.add("hidden"));
+    return;
+  }
+  banners.forEach((b) => {
+    b.classList.remove("hidden");
+    const label = b.querySelector(".paused-test-name");
+    if (label) label.textContent = saved.testName || saved.mode;
+  });
+}
+
+// Stops the timer, saves a final snapshot, and leaves the test without
+// discarding anything -- unlike Cancel/"leave this test" (which explicitly
+// warn progress will be lost), Pause is non-destructive so it needs no
+// confirm dialog, just an immediate save-and-go-home.
+function pauseTest() {
+  if (!session) return;
+  clearInterval(session.timerHandle);
+  savePausedSession();
+  show(DB.getUser() ? "view-dashboard" : "view-home");
+  if (DB.getUser()) renderDashboard();
+  checkPausedSession();
+}
+
+function resumePausedTest() {
+  const saved = loadPausedSession();
+  if (!saved) return;
+  const questions = saved.questionIds.map((id) => ALL_QUESTIONS.find((q) => q.id === id)).filter(Boolean);
+  if (questions.length !== saved.questionIds.length) {
+    // Question content changed since this was paused (or failed to load) --
+    // can't safely reconstruct the exact same test, so bail out cleanly
+    // instead of resuming with holes in the question list.
+    clearPausedSession();
+    checkPausedSession();
+    alert("Sorry, this paused test can no longer be resumed. Please start a new test.");
+    return;
+  }
+  session = {
+    mode: saved.mode,
+    testName: saved.testName,
+    feedbackMode: saved.feedbackMode,
+    questions,
+    index: saved.index,
+    answers: saved.answers,
+    checked: saved.checked,
+    flagged: new Set(saved.flagged),
+    visited: new Set(saved.visited),
+    startedAt: Date.now(),
+    timerMode: saved.timerMode,
+    durationSec: saved.durationSec,
+    remainingSec: saved.remainingSec,
+    elapsedSec: saved.elapsedSec,
+    timerHandle: null,
+  };
+  document.getElementById("modeBadge").textContent = saved.feedbackMode === "immediate" ? "Practice mode" : "Timed exam mode";
+  document.getElementById("modeBadge").className = "mode-badge " + (saved.feedbackMode === "immediate" ? "practice" : "timed");
+  document.getElementById("testNameLabel").textContent = saved.testName;
+  renderQuestionSidebar();
+  renderNavGrid();
+  renderQuestion();
+  startTimer();
+  show("view-test");
+}
+
+function startOverPausedTest() {
+  clearPausedSession();
+  checkPausedSession();
 }
 
 function updateTimerDisplay() {
@@ -1936,6 +2079,7 @@ async function onSubmitTest() {
 
 function finishTest() {
   clearInterval(session.timerHandle);
+  clearPausedSession();
 
   let correctCount = 0;
   const reviewItems = session.questions.map((q) => {

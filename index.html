@@ -81,6 +81,10 @@
           </div>
         </div>
 
+        <div class="paused-test-banner hidden">
+          <span>⏸ There is a paused test (<span class="paused-test-name"></span>). Click to <button type="button" class="link-btn paused-resume-btn">Resume</button> or <button type="button" class="link-btn paused-start-over-btn">Start over</button></span>
+        </div>
+
         <div class="hero-closing">
           <p>Start practicing and see where you stand before taking the official Microsoft PL-300 exam.</p>
           <p>This practice test is aligned to the official Microsoft <a href="https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/pl-300" target="_blank" rel="noopener">PL-300 study guide</a>, updated as per the latest study guide as on April 20, 2026.</p>
@@ -450,6 +454,10 @@
 
     <!-- Dashboard -->
     <section id="view-dashboard" class="view">
+      <div class="paused-test-banner hidden">
+        <span>⏸ There is a paused test (<span class="paused-test-name"></span>). Click to <button type="button" class="link-btn paused-resume-btn">Resume</button> or <button type="button" class="link-btn paused-start-over-btn">Start over</button></span>
+      </div>
+
       <div class="card">
         <h2 id="dashGreeting">Welcome!</h2>
         <div class="btn-row">
@@ -492,6 +500,7 @@
           <span class="test-name-label" id="testNameLabel"></span>
         </div>
         <div class="test-topbar-right">
+          <button id="testPauseBtn" class="btn ghost small">⏸ Pause</button>
           <button id="testCancelBtn" class="btn ghost small">✕ Cancel</button>
         </div>
       </div>
