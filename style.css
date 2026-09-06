@@ -472,8 +472,7 @@ th { color: var(--text-muted); font-weight: 600; }
    capped at a fixed height regardless of how much space is actually available. */
 .test-layout { display: flex; gap: 16px; align-items: stretch; flex-wrap: wrap; }
 .test-sidebar {
-  flex: 0 0 340px; background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
-  overflow: hidden; min-height: 500px; display: flex; flex-direction: column;
+  display: none;
 }
 .test-sidebar-header {
   padding: 12px 16px; font-weight: 700; font-size: 0.85rem; color: var(--text-muted);
@@ -692,7 +691,7 @@ th { color: var(--text-muted); font-weight: 600; }
   letter-spacing: 0.03em; color: var(--accent-dark); padding: 8px 14px;
   border-bottom: 1px solid var(--border);
 }
-.explanation-body { padding: 12px 14px; font-size: 0.92rem; color: var(--text); line-height: 1.6; }
+.explanation-body { padding: 12px 14px; font-size: 1.05rem; color: var(--text); line-height: 1.4; }
 .explanation-body p { margin: 0 0 10px; }
 .explanation-body p:last-child { margin-bottom: 0; }
 .explanation-body ul, .explanation-body ol { margin: 6px 0 12px; padding-left: 22px; }
@@ -761,18 +760,18 @@ th { color: var(--text-muted); font-weight: 600; }
   .test-main { order: 0; width: 100%; }
   .test-sidebar-header { padding: 8px 16px; font-size: 0.75rem; }
   .nav-grid-legend { flex-direction: row; flex-wrap: wrap; gap: 8px 14px; padding: 6px 16px; font-size: 0.74rem; }
-  /* Horizontally scrollable single row instead of a wrapping grid — keeps
-     the navigator to one thumb-swipeable strip instead of several rows of
-     tiny buttons stacked above the question. */
+  /* Fixed 10-column grid (10x10 for a 50-question test spans 5 rows) instead
+     of a horizontally-scrolling strip — the whole navigator is visible at a
+     glance with no swiping/scroll-arrows needed. */
   .nav-grid {
-    display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 6px;
-    padding: 10px 16px 14px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
+    display: grid; grid-template-columns: repeat(10, 1fr);
+    gap: 6px; padding: 10px 16px 14px;
   }
-  .nav-grid button { flex: 0 0 36px; width: 36px; height: 36px; scroll-snap-align: start; }
 }
 
 @media (max-width: 480px) {
   .container { padding: 14px 10px 50px; }
   .card { padding: 16px; }
-  .nav-grid button { flex-basis: 32px; width: 32px; height: 32px; font-size: 0.72rem; }
+  .nav-grid { gap: 4px; }
+  .nav-grid button { font-size: 0.68rem; }
 }
