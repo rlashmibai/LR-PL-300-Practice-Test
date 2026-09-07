@@ -1670,6 +1670,16 @@ function formatExplanationInner(raw) {
   // Break each back-to-back link onto its own line.
   html = html.replace(/<\/a>\s+(?=<a )/g, "</a><br>");
 
+  // Same idea for the FIRST link of a back-to-back run when the source glued
+  // it straight onto the end of the preceding sentence with no blank line at
+  // all (e.g. "...for each client. <a ...>Automate configuration...</a><br><a
+  // ...>Create a Power BI Template...</a>...") -- it reads as part of the
+  // sentence instead of the start of a reference list. Only fires when this
+  // link is already followed by an `<br><a` from the rule above (proof it's
+  // really the head of a multi-link run), so a single link naturally embedded
+  // mid-sentence is never touched.
+  html = html.replace(/([^\s>])\s+(<a\b[^>]*>[^<]*<\/a>)(?=<br><a\b)/g, "$1<br>$2");
+
   return html;
 }
 
