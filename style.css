@@ -276,6 +276,7 @@ h3 { margin: 18px 0 8px; font-size: 1rem; }
   display: inline-flex; align-items: center; gap: 6px;
   background: var(--accent); color: #fff; font-weight: 800; font-size: 0.92rem;
   padding: 7px 16px; border-radius: 999px;
+  text-align: center;
 }
 .hero-badge:nth-child(even) { background: #a86c0a; }
 .feature-list {
