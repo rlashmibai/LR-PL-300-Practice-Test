@@ -4280,7 +4280,7 @@
     "testSet": 7,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "When a source dataset lacks a date table, you can create one using the __ or __DAX functions.",
+    "text": "When a source dataset lacks a date table, you can create one using the ______ or ______ DAX functions.",
     "options": [],
     "correct": [
       "CALENDAR, CALENDARAUTO"
@@ -6192,7 +6192,7 @@
     "testSet": 7,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each modeling concept with its correct description. Concepts: Use surrogate keys for relationships; Normalize data into fact and dimension tables; Configure cardinality and cross-filter direction; Implement calculation groups; Use inactive relationships with USERELATIONSHIP; Apply object-level security (OLS). Descriptions: A. Replaces natural keys with integer-based keys to improve join performance. B. Organizes data into a star schema to reduce redundancy and improve query efficiency. C. Defines how filters propagate between tables and whether relationships are one-to-one or one-to-many. D. Enables reusable logic across multiple measures, such as time intelligence or formatting. E. Activates dormant relationships in DAX to support alternate filtering paths. F. Controls visibility of specific columns or tables based on user roles.",
+    "text": "Match each modeling concept with its correct description. Concepts: 1. Use surrogate keys for relationships 2. Normalize data into fact and dimension tables 3. Configure cardinality and cross-filter direction 4. Implement calculation groups 5. Use inactive relationships with USERELATIONSHIP 6. Apply object-level security (OLS). Descriptions: A. Replaces natural keys with integer-based keys to improve join performance. B. Organizes data into a star schema to reduce redundancy and improve query efficiency. C. Defines how filters propagate between tables and whether relationships are one-to-one or one-to-many. D. Enables reusable logic across multiple measures, such as time intelligence or formatting. E. Activates dormant relationships in DAX to support alternate filtering paths. F. Controls visibility of specific columns or tables based on user roles.",
     "options": [
       {
         "id": "a",
@@ -6588,12 +6588,12 @@
     "testSet": 7,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match each modeling technique with its correct description. Techniques: Use role-based perspectives; Configure data categories for columns; Use composite keys in relationships; Mark a table as a date table; Apply summarization settings to columns; Use calculated columns for slicer compatibility. Descriptions: A. Limits visible fields for specific user roles to simplify report authoring. B. Controls how a column is interpreted (e.g., as an address, image URL, or web link) for visuals and tooltips. C. Creates a relationship using multiple columns when a single key is insufficient. D. Enables time intelligence functions like YTD and MTD by identifying the official date table. E. Allows columns to be summed, averaged, or counted automatically in visuals. F. Ensures slicers work properly when filtering based on derived or transformed values.",
+    "text": "Match each modeling technique with its correct description. Techniques: 1. Use role-based perspectives 2. Configure data categories for columns 3. Use composite keys in relationships 4. Mark a table as a date table 5. Apply summarization settings to columns 6. Use calculated columns for slicer compatibility. Descriptions: A. Limits visible fields for specific user roles to simplify report authoring. B. Controls how a column is interpreted (e.g., as an address, image URL, or web link) for visuals and tooltips. C. Creates a relationship using multiple columns when a single key is insufficient. D. Enables time intelligence functions like YTD and MTD by identifying the official date table. E. Allows columns to be summed, averaged, or counted automatically in visuals. F. Ensures slicers work properly when filtering based on derived or transformed values.",
     "options": [
       {
         "id": "a",
         "text": "1 – D 2 – B 3 – C 4 – A 5 – E 6 – F",
-        "explanation": "1 matches with D because perspectives let you define subsets of the model for different audiences, streamlining the experience for report authors. 2 matches with B because setting a column’s data category (e.g., address, image URL) affects how visuals interpret and display that data. 3 matches with C because composite keys are used when no single column uniquely identifies a relationship, requiring multiple columns to form the join. 4 matches with A because marking a table as a date table activates time intelligence functions and ensures proper chronological filtering. 5 matches with E because summarization settings define how numeric columns behave in visuals whether they default to sum, average, or count. 6 matches with F because calculated columns can be used to create slicer-friendly fields, especially when transforming or combining values for user selection."
+        "explanation": "1 matches with D because perspectives let you define subsets of the model for different audiences, streamlining the experience for report authors.\n\n2 matches with B because setting a column’s data category (e.g., address, image URL) affects how visuals interpret and display that data.\n\n3 matches with C because composite keys are used when no single column uniquely identifies a relationship, requiring multiple columns to form the join.\n\n4 matches with A because marking a table as a date table activates time intelligence functions and ensures proper chronological filtering.\n\n5 matches with E because summarization settings define how numeric columns behave in visuals whether they default to sum, average, or count.\n\n6 matches with F because calculated columns can be used to create slicer-friendly fields, especially when transforming or combining values for user selection."
       },
       {
         "id": "b",
@@ -8286,7 +8286,7 @@
     "testSet": 7,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "Match the Filter Type with Its Example or Use Case. Filter Types: Automatic filters; Manual filters; Include/Exclude filters; Drill-down filters; Cross-drill filters; Drillthrough filters. Use Cases / Examples: A. Clicking a bar in a chart filters other visuals automatically. B. Set by the report designer in the Filters pane to show only FY2025 data. C. Right-click a data point and choose \"Exclude\" to remove it from the visual. D. Clicking on a year in a column chart drills down to quarters. E. Not supported directly as a filter type; handled through interactions, not filter settings. F. Right-click a product name and drill through to a detailed product page.",
+    "text": "Match the Filter Type with Its Example or Use Case. Filter Types: 1. Automatic filters 2. Manual filters 3. Include/Exclude filters 4. Drill-down filters 5. Cross-drill filters 6. Drillthrough filters. Use Cases / Examples: A. Clicking a bar in a chart filters other visuals automatically. B. Set by the report designer in the Filters pane to show only FY2025 data. C. Right-click a data point and choose \"Exclude\" to remove it from the visual. D. Clicking on a year in a column chart drills down to quarters. E. Not supported directly as a filter type; handled through interactions, not filter settings. F. Right-click a product name and drill through to a detailed product page.",
     "options": [
       {
         "id": "a",
@@ -12110,7 +12110,7 @@
     "testSet": 7,
     "module": 4,
     "section": "Design effective reports in Power BI",
-    "text": "Left Column (Endorsement Type) A. Promotion B. Certification C. Master Data Right Column (Description) Request approval for a promoted semantic model; only the most reliable and authoritative models are used. Highlight content that is valuable, worthwhile, and ready for others to use; encourages collaboration. Label data as core, singlesourceoftruth items such as customer lists or product codes (Microsoft Fabric feature).",
+    "text": "Left Column: A. Promotion B. Certification C. Master Data. Right Column: 1. Request approval for a promoted semantic model; only the most reliable and authoritative models are used. 2. Highlight content that is valuable, worthwhile, and ready for others to use; encourages collaboration. 3. Label data as core, single-source-of-truth items such as customer lists or product codes (Microsoft Fabric feature).",
     "options": [
       {
         "id": "a",
@@ -14908,12 +14908,12 @@
     "options": [
       {
         "id": "a",
-        "text": "A. Dynamic Row-Level Security - 2. Filters data at query time based on the current user’s identity B. Static Row-Level Security - 4. Fixed rules applied to roles inside the model design C. Sensitivity Labels - 1. Labels applied to datasets to classify and enforce encryption D. Data Loss Prevention - 3. Prevents sharing or exporting of sensitive content beyond rules E. Service Principal Auth - 5. Uses a Microsoft Entra ID app identity instead of individual user credentials F. FIPS Compliance - 6. Ensures cryptographic operations meet government standards",
+        "text": "A. Dynamic Row-Level Security - 2. Filters data at query time based on the current user’s identity<br>B. Static Row-Level Security - 4. Fixed rules applied to roles inside the model design<br>C. Sensitivity Labels - 1. Labels applied to datasets to classify and enforce encryption<br>D. Data Loss Prevention - 3. Prevents sharing or exporting of sensitive content beyond rules<br>E. Service Principal Auth - 5. Uses a Microsoft Entra ID app identity instead of individual user credentials<br>F. FIPS Compliance - 6. Ensures cryptographic operations meet government standards",
         "explanation": "This is correct match."
       },
       {
         "id": "b",
-        "text": "A. Dynamic Row-Level Security - 4. Fixed rules applied to roles inside the model design B. Static Row-Level Security - 2. Filters data at query time based on the current user’s identity C. Sensitivity Labels - 1. Labels applied to datasets to classify and enforce encryption D. Data Loss Prevention - 5. Uses a Microsoft Entra ID app identity instead of individual user credentials E. Service Principal Auth - 3. Prevents sharing or exporting of sensitive content beyond rules F. FIPS Compliance - 6. Ensures cryptographic operations meet government standards",
+        "text": "A. Dynamic Row-Level Security - 4. Fixed rules applied to roles inside the model design<br>B. Static Row-Level Security - 2. Filters data at query time based on the current user’s identity<br>C. Sensitivity Labels - 1. Labels applied to datasets to classify and enforce encryption<br>D. Data Loss Prevention - 5. Uses a Microsoft Entra ID app identity instead of individual user credentials<br>E. Service Principal Auth - 3. Prevents sharing or exporting of sensitive content beyond rules<br>F. FIPS Compliance - 6. Ensures cryptographic operations meet government standards",
         "explanation": "This is incorrect match."
       }
     ],
@@ -16908,12 +16908,12 @@
       },
       {
         "id": "c",
-        "text": "C. In Power BI Desktop, create a role with this DAX filter on the Management table: PATHCONTAINS( PATH( Management[EmployeeID], Management[ManagerID] ), LOOKUPVALUE( Management[EmployeeID], Management[EmailAddress], USERPRINCIPALNAME() ) )",
+        "text": "C. In Power BI Desktop, create a role with this DAX filter on the Management table:<br><br><pre class=\"dax-code\">PATHCONTAINS(\n    PATH(\n        Management[EmployeeID],\n        Management[ManagerID]\n    ),\n    LOOKUPVALUE(\n        Management[EmployeeID],\n        Management[EmailAddress],\n        USERPRINCIPALNAME()\n    )\n)</pre>",
         "explanation": "Creating a role in Power BI Desktop with this DAX filter ensures that each manager can view only the sales records for their direct and indirect reports based on the management hierarchy stored in the Management table. USERPRINCIPALNAME() returns the signed-in user's email/UPN, not their EmployeeID, so LOOKUPVALUE first translates that email into the matching EmployeeID via the table's EmailAddress column - then PATHCONTAINS checks whether that EmployeeID appears anywhere in the current row's manager chain."
       },
       {
         "id": "d",
-        "text": "D. In that same role, add a role filter on Sales: Sales[SalesEmployeeID] IN VALUES( Management[EmployeeID] )",
+        "text": "D. In that same role, add a role filter on Sales:<br><br><pre class=\"dax-code\">Sales[SalesEmployeeID] IN VALUES( Management[EmployeeID] )</pre>",
         "explanation": "Adding a role filter in the same role on the Sales table using the VALUES function ensures that each manager can access only the sales records of their direct and indirect reports as defined in the Management table, thus implementing dynamic row-level security effectively."
       },
       {
@@ -18415,7 +18415,7 @@
     "testSet": 7,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each measure type with the correct DAX example. Measure Types: Implicit measure; Explicit measure. Description: A. Sum of Sales [SalesAmount], created automatically by Power BI when you drag the numeric column. B. Total Sales = SUM (Sales [SalesAmount]).",
+    "text": "Match each measure type with the correct DAX example. Measure Types: 1. Implicit measure 2. Explicit measure. Description: A. Sum of Sales [SalesAmount], created automatically by Power BI when you drag the numeric column. B. Total Sales = SUM (Sales [SalesAmount]).",
     "options": [
       {
         "id": "a",
@@ -19213,12 +19213,12 @@
     "options": [
       {
         "id": "a",
-        "text": "1 - RELATED 2 - RELATEDTABLE 3 - SUMMARIZE 4 - SUMMARIZECOLUMNS 5 - CALCULATE 6 - CALCULATETABLE 7 - ALL 8 - ALLSELECTED 9 - RANKX 10 - TOPN 11 - SUMX 12 - SUM 13 - KEEPFILTERS 14 - FILTER 15 - SAMEPERIODLASTYEAR 16 - DATEADD 17 - PARALLELPERIOD",
+        "text": "1 - A<br>2 - B<br>3 - C<br>4 - D<br>5 - E<br>6 - F<br>7 - G<br>8 - H<br>9 - I<br>10 - J<br>11 - K<br>12 - L<br>13 - M<br>14 - N<br>15 - O<br>16 - P<br>17 - Q",
         "explanation": "This is correct option. Check description for more explanation. However, remember such long list of match the following is not expected in the exam. In order to provide more value, I clubbed various DAX in single question so as to check your clarity. Understand each and every DAX and how it works."
       },
       {
         "id": "b",
-        "text": "1 - RELATEDTABLE 2 - RELATED 3 - SUMMARIZECOLUMNS 4 - SUMMARIZE 5 - CALCULATETABLE 6 - CALCULATE 7 - ALLSELECTED 8 - ALL 9 - TOPN 10 - RANKX 11 - SUM 12 - SUMX 13 - FILTER 14 - KEEPFILTERS 15 - DATEADD 16 - PARALLELPERIOD 17 - SAMEPERIODLASTYEAR",
+        "text": "1 - B<br>2 - A<br>3 - D<br>4 - C<br>5 - F<br>6 - E<br>7 - H<br>8 - G<br>9 - J<br>10 - I<br>11 - L<br>12 - K<br>13 - N<br>14 - M<br>15 - P<br>16 - Q<br>17 - O",
         "explanation": "This is incorrect option. These 17 matchstyle questions won’t appear in the actual exam; I’ve included them to give you extra practice. In the real test, you’re more likely to see draganddrop tasks where you identify the correct DAX function."
       }
     ],
