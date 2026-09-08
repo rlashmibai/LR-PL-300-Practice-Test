@@ -604,22 +604,25 @@ function formatSentences(text) {
   // genuine "A. ... B. ..." list (2+ increasing letters), so a lone
   // "X." here is essentially never a real list marker. Two abbreviation
   // shapes are excluded outright: "vs." (never a sentence end — "Standard
-  // vs. Custom Tables" must stay one phrase), and a single capital letter
-  // preceded by whitespace/start/open-paren and followed by a period, used
-  // as an inline answer reference ("...B. Microsoft 365 admin centre" must
-  // stay one phrase, not split after "B."). That exclusion is deliberately
-  // anchored to whitespace/start rather than a bare word boundary -- a
-  // word boundary alone also sits right before the "A" in "Q&A." (the "&"
-  // isn't a word character either), which used to wrongly suppress the
-  // split after a "Q&A." ending a sentence -- exactly the acronym case the
-  // paragraph above says this whole rule must still split on.
+  // vs. Custom Tables" must stay one phrase), and a single letter (either
+  // case — a lowercase match-answer marker like "- d." is just as common in
+  // this corpus as an uppercase one) preceded by whitespace/start/open-paren
+  // and followed by a period, used as an inline answer reference ("...B.
+  // Microsoft 365 admin centre" / "...-  d. Returns dates..." must each stay
+  // one phrase, not split right after the marker). That exclusion is
+  // deliberately anchored to whitespace/start rather than a bare word
+  // boundary -- a word boundary alone also sits right before the "A" in
+  // "Q&A." (the "&" isn't a word character either), which used to wrongly
+  // suppress the split after a "Q&A." ending a sentence -- exactly the
+  // acronym case the paragraph above says this whole rule must still split
+  // on.
   // A third shape: a bare numbered-list marker ("1.", "2." ... up to 2 digits)
   // that starts a paragraph on its own, with the item's actual title/content
   // sitting right after it on the same logical line — e.g. "1. DAX Operators
   // - A. Used to perform..." must stay one phrase, not split right after "1."
   // and orphan the marker onto its own paragraph.
   const sentences = safe
-    .split(/(?<!\bvs\.)(?<!(?:^|[\s(])[A-Z]\.)(?<!\b\d{1,2}\.)(?<=[a-zA-Z0-9\)"']\.)\s+(?=[A-Z])/g)
+    .split(/(?<!\bvs\.)(?<!(?:^|[\s(])[A-Za-z]\.)(?<!\b\d{1,2}\.)(?<=[a-zA-Z0-9\)"']\.)\s+(?=[A-Z])/g)
     .map((s) => s.trim())
     .filter(Boolean);
   if (sentences.length < 2) return `<p>${linkify(text)}</p>`;
