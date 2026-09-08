@@ -326,6 +326,12 @@ const EXPL_HEADER_PATTERNS = [
   // "\n\nExam Tips\n\n   References ..." — the colon itself is gone by now).
   /(?:^|(?<=(?<!\d)[.:]\s+)|(?<=\n\n\s*))References\b/g,
   /Why (?:the )?Other[s]?(?: Answers?| Options?)?\s*(?:Are|Is)\s*(?:Correct|Incorrect|Wrong|Right)\b/gi,
+  // The "correct" counterpart to the "why others are incorrect" heading
+  // above ("Why these are correct:", "Why this is correct") -- without its
+  // own pattern this sibling heading was never registered at all, so it
+  // rendered as an ordinary paragraph while "Why others are incorrect"
+  // right after it in the same explanation got the real <h4> treatment.
+  /Why (?:these|this)(?: (?:option|options|answer|answers))?\s*(?:is|are)\s*correct\b/gi,
   // Same phrase, reversed word order ("Why ARE the other options incorrect"
   // instead of "Why the other options ARE incorrect") -- both orders read
   // naturally in English, and this corpus uses each at least once.
@@ -1164,6 +1170,27 @@ function formatTrueFalseOptionTextInner(text) {
     return items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it.text} - <strong>${it.mark}</strong></div>`).join("");
   }
 
+  // A "reorder these steps" option can restate the whole proposed sequence
+  // as "C - Select the ellipsis... D - Select + Add Alert Rule... A -
+  // Choose the threshold..." -- a single capital letter marking each step,
+  // run together in one paragraph with no other separator between steps.
+  // Distinct from the True/False leading/trailing shapes above (those key
+  // off the literal words "True"/"False", not an arbitrary letter) and from
+  // the digit-based match-key shapes further up (those pair a NUMBER with a
+  // single answer letter, not a letter with a full sentence). Gated to a
+  // single uppercase letter immediately followed by a capitalized word, so
+  // it can't misfire on an ordinary sentence that merely contains "X - Y".
+  const stepLetterRe = /\b([A-Z])\s*-\s*(?=[A-Z])/g;
+  const stepLetterMatches = [...clean.matchAll(stepLetterRe)];
+  if (stepLetterMatches.length >= 2) {
+    const stepItems = stepLetterMatches.map((m, i) => {
+      const start = m.index + m[0].length;
+      const end = i + 1 < stepLetterMatches.length ? stepLetterMatches[i + 1].index : clean.length;
+      return { mark: m[1], text: clean.slice(start, end).trim() };
+    });
+    return stepItems.map((it) => `<div class="match-line"><strong>${it.mark}.</strong> ${it.text}</div>`).join("");
+  }
+
   // A handful of options are several distinct steps/clauses run together with
   // no punctuation at all between them ("Share the dashboard with others
   // Build a dashboard in Power BI Service Publish to..."), each a genuine
@@ -1366,6 +1393,15 @@ function splitTermColon(p) {
   const m = p.match(/^([A-Z][a-zA-Z0-9 '&/-]{1,40}):\s+(.+)$/);
   if (!m || /\n/.test(p)) return null;
   if (m[1].split(/\s+/).length > 6) return null;
+  // A "Q1:"/"Q2:" question-number label looks exactly like a term-colon
+  // title to this shape, but it's actually the numbered-FAQ pattern the
+  // qMatch shape below is built for -- letting it match here instead
+  // strands the real question text as a plain "rest" sentence (no bold
+  // "Q:"/"A:" pairing, and the loop then stops at the very next paragraph
+  // since an "A: ..." answer line matches no shape at all), which silently
+  // breaks the whole FAQ list after just one question. Bowing out here lets
+  // qMatch claim it instead.
+  if (/^Q\d*$/.test(m[1])) return null;
   return { title: m[1].trim(), rest: m[2] };
 }
 // A third shape: "Short Title - full description." already complete in ONE
@@ -1444,7 +1480,14 @@ function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
     // title's description -- each subsequent line looks exactly as
     // title-shaped as the first, so there's no reliable way to tell the two
     // shapes apart from structure alone.
-    if (!/\n/.test(p) && p.length <= 30 && /^[A-Z][a-zA-Z ]*$/.test(p) && p.split(/\s+/).length <= 4) {
+    // Character set and length/word caps widened beyond a bare word or two
+    // to also cover compound category names this corpus actually uses --
+    // hyphenated ("Year-over-year change"), parenthetical ("Total for
+    // category (filters applied)"), and ampersand-joined ("Shapes &
+    // Indicators") -- which a plain letters-and-spaces-only line missed
+    // entirely, silently ending the list right before them (the rest of a
+    // "Keep in Mind" list falling back to unbulleted plain paragraphs).
+    if (!/\n/.test(p) && p.length <= 45 && /^[A-Z][a-zA-Z0-9 '&(),-]*$/.test(p) && p.split(/\s+/).length <= 6) {
       j++;
       items.push(`<li>${p}</li>`);
       continue;
@@ -1452,12 +1495,15 @@ function groupKeepInMindList(paragraphs, startIndex, isBoundary) {
     // A fourth shape: a question ("What is cross filtering in Power BI?")
     // as its own paragraph, answered by the paragraph(s) right after it --
     // an FAQ-style list, sometimes with NO "Q:"/"A:" labels in the source at
-    // all, sometimes already carrying its own "Q:"/"A:" (only the grouping
-    // and bolding is missing there). Either way, a leading "Q:"/"A:" is
-    // stripped from what the source gave before re-adding it here, so a
-    // question already labeled "Q: What is...?" never ends up double-tagged
-    // "Q: Q: What is...?".
-    const qMatch = !/\n/.test(p) && p.length <= 160 && p.match(/^(?:Q:\s*)?([A-Z].{4,}\?)$/);
+    // all, sometimes already carrying its own "Q:"/"A:" or a numbered
+    // "Q1:"/"Q2:" form. Either way, a leading "Q:"/"Q1:"/"A:" is stripped
+    // from what the source gave before re-adding it here, so a question
+    // already labeled "Q: What is...?" never ends up double-tagged
+    // "Q: Q: What is...?", and a numbered "Q3: ..." doesn't end up
+    // double-tagged "Q: Q3: ..." either (the numbering is dropped rather
+    // than kept, matching how every other Keep-in-Mind FAQ list in this
+    // corpus renders its questions with a plain, unnumbered "Q:").
+    const qMatch = !/\n/.test(p) && p.length <= 160 && p.match(/^(?:Q\d*:\s*)?([A-Z].{4,}\?)$/);
     if (qMatch) {
       j++;
       const desc = [];
@@ -1658,14 +1704,22 @@ function formatExplanationInner(raw) {
     // A standalone short paragraph that's just "N. <short phrase>" (a
     // numbered sub-heading/mini-question ahead of its own answer, e.g. "1.
     // What are model calculations in DAX?", or a matching-question recap
-    // like "2. References to Model Objects - C. Can only refer to...")
-    // reads as a real heading in the source but got no distinct treatment.
-    // Bolds the whole line (plain bold, not the bigger blue-caps
-    // .expl-heading style, since it's one item in a numbered set rather
-    // than a top-level section) -- gated tightly (single line, <=130 chars
-    // after the marker) so an ordinary long paragraph that merely starts
-    // with a number can never be caught by mistake.
-    if (/^\d{1,2}\.\s.{1,130}$/.test(p) && !/\n/.test(p)) {
+    // like "2. References to Model Objects - C. Can only refer to...") --
+    // or the same shape with a single letter marker instead of a number
+    // ("A. Q&A", "B. Copilot", each its own paragraph naming one item in a
+    // lettered feature list) -- reads as a real heading in the source but
+    // got no distinct treatment. Bolds the whole line (plain bold, not the
+    // bigger blue-caps .expl-heading style, since it's one item in a
+    // numbered/lettered set rather than a top-level section) -- gated
+    // tightly (single line, <=130 chars after the marker) so an ordinary
+    // long paragraph that merely starts with a number or letter can never
+    // be caught by mistake. Handled here, BEFORE formatBlock/formatSentences
+    // gets a look, specifically so a hand-added <strong> around a line like
+    // this never happens -- formatSentences treats a bare "A." as its own
+    // sentence boundary and tears an already-open <strong> tag in half
+    // right after it, so this short-circuit is the only safe way to bold
+    // this shape.
+    if (/^(?:\d{1,2}|[A-H])\.\s.{1,130}$/.test(p) && !/\n/.test(p)) {
       htmlParts.push(`<p><strong>${p}</strong></p>`);
       continue;
     }
