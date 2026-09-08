@@ -232,7 +232,14 @@ const EXPL_HEADERS = [
   "Correct Answers:", "Correct Answers", "Correct Answer:",
   // Same "bare, no colon" shape, checked the same way for this one (every
   // occurrence sits right after "\n\n", never mid-sentence, before adding).
-  "Incorrect Answers:", "Incorrect Answers", "Incorrect Answer:", "Incorrect Answer",
+  // The bare singular ("Incorrect Answer", no colon) is NOT included here on
+  // purpose: since it's a prefix of the bare plural right above it, this
+  // array's sequential split-and-rejoin would find it AGAIN inside that
+  // plural entry's own already-isolated replacement text ("Incorrect
+  // Answers" contains "Incorrect Answer"), tearing the trailing "s" off onto
+  // its own stray paragraph. It's handled instead as an EXPL_HEADER_PATTERNS
+  // regex below with a negative lookahead so it never matches that prefix.
+  "Incorrect Answers:", "Incorrect Answers", "Incorrect Answer:",
   "Why correct:", "Why correct", "Why Correct:", "Why Correct",
   "Why wrong:", "Why wrong", "Why Wrong:", "Why Wrong",
   "Why incorrect:", "Why incorrect", "Why Incorrect:", "Why Incorrect",
@@ -364,6 +371,11 @@ const EXPL_HEADER_PATTERNS = [
   // above, so it's stripped as dangling punctuation rather than baked into
   // the heading text.
   /(?:[A-Z][a-z]+\s)?Steps? (?:to|for) [^\n:]+(?=:)/g,
+  // The bare singular "Incorrect Answer" (no colon) — kept out of the plain
+  // EXPL_HEADERS list above (see the comment there) so it never matches the
+  // bare plural's own "Incorrect Answer|s" prefix; the negative lookahead
+  // here does the same job safely regardless of processing order.
+  /Incorrect Answer(?!s)\b/g,
 ];
 
 function linkify(text) {
