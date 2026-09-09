@@ -2796,7 +2796,7 @@
     "testSet": 12,
     "module": 1,
     "section": "Get started with Microsoft data analytics",
-    "text": "Match the following report and dashboard features with their functionalities. Features: Drill-Through; Filters; Drill-Down; Cross-Filtering. Functionalities: A. Allows users to see more detailed data by clicking a visual element. B. Enables the selection of specific data points to refine visualizations. C. Navigates from summarized data to more detailed information. D. Filters visuals based on interactions with other visuals.",
+    "text": "Match the following report and dashboard features with their functionalities. Features: 1. Drill-Through; 2. Filters; 3. Drill-Down; 4. Cross-Filtering. Functionalities: A. Allows users to see more detailed data by clicking a visual element. B. Enables the selection of specific data points to refine visualizations. C. Navigates from summarized data to more detailed information. D. Filters visuals based on interactions with other visuals.",
     "options": [
       {
         "id": "a",
@@ -4055,7 +4055,7 @@
     "correct": [
       "b"
     ],
-    "explanation": "A. Explicit measures are automatically created by Power BI\n\nWhy it’s wrong: This describes implicit measures, not explicit ones. Implicit measures are created automatically when you drag a field into a visual and apply an aggregation like SUM or COUNT. Explicit measures require manual creation using DAX.\n\nC. Explicit measures are stored in memory like calculated columns\n\nWhy it’s wrong: Calculated columns store values for each row in memory, which can increase model size. Explicit measures, on the other hand, are calculated dynamically based on the context of the visual. They don’t store values row by row.\n\nD. Explicit measures are only available in Excel\n\nWhy it’s wrong: Explicit measures are available in Power BI and can also be used when analyzing data in Excel (e.g., via Analyze in Excel). But they are not exclusive to Excel, they’re a core feature of Power BI modeling.\n\n<img src=\"images/questions/m2-image18.png\" alt=\"\" />\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/6-measures\" target=\"_blank\" rel=\"noopener\">Configure measures - Training | Microsoft Learn</a>"
+    "explanation": "A. Explicit measures are automatically created by Power BI\n\nWhy it’s wrong: This describes implicit measures, not explicit ones. Implicit measures are created automatically when you drag a field into a visual and apply an aggregation like SUM or COUNT. Explicit measures require manual creation using DAX.\n\nC. Explicit measures are stored in memory like calculated columns\n\nWhy it’s wrong: Calculated columns store values for each row in memory, which can increase model size. Explicit measures, on the other hand, are calculated dynamically based on the context of the visual. They don’t store values row by row.\n\nD. Explicit measures are only available in Excel\n\nWhy it’s wrong: Explicit measures are available in Power BI and can also be used when analyzing data in Excel (e.g., via Analyze in Excel). But they are not exclusive to Excel, they’re a core feature of Power BI modeling.\n\nReferences: <a href=\"https://learn.microsoft.com/en-us/training/modules/configure-semantic-model-power-bi/6-measures\" target=\"_blank\" rel=\"noopener\">Configure measures - Training | Microsoft Learn</a>"
   },
   {
     "id": "q121",
@@ -4835,7 +4835,7 @@
     "testSet": 12,
     "module": 2,
     "section": "Prepare data for analysis with Power BI",
-    "text": "Match the following DAX operators with their operations, in DAX's order of precedence. Operators: ^ (exponentiation); - (as in -1, unary sign); * and /; NOT; + and -; &; =, ==, <, >, <=, >=, <>. Operations: A. Addition and subtraction. B. Concatenation of two strings of text. C. Multiplication and division. D. Comparison. E. Sign (negative or positive). F. Exponentiation. G. Logical NOT.",
+    "text": "Match the following DAX operators with their operations, in DAX's order of precedence. Operators: 1. Operator ^ (exponentiation); 2. Operator - (as in -1, unary sign); 3. Operators * and /; 4. NOT; 5. Operators + and -; 6. Operator &; 7. Operators =, ==, <, >, <=, >=, <>. Operations: A. Addition and subtraction. B. Concatenation of two strings of text. C. Multiplication and division. D. Comparison. E. Sign (negative or positive). F. Exponentiation. G. Logical NOT.",
     "options": [
       {
         "id": "a",
@@ -9754,7 +9754,7 @@
     "testSet": 12,
     "module": 3,
     "section": "Model data with Power BI",
-    "text": "You are building a Power BI report to forecast monthly sales. You create a WhatIf parameter called Sales Forecast Percentage and then define a new measure: Gross Sales Forecast = [Gross Sales] * [Sales Forecast Percentage Value] You add a clustered column chart with MonthName on the axis and both Gross Sales and Gross Sales Forecast as values. Initially, the bars look similar, but as you move the slicer slider, the forecast bars change. Which of the following statements correctly explain how this setup works?",
+    "text": "You are building a Power BI report to forecast monthly sales. You create a WhatIf parameter called Sales Forecast Percentage and then define a new measure: Gross Sales Forecast = [Gross Sales] * [Sales Forecast Percentage Value].<br><br>You add a clustered column chart with MonthName on the axis and both Gross Sales and Gross Sales Forecast as values. Initially, the bars look similar, but as you move the slicer slider, the forecast bars change. Which of the following statements correctly explain how this setup works?",
     "options": [
       {
         "id": "a",
@@ -11049,7 +11049,7 @@
       "b",
       "c"
     ],
-    "explanation": "PPU includes everything in Pro plus advanced features.\n\nLarger semantic models: lets you handle bigger datasets than Pro.\n\nMore refreshes per day: supports more frequent scheduled refreshes.\n\nAI features: adds advanced AIpowered analytics capabilities.\n\nDedicated cloud capacity is not part of PPU - that’s only available with Fabric Capacity.\n\nExam Tips: Features Included in Premium Per User (PPU) Larger semantic models (up to 100 GB per dataset) More scheduled refreshes (up to 48 per day) AIpowered features (text analytics, image recognition, AutoML, cognitive services) Paginated reports Deployment pipelines Enhanced performance features"
+    "explanation": "PPU includes everything in Pro plus advanced features.\n\nLarger semantic models: lets you handle bigger datasets than Pro.\n\nMore refreshes per day: supports more frequent scheduled refreshes.\n\nAI features: adds advanced AIpowered analytics capabilities.\n\nDedicated cloud capacity is not part of PPU - that’s only available with Fabric Capacity.\n\nExam Tips: Features Included in Premium Per User (PPU):<br>- Larger semantic models (up to 100 GB per dataset)<br>- More scheduled refreshes (up to 48 per day)<br>- AI-powered features (text analytics, image recognition, AutoML, cognitive services)<br>- Paginated reports<br>- Deployment pipelines<br>- Enhanced performance features"
   },
   {
     "id": "q325",
@@ -18988,7 +18988,7 @@
     "testSet": 12,
     "module": 6,
     "section": "Complete DAX Mastery",
-    "text": "Match each DAX function with the correct statement about it: CONCATENATE vs CONCATENATEX. Functions: CONCATENATE; CONCATENATEX. Statements: A. Joins exactly two text strings into one. B. Can combine text from multiple rows of a table into a single string. C. Accepts only two arguments (text or column reference). D. Requires an iterator (loops through rows of a table). E. Useful for creating a FullName column by joining FirstName and LastName. F. Useful for creating a comma-separated list of product categories from a table.",
+    "text": "Match each DAX function with the correct statement about it: CONCATENATE vs CONCATENATEX. Functions: CONCATENATE and CONCATENATEX. Statements: A. Joins exactly two text strings into one. B. Can combine text from multiple rows of a table into a single string. C. Accepts only two arguments (text or column reference). D. Requires an iterator (loops through rows of a table). E. Useful for creating a FullName column by joining FirstName and LastName. F. Useful for creating a comma-separated list of product categories from a table.",
     "options": [
       {
         "id": "a",
