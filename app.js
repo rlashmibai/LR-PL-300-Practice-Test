@@ -1173,6 +1173,19 @@ function formatTrueFalseOptionTextInner(text) {
     return items.map((it, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${it.text} - <strong>${it.mark}</strong></div>`).join("");
   }
 
+  // A much barer "reorder these steps" option can be just the proposed
+  // letter sequence itself, no description text at all ("C - A - B") --
+  // each letter immediately followed by the next, with nothing in between.
+  // Must be checked BEFORE the fuller "letter - description" shape right
+  // below: that one expects real content between two markers, and finds
+  // none here (every marker sits directly against the next), so it slices
+  // out empty strings for every item except the last, which wrongly
+  // swallows the final bare letter as if it were descriptive text.
+  if (/^[A-Z](?:\s*-\s*[A-Z])+$/.test(clean)) {
+    const letters = clean.split(/\s*-\s*/);
+    return letters.map((l, i) => `<div class="match-line"><strong>${i + 1}.</strong> ${l}</div>`).join("");
+  }
+
   // A "reorder these steps" option can restate the whole proposed sequence
   // as "C - Select the ellipsis... D - Select + Add Alert Rule... A -
   // Choose the threshold..." -- a single capital letter marking each step,
