@@ -30,10 +30,20 @@ function beaconSource() {
   return undefined;
 }
 
+// Rough region only (e.g. "Asia/Kolkata") from the browser's own timezone setting — no IP
+// lookup, no permission prompt, and nothing that identifies an individual visitor.
+function beaconTimezone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || undefined;
+  } catch (err) {
+    return undefined;
+  }
+}
+
 function logTestStart(mode, param) {
   if (!TEST_START_LOG_URL || TEST_START_LOG_URL.startsWith("PASTE_")) return;
   try {
-    const payload = JSON.stringify({ site: "PL300", event: "test_start", mode, param: String(param), source: beaconSource() });
+    const payload = JSON.stringify({ site: "PL300", event: "test_start", mode, param: String(param), source: beaconSource(), tz: beaconTimezone() });
     navigator.sendBeacon(TEST_START_LOG_URL, new Blob([payload], { type: "text/plain;charset=UTF-8" }));
   } catch (err) {
     // Logging is best-effort only — never let it block a test from starting.
@@ -46,7 +56,7 @@ function logTestStart(mode, param) {
 function logHomePageVisit() {
   if (!TEST_START_LOG_URL || TEST_START_LOG_URL.startsWith("PASTE_")) return;
   try {
-    const payload = JSON.stringify({ site: "PL300", event: "home_visit", source: beaconSource() });
+    const payload = JSON.stringify({ site: "PL300", event: "home_visit", source: beaconSource(), tz: beaconTimezone() });
     navigator.sendBeacon(TEST_START_LOG_URL, new Blob([payload], { type: "text/plain;charset=UTF-8" }));
   } catch (err) {
     // Logging is best-effort only — never let it block the page from loading.
