@@ -189,9 +189,7 @@ h3 { margin: 18px 0 8px; font-size: 1rem; }
 @media (max-width: 900px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px) { .feature-grid { grid-template-columns: 1fr; } }
 
-/* Responsible AI section: third colour pair, 3-column grid of principle + description cards */
-.pair-c .split-head { background: #2f7d4f; }
-.pair-c .split-body { background: #e8f5ec; }
+/* Responsible AI section: 3-column grid of principle + description cards */
 .rai-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 4px; }
 @media (max-width: 900px) { .rai-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px) { .rai-grid { grid-template-columns: 1fr; } }
